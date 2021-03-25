@@ -71,6 +71,11 @@ export default {
       return this.$store.state.size
     },
   },
+  watch: {
+    curoute() {
+      this.scrolltop()
+    },
+  },
   beforeMount() {
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('resize', this.large)
@@ -85,6 +90,7 @@ export default {
     this.large()
     this.handleScroll()
     this.checkDomload()
+    this.scrolltop()
   },
   methods: {
     scrolltop() {

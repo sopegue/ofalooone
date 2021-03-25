@@ -64,8 +64,9 @@
           <hr class="dropdown-divider" />
           <span class="size-135 font-semibold dropdown-item">Mon compte</span>
           <nuxt-link
-            to="/"
+            to="/user"
             class="dropdown-item flex space-x-2 align-center w-fit clickable size-125"
+            @click.native="hide"
             ><svg
               class="w-5 h-5 logo-color"
               fill="currentColor"
@@ -80,8 +81,9 @@
             ><span>Profil</span></nuxt-link
           >
           <nuxt-link
-            to="/"
+            to="/favoris"
             class="dropdown-item flex space-x-2 align-center w-fit clickable size-125"
+            @click.native="hide"
             ><svg
               class="w-5 h-5 logo-color"
               fill="currentColor"

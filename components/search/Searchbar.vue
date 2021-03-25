@@ -103,6 +103,7 @@
     </div>
     <button
       class="h-full btn-008489 absolute h-10 right-0 px-3 rounded-tr rounded-br text-white size-13 font-semibold"
+      @click="$router.push('/recherche')"
     >
       <svg
         class="w-5 h-5 text-white"

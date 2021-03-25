@@ -51,8 +51,20 @@
             </div>
             <div class="flex align-center space-x-5">
               <button class="flex align-center hover-008489 space-x-1 mt-1">
+                <!-- <svg
+                  class="w-5 h-5 logo-color"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-width="1"
+                    d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
+                  ></path>
+                </svg> -->
                 <svg
-                  class="w-6 h-6 logo-color makeme-008489"
+                  class="w-5 h-5 logo-color"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 20 20"
@@ -67,27 +79,67 @@
                   >Enregistrer</span
                 >
               </button>
-              <button class="flex align-center hover-008489 space-x-1 mt-1">
+              <button
+                v-click-outside="hideshare"
+                class="flex align-center relative hover-008489 space-x-1 mt-1"
+                @click="
+                  {
+                    share = !share
+                  }
+                "
+              >
                 <svg
-                  class="w-6 h-6 logo-color -ml-1 makeme-008489"
+                  class="w-5 h-5 logo-color -ml-1 makeme-008489"
+                  stroke="none"
+                  viewBox="0 0 20 20"
                   fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                  ></path>
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1"
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                  ></path>
+                    d="M15 8C16.6569 8 18 6.65685 18 5C18 3.34315 16.6569
+                     2 15 2C13.3431 2 12 3.34315 12 5C12 5.12548 12.0077 
+                     5.24917 12.0227 5.37061L7.08259 7.84064C6.54303 7.32015 
+                     5.8089 7 5 7C3.34315 7 2 8.34315 2 10C2 11.6569 3.34315 
+                     13 5 13C5.80892 13 6.54306 12.6798 7.08263 12.1593L12.0227
+                      14.6293C12.0077 14.7508 12 14.8745 12 15C12 16.6569 13.3431 
+                      18 15 18C16.6569 18 18 16.6569 18 15C18 13.3431 16.6569 12 15 
+                      12C14.1911 12 13.457 12.3201 12.9174 12.8406L7.97733 10.3706C7.9923 10.2492 8 10.1255 8 10C8 9.8745 7.99229 9.7508 7.97733 9.62934L12.9174 7.15932C13.4569 7.67984 14.1911 8 15 8Z"
+                    fill="#2d3748"
+                  />
                 </svg>
+                <div
+                  v-show="share"
+                  class="absolute bg-white top-0 right-0 mt-7 z-20 appearZ w-fit flex align-center space-x-4 border py-2 px-5 rounded"
+                >
+                  <a href="https://fb.com/saliistore" target="_blank"
+                    ><i class="fab fa-twitter size-20 clickable logo-color"></i
+                  ></a>
+                  <a href="https://fb.com/saliistore" target="_blank"
+                    ><i class="fab fa-facebook size-20 clickable logo-color"></i
+                  ></a>
+                  <a href="https://fb.com/saliistore" target="_blank"
+                    ><i
+                      class="fab fa-instagram size-20 clickable logo-color"
+                    ></i
+                  ></a>
+                  <a href="https://fb.com/saliistore" target="_blank"
+                    ><svg
+                      class="w-6 h-6 logo-color -ml-1 -mt-px makeme-008489"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M2.00333 5.88355L9.99995 9.88186L17.9967 5.8835C17.9363 4.83315 17.0655 4 16 4H4C2.93452 4 2.06363 4.83318 2.00333 5.88355Z"
+                        fill="#4A5568"
+                      />
+                      <path
+                        d="M18 8.1179L9.99995 12.1179L2 8.11796V14C2 15.1046 2.89543 16 4 16H16C17.1046 16 18 15.1046 18 14V8.1179Z"
+                        fill="#2d3748"
+                      />
+                    </svg>
+                  </a>
+                </div>
                 <span class="logo-color size-14 makeme-008489">Partager</span>
               </button>
             </div>
@@ -132,25 +184,18 @@
                 />
                 <p v-else class="relative w-w280x126">
                   <svg
-                    class="w-8 h-8 absolute text-white both-centers -mt-3"
-                    fill="#00000041"
+                    class="w-14 h-14 text-white absolute text-white both-centers -mt-7"
+                    fill="none"
                     stroke="currentColor"
-                    viewBox="0 0 24 24"
+                    viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    ></path>
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1"
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268
-2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                    ></path>
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18ZM9.5547 7.16795C9.24784 6.96338 8.8533 6.94431 8.52814 7.11833C8.20298 7.29235 8 7.63121 8 8V12C8 12.3688 8.20298 12.7077 8.52814 12.8817C8.8533 13.0557 9.24784 13.0366 9.5547 12.8321L12.5547 10.8321C12.8329 10.6466 13 10.3344 13 10C13 9.66565 12.8329 9.35342 12.5547 9.16795L9.5547 7.16795Z"
+                      fill="none"
+                    />
                   </svg>
                   <video id="my-video" class="w-w280x126">
                     <source :src="ads[next2]" type="video/mp4" />
@@ -188,25 +233,18 @@
                 />
                 <p v-else class="relative w-w280x126">
                   <svg
-                    class="w-8 h-8 absolute text-white both-centers -mt-3"
-                    fill="#00000041"
+                    class="w-14 h-14 text-white absolute text-white both-centers -mt-7"
+                    fill="none"
                     stroke="currentColor"
-                    viewBox="0 0 24 24"
+                    viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    ></path>
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1"
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268
-2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                    ></path>
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18ZM9.5547 7.16795C9.24784 6.96338 8.8533 6.94431 8.52814 7.11833C8.20298 7.29235 8 7.63121 8 8V12C8 12.3688 8.20298 12.7077 8.52814 12.8817C8.8533 13.0557 9.24784 13.0366 9.5547 12.8321L12.5547 10.8321C12.8329 10.6466 13 10.3344 13 10C13 9.66565 12.8329 9.35342 12.5547 9.16795L9.5547 7.16795Z"
+                      fill="none"
+                    />
                   </svg>
                   <video id="my-video" class="w-w280x126">
                     <source :src="ads[next1]" type="video/mp4" />
@@ -236,7 +274,7 @@
                   class="absolute appearZ z-10 top-0 left-0 w-full h-full bg-black-trer"
                 >
                   <svg
-                    class="w-8 h-8 text-white both-centers -mt-3"
+                    class="w-14 h-14 text-white both-centers -mt-5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -245,13 +283,11 @@
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      stroke-width="1"
                       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                     ></path>
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      stroke-width="1"
                       d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268
 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                     ></path>
@@ -423,6 +459,7 @@ export default {
   data() {
     return {
       inside: false,
+      share: false,
       hovered1: false,
       hovered2: false,
       hovered3: false,
@@ -463,6 +500,9 @@ export default {
     },
   },
   methods: {
+    hideshare() {
+      this.share = false
+    },
     hidebody() {
       document.body.style = 'overflow: hidden !important;'
     },

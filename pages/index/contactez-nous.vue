@@ -8,7 +8,7 @@
         <h4 class="text-white size-20 font-semibold mb-1 text-c">
           Contactez Nous
         </h4>
-        <span class="block px-2 sm:px-6 text-white leading-5"
+        <span class="block px-2 sm:px-6 text-white leading-4 size-12"
           >Remplissez ce formulaire pour nous envoyer un message et nous vous
           répondrons dans les plus brefs délais possibles</span
         >

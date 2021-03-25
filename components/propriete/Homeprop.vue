@@ -30,35 +30,28 @@
     </div>
     <div class="mt-3">
       <figure class="image relative is-4by3">
-        <img src="https://ofaloo.herokuapp.com/images/7.jpg" alt="Placeholder image" />
+        <img
+          src="https://ofaloo.herokuapp.com/images/7.jpg"
+          alt="Placeholder image"
+        />
         <button
-          class="absolute bottom-0 right-0 mb-2 mr-2 z-10"
+          class="absolute cursor-default bottom-0 right-0 mb-2 mr-2 z-10"
           title="Contient une vidéo"
         >
           <svg
-            class="w-7 h-7 text-white"
+            class="w-8 h-8 text-white"
             fill="#00000041"
             stroke="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              stroke-width="1"
-              d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
-            ></path>
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18ZM9.5547 7.16795C9.24784 6.96338 8.8533 6.94431 8.52814 7.11833C8.20298 7.29235 8 7.63121 8 8V12C8 12.3688 8.20298 12.7077 8.52814 12.8817C8.8533 13.0557 9.24784 13.0366 9.5547 12.8321L12.5547 10.8321C12.8329 10.6466 13 10.3344 13 10C13 9.66565 12.8329 9.35342 12.5547 9.16795L9.5547 7.16795Z"
+              fill="#00000041"
+            />
           </svg>
-          <!-- <svg
-            class="w-7 h-7 logo-color"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-width="1"
-              d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
-            ></path>
-          </svg> -->
         </button>
         <button
           class="absolute top-0 right-0 mt-2 mr-2 z-10"
@@ -109,7 +102,7 @@
         </div>
       </figure>
     </div>
-    <div class="flex flex-col mt-2">
+    <div class="flex flex-col mt-2" @click="$router.push('/propriete')">
       <div class="flex align-center justify-between">
         <h4 class="logo-color size-15 font-semibold">{{ property }}</h4>
         <nuxt-link

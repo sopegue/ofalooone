@@ -8,7 +8,7 @@
         </div>
         <nuxt-link
           to="/"
-          class="text-white size-13 rounded font-semibold px-2 pb-1 button is-lights"
+          class="text-white size-12 rounded font-semibold px-4 pb-1.5 button is-lights"
           >Devenir agent</nuxt-link
         >
       </div>

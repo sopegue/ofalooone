@@ -79,7 +79,7 @@ export default {
 </script>
 <style scoped>
 .header-home {
-  background-image: url('https://ofaloo.herokuapp.com/images/9.jpg');
+  background-image: url('https://ofaloo.herokuapp.com/images/7.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;

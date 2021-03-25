@@ -113,6 +113,7 @@
           <button
             class="h-full button btn-008489 rounded-tr rounded-br text-white size-13 font-semibold"
             :class="{ 'px-6': size > 500, 'px-3': size <= 500 }"
+            @click="$router.push('/recherche')"
           >
             Rechercher
           </button>

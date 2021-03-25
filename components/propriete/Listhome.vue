@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col space-y-5">
-    <div class="flex align-center justify-between mx-5">
+    <div class="flex align-center justify-between sm:px-20 px-5">
       <h4 class="logo-color size-18 font-semibold">{{ property }}</h4>
       <nuxt-link
         to="#"

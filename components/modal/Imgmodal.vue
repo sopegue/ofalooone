@@ -13,7 +13,7 @@
           <path
             stroke-linecap="round"
             stroke-linejoin="round"
-            stroke-width="2"
+            stroke-width="1"
             d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
           ></path>
         </svg>
@@ -25,20 +25,18 @@
           <div class="flex align-center space-x-3">
             <button @click="gotos(1)">
               <svg
-                class="w-6 h-6"
-                :class="{
-                  'logo-color': !curimage,
-                  'text-white': curimage,
-                }"
+                class="w-7 h-7"
+                viewBox="0 0 24 24"
                 fill="none"
-                stroke="currentColor"
-                viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
+                  d="M4 16L8.58579 11.4142C9.36683 10.6332 10.6332 10.6332 11.4142 11.4142L16 16M14 14L15.5858 12.4142C16.3668 11.6332 17.6332 11.6332 18.4142 12.4142L20 14M14 8H14.01M6 20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4H6C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20Z"
+                  :stroke="!curimage ? '#2d3748' : curimage ? '#fff' : '#fff'"
                   stroke-width="1"
-                  d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
-                ></path>
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
               </svg>
             </button>
             <button
@@ -49,7 +47,7 @@
               @click="gotos(2)"
             >
               <svg
-                class="w-6 h-6"
+                class="w-7 h-7"
                 :class="{
                   'logo-color': hasvideo.length === 0 || curimage,
                   'text-white': hasvideo.length !== 0 && !curimage,
@@ -60,9 +58,11 @@
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  stroke-width="1"
-                  d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
-                ></path>
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18ZM9.5547 7.16795C9.24784 6.96338 8.8533 6.94431 8.52814 7.11833C8.20298 7.29235 8 7.63121 8 8V12C8 12.3688 8.20298 12.7077 8.52814 12.8817C8.8533 13.0557 9.24784 13.0366 9.5547 12.8321L12.5547 10.8321C12.8329 10.6466 13 10.3344 13 10C13 9.66565 12.8329 9.35342 12.5547 9.16795L9.5547 7.16795Z"
+                  fill="none"
+                />
               </svg>
             </button>
           </div>

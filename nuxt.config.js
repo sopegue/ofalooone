@@ -53,6 +53,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: 'https://ofalooback.herokuapp.com/api/',
+    credentials: true,
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

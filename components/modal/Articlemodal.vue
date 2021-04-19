@@ -739,7 +739,7 @@ export default {
   methods: {
     async increment() {
       const result = await fetch(
-        'http://localhost:8000/api/property/visit/' + this.property.property.id
+        'https://ofalooback.herokuapp.com/api/property/visit/' + this.property.property.id
       ).then((res) => res.json())
       console.log(result)
     },

@@ -715,7 +715,7 @@ export default {
   middleware: 'query',
   async asyncData({ query }) {
     const property = await fetch(
-      'http://localhost:8000/api/property/' + query.wyzes
+      'https://ofalooback.herokuapp.com/api/property/' + query.wyzes
     ).then((res) => res.json())
     return { property }
   },
@@ -762,7 +762,7 @@ export default {
   methods: {
     async increment() {
       const result = await fetch(
-        'http://localhost:8000/api/property/visit/' +
+        'https://ofalooback.herokuapp.com/api/property/visit/' +
           this.property.data.property.id
       ).then((res) => res.json())
       console.log(result)

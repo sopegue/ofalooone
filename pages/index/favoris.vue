@@ -92,7 +92,7 @@ export default {
   }) {
     try {
       const properties = await fetch(
-        'http://localhost:8000/api/properties/bytype/Studio'
+        'https://ofalooback.herokuapp.com/api/properties/bytype/Studio'
       ).then((res) => res.json())
       const charging = false
       return { properties, charging }

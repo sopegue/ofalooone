@@ -102,7 +102,7 @@ export default {
   async fetch() {
     this.title = this.titler
     this.properties = await fetch(
-      'http://localhost:8000/api/properties/bytype/Maison'
+      'https://ofalooback.herokuapp.com/api/properties/bytype/Maison'
     ).then((res) => res.json())
   },
   computed: {

@@ -88,7 +88,7 @@ export default {
   methods: {
     async pendingmail(prop, what, id, email) {
       const data = await fetch(
-        'http://localhost:8000/api/saved/' +
+        'https://ofalooback.herokuapp.com/api/saved/' +
           prop +
           '/' +
           what +

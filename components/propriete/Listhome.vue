@@ -67,7 +67,7 @@ export default {
     this.title = this.titler
     try {
       this.properties = await fetch(
-        'http://localhost:8000/api/properties/bytype/' + this.titler
+        'https://ofalooback.herokuapp.com/api/properties/bytype/' + this.titler
       ).then((res) => res.json())
       this.error = false
     } catch (th) {

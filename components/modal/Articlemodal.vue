@@ -449,7 +449,7 @@
                 </div>
                 <div class="my-2">
                   <img
-                    src="http://127.0.0.1:8000/images/prop.png"
+                    src="https://ofalooback.herokuapp.com/images/prop.png"
                     alt="Image"
                   />
                 </div>
@@ -492,7 +492,7 @@
                     ><img
                       class="rounded-full is-40x40"
                       :src="
-                        'http://127.0.0.1:8000/storage/' + property.user_pic
+                        'https://ofalooback.herokuapp.com/storage/' + property.user_pic
                       "
                       alt="Image"
                     />
@@ -559,27 +559,27 @@
                 </h4>
                 <div class="my-2">
                   <img
-                    src="http://127.0.0.1:8000/images/prop.png"
+                    src="https://ofalooback.herokuapp.com/images/prop.png"
                     alt="Image"
                   />
                   <img
-                    src="http://127.0.0.1:8000/images/prop.png"
+                    src="https://ofalooback.herokuapp.com/images/prop.png"
                     alt="Image"
                   />
                   <img
-                    src="http://127.0.0.1:8000/images/prop.png"
+                    src="https://ofalooback.herokuapp.com/images/prop.png"
                     alt="Image"
                   />
                   <img
-                    src="http://127.0.0.1:8000/images/prop.png"
+                    src="https://ofalooback.herokuapp.com/images/prop.png"
                     alt="Image"
                   />
                   <img
-                    src="http://127.0.0.1:8000/images/prop.png"
+                    src="https://ofalooback.herokuapp.com/images/prop.png"
                     alt="Image"
                   />
                   <img
-                    src="http://127.0.0.1:8000/images/prop.png"
+                    src="https://ofalooback.herokuapp.com/images/prop.png"
                     alt="Image"
                   />
                 </div>
@@ -695,11 +695,11 @@ export default {
       active: 0,
       index: 1,
       ads: [
-        'http://127.0.0.1:8000/images/9.jpg',
-        'http://127.0.0.1:8000/images/1.jpg',
-        'http://127.0.0.1:8000/images/3.jpg',
-        'http://127.0.0.1:8000/images/4.jpg',
-        'http://127.0.0.1:8000/images/5.jpg',
+        'https://ofalooback.herokuapp.com/images/9.jpg',
+        'https://ofalooback.herokuapp.com/images/1.jpg',
+        'https://ofalooback.herokuapp.com/images/3.jpg',
+        'https://ofalooback.herokuapp.com/images/4.jpg',
+        'https://ofalooback.herokuapp.com/images/5.jpg',
       ],
     }
   },

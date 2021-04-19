@@ -23,7 +23,7 @@
       <a href="#" class="flex align-center space-x-2"
         ><img
           class="rounded-full is-40x40"
-          :src="'http://127.0.0.1:8000/storage/' + property.user_pic"
+          :src="'https://ofalooback.herokuapp.com/storage/' + property.user_pic"
           alt="Image"
         />
         <span class="size-14 font-semibold">{{ property.agence.name }}</span></a
@@ -159,7 +159,7 @@
           class="flex align-center space-x-2"
           ><img
             class="rounded-full is-40x40"
-            :src="'http://127.0.0.1:8000/storage/' + property.user_pic"
+            :src="'https://ofalooback.herokuapp.com/storage/' + property.user_pic"
             alt="Image"
           />
           <span class="size-14 font-semibold">{{
@@ -333,7 +333,7 @@
         }"
       >
         <div>
-          <img src="http://127.0.0.1:8000/images/prop.png" alt="Image" />
+          <img src="https://ofalooback.herokuapp.com/images/prop.png" alt="Image" />
         </div>
         <span class="color-363636 size-11">Il y a 3 jours</span>
       </div>
@@ -415,9 +415,9 @@ export default {
       for (let index = 0; index < this.property.images.length; index++) {
         const element = this.property.images[index]
         if (element.principal === 'yes')
-          return 'http://127.0.0.1:8000/storage/' + element.url
+          return 'https://ofalooback.herokuapp.com/storage/' + element.url
       }
-      return 'http://127.0.0.1:8000/storage/' + this.property.images[0].url
+      return 'https://ofalooback.herokuapp.com/storage/' + this.property.images[0].url
     },
   },
   methods: {
@@ -425,14 +425,14 @@ export default {
       for (let index = 0; index < this.property.images.length; index++) {
         const element = this.property.images[index]
         if (element.principal === 'yes') {
-          this.images.push('http://127.0.0.1:8000/storage/' + element.url)
+          this.images.push('https://ofalooback.herokuapp.com/storage/' + element.url)
           break
         }
       }
       for (let index = 0; index < this.property.images.length; index++) {
         const element = this.property.images[index]
         if (element.principal === 'no')
-          this.images.push('http://127.0.0.1:8000/storage/' + element.url)
+          this.images.push('https://ofalooback.herokuapp.com/storage/' + element.url)
       }
     },
     close_quick() {

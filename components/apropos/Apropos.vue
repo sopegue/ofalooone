@@ -116,7 +116,7 @@
           <div>
             <span
               >L'agent de la propriété reçoit votre message et vous contacte
-              dans les plus brefs delais possibles pour conclure un achat ou une
+              dans les plus brefs délais possibles pour conclure un achat ou une
               location.
             </span>
           </div>
@@ -124,10 +124,10 @@
       </div>
     </div>
     <div class="pt-15 pb-10 w-fit m-0-auto">
-      <nuxt-link
-        to="/"
+      <a
+        href="/"
         class="button bg-transparent px-10 py-2 rounded border-008489ss size-12 color-008489"
-        >Aller à la page d'accueil</nuxt-link
+        >Aller à la page d'accueil</a
       >
     </div>
   </div>
@@ -155,7 +155,7 @@ export default {
 </script>
 <style scoped>
 .header-home {
-  background-image: url('https://ofaloo.herokuapp.com/images/4.jpg');
+  background-image: url('http://127.0.0.1:8000/images/4.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;

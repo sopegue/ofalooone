@@ -28,9 +28,9 @@
           }"
         >
           <div
-            class="flex pb-5"
+            class="flex pb-8"
             :class="{
-              'px-5 space-x-5': size < 850,
+              'px-6 space-x-5': size < 850,
               'flex-col space-y-2.5 justify-center border-b':
                 size >= 850 || size < 467,
             }"
@@ -44,8 +44,8 @@
               <figure class="image relative rounded-full is-110x110 m-0-auto">
                 <img
                   class="rounded-full"
-                  src="https://ofaloo.herokuapp.com/images/4.jpg"
-                  alt="Placeholder image"
+                  src="http://127.0.0.1:8000/images/4.jpg"
+                  alt="Image"
                 />
                 <button
                   class="absolute bottom-0 right-0 -mr-10.5 rounded-full border-none p-3 button is-lightsz"
@@ -58,7 +58,7 @@
                   >
                     <path
                       d="M15.2322 5.23223L18.7677 8.76777M16.7322 3.73223C17.7085 2.75592 19.2914 2.75592 20.2677 3.73223C21.244 4.70854 21.244 6.29146 20.2677 7.26777L6.5 21.0355H3V17.4644L16.7322 3.73223Z"
-                      stroke="#4A5568"
+                      stroke="#2d3748"
                       stroke-width="2"
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -109,19 +109,21 @@
               'justify-between': size < 467,
             }"
           >
-            <nuxt-link
-              to="/user"
+            <a
+              href="/user"
               class="tyu size-13"
+              prefetch
               :class="{
                 'dropdown-item': size >= 850,
                 'font-semibold color-008489 items-perm cursor-default':
                   curoute === '/user' && size >= 850,
                 'font-semibold list-active': curoute === '/user' && size < 850,
               }"
-              >Mes informations</nuxt-link
+              >Mes informations</a
             >
-            <nuxt-link
-              to="/user/password"
+            <a
+              href="/user/password"
+              prefetch
               class="tyu size-13"
               :class="{
                 'dropdown-item': size >= 850,
@@ -130,11 +132,12 @@
                 'font-semibold list-active':
                   curoute === '/user/password' && size < 850,
               }"
-              >Mot de passe</nuxt-link
+              >Mot de passe</a
             >
-            <nuxt-link
+            <a
               v-if="size > 425"
-              to="/user/parametres"
+              href="/user/parametres"
+              prefetch
               class="tyu size-13"
               :class="{
                 'dropdown-item': size >= 850,
@@ -143,11 +146,12 @@
                 'font-semibold list-active':
                   curoute === '/user/parametres' && size < 850,
               }"
-              >Paramètres du compte</nuxt-link
+              >Paramètres du compte</a
             >
-            <nuxt-link
+            <a
               v-else
-              to="/user/parametres"
+              href="/user/parametres"
+              prefetch
               class="tyu size-13"
               :class="{
                 'dropdown-item': size >= 850,
@@ -156,7 +160,7 @@
                 'font-semibold list-active':
                   curoute === '/user/parametres' && size < 850,
               }"
-              >Paramètres</nuxt-link
+              >Paramètres</a
             >
           </div>
         </div>
@@ -164,7 +168,7 @@
       <div
         class="bg-white w-full"
         :class="{
-          'rounded-bl rounded-br': size < 850,
+          'rounded-bl rounded-br pb-8 pt-8': size < 850,
           'border rounded shadow-sm': size >= 850,
           'px-8 py-4': size >= 467,
           'px-4 py-4': size < 467,

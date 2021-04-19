@@ -1,29 +1,34 @@
 <template>
-  <div class="flex align-center space-x-8">
-    <div class="flex align-center space-x-8">
-      <div v-show="size > 1100" class="flex align-center space-x-3 w-fit">
-        <div class="flex align-center space-x-3 w-fit">
+  <div
+    class="flex align-center"
+    :class="{
+      'space-x-5': size > 1100,
+    }"
+  >
+    <div>
+      <div v-show="size > 1100" class="flex align-center space-x-5 w-fit">
+        <div class="flex align-center space-x-5 w-fit">
           <propertydrophome :color="'rg'" :title="'Acheter'"></propertydrophome>
           <propertydrophome :color="'rg'" :title="'Louer'"></propertydrophome>
         </div>
-        <nuxt-link
-          to="/"
-          class="button btn-008489 border-none text-white dezz size-12 rounded font-semibold px-4 pb-1.5"
-          >Devenir agent</nuxt-link
+        <a
+          href="/devenir-agent"
+          class="button btn-008489 border-none text-white dezz size-13 rounded font-semibold px-4 pb-1.5"
+          >Devenir agent</a
         >
       </div>
     </div>
     <div
       class="flex align-center"
       :class="{
-        'space-x-8': size > 403,
-        'space-x-4': size <= 403,
+        'space-x-8': size > 1100,
+        'space-x-6': size <= 699,
       }"
     >
-      <div v-show="size > 889">
+      <!-- <div v-show="size > 889">
         <currency :color="'rfef'"></currency>
-      </div>
-      <div v-show="size <= 700" class="z-10">
+      </div> -->
+      <div v-show="size <= 699" class="z-10">
         <button
           v-show="!minsearch"
           class="button dezz border-none rounded-full"
@@ -51,11 +56,11 @@
 </template>
 
 <script>
-import Currency from '../dropdown/Currency.vue'
+// import Currency from '../dropdown/Currency.vue'
 import Propertydrophome from '../dropdown/Propertydrophome.vue'
 import Signdrop from '../dropdown/Signdrop.vue'
 export default {
-  components: { Propertydrophome, Currency, Signdrop },
+  components: { Propertydrophome, Signdrop },
   computed: {
     size() {
       return this.$store.state.size

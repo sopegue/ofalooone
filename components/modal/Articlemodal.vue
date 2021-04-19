@@ -12,15 +12,18 @@
           @click="close"
         ></button>
         <div
-          class="flex flex-col bg-white w-full h-full relative py-3 px-2 mt-4 overflow-y-auto aside"
+          v-if="dataOk"
+          class="flex flex-col bg-white w-full h-full relative py-3 sm:px-8 px-0.5 mt-4 overflow-y-auto aside"
         >
           <div class="mb-1">
-            <h4 class="logo-color size-16 font-semibold">Appartement</h4>
+            <h4 class="logo-color size-18 font-semibold">
+              {{ property.property.type }}
+            </h4>
           </div>
           <div
             class="flex mb-5"
             :class="{
-              'flex-col space-y-1': size < 556,
+              'flex-col space-y-3': size < 556,
               'space-x-4 align-center justify-between': size >= 556,
             }"
           >
@@ -45,10 +48,9 @@
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                 ></path>
               </svg>
-              <span class="logo-color size-14"
-                >Plateau Angle Avenue Terrasson de Fougères et Rue Gourgas</span
-              >
+              <span class="logo-color size-14">{{ property.adresse }}</span>
             </div>
+            <!-- here for save and non saved property -->
             <div class="flex align-center space-x-5">
               <button class="flex align-center hover-008489 space-x-1 mt-1">
                 <!-- <svg
@@ -131,7 +133,7 @@
                     >
                       <path
                         d="M2.00333 5.88355L9.99995 9.88186L17.9967 5.8835C17.9363 4.83315 17.0655 4 16 4H4C2.93452 4 2.06363 4.83318 2.00333 5.88355Z"
-                        fill="#4A5568"
+                        fill="#2d3748"
                       />
                       <path
                         d="M18 8.1179L9.99995 12.1179L2 8.11796V14C2 15.1046 2.89543 16 4 16H16C17.1046 16 18 15.1046 18 14V8.1179Z"
@@ -145,18 +147,41 @@
             </div>
           </div>
           <div class="h-402max flex space-x-6">
-            <div class="h-full w-full">
+            <div class="h-full relative w-full">
+              <div
+                v-if="property.property.sold === 'yes'"
+                class="absolute z-10 bottom-0 left-0"
+              >
+                <button
+                  class="border-none size-12 text-white rounded ml-2 mb-2 button bg-black-tre both-centers"
+                >
+                  Vendue
+                </button>
+              </div>
+              <div
+                v-if="property.property.rent === 'yes'"
+                class="absolute z-10 bottom-0 left-0"
+              >
+                <button
+                  class="border-none size-12 text-white rounded ml-2 mb-2 button bg-black-tre both-centers"
+                >
+                  Louée
+                </button>
+              </div>
               <bigads
                 :indexer="index"
-                :ads="ads"
+                :ads="images"
+                :link="property.links !== null"
                 class="h-full"
                 @indexed="indexed"
               ></bigads>
             </div>
-            <div v-show="size > 999" class="w180e flex flex-col space-y-3">
+            <div
+              v-show="size > 999"
+              class="w180e h-402max flex flex-col space-y-3"
+            >
               <figure
-                class="image appearZ clickable relative"
-                :class="{ ' is-5by3': ads[next2].includes('images') }"
+                class="image appearZ clickable relative is-5by3s"
                 @mouseover="
                   {
                     hovered1 = true
@@ -177,35 +202,11 @@
                   v-show="hovered1"
                   class="absolute appearZ z-10 top-0 left-0 w-full h-full bg-black-trer"
                 ></div>
-                <img
-                  v-if="ads[next2].includes('images')"
-                  :src="ads[next2]"
-                  alt="Placeholder image"
-                />
-                <p v-else class="relative w-w280x126">
-                  <svg
-                    class="w-14 h-14 text-white absolute text-white both-centers -mt-7"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18ZM9.5547 7.16795C9.24784 6.96338 8.8533 6.94431 8.52814 7.11833C8.20298 7.29235 8 7.63121 8 8V12C8 12.3688 8.20298 12.7077 8.52814 12.8817C8.8533 13.0557 9.24784 13.0366 9.5547 12.8321L12.5547 10.8321C12.8329 10.6466 13 10.3344 13 10C13 9.66565 12.8329 9.35342 12.5547 9.16795L9.5547 7.16795Z"
-                      fill="none"
-                    />
-                  </svg>
-                  <video id="my-video" class="w-w280x126">
-                    <source :src="ads[next2]" type="video/mp4" />
-                  </video>
-                </p>
+                <img :src="images[next2]" alt="Image" />
               </figure>
 
               <figure
-                class="image appearZ clickable relative"
-                :class="{ ' is-5by3': ads[next1].includes('images') }"
+                class="image appearZ clickable relative is-5by3s"
                 @mouseover="
                   {
                     hovered2 = true
@@ -226,34 +227,10 @@
                   v-show="hovered2"
                   class="absolute appearZ z-10 top-0 left-0 w-full h-full bg-black-trer"
                 ></div>
-                <img
-                  v-if="ads[next1].includes('images')"
-                  :src="ads[next1]"
-                  alt="Placeholder image"
-                />
-                <p v-else class="relative w-w280x126">
-                  <svg
-                    class="w-14 h-14 text-white absolute text-white both-centers -mt-7"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18ZM9.5547 7.16795C9.24784 6.96338 8.8533 6.94431 8.52814 7.11833C8.20298 7.29235 8 7.63121 8 8V12C8 12.3688 8.20298 12.7077 8.52814 12.8817C8.8533 13.0557 9.24784 13.0366 9.5547 12.8321L12.5547 10.8321C12.8329 10.6466 13 10.3344 13 10C13 9.66565 12.8329 9.35342 12.5547 9.16795L9.5547 7.16795Z"
-                      fill="none"
-                    />
-                  </svg>
-                  <video id="my-video" class="w-w280x126">
-                    <source :src="ads[next1]" type="video/mp4" />
-                  </video>
-                </p>
+                <img :src="images[next1]" alt="Image" />
               </figure>
               <figure
-                class="image appearZ relative"
-                :class="{ ' is-5by3': ads[curindex].includes('images') }"
+                class="image appearZ relative is-5by3s"
                 @mouseover="
                   {
                     hovered3 = true
@@ -274,7 +251,7 @@
                   class="absolute appearZ z-10 top-0 left-0 w-full h-full bg-black-trer"
                 >
                   <svg
-                    class="w-14 h-14 text-white both-centers -mt-5"
+                    class="w-14 h-14 text-white both-centers -mt-7"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -293,65 +270,287 @@
                     ></path>
                   </svg>
                 </div>
-                <img
-                  v-if="ads[curindex].includes('images')"
-                  :src="ads[curindex]"
-                  alt="Placeholder image"
-                />
-                <p v-else class="relative w-w280x126">
-                  <video id="my-video" class="w-w280x126">
-                    <source :src="ads[curindex]" type="video/mp4" />
-                  </video>
-                </p>
+                <img :src="images[curindex]" alt="Image" />
               </figure>
             </div>
           </div>
           <div
             class="flex mt-4"
             :class="{
-              'flex-col space-y-6': size < 770,
-              'space-x-6': size >= 770,
+              'flex-col space-y-6': size < 999,
+              'space-x-6': size >= 999,
             }"
           >
             <div class="w-full flex flex-col space-y-4">
               <div class="w-full border-b pb-4">
                 <div class="flex align-center space-x-4 justify-between">
-                  <span class="logo-color font-medium size-15 block"
-                    >90 000 000 FCFA - 100 000 000 000 FCFA, négociable</span
-                  >
-                  <nuxt-link
-                    to="#"
-                    class="px-3 py-1 self-start block w-fit h-fit rounded btn-008489s color-008489 font-semibold size-12 my-1 whitespace-no-wrap"
-                    >Achat total</nuxt-link
-                  >
+                  <div>
+                    <span
+                      v-if="property.property.price_fixed.toString() !== '0'"
+                      class="logo-color font-medium size-15 block"
+                      :class="{
+                        'w-max-96 over': size > 599,
+                      }"
+                      >{{
+                        $linker.formatMoney(
+                          property.property.price_fixed.toString()
+                        )
+                      }}
+                      FCFA
+                      <span
+                        v-if="
+                          property.property.proposition.includes('Location')
+                        "
+                        class="logo-color font-medium size-15"
+                      >
+                        {{ property.property.location_freq }}</span
+                      ><span
+                        v-if="property.property.negociable === 'yes'"
+                        class="logo-color font-medium size-15"
+                      >
+                        , négociable</span
+                      ></span
+                    >
+                    <span
+                      v-else-if="
+                        property.property.price_min.toString() !== '0' &&
+                        property.property.price_max.toString() !== '0'
+                      "
+                      class="logo-color font-medium size-15 block"
+                      :class="{
+                        'w-max-96 over': size > 599,
+                      }"
+                      >{{
+                        $linker.formatMoney(
+                          property.property.price_min.toString()
+                        )
+                      }}
+                      FCFA -
+                      {{
+                        $linker.formatMoney(
+                          property.property.price_max.toString()
+                        )
+                      }}
+                      FCFA
+                      <span
+                        v-if="
+                          property.property.proposition.includes('Location')
+                        "
+                        class="logo-color font-medium size-15"
+                      >
+                        {{ property.property.location_freq }}</span
+                      ><span
+                        v-if="property.property.negociable === 'yes'"
+                        class="logo-color font-medium size-15"
+                      >
+                        , négociable</span
+                      ></span
+                    >
+                    <span
+                      v-else-if="property.property.price_min.toString() === '0'"
+                      class="logo-color font-medium size-15 block"
+                      :class="{
+                        'w-max-96 over': size > 599,
+                      }"
+                      >Jusqu'à
+                      {{
+                        $linker.formatMoney(
+                          property.property.price_max.toString()
+                        )
+                      }}
+                      FCFA
+                      <span
+                        v-if="
+                          property.property.proposition.includes('Location')
+                        "
+                        class="logo-color font-medium size-15"
+                      >
+                        {{ property.property.location_freq }}</span
+                      ><span
+                        v-if="property.property.negociable === 'yes'"
+                        class="logo-color font-medium size-15"
+                      >
+                        , négociable</span
+                      ></span
+                    >
+                    <span
+                      v-else
+                      class="logo-color font-medium size-15 block"
+                      :class="{
+                        'w-max-96 over': size > 599,
+                      }"
+                      >A partir de
+                      {{
+                        $linker.formatMoney(
+                          property.property.price_min.toString()
+                        )
+                      }}
+                      FCFA
+                      <span
+                        v-if="
+                          property.property.proposition.includes('Location')
+                        "
+                        class="logo-color font-medium size-15"
+                      >
+                        {{ property.property.location_freq }}</span
+                      ><span
+                        v-if="property.property.negociable === 'yes'"
+                        class="logo-color font-medium size-15"
+                      >
+                        , négociable</span
+                      ></span
+                    >
+                  </div>
+                  <div>
+                    <a
+                      v-if="property.property.proposition === 'Vente totale'"
+                      href="/"
+                      title="Le prix indiqué représente le montant à payer pour toute la propriété"
+                      class="px-3 py-1 z-20 block w-fit rounded btn-008489s color-008489 font-semibold size-11 my-1"
+                      >Achat total</a
+                    ><a
+                      v-if="property.property.proposition === 'Vente partielle'"
+                      href="/"
+                      :title="
+                        'Le prix indiqué représente ' +
+                        property.property.percentage_part.toString() +
+                        '%' +
+                        ' de la propriété (la part disponible)'
+                      "
+                      class="px-3 py-1 z-20 block w-fit rounded btn-008489s color-008489 font-semibold size-11 my-1"
+                      >Acheter une part ({{
+                        property.property.percentage_part.toString() + '%'
+                      }})</a
+                    >
+                    <a
+                      v-if="property.property.proposition === 'Location totale'"
+                      href="/"
+                      title="Le prix indiqué représente le montant à payer pour toute la propriété"
+                      class="px-3 py-1 z-20 block w-fit rounded btn-008489s color-008489 font-semibold size-11 my-1"
+                      >Location totale</a
+                    >
+                    <a
+                      v-if="
+                        property.property.proposition === 'Location partielle'
+                      "
+                      href="/"
+                      :title="
+                        'Le prix indiqué représente ' +
+                        property.property.percentage_part.toString() +
+                        '%' +
+                        ' de la propriété (la part disponible)'
+                      "
+                      class="px-3 py-1 z-20 block w-fit rounded btn-008489s color-008489 font-semibold size-11 my-1"
+                      >Louer une part ({{
+                        property.property.percentage_part.toString() + '%'
+                      }})</a
+                    >
+                  </div>
                 </div>
                 <div class="my-2">
                   <img
-                    src="https://ofaloo.herokuapp.com/images/prop.png"
-                    alt="Placeholder image"
+                    src="http://127.0.0.1:8000/images/prop.png"
+                    alt="Image"
                   />
                 </div>
+                <div v-if="property.property.rent === 'yes'" class="pb-0">
+                  <span class="font-semibold size-13 logo-color flex"
+                    ><svg
+                      class="mr-1.5"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8 7V3M16 7V3M7 11H17M5 21H19C20.1046 21 21 20.1046 21 19V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V19C3 20.1046 3.89543 21 5 21Z"
+                        stroke="#2d3748"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      /></svg
+                    >Disponible à partir du 24 Mars 2021</span
+                  ><br />
+                  <!-- <span class="font-semibold logo-color"
+            >Disponible jusqu'au 24 Mars 2021</span
+          ><br />
+          <span class="font-semibold logo-color"
+            >Disponible jusqu'au 24 Mars 2021 et après le 24 Mars 2021</span
+          > -->
+                </div>
+                <div
+                  :class="{
+                    'pb-2': property.property.rent === 'yes',
+                    'py-2': property.property.rent !== 'yes',
+                  }"
+                >
+                  <span class="color-363636 size-11">Il y a 3 jours</span>
+                </div>
                 <div class="flex align-center space-x-4 justify-between py-2">
-                  <nuxt-link to="#" class="flex align-center space-x-2"
+                  <a href="#" class="flex align-center space-x-2"
                     ><img
                       class="rounded-full is-40x40"
-                      src="https://ofaloo.herokuapp.com/images/4.jpg"
-                      alt="Placeholder image"
+                      :src="
+                        'http://127.0.0.1:8000/storage/' + property.user_pic
+                      "
+                      alt="Image"
                     />
-                    <span class="size-14 font-semibold over"
-                      >John Wick</span
-                    ></nuxt-link
+                    <span class="size-14 font-semibold">{{
+                      property.agence.name
+                    }}</span></a
                   >
-                  <nuxt-link
-                    to="#"
+                  <a
+                    v-show="property.agence.super === 'yes'"
+                    href="#"
                     class="button bg-transparent px-3 py-1 rounded border-008489ss size-12 color-008489"
-                    >Super agent</nuxt-link
+                    >Super agent</a
                   >
                 </div>
-                <div class="mt-1">
-                  <div>
-                    <span class="color-363636 size-12"> Il y a 3 jours</span>
-                  </div>
+                <div>
+                  <span
+                    v-if="showtel"
+                    class="size-14 appearZ font-semibold block flex align-center mt-1 mb-3"
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 18H12.01M8 21H16C17.1046 21 18 20.1046 18 19V5C18 3.89543 17.1046 3 16 3H8C6.89543 3 6 3.89543 6 5V19C6 20.1046 6.89543 21 8 21Z"
+                        stroke="#2d3748"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      /></svg
+                    >Tel: {{ property.agence.tel }}</span
+                  >
+                  <button
+                    class="border-none mt-1.5 flex align-center w-fit size-12 text-white px-5 pb-2 rounded button btn-008489"
+                    @click="
+                      {
+                        showtel = !showtel
+                      }
+                    "
+                  >
+                    <svg
+                      class="mr-1.5"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M2 3C2 2.44772 2.44772 2 3 2H5.15287C5.64171 2 6.0589 2.35341 6.13927 2.8356L6.87858 7.27147C6.95075 7.70451 6.73206 8.13397 6.3394 8.3303L4.79126 9.10437C5.90756 11.8783 8.12168 14.0924 10.8956 15.2087L11.6697 13.6606C11.866 13.2679 12.2955 13.0492 12.7285 13.1214L17.1644 13.8607C17.6466 13.9411 18 14.3583 18 14.8471V17C18 17.5523 17.5523 18 17 18H15C7.8203 18 2 12.1797 2 5V3Z"
+                        fill="#fff"
+                      />
+                    </svg>
+                    Appeler l'agent
+                  </button>
                 </div>
               </div>
               <div class="border-b pb-5">
@@ -360,28 +559,28 @@
                 </h4>
                 <div class="my-2">
                   <img
-                    src="https://ofaloo.herokuapp.com/images/prop.png"
-                    alt="Placeholder image"
+                    src="http://127.0.0.1:8000/images/prop.png"
+                    alt="Image"
                   />
                   <img
-                    src="https://ofaloo.herokuapp.com/images/prop.png"
-                    alt="Placeholder image"
+                    src="http://127.0.0.1:8000/images/prop.png"
+                    alt="Image"
                   />
                   <img
-                    src="https://ofaloo.herokuapp.com/images/prop.png"
-                    alt="Placeholder image"
+                    src="http://127.0.0.1:8000/images/prop.png"
+                    alt="Image"
                   />
                   <img
-                    src="https://ofaloo.herokuapp.com/images/prop.png"
-                    alt="Placeholder image"
+                    src="http://127.0.0.1:8000/images/prop.png"
+                    alt="Image"
                   />
                   <img
-                    src="https://ofaloo.herokuapp.com/images/prop.png"
-                    alt="Placeholder image"
+                    src="http://127.0.0.1:8000/images/prop.png"
+                    alt="Image"
                   />
                   <img
-                    src="https://ofaloo.herokuapp.com/images/prop.png"
-                    alt="Placeholder image"
+                    src="http://127.0.0.1:8000/images/prop.png"
+                    alt="Image"
                   />
                 </div>
               </div>
@@ -405,6 +604,7 @@
                   <br />
                   <input
                     id="username"
+                    autocomplete="none"
                     type="text"
                     class="border w-full py-1 h-7 size-14 rounded no-outlines px-2"
                   />
@@ -414,6 +614,7 @@
                   <br />
                   <input
                     id="phone"
+                    autocomplete="none"
                     type="tel"
                     class="border w-full py-1 h-7 size-14 rounded no-outlines px-2"
                   />
@@ -422,6 +623,21 @@
                   <label for="request" class="size-14">Requête</label>
                   <br />
                   <smstype></smstype>
+                </div>
+                <div class="w-full">
+                  <label for="request" class="size-14">Vous êtes</label>
+                  <br />
+                  <typeprop
+                    :content="[
+                      'Acheteur',
+                      'Locataire',
+                      'Agent immobilier',
+                      'Agent sur Ofaloo',
+                      'Investisseur',
+                      'Vendeur',
+                      'Autre',
+                    ]"
+                  ></typeprop>
                 </div>
                 <div class="w-full">
                   <label for="coment2x" class="size-14">Message</label>
@@ -439,7 +655,7 @@
                   <button
                     class="border-none w-full size-12 text-white px-5 pb-2 rounded button btn-008489 both-centers"
                   >
-                    Envoyer
+                    Envoyer le message
                   </button>
                 </div>
               </div>
@@ -453,12 +669,24 @@
 
 <script>
 import Smstype from '../dropdown/Smstype.vue'
+import Typeprop from '../dropdown/Typeprop.vue'
 import Bigads from '../propriete/Bigads.vue'
 export default {
-  components: { Bigads, Smstype },
+  components: { Bigads, Smstype, Typeprop },
+  props: {
+    property: {
+      type: Object,
+      default: () => {},
+    },
+    images: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data() {
     return {
       inside: false,
+      showtel: false,
       share: false,
       hovered1: false,
       hovered2: false,
@@ -467,12 +695,11 @@ export default {
       active: 0,
       index: 1,
       ads: [
-        'https://ofaloo.herokuapp.com/images/9.jpg',
-        'https://ofaloo.herokuapp.com/images/1.jpg',
-        'https://ofaloo.herokuapp.com/images/3.jpg',
-        'https://ofaloo.herokuapp.com/images/4.jpg',
-        'https://ofaloo.herokuapp.com/images/5.jpg',
-        'https://ofaloo.herokuapp.com/videos/vid.mp4',
+        'http://127.0.0.1:8000/images/9.jpg',
+        'http://127.0.0.1:8000/images/1.jpg',
+        'http://127.0.0.1:8000/images/3.jpg',
+        'http://127.0.0.1:8000/images/4.jpg',
+        'http://127.0.0.1:8000/images/5.jpg',
       ],
     }
   },
@@ -480,18 +707,25 @@ export default {
     size() {
       return this.$store.state.size
     },
+    dataOk() {
+      return (
+        this.property !== undefined &&
+        this.property.property !== undefined &&
+        this.property.property !== null
+      )
+    },
     next1() {
-      if (this.ads.length - 1 - this.curindex <= 1) {
-        if (this.ads.length - 1 - this.curindex === 1)
-          return this.ads.length - 1
-        if (this.ads.length - 1 - this.curindex === 0) return 0
+      if (this.images.length - 1 - this.curindex <= 1) {
+        if (this.images.length - 1 - this.curindex === 1)
+          return this.images.length - 1
+        if (this.images.length - 1 - this.curindex === 0) return 0
       }
       return this.curindex + 1
     },
     next2() {
-      if (this.ads.length - 1 - this.curindex <= 1) {
-        if (this.ads.length - 1 - this.curindex === 1) return 0
-        if (this.ads.length - 1 - this.curindex === 0) return 1
+      if (this.images.length - 1 - this.curindex <= 1) {
+        if (this.images.length - 1 - this.curindex === 1) return 0
+        if (this.images.length - 1 - this.curindex === 0) return 1
       }
       return this.curindex + 2
     },
@@ -499,7 +733,16 @@ export default {
       return this.index - 1
     },
   },
+  mounted() {
+    this.increment()
+  },
   methods: {
+    async increment() {
+      const result = await fetch(
+        'http://localhost:8000/api/property/visit/' + this.property.property.id
+      ).then((res) => res.json())
+      console.log(result)
+    },
     hideshare() {
       this.share = false
     },

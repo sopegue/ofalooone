@@ -38,6 +38,31 @@ const linker = {
     }
     return false
   },
+  onlyLetters(val) {
+    return /\d/.test(val) === false && /[a-zA-Z]/.test(val) === true
+  },
+  isNumber(val) {
+    if (!val.includes(' ')) {
+      if (!isNaN(val) && !val.includes('.')) return true
+    }
+    return false
+  },
+  formatMoney(val) {
+    let money = ''
+    let reverse = ''
+    let i = 0
+    for (let index = val.length - 1; index >= 0; index--) {
+      money = money + val[index]
+      if (i === 2) {
+        money = money + ' '
+        i = 0
+      } else i++
+    }
+    for (let index = money.length - 1; index >= 0; index--) {
+      reverse = reverse + money[index]
+    }
+    return reverse
+  },
 }
 
 export default ({ app }, inject) => {

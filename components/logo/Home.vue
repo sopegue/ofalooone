@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link to="/" class="flex w-fit align-center">
+  <a href="/" class="flex w-fit align-center">
     <logo :color="color" :scale="scaling"></logo>
     <span
       class="font-semibold select-none transform pl-5"
@@ -13,7 +13,7 @@
       }"
       >Ofaloo</span
     >
-  </nuxt-link>
+  </a>
 </template>
 <script>
 import Logo from '~/components/logo/Logo.vue'

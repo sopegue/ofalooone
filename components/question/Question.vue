@@ -58,10 +58,10 @@
           <span>{{ content }}</span>
         </div>
         <div v-if="link1">
-          <nuxt-link
-            :to="link1.link"
+          <a
+            :href="link1.link"
             class="button bg-transparent px-3 py-1 rounded border-008489ss size-12 color-008489"
-            >{{ link1.text }}</nuxt-link
+            >{{ link1.text }}</a
           >
         </div>
       </div>

@@ -750,6 +750,14 @@ button {
 .w180e {
   min-width: 280px;
 }
+.w180eb {
+  min-width: 320px !important;
+  max-width: 320px !important;
+}
+.w180es {
+  min-width: 280px;
+  max-width: 280px;
+}
 .w240e {
   min-width: 240px;
 }
@@ -804,6 +812,9 @@ button {
 .h-fulls {
   height: 100% !important;
 }
+.w-fulls {
+  width: 100% !important;
+}
 .bg-black-tr {
   background-color: rgba(0, 0, 0, 0.74) !important;
 }
@@ -818,6 +829,10 @@ button {
 }
 .w180s {
   min-width: 360px;
+}
+
+.w-max-360 {
+  max-width: 360px !important;
 }
 .w180ss {
   min-width: 360px !important;
@@ -1178,7 +1193,7 @@ textarea {
 }
 .aside:hover::-webkit-scrollbar-thumb {
   position: absolute;
-  background: #dddddd;
+  background: #b3b3b3;
 }
 
 .asides::-webkit-scrollbar {
@@ -1204,11 +1219,7 @@ textarea {
   border-radius: 6px !important;
   background: #888 !important;
 }
-@media screen and (max-width: 450px) {
-  .nexttag {
-    display: none;
-  }
-}
+
 .slow-spin {
   -webkit-animation: fa-spin 6s infinite linear;
   animation: fa-spin 6s infinite linear;

@@ -4,7 +4,7 @@
       id="contact-agent"
       class="w-full lg:w-2/5 md:w-3/5 sm:w-3/4 m-0-auto rounded bg-white"
     >
-      <div class="bg-008489 px-4 py-3">
+      <div class="bg-008489 px-4 py-3 rounded-tl rounded-tr">
         <h4 class="text-white size-20 font-semibold mb-1 text-c">
           Contactez Nous
         </h4>

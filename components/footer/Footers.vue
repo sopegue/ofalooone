@@ -20,17 +20,17 @@
           Besoin d'aide ?
         </h4>
         <div class="mt-2 flex flex-col space-y-1">
-          <nuxt-link
-            to="/faq"
+          <a
+            href="/faq"
             class="underline-hover text-c w-fit text-white block size-13"
             :class="{ 'w-autoxx': size <= 767 }"
-            >FAQs</nuxt-link
+            >FAQs</a
           >
-          <nuxt-link
-            to="/contactez-nous"
+          <a
+            href="/contactez-nous"
             class="underline-hover text-c w-fit text-white block size-13"
             :class="{ 'w-autoxx': size <= 767 }"
-            >Nous contacter</nuxt-link
+            >Nous contacter</a
           >
         </div>
       </div>
@@ -42,17 +42,17 @@
           Compte
         </h4>
         <div class="mt-2 flex flex-col space-y-1">
-          <nuxt-link
-            to="/user"
+          <a
+            href="/user"
             class="underline-hover text-c w-fit text-white block size-13"
             :class="{ 'w-autoxx': size <= 767 }"
-            >Mon profil</nuxt-link
+            >Mon profil</a
           >
-          <nuxt-link
-            to="/favoris"
+          <a
+            href="/favoris"
             class="underline-hover text-c w-fit text-white block size-13"
             :class="{ 'w-autoxx': size <= 767 }"
-            >Enregistrés</nuxt-link
+            >Enregistrés</a
           >
         </div>
       </div>
@@ -64,17 +64,17 @@
           Ofaloo
         </h4>
         <div class="mt-2 flex flex-col space-y-1">
-          <nuxt-link
-            to="/apropos"
+          <a
+            href="/apropos"
             class="underline-hover text-c w-fit text-white block size-13"
             :class="{ 'w-autoxx': size <= 767 }"
-            >A propos de nous</nuxt-link
+            >A propos de nous</a
           >
-          <nuxt-link
-            to="/devenir-agent"
+          <a
+            href="/devenir-agent"
             class="underline-hover text-c w-fit text-white block size-13"
             :class="{ 'w-autoxx': size <= 767 }"
-            >Devenir agent</nuxt-link
+            >Devenir agent</a
           >
         </div>
       </div>
@@ -135,19 +135,17 @@
       <div class="w-fit mx-2 flex align-center space-x-1 size-14 text-white">
         <span class="text-white">{{ toyear }}</span>
         <span class="text-white">•</span>
-        <nuxt-link to="/" class="w-fit text-white block size-13"
-          >Ofaloo.com</nuxt-link
-        >
+        <a href="/" class="w-fit text-white block size-13">Ofaloo.com</a>
       </div>
-      <nuxt-link
-        to="/condition-utilisation"
+      <a
+        href="/condition-utilisation"
         class="underline-hover w-fit text-white block size-13"
-        >Conditions d'utilisations</nuxt-link
+        >Conditions d'utilisations</a
       >
-      <nuxt-link
-        to="/politique-confidentialite"
+      <a
+        href="/politique-confidentialite"
         class="underline-hover w-fit text-white block size-13"
-        >Politique de confidentialité</nuxt-link
+        >Politique de confidentialité</a
       >
     </div>
   </div>

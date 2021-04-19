@@ -22,11 +22,12 @@
         "
       >
         <button
-          class="absolute cursor-default bottom-0 right-0 mb-2 mr-2 z-10"
-          title="Contient une vidéo"
+          v-if="link"
+          class="absolute z-10 cursor-default bottom-0 right-0 mb-2 mr-2"
+          title="Contient un ou plusieurs lien vidéo(s)"
         >
           <svg
-            class="w-10 h-10 text-white"
+            class="w-8 h-8 text-white"
             fill="#00000041"
             stroke="currentColor"
             viewBox="0 0 20 20"
@@ -51,7 +52,7 @@
           :class="{
             slide: index === i + 1,
           }"
-          ><img class="h-full w-full" :src="img" alt="Placeholder image"
+          ><img class="h-full w-full" :src="img" alt="Image"
         /></a></figure
     ></slidermin>
   </div>
@@ -65,6 +66,10 @@ export default {
     ads: {
       type: Array,
       default: () => [],
+    },
+    link: {
+      type: Boolean,
+      default: false,
     },
     indexer: {
       type: Number,

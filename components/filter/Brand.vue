@@ -1,7 +1,11 @@
 <template>
   <div class="border-b pb-4">
     <div class="flex align-center justify-between">
-      <span class="font-semibold size-14 logo-color">{{ title }}</span>
+      <span
+        class="font-semibold clickable size-14 logo-color"
+        @click="tryingexpand"
+        >{{ title }}</span
+      >
       <button class="p-1 rounded bg-white no-outlines" @click="tryingexpand">
         <svg
           v-if="!expanded"
@@ -54,6 +58,7 @@
                 v-else
                 :for="'mix' + id + i"
                 class="flex align-center container pb-1"
+                @click="seting"
                 ><span
                   class="w-fit size-13 -mt-012x multichoice-categ"
                   :class="{
@@ -140,6 +145,7 @@
                 <div class="m-0-auto w-full pt-4 pb-2">
                   <button
                     class="btn-008489 px-3 pb-1 w-full rounded no-outlines"
+                    @click="setprice"
                   >
                     <span class="text-white size-11 h-fit font-semibold"
                       >Appliquer les prix</span
@@ -175,6 +181,7 @@
                 <div class="m-0-auto w-full pt-4 pb-2">
                   <button
                     class="btn-008489 px-3 pb-1 w-full rounded no-outlines"
+                    @click="setsize"
                   >
                     <span class="text-white size-11 h-fit font-semibold"
                       >Appliquer les tailles</span
@@ -234,6 +241,8 @@ export default {
     return {
       index: 0,
       hidden: false,
+      has_reset: false,
+      hasfil: false,
       indexsub: 0,
       hiddensub: false,
       expand: true,
@@ -242,6 +251,154 @@ export default {
       search: '',
       max: '',
       min: '',
+      filter_old: {
+        what: 'all',
+        achat_location: {
+          multiple: ['Tous types'],
+        },
+        part: {
+          tous: 'Toute part',
+        },
+        type_loc: {
+          tous: 'Tous types',
+        },
+        achat: {
+          type: "Tous types d'achats",
+          multiple: [],
+        },
+        rent: {
+          type: 'Tous types de locations',
+          multiple: [],
+        },
+        property: {
+          tous: 'Tous types de propriétés',
+          multiple: [],
+          tous_search: 'Tous types',
+        },
+        bed: {
+          tous: 'Tous types de pièces',
+          tous_search: 'Tous types',
+        },
+        bath: {
+          tous: 'Tous types',
+        },
+        search_price: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        price: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        price_loc: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        taille: {
+          tous_search: 'Tous types',
+          tous: 'Tous types de tailles',
+          min: 0,
+          max: 0,
+        },
+        garage: {
+          tous_search: 'Tous types',
+          tous: 'Tous types de garages',
+        },
+        date: {
+          tous: 'Tous temps',
+          date: null,
+        },
+        availability: {
+          tous: 'Tous types',
+          multiple: [],
+        },
+        indoor: {
+          multiple: [],
+        },
+        outdoor: {
+          multiple: [],
+        },
+        energy: {
+          multiple: [],
+        },
+      },
+      filter: {
+        what: 'all',
+        achat_location: {
+          multiple: ['Tous types'],
+        },
+        part: {
+          tous: 'Toute part',
+        },
+        type_loc: {
+          tous: 'Tous types',
+        },
+        achat: {
+          type: "Tous types d'achats",
+          multiple: [],
+        },
+        rent: {
+          type: 'Tous types de locations',
+          multiple: [],
+        },
+        property: {
+          tous: 'Tous types de propriétés',
+          multiple: [],
+          tous_search: 'Tous types',
+        },
+        bed: {
+          tous: 'Tous types de pièces',
+          tous_search: 'Tous types',
+        },
+        bath: {
+          tous: 'Tous types',
+        },
+        search_price: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        price: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        price_loc: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        taille: {
+          tous_search: 'Tous types',
+          tous: 'Tous types de tailles',
+          min: 0,
+          max: 0,
+        },
+        garage: {
+          tous_search: 'Tous types',
+          tous: 'Tous types de garages',
+        },
+        date: {
+          tous: 'Tous temps',
+          date: null,
+        },
+        availability: {
+          tous: 'Tous types',
+          multiple: [],
+        },
+        indoor: {
+          multiple: [],
+        },
+        outdoor: {
+          multiple: [],
+        },
+        energy: {
+          multiple: [],
+        },
+      },
     }
   },
   computed: {
@@ -259,6 +416,9 @@ export default {
     me() {
       return this.hidden === true
     },
+    filting() {
+      return this.hasfil === true
+    },
     mesub() {
       return this.hiddensub === true
     },
@@ -271,6 +431,12 @@ export default {
     scroll() {
       return this.$store.state.scroll
     },
+    youreset() {
+      return this.has_reset === true
+    },
+    reset() {
+      return this.$store.state.reseting === true
+    },
   },
   watch: {
     // whenever toremove changes, this function will run
@@ -278,7 +444,7 @@ export default {
       this.deletecateg(newcateg)
     },
     size(newcateg, oldcateg) {
-      if (newcateg < 1100) this.expand = false
+      if (newcateg < 1150) this.expand = false
     },
     min(newcateg, oldcateg) {
       if (!newcateg.toString().includes(' ')) {
@@ -308,24 +474,430 @@ export default {
           newv.splice(newv.indexOf('Tous types'), 1)
       }
       if (newv.length === 0) {
-        if (this.content.includes('Tous types')) {
+        if (
+          this.content.includes('Tous types') &&
+          this.title !== 'Taille (m²)'
+        ) {
           this.checkedCateg = ['Tous types']
         }
+      }
+      if (this.title === 'Achat et location') {
+        // console.log('fd')
+        if (
+          newv.includes('Acheter une part') ||
+          newv.includes('Louer une part') ||
+          newv.includes('Tous types') ||
+          newv.length === 4
+        ) {
+          this.$emit('part', true)
+        } else this.$emit('part', false)
+        if (
+          newv.includes('Location totale') ||
+          newv.includes('Louer une part') ||
+          newv.includes('Tous types') ||
+          newv.length === 4
+        ) {
+          this.$emit('location', true)
+        } else this.$emit('location', false)
+      }
+      if (
+        this.title === 'Achat et location' ||
+        this.title === 'Types de propriétés' ||
+        this.title === 'Indoor' ||
+        this.title === 'Outdoor' ||
+        this.title === "Contrôle d'énergie" ||
+        this.title === 'Disponibilité'
+      ) {
+        this.fill_filter(newv)
+      }
+    },
+    filting(nv, ov) {
+      if (nv) {
+        this.filling()
+      }
+    },
+    reset(nv, ov) {
+      if (nv) {
+        this.has_reset = true
+      } else this.has_reset = false
+    },
+    youreset(nv, ov) {
+      if (nv) {
+        this.resetingAll()
       }
     },
   },
   mounted() {
+    this.$emit('there')
+    this.checkedCateg[0] = this.content[0]
     if (this.size < 1050) this.expand = false
     this.id = this._uid
+    this.fill_ifOk()
   },
   methods: {
+    resetingAll() {
+      if (sessionStorage.filter) sessionStorage.removeItem('filter')
+      this.filter = this.filter_old
+      sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      this.min = ''
+      this.max = ''
+      this.checkedCateg = []
+      this.checkedCateg.push(this.content[0])
+      this.$emit('done')
+    },
+    async fill_ifOk() {
+      if (sessionStorage.filter) {
+        this.filter = await JSON.parse(sessionStorage.getItem('filter'))
+      }
+      this.hasfil = true
+      this.$emit('finished', true)
+    },
+    async fill_filter(val) {
+      if (sessionStorage.filter) {
+        this.filter = await JSON.parse(sessionStorage.getItem('filter'))
+      }
+      if (this.title === 'Achat et location') {
+        if (val.includes('Tous types')) {
+          this.filter.what = 'all'
+          this.filter.achat_location.multiple = ['Tous types']
+
+          if (sessionStorage.filter) sessionStorage.removeItem('filter')
+          sessionStorage.setItem('filter', JSON.stringify(this.filter))
+        } else {
+          if (val.length >= 3) {
+            this.filter.what = 'all'
+          } else if (val.length === 2) {
+            if (
+              (val.includes('Achat total') &&
+                val.includes('Location totale')) ||
+              (val.includes('Acheter une part') &&
+                val.includes('Location totale')) ||
+              (val.includes('Achat total') && val.includes('Louer une part')) ||
+              (val.includes('Acheter une part') &&
+                val.includes('Louer une part'))
+            ) {
+              this.filter.what = 'all'
+            }
+            if (
+              val.includes('Achat total') &&
+              val.includes('Acheter une part')
+            ) {
+              this.filter.what = 'Acheter'
+            }
+            if (
+              val.includes('Location totale') &&
+              val.includes('Louer une part')
+            ) {
+              this.filter.what = 'Louer'
+            }
+          } else {
+            if (
+              val.includes('Achat total') ||
+              val.includes('Acheter une part')
+            ) {
+              this.filter.what = 'Acheter'
+            }
+            if (
+              val.includes('Location totale') ||
+              val.includes('Louer une part')
+            ) {
+              this.filter.what = 'Louer'
+            }
+          }
+
+          this.filter.achat_location.multiple = val
+          if (sessionStorage.filter) sessionStorage.removeItem('filter')
+          sessionStorage.setItem('filter', JSON.stringify(this.filter))
+        }
+      }
+      if (this.title === 'Types de propriétés') {
+        if (val.includes('Tous types')) {
+          this.filter.property.multiple = ['Tous types']
+        } else {
+          this.filter.property.multiple = val
+        }
+        if (sessionStorage.filter) sessionStorage.removeItem('filter')
+        sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      }
+      if (this.title === 'Indoor') {
+        if (val.includes('Tous types')) {
+          this.filter.indoor.multiple = ['Tous types']
+        } else {
+          this.filter.indoor.multiple = val
+        }
+        if (sessionStorage.filter) sessionStorage.removeItem('filter')
+        sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      }
+      if (this.title === 'Outdoor') {
+        if (val.includes('Tous types')) {
+          this.filter.outdoor.multiple = ['Tous types']
+        } else {
+          this.filter.outdoor.multiple = val
+        }
+        if (sessionStorage.filter) sessionStorage.removeItem('filter')
+        sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      }
+      if (this.title === "Contrôle d'énergie") {
+        if (val.includes('Tous types')) {
+          this.filter.energy.multiple = ['Tous types']
+        } else {
+          this.filter.energy.multiple = val
+        }
+        if (sessionStorage.filter) sessionStorage.removeItem('filter')
+        sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      }
+      if (this.title === 'Disponibilité') {
+        if (val.includes('Tous types')) {
+          this.filter.availability.multiple = ['Tous types']
+        } else {
+          this.filter.availability.multiple = val
+        }
+        if (sessionStorage.filter) sessionStorage.removeItem('filter')
+        sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      }
+    },
+    async fill_filterSet(val) {
+      if (sessionStorage.filter) {
+        this.filter = await JSON.parse(sessionStorage.getItem('filter'))
+      }
+      if (this.title === 'Part') {
+        this.filter.part.tous = val
+        if (sessionStorage.filter) sessionStorage.removeItem('filter')
+        sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      }
+      if (this.title === 'Type de location') {
+        this.filter.type_loc.tous = val
+        if (sessionStorage.filter) sessionStorage.removeItem('filter')
+        sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      }
+      if (this.title === 'Pièces') {
+        this.filter.bed.tous_search = val
+        if (sessionStorage.filter) sessionStorage.removeItem('filter')
+        sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      }
+      if (this.title === 'Prix') {
+        this.filter.search_price.tous = val
+        this.filter.search_price.min = 0
+        this.filter.search_price.max = 0
+        this.min = ''
+        this.max = ''
+        if (sessionStorage.filter) sessionStorage.removeItem('filter')
+        sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      }
+      if (this.title === 'Taille (m²)') {
+        this.filter.taille.tous_search = val
+        this.filter.taille.min = 0
+        this.filter.taille.max = 0
+        this.min = ''
+        this.max = ''
+        if (sessionStorage.filter) sessionStorage.removeItem('filter')
+        sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      }
+      if (this.title === 'Salles de bains') {
+        this.filter.bath.tous = val
+        if (sessionStorage.filter) sessionStorage.removeItem('filter')
+        sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      }
+      if (this.title === 'Garages') {
+        this.filter.garage.tous_search = val
+        if (sessionStorage.filter) sessionStorage.removeItem('filter')
+        sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      }
+      if (this.title === "Date d'arrivée") {
+        this.filter.date.tous = val
+        if (sessionStorage.filter) sessionStorage.removeItem('filter')
+        sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      }
+    },
+    filling() {
+      if (this.title === 'Achat et location') {
+        if (
+          this.filter.achat_location.multiple.includes("Tous types d'achats")
+        ) {
+          this.checkedCateg = []
+          this.checkedCateg = ['Achat total', 'Acheter une part']
+        } else if (
+          this.filter.achat_location.multiple.includes(
+            'Tous types de locations'
+          )
+        ) {
+          this.checkedCateg = []
+          this.checkedCateg = ['Location totale', 'Louer une part']
+        } else if (this.filter.achat_location.multiple.includes('Tous types')) {
+          this.checkedCateg = ['Tous types']
+        } else {
+          this.checkedCateg = []
+          this.filter.achat_location.multiple.forEach((element) => {
+            this.checkedCateg.push(element)
+          })
+        }
+      }
+      if (this.title === "Date d'arrivée") {
+        this.checkedCateg = []
+        this.checkedCateg.push(this.filter.date.tous)
+      }
+      if (this.title === 'Types de propriétés') {
+        if (this.filter.property.multiple.length === 1) {
+          if (
+            this.filter.property.multiple[0] === 'Tous types de propriétés' ||
+            this.filter.property.multiple[0] === 'Tous types'
+          )
+            this.checkedCateg = ['Tous types']
+          else {
+            this.checkedCateg = this.filter.property.multiple
+          }
+        } else if (this.filter.property.multiple.length > 1) {
+          this.checkedCateg = []
+          for (
+            let index = 0;
+            index < this.filter.property.multiple.length;
+            index++
+          ) {
+            const element = this.filter.property.multiple[index]
+            this.checkedCateg.push(element)
+          }
+        } else if (this.filter.property.multiple.length === 0)
+          this.checkedCateg = ['Tous types']
+      }
+      if (this.title === 'Disponibilité') {
+        if (this.filter.availability.multiple.length === 0) {
+          this.checkedCateg = ['Tous types']
+        } else if (this.filter.availability.multiple.length > 0) {
+          this.checkedCateg = []
+          for (
+            let index = 0;
+            index < this.filter.availability.multiple.length;
+            index++
+          ) {
+            const element = this.filter.availability.multiple[index]
+            this.checkedCateg.push(element)
+          }
+        }
+      }
+      if (this.title === 'Prix') {
+        this.checkedCateg = []
+
+        if (
+          this.filter.search_price.min === 0 &&
+          this.filter.search_price.max === 0
+        ) {
+          this.checkedCateg.push(this.filter.search_price.tous)
+        } else this.checkedCateg = []
+        this.min =
+          this.filter.search_price.min === 0
+            ? ''
+            : this.filter.search_price.min.toString()
+        this.max =
+          this.filter.search_price.max === 0
+            ? ''
+            : this.filter.search_price.max.toString()
+      }
+      if (this.title === 'Pièces') {
+        this.checkedCateg = [this.filter.bed.tous_search]
+      }
+      if (this.title === 'Salles de bains') {
+        this.checkedCateg = [this.filter.bath.tous]
+      }
+      if (this.title === 'Part') {
+        this.checkedCateg = [this.filter.part.tous]
+      }
+      if (this.title === 'Type de location') {
+        this.checkedCateg = [this.filter.type_loc.tous]
+      }
+      if (this.title === 'Indoor') {
+        if (this.filter.indoor.multiple.length === 0) {
+          this.checkedCateg = ['Tous types']
+        } else {
+          this.checkedCateg = this.filter.indoor.multiple
+        }
+      }
+      if (this.title === 'Outdoor') {
+        if (this.filter.outdoor.multiple.length === 0) {
+          this.checkedCateg = ['Tous types']
+        } else {
+          this.checkedCateg = this.filter.outdoor.multiple
+        }
+      }
+      if (this.title === "Contrôle d'énergie") {
+        if (this.filter.energy.multiple.length === 0) {
+          this.checkedCateg = ['Tous types']
+        } else {
+          this.checkedCateg = this.filter.energy.multiple
+        }
+      }
+      if (this.title === 'Garages') {
+        this.checkedCateg = [this.filter.garage.tous_search]
+      }
+      if (this.title === 'Taille (m²)') {
+        this.checkedCateg = []
+        if (this.filter.taille.min === 0 && this.filter.taille.max === 0) {
+          this.checkedCateg = ['Tous types']
+        } else this.checkedCateg = []
+        this.min =
+          this.filter.taille.min === 0 ? '' : this.filter.taille.min.toString()
+        this.max =
+          this.filter.taille.max === 0 ? '' : this.filter.taille.max.toString()
+      }
+      if (sessionStorage.filter) sessionStorage.removeItem('filter')
+      sessionStorage.setItem('filter', JSON.stringify(this.filter))
+    },
     setcur1(cur) {
+      this.fill_filterSet(cur)
       this.checkedCateg = []
       this.checkedCateg.push(cur)
     },
-    setcur2(cur) {
-      this.checkedCateg = []
-      this.checkedCateg.push(cur)
+    async setprice() {
+      if (sessionStorage.filter) {
+        this.filter = await JSON.parse(sessionStorage.getItem('filter'))
+      }
+      if (this.min !== '') this.filter.search_price.min = +this.min
+      if (this.max !== '') this.filter.search_price.max = +this.max
+      if (this.min === '' && this.max === '') {
+        this.filter.search_price.min = 0
+        this.filter.search_price.max = 0
+        this.checkedCateg = ['Tout prix']
+      } else {
+        if (this.min === '') {
+          this.filter.search_price.min = 0
+        }
+        if (this.max === '') {
+          this.filter.search_price.max = 0
+        }
+      }
+      if (sessionStorage.filter) sessionStorage.removeItem('filter')
+      sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      if (this.min !== '' || this.max !== '') {
+        this.checkedCateg = []
+        this.$emit('gone', this.filter)
+      }
+    },
+    async setsize() {
+      if (sessionStorage.filter) {
+        this.filter = await JSON.parse(sessionStorage.getItem('filter'))
+      }
+      if (this.min !== '') this.filter.taille.min = +this.min
+      if (this.max !== '') this.filter.taille.max = +this.max
+      if (this.min === '' && this.max === '') {
+        this.filter.taille.min = 0
+        this.filter.taille.max = 0
+        this.checkedCateg = ['Tous types']
+      } else {
+        if (this.min === '') {
+          this.filter.taille.min = 0
+        }
+        if (this.max === '') {
+          this.filter.taille.max = 0
+        }
+      }
+      if (sessionStorage.filter) sessionStorage.removeItem('filter')
+      sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      if (this.min !== '' || this.max !== '') {
+        this.checkedCateg = []
+        this.$emit('gone', this.filter)
+      }
+    },
+    seting() {
+      console.log('clicked')
     },
     deletecateg(value) {
       if (value === 'all') this.checkedCateg = []

@@ -57,7 +57,7 @@
             content="Vous pouvez envoyer un message à 
             l'agent en charge d'une propriété pour savoir 
             les moyens de paiements disponibles dans le cadre 
-            'un achat ou d'une location."
+            d'un achat ou d'une location."
             title="Méthode de paiement"
           ></question>
         </div>
@@ -151,8 +151,8 @@
         <div class="flex flex-col space-y-3">
           <span
             >Vous avez une question ou une suggestion ? Remplissez
-            <nuxt-link to="/contactez-nous" class="color-008489 underline-hover"
-              >ce formulaire</nuxt-link
+            <a href="/contactez-nous" class="color-008489 underline-hover"
+              >ce formulaire</a
             >
             pour nous envoyer un message et nous vous répondrons dans les plus
             brefs délais possibles</span

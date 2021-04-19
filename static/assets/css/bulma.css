@@ -11,6 +11,10 @@
   flex: none;
   width: 50%;
 }
+.column.is-one-quarters {
+  flex: none;
+  width: 33.3%;
+}
 .column.is-two-fifths,
 .column.is-two-fifths-tablet {
   flex: none;
@@ -191,6 +195,7 @@
 .image.is-4by5 img,
 .image.is-5by3 .has-ratio,
 .image.is-5by3 img,
+.image.is-5by3s img,
 .image.is-5by4 .has-ratio,
 .image.is-5by4 img,
 .image.is-9by16 .has-ratio,
@@ -235,6 +240,7 @@
 .image.is-4by5 .has-ratio,
 .image.is-4by5 img,
 .image.is-5by3 .has-ratio,
+.image.is-5by3s img,
 .image.is-5by3 img,
 .image.is-5by4 .has-ratio,
 .image.is-5by4 img,
@@ -326,25 +332,25 @@
   padding-top: 66.6666%;
 }
 .h-402max {
-  max-height: 402px;
-  min-height: 402px;
+  max-height: 460px;
+  min-height: 460px;
 }
 @media screen and (max-width: 720px) {
   .h-402max {
     max-height: 300px;
-    min-height: 300px;
+    min-height: 360px;
   }
 }
 @media screen and (max-width: 620px) {
   .h-402max {
     max-height: 200px;
-    min-height: 200px;
+    min-height: 280px;
   }
 }
 @media screen and (max-width: 460px) {
   .h-402max {
     max-height: 160px;
-    min-height: 160px;
+    min-height: 240px;
   }
 }
 @media screen and (max-width: 410px) {
@@ -355,14 +361,14 @@
 .w-w280x126 {
   max-width: 280px;
   min-width: 280px;
-  max-height: 126px;
-  min-height: 126px;
+  max-height: 145.4px;
+  min-height: 145.4px;
 }
 .image.is-360x216 {
-  min-width: 280px;
-  max-width: 360px;
-  min-height: 210px;
-  max-height: 240px;
+  min-width: 320px !important;
+  max-width: 360px !important;
+  min-height: 240px !important;
+  max-height: 240px !important;
 }
 .h-16min {
   min-height: 56px !important;
@@ -409,6 +415,9 @@
 }
 .image.is-5by3 {
   padding-top: 45%;
+}
+.image.is-5by3s {
+  padding-top: 51.9%;
 }
 .image.is-16by9 {
   padding-top: 56.25%;
@@ -1968,6 +1977,7 @@ fieldset[disabled] .button {
   -ms-user-select: none;
   user-select: none;
 }
+
 .delete,
 .modal-close {
   -moz-appearance: none;
@@ -1990,6 +2000,19 @@ fieldset[disabled] .button {
   position: relative;
   vertical-align: top;
   width: 24px;
+}
+.delete.search {
+  background-color: rgba(255, 255, 255, 0.822);
+  height: 16px !important;
+  max-height: 16px !important;
+  max-width: 16px !important;
+  min-height: 16px !important;
+  min-width: 16px !important;
+  width: 16px !important;
+}
+.delete.search:focus,
+.delete.search:hover {
+  background-color: rgba(255, 255, 255, 0.575) !important;
 }
 .delete::after,
 .delete::before,

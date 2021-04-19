@@ -1,11 +1,5 @@
 <template>
-  <div
-    class="z-10x wsearch m-0-auto pt-28"
-    :class="{
-      'wsearch-agent': activesearch === 'Agent',
-      'wsearch-location': activesearch === 'Louer',
-    }"
-  >
+  <div class="z-10x wsearch m-0-auto pt-28">
     <div class="flex align-center space-x-2">
       <button
         class="btn-adv button border-none rounded-tl rounded-tr px-10 text-white py-2x size-13 font-semibold"
@@ -53,7 +47,7 @@
     <div class="relative w-full hsearch btn-adv rounded-br rounded-bl">
       <div class="absolute bgtr h-full w-full z-10"></div>
       <div
-        class="z-12 relative w-full px-6 pt-5"
+        class="z-12 relative w-full px-8 pt-5"
         :class="{
           'pb-6': activesearch === 'Agent',
           'pb-2': activesearch !== 'Agent',
@@ -73,8 +67,8 @@
             class="relative flex align-center w-full h-full rounded-tl rounded-bl"
           >
             <div
-              v-show="inputfocused"
-              class="rounded-bl rounded-br bg-white h-64 w-full absolute z-12 top-0 mt-10"
+              v-show="inputfocused && search !== ''"
+              class="rounded-bl border shadow-xs rounded-br bg-white h-64 w-full absolute z-12 top-0 mt-11.5"
             ></div>
             <svg
               class="w-6 h-6 logo-color absolute left-0 ml-3"
@@ -91,12 +85,13 @@
               ></path>
             </svg>
             <input
-              class="w-full h-full outline-none pl-12 size-17 bg-white rounded-tl rounded-bl"
+              v-model="search"
+              class="w-full h-full outline-none pl-12 size-16 bg-white rounded-tl rounded-bl"
               type="search"
               :placeholder="
                 activesearch === 'Agent'
                   ? 'Rechercher une propriété par agent...'
-                  : 'Rechercher par ville, quartier, code postal...'
+                  : 'Rechercher par ville, quartier...'
               "
               @focus="
                 {
@@ -113,7 +108,7 @@
           <button
             class="h-full button btn-008489 rounded-tr rounded-br text-white size-13 font-semibold"
             :class="{ 'px-6': size > 500, 'px-3': size <= 500 }"
-            @click="$router.push('/recherche')"
+            @click="gotosearch"
           >
             Rechercher
           </button>
@@ -124,28 +119,35 @@
         >
           <optionadvanced
             v-show="activesearch === 'Acheter'"
+            class="mr-1 my-1"
             :left="true"
             :what="'achat'"
             :currencies="[
-              'Tous types d\'achat',
+              'Tous types d\'achats',
               'Achat total',
               'Acheter une part',
             ]"
+            @options="achat"
           ></optionadvanced>
           <optionadvanced
             v-show="activesearch === 'Louer'"
+            class="mr-1 my-1"
             :left="true"
-            :what="'achat'"
+            :what="'location'"
             :currencies="[
-              'Tous types de location',
+              'Tous types de locations',
               'Location totale',
               'Louer une part',
             ]"
+            @options="location"
           ></optionadvanced
           ><optionadvanced
+            class="mx-1 my-1"
             :what="'type'"
+            :left="true"
             :currencies="[
               'Tous types de propriétés',
+              'Studio',
               'Maison',
               'Appartement',
               'Villa',
@@ -154,70 +156,66 @@
               'Magasin',
               'Terrain',
             ]"
+            @options1="properties"
           ></optionadvanced
           ><optionadvanced
+            class="mx-1 my-1"
             :what="'bed'"
+            :left="true"
             :currencies="[
               'Tous types de pièces',
-              'Studio',
               '1 pièce et plus',
               '2 pièces et plus',
               '3 pièces et plus',
               '4 pièces et plus',
               '5 pièces et plus',
             ]"
+            @options="beding"
           ></optionadvanced
           ><optionadvanced
             v-show="activesearch === 'Acheter'"
+            class="mx-1 my-1"
             :what="'price'"
-            :currencies="[
-              'Tous types de prix',
-              '1 000 000 FCFA et plus',
-              '10 000 000 FCFA et plus',
-              '15 000 000 FCFA et plus',
-              '30 000 000 FCFA et plus',
-              '50 000 000 FCFA et plus',
-              '100 000 000 FCFA et plus',
-            ]"
+            :left="true"
+            :currencies="['Tout prix']"
+            @options2="pricing"
           ></optionadvanced
           ><optionadvanced
             v-show="activesearch === 'Louer'"
-            :what="'price'"
-            :currencies="[
-              'Tous types de prix',
-              '50 000 FCFA et plus',
-              '100 000 FCFA et plus',
-              '250 000 FCFA et plus',
-              '500 000 FCFA et plus',
-              '1 000 000 FCFA et plus',
-            ]"
+            class="mx-1 my-1"
+            :what="'price-loc'"
+            :left="true"
+            :currencies="['Tout prix']"
+            @options2="pricingloc"
           ></optionadvanced
           ><optionadvanced
             v-show="activesearch === 'Louer' || activesearch === 'Acheter'"
+            class="mx-1 my-1"
             :what="'size'"
-            :currencies="[
-              'Tous types de taille',
-              'Entre 100 m² et 500 m²',
-              'Entre 500 m² et 1000 m²',
-              'Entre 1000 m² et 5000 m²',
-            ]"
+            :left="true"
+            :currencies="['Tous types de tailles']"
+            @options2="sizing"
           ></optionadvanced>
           <optionadvanced
-            v-show="activesearch === 'Acheter'"
+            v-show="activesearch === 'Louer' || activesearch === 'Acheter'"
+            class="mx-1 my-1"
             :what="'garage'"
+            :left="true"
             :currencies="[
               'Tous types de garages',
-              '1 garage',
-              '2 garages',
-              '3 garages',
-              '4 garages',
-              '5 garages',
-              'Entre 5 et 10 garages',
+              '1 garage et plus',
+              '2 garages et plus',
+              '3 garages et plus',
+              '4 garages et plus',
+              '5 garages et plus',
             ]"
+            @options="garaging"
           ></optionadvanced>
           <optionadvanced
-            v-show="activesearch === 'Louer'"
+            v-if="activesearch === 'Louer'"
+            class="mx-1 my-1"
             :what="'date'"
+            :left="true"
             :currencies="[
               'Tous temps',
               'Maintenant',
@@ -225,6 +223,7 @@
               'La semaine prochaine',
               'Le mois prochain',
             ]"
+            @options="dating"
           ></optionadvanced>
         </div>
       </div>
@@ -240,11 +239,213 @@ export default {
     return {
       activesearch: 'Acheter',
       inputfocused: false,
+      search: '',
+      toSearch: '',
+      filter: {
+        what: 'Acheter',
+        achat_location: {
+          multiple: ['Tous types'],
+        },
+        achat: {
+          type: "Tous types d'achats",
+          multiple: [],
+        },
+        rent: {
+          type: 'Tous types de locations',
+          multiple: [],
+        },
+        property: {
+          tous: 'Tous types de propriétés',
+          multiple: [],
+          tous_search: 'Tous types',
+        },
+        bed: {
+          tous: 'Tous types de pièces',
+          tous_search: 'Tous types',
+        },
+        bath: {
+          tous: 'Tous types',
+        },
+        search_price: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        price: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        price_loc: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        taille: {
+          tous_search: 'Tous types',
+          tous: 'Tous types de tailles',
+          min: 0,
+          max: 0,
+        },
+        garage: {
+          tous_search: 'Tous types',
+          tous: 'Tous types de garages',
+        },
+        date: {
+          tous: 'Tous temps',
+          date: null,
+        },
+        part: {
+          tous: 'Toute part',
+        },
+        type_loc: {
+          tous: 'Tous types',
+        },
+        availability: {
+          tous: 'Tous types',
+          multiple: [],
+        },
+        indoor: {
+          multiple: [],
+        },
+        outdoor: {
+          multiple: [],
+        },
+        energy: {
+          multiple: [],
+        },
+      },
     }
   },
   computed: {
     size() {
       return this.$store.state.size
+    },
+  },
+  watch: {
+    activesearch(newv, oldv) {
+      this.filter.what = newv
+      if (sessionStorage.filter_home) sessionStorage.removeItem('filter_home')
+      sessionStorage.setItem('filter_home', JSON.stringify(this.filter))
+      if (sessionStorage.activesearch) sessionStorage.removeItem('activesearch')
+      sessionStorage.setItem('activesearch', newv)
+    },
+  },
+  mounted() {
+    this.check_storage_and_fill()
+    if (sessionStorage.search) {
+      this.search = sessionStorage.getItem('search')
+    }
+  },
+  methods: {
+    achat(val) {
+      // this.filter.what = 'Acheter'
+      this.filter.achat.type = val
+      if (sessionStorage.filter_home) sessionStorage.removeItem('filter_home')
+      sessionStorage.setItem('filter_home', JSON.stringify(this.filter))
+    },
+    location(val) {
+      // this.filter.what = 'Acheter'
+      this.filter.rent.type = val
+      if (sessionStorage.filter_home) sessionStorage.removeItem('filter_home')
+      sessionStorage.setItem('filter_home', JSON.stringify(this.filter))
+    },
+    properties(val) {
+      this.filter.property.tous = val.tous
+      if (val.tous === 'Tous types de propriétés') {
+        this.filter.property.multiple = ['Tous types de propriétés']
+      } else if (val.tab !== undefined) {
+        this.filter.property.multiple = []
+        this.filter.property.multiple = val.tab
+      } else {
+        this.filter.property.multiple = []
+      }
+      if (sessionStorage.filter_home) sessionStorage.removeItem('filter_home')
+      sessionStorage.setItem('filter_home', JSON.stringify(this.filter))
+    },
+    beding(val) {
+      this.filter.bed.tous = val
+      if (val === 'Tous types de pièces')
+        this.filter.bed.tous_search = 'Tous types'
+      else this.filter.bed.tous_search = val
+      if (sessionStorage.filter_home) sessionStorage.removeItem('filter_home')
+      sessionStorage.setItem('filter_home', JSON.stringify(this.filter))
+    },
+    pricing(val) {
+      this.filter.price.tous = val.tous
+      this.filter.price.min = val.min
+      this.filter.price.max = val.max
+      if (sessionStorage.filter_home) sessionStorage.removeItem('filter_home')
+      sessionStorage.setItem('filter_home', JSON.stringify(this.filter))
+    },
+    pricingloc(val) {
+      this.filter.price_loc.tous = val.tous
+      this.filter.price_loc.min = val.min
+      this.filter.price_loc.max = val.max
+      if (sessionStorage.filter_home) sessionStorage.removeItem('filter_home')
+      sessionStorage.setItem('filter_home', JSON.stringify(this.filter))
+    },
+    sizing(val) {
+      if (val === 'Tous types de tailles')
+        this.filter.taille.tous_search = 'Tous types'
+      else this.filter.taille.tous_search = val.tous
+      this.filter.taille.tous = val.tous
+      this.filter.taille.min = val.min
+      this.filter.taille.max = val.max
+      if (sessionStorage.filter_home) sessionStorage.removeItem('filter_home')
+      sessionStorage.setItem('filter_home', JSON.stringify(this.filter))
+    },
+    garaging(val) {
+      if (val === 'Tous types de garages')
+        this.filter.garage.tous_search = 'Tous types'
+      else this.filter.garage.tous_search = val
+      this.filter.garage.tous = val
+      if (sessionStorage.filter_home) sessionStorage.removeItem('filter_home')
+      sessionStorage.setItem('filter_home', JSON.stringify(this.filter))
+    },
+    dating(val) {
+      this.filter.date.tous = val
+      if (sessionStorage.filter_home) sessionStorage.removeItem('filter_home')
+      sessionStorage.setItem('filter_home', JSON.stringify(this.filter))
+    },
+    check_storage_and_fill() {
+      if (sessionStorage.activesearch) {
+        this.activesearch = sessionStorage.getItem('activesearch')
+        if (this.activesearch === 'Acheter') this.filter.what = 'Acheter'
+        if (this.activesearch === 'Louer') this.filter.what = 'Louer'
+        if (this.activesearch === 'Agent') this.filter.what = 'Agent'
+      }
+      if (sessionStorage.filter_home) {
+        this.filter = JSON.parse(sessionStorage.getItem('filter_home'))
+      }
+    },
+    gotosearch() {
+      if (sessionStorage.sort) sessionStorage.removeItem('sort')
+      if (sessionStorage.txt) sessionStorage.removeItem('txt')
+      sessionStorage.setItem('txt', this.activesearch)
+
+      if (this.search !== '') {
+        if (sessionStorage.search) sessionStorage.removeItem('search')
+        sessionStorage.setItem('search', this.search)
+      } else if (sessionStorage.search) sessionStorage.removeItem('search')
+
+      sessionStorage.setItem('activesearch', this.activesearch)
+      if (this.filter.what === 'Acheter') {
+        this.filter.search_price = this.filter.price
+        this.filter.achat_location.multiple = []
+        this.filter.achat_location.multiple.push(this.filter.achat.type)
+      }
+      if (this.filter.what === 'Louer') {
+        this.filter.search_price = this.filter.price_loc
+        this.filter.achat_location.multiple = []
+        this.filter.achat_location.multiple.push(this.filter.rent.type)
+      }
+      if (this.filter.what === 'Agent') {
+        this.filter.achat_location.multiple = ['Tous types']
+      }
+      if (sessionStorage.filter) sessionStorage.removeItem('filter')
+      sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      location.assign('/recherche')
     },
   },
 }

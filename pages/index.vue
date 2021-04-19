@@ -1,41 +1,51 @@
 <template>
-  <div>
+  <div class="relative">
+    <div
+      v-if="deleting"
+      class="absolute z-10000 top-0 bottom-0 right-0 left-0 bg-black-tr"
+    >
+      <span
+        class="size-20 font-semibold text-white block h-fit w-fit vertical-center m-0-auto"
+        >Compte en cours de suppression...</span
+      >
+    </div>
     <div v-show="loading"></div>
-    <div v-show="!loading" id="ofaloo" class="m-0-auto max-w-x1366">
+    <div v-show="!loading" id="ofaloo" class="m-0-auto max-w-x1366 relative">
       <headerhome v-if="curoute === '/' && size >= 404"></headerhome>
       <headers
         v-if="curoute !== '/' || size < 404"
         class="sticky top-0 z-20"
       ></headers>
+      <!-- <div class="fixed w-fit top-0 right-0 mt-18.7 appearxhz z-20">
+        <span
+          class="block text-c bg-red-500 py-3 px-10 text-white font-semibold size-12"
+          >Oops désolé, il y a eu une erreur!</span
+        >
+      </div> -->
       <home v-if="curoute === '/'"></home>
       <nuxt-child
         v-else
-        keep-alive
-        :keep-alive-props="{ max: 10 }"
         :class="{ 'px-10': size > 640, 'px-4': size <= 640 }"
       />
-      <div
+      <button
         v-show="scrollpos > 728"
-        class="sticky h-fits w-full appearyh bottom-0 z-30 pb-16 pt-2 pr-4"
+        class="button w-fit h-fit sticky appearyh bottom-18 right-5 pos-right absolute z-16 bg-white rounded shadow no-outlines border-gray-400 gotop self-end"
+        @click="scrolltop"
       >
-        <button
-          class="button bg-white rounded shadow no-outlines border-gray-400 absolute right-0 gotop mr-8 -mt-10"
-          @click="scrolltop"
+        <svg
+          class="w-5 h-5 transform rotate-180 logo-color relative"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            class="w-5 h-5 transform rotate-180 logo-color relative"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
-        </button>
-      </div>
+          <path
+            fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+      <div class="clear-both"></div>
       <footers></footers>
     </div>
   </div>
@@ -70,10 +80,20 @@ export default {
     size() {
       return this.$store.state.size
     },
+    deleting() {
+      return this.$store.state.accountdeleting === true
+    },
   },
   watch: {
-    curoute() {
+    curoute(nv, ov) {
       this.scrolltop()
+      if (nv !== '/') {
+        sessionStorage.removeItem('filter_home')
+        sessionStorage.removeItem('activesearch')
+      }
+      if (nv !== '/' && !nv.includes('/recherche')) {
+        sessionStorage.clear()
+      }
     },
   },
   beforeMount() {
@@ -91,6 +111,14 @@ export default {
     this.handleScroll()
     this.checkDomload()
     this.scrolltop()
+    if (this.curoute !== '/' && !this.curoute.includes('/recherche')) {
+      sessionStorage.clear()
+    }
+    if (this.curoute !== '/') {
+      sessionStorage.removeItem('filter_home')
+      sessionStorage.removeItem('activesearch')
+    }
+    // sessionStorage.setItem('filter_empty', JSON.stringify(this.filter))
   },
   methods: {
     scrolltop() {

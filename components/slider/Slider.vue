@@ -1,6 +1,8 @@
 <template>
   <div class="relative slider flex justify-between h-full w-full">
-    <div class="eded h-fit vertical-center leftag z-10 relative left-0 px-3">
+    <div
+      class="eded h-fit vertical-center leftag z-10 relative left-0 pr-0.5 pl-2.5"
+    >
       <button
         class="-ml-3 rounded-full no-outlines outline-none z-10 border-2 border-transparent"
         @click="go('left')"
@@ -110,5 +112,25 @@ export default {
 .eded:hover {
   animation: 0.5s appearZ;
   background-color: rgba(0, 0, 0, 0.295);
+}
+.leftag,
+.rightag,
+.d-dot {
+  visibility: hidden;
+  /* border-color: white; */
+}
+.slider:hover .leftag,
+.slider:hover .rightag,
+.slider:hover .d-dot {
+  visibility: visible !important;
+  animation: 0.2s appearZ !important;
+}
+@media screen and (max-width: 640px) {
+  .leftag,
+  .rightag,
+  .d-dot {
+    visibility: visible !important;
+    /* border-color: white; */
+  }
 }
 </style>

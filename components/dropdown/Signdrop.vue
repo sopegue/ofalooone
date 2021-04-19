@@ -26,8 +26,8 @@
             <p class="flex align-center">
               <img
                 class="rounded-full is-36x36"
-                src="https://ofaloo.herokuapp.com/images/user.png"
-                alt="Placeholder image"
+                src="http://127.0.0.1:8000/images/4.jpg"
+                alt="Image"
               />
               <svg
                 class="w-4 h-4 relative transform top-03x ml-px logo-color"
@@ -48,25 +48,26 @@
       </div>
       <div id="dropdown-menu" class="dropdown-menu walele" role="menu">
         <div class="dropdown-content bg-white border">
-          <nuxt-link to="/login" class="block w-fit m-0-auto"
+          <a href="/connexion" class="block w-fit m-0-auto" @click="hide"
             ><button class="btn-008489 rounded px-20 py-1 text-white size-14">
               Se connecter
-            </button></nuxt-link
+            </button></a
           >
           <span class="size-12 pt-2 w-fit m-0-auto dropdown-item logo-color"
             >Vous n'avez pas de compte ?
-            <nuxt-link
-              to="/register"
+            <a
+              href="/inscription"
               class="clickable color-008489 underline-hover font-semibold"
-              >Créer un compte</nuxt-link
+              @click="hide"
+              >Créer un compte</a
             ></span
           >
           <hr class="dropdown-divider" />
           <span class="size-135 font-semibold dropdown-item">Mon compte</span>
-          <nuxt-link
-            to="/user"
+          <a
+            href="/user"
             class="dropdown-item flex space-x-2 align-center w-fit clickable size-125"
-            @click.native="hide"
+            @click="hide"
             ><svg
               class="w-5 h-5 logo-color"
               fill="currentColor"
@@ -78,12 +79,12 @@
                 d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                 clip-rule="evenodd"
               ></path></svg
-            ><span>Profil</span></nuxt-link
+            ><span>Profil</span></a
           >
-          <nuxt-link
-            to="/favoris"
+          <a
+            href="/favoris"
             class="dropdown-item flex space-x-2 align-center w-fit clickable size-125"
-            @click.native="hide"
+            @click="hide"
             ><svg
               class="w-5 h-5 logo-color"
               fill="currentColor"
@@ -93,15 +94,15 @@
               <path
                 d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
               ></path></svg
-            ><span>Enregistrés</span></nuxt-link
+            ><span>Enregistrés</span></a
           >
           <hr class="dropdown-divider" />
-          <nuxt-link to="/login" class="block w-fit m-0-auto"
+          <a href="#" class="block w-fit m-0-auto" @click="hide"
             ><button
               class="button is-light ferfe rounded px-20 py-1 text-white size-14"
             >
               Se deconnecter
-            </button></nuxt-link
+            </button></a
           >
         </div>
       </div>

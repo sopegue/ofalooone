@@ -82,8 +82,16 @@ export default {
     }
   },
   computed: {},
+  watch: {
+    currency(nv, ov) {
+      this.$emit('sort', nv)
+    },
+  },
   mounted() {
     this.currency = this.currencies[0]
+    if (sessionStorage.sort) {
+      this.currency = sessionStorage.getItem('sort')
+    }
   },
   methods: {
     hide() {

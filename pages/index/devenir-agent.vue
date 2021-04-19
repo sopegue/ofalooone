@@ -4,23 +4,23 @@
       <div class="absolute bgtr h-full w-full z-0"></div>
       <div class="absolute bgtr h-full w-full">
         <div>
-          <div class="sm:px-10 px-4 pt-25">
+          <div class="sm:px-10 px-4 pt-20">
             <h4 class="text-white size-48 font-semibold mb-1">
               Devenir un agent sur Ofaloo
             </h4>
             <span class="block text-white leading-4 size-16"
               >Rejoignez-nous et commencez à vendre ou mettre en location une ou
-              plusieurs propriétés que vous gerez.</span
+              plusieurs propriétés que vous gérez.</span
             >
           </div>
         </div>
       </div>
-      <div class="absolute bottom-0 right-0 mb-20 mr-10">
-        <nuxt-link
-          to="/"
+      <div class="absolute bottom-0 right-0 mb-25 mr-10">
+        <a
+          href="/"
           target="_blank"
           class="button btn-008489 px-10 py-2 rounded border-white text-white size-14"
-          >Rejoindre Ofaloo</nuxt-link
+          >Rejoindre Ofaloo</a
         >
       </div>
     </div>
@@ -49,7 +49,7 @@ export default {
 </script>
 <style scoped>
 .header-home {
-  background-image: url('https://ofaloo.herokuapp.com/images/1.jpg');
+  background-image: url('http://127.0.0.1:8000/images/1.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;

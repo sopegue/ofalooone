@@ -75,11 +75,14 @@
     </div>
     <div class="relative flex align-center w-full h-full mr-10">
       <div
-        v-show="inputfocused"
-        class="rounded-bl rounded-br bg-white h-10 w-full absolute z-12 top-0 mt-10"
+        v-show="inputfocused && search !== ''"
+        class="rounded-bl border rounded-br bg-white h-10 shadow-xs w-full absolute z-12 top-0 mt-9.5 -ml-0.8"
       ></div>
       <input
-        class="w-full h-full outline-none pr-2 size-17 bg-white rounded-tl rounded-bl"
+        id="byuyc"
+        v-model="search"
+        autocomplete="none"
+        class="w-full h-full outline-none pr-2 size-15 bg-white rounded-tl rounded-bl"
         :class="{
           'ml-2': color !== 'text-white',
         }"
@@ -87,7 +90,7 @@
         :placeholder="
           currency === 'Agent'
             ? 'Rechercher une propriété par agent...'
-            : 'Rechercher par ville, quartier, code postal...'
+            : 'Rechercher une propriété par ville, quartier...'
         "
         @focus="
           {
@@ -103,7 +106,7 @@
     </div>
     <button
       class="h-full btn-008489 absolute h-10 right-0 px-3 rounded-tr rounded-br text-white size-13 font-semibold"
-      @click="$router.push('/recherche')"
+      @click="searching"
     >
       <svg
         class="w-5 h-5 text-white"
@@ -133,22 +136,167 @@ export default {
   },
   data() {
     return {
+      filter: {
+        what: 'all',
+        achat_location: {
+          multiple: ['Tous types'],
+        },
+        part: {
+          tous: 'Toute part',
+        },
+        type_loc: {
+          tous: 'Tous types',
+        },
+        achat: {
+          type: "Tous types d'achats",
+          multiple: [],
+        },
+        rent: {
+          type: 'Tous types de locations',
+          multiple: [],
+        },
+        property: {
+          tous: 'Tous types de propriétés',
+          multiple: [],
+          tous_search: 'Tous types',
+        },
+        bed: {
+          tous: 'Tous types de pièces',
+          tous_search: 'Tous types',
+        },
+        bath: {
+          tous: 'Tous types',
+        },
+        search_price: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        price: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        price_loc: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        taille: {
+          tous_search: 'Tous types',
+          tous: 'Tous types de tailles',
+          min: 0,
+          max: 0,
+        },
+        garage: {
+          tous_search: 'Tous types',
+          tous: 'Tous types de garages',
+        },
+        date: {
+          tous: 'Tous temps',
+          date: null,
+        },
+        availability: {
+          tous: 'Tous types',
+          multiple: [],
+        },
+        indoor: {
+          multiple: [],
+        },
+        outdoor: {
+          multiple: [],
+        },
+        energy: {
+          multiple: [],
+        },
+      },
       inputfocused: false,
       focused: false,
+      search: '',
       currency: '',
       currencies: ['Acheter', 'Louer', 'Agent'],
     }
   },
+  computed: {
+    curoute() {
+      return this.$route.path
+    },
+  },
+  watch: {
+    curoute(nv, ov) {
+      if (nv !== '/' && !nv.includes('/recherche')) {
+        sessionStorage.clear()
+        this.currency = 'Acheter'
+        this.search = ''
+      }
+    },
+  },
   mounted() {
     this.currency = this.currencies[0]
+    if (sessionStorage.search) {
+      this.search = sessionStorage.getItem('search')
+    }
+    if (sessionStorage.txt) {
+      this.currency = sessionStorage.getItem('txt')
+    }
+    this.autoff()
+
+    if (this.curoute !== '/' && !this.curoute.includes('/recherche')) {
+      sessionStorage.clear()
+      this.currency = 'Acheter'
+      this.search = ''
+    }
   },
   methods: {
+    autoff() {
+      const myel = document.getElementById('byuyc')
+      myel.setAttribute('autocomplete', 'off')
+    },
     hide() {
       this.focused = false
     },
     setcur(cur) {
       this.currency = cur
       this.hide()
+    },
+    async searching() {
+      if (this.search !== '') {
+        sessionStorage.removeItem('search')
+        sessionStorage.setItem('search', this.search)
+      } else sessionStorage.removeItem('search')
+
+      sessionStorage.removeItem('txt')
+      sessionStorage.setItem('txt', this.currency)
+
+      if (sessionStorage.filter) {
+        this.filter = await JSON.parse(sessionStorage.getItem('filter'))
+        if (this.currency === 'Acheter') {
+          this.filter.what = 'Acheter'
+          this.filter.achat_location.multiple = ["Tous types d'achats"]
+        } else if (this.currency === 'Louer') {
+          this.filter.what = 'Louer'
+          this.filter.achat_location.multiple = ['Tous types de locations']
+        } else {
+          this.filter.what = 'Agent'
+          this.filter.achat_location.multiple = ['Tous types']
+        }
+      } else {
+        if (this.currency === 'Acheter') {
+          this.filter.what = 'Acheter'
+          this.filter.achat_location.multiple = ["Tous types d'achats"]
+        }
+        if (this.currency === 'Louer') {
+          this.filter.what = 'Louer'
+          this.filter.achat_location.multiple = ['Tous types de locations']
+        }
+        if (this.currency !== 'Louer' && this.currency !== 'Acheter') {
+          this.filter.what = 'Agent'
+          this.filter.achat_location.multiple = ['Tous types']
+        }
+      }
+      if (sessionStorage.sort) sessionStorage.removeItem('sort')
+      sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      location.assign('/recherche')
     },
   },
 }

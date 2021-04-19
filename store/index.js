@@ -7,6 +7,12 @@ export const state = () => ({
   minsearch: false,
   domloading: true,
   hasscrolled: false,
+  filter: null,
+  reseting: false,
+
+  regerror: false,
+  regsuccess: false,
+  accountdeleting: false,
 })
 
 export const mutations = {
@@ -25,6 +31,15 @@ export const mutations = {
   },
   set_Size(state, value) {
     state.size = value
+  },
+  set_Reseting(state, value) {
+    state.reseting = value
+  },
+  set_Deleting(state, value) {
+    state.accountdeleting = value
+  },
+  set_Filter(state, value) {
+    state.filter = value
   },
   set_MinSearch(state, value) {
     state.minsearch = value

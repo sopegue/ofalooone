@@ -57,8 +57,14 @@
             'border-b': focused,
           }"
         >
-          <a class="dropdown-item size-13 py-2 clickable">Location totale</a>
-          <a class="dropdown-item size-13 py-2 clickable">Louer une part</a>
+          <a class="dropdown-item size-13 clickable" @click="location('totale')"
+            >Location totale</a
+          >
+          <a
+            class="dropdown-item size-13 clickable"
+            @click="location('partielle')"
+            >Louer une part</a
+          >
         </div>
         <div
           v-show="title === 'Acheter'"
@@ -67,8 +73,12 @@
             'border-b': focused,
           }"
         >
-          <a class="dropdown-item size-13 py-2 clickable">Achat total</a>
-          <a class="dropdown-item size-13 py-2 clickable">Acheter une part</a>
+          <a class="dropdown-item size-13 clickable" @click="achat('total')"
+            >Achat total</a
+          >
+          <a class="dropdown-item size-13 clickable" @click="achat('partiel')"
+            >Acheter une part</a
+          >
         </div>
       </div>
     </div>
@@ -85,12 +95,106 @@ export default {
   data() {
     return {
       focused: false,
+      filter: {
+        what: 'all',
+        achat_location: {
+          multiple: ['Tous types'],
+        },
+        part: {
+          tous: 'Toute part',
+        },
+        type_loc: {
+          tous: 'Tous types',
+        },
+        achat: {
+          type: "Tous types d'achats",
+          multiple: [],
+        },
+        rent: {
+          type: 'Tous types de locations',
+          multiple: [],
+        },
+        property: {
+          tous: 'Tous types de propriétés',
+          multiple: [],
+          tous_search: 'Tous types',
+        },
+        bed: {
+          tous: 'Tous types de pièces',
+          tous_search: 'Tous types',
+        },
+        bath: {
+          tous: 'Tous types',
+        },
+        search_price: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        price: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        price_loc: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        taille: {
+          tous_search: 'Tous types',
+          tous: 'Tous types de tailles',
+          min: 0,
+          max: 0,
+        },
+        garage: {
+          tous_search: 'Tous types',
+          tous: 'Tous types de garages',
+        },
+        date: {
+          tous: 'Tous temps',
+          date: null,
+        },
+        availability: {
+          tous: 'Tous types',
+          multiple: [],
+        },
+        indoor: {
+          multiple: [],
+        },
+        outdoor: {
+          multiple: [],
+        },
+        energy: {
+          multiple: [],
+        },
+      },
     }
   },
   computed: {},
   methods: {
     hide() {
       this.focused = false
+    },
+    achat(val) {
+      sessionStorage.clear()
+      this.filter.what = 'Acheter'
+      if (val === 'total') {
+        this.filter.achat_location.multiple = ['Achat total']
+      } else this.filter.achat_location.multiple = ['Acheter une part']
+      sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      this.$emit('close')
+      location.assign('/recherche')
+    },
+    location(val) {
+      this.filter.what = 'Louer'
+      sessionStorage.clear()
+      if (val === 'totale') {
+        this.filter.achat_location.multiple = ['Location totale']
+      } else this.filter.achat_location.multiple = ['Louer une part']
+      sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      this.$emit('close')
+      location.assign('/recherche')
     },
   },
 }

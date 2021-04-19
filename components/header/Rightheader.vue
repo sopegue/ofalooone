@@ -1,28 +1,27 @@
 <template>
   <div class="flex align-center space-x-8">
-    <div class="flex align-center space-x-8">
-      <div v-show="size > 830" class="flex align-center space-x-3 w-fit">
-        <div class="flex align-center space-x-3 w-fit">
+    <div>
+      <div v-show="size > 830" class="flex align-center space-x-5 w-fit">
+        <div class="flex align-center space-x-5 w-fit">
           <propertydrophome :title="'Acheter'"></propertydrophome>
           <propertydrophome :title="'Louer'"></propertydrophome>
         </div>
-        <nuxt-link
-          to="/"
-          class="text-white size-12 rounded font-semibold px-4 pb-1.5 button is-lights"
-          >Devenir agent</nuxt-link
+        <a
+          href="/devenir-agent"
+          class="text-white size-13 rounded font-semibold px-4 pb-1.5 button is-lights"
+          >Devenir agent</a
         >
       </div>
     </div>
     <div
       class="flex align-center"
       :class="{
-        'space-x-8': size > 403,
-        'space-x-4': size <= 403,
+        'space-x-8': size > 404,
       }"
     >
-      <div v-show="size > 490">
+      <!-- <div v-show="size > 490">
         <currency></currency>
-      </div>
+      </div> -->
       <div v-show="size <= 403" class="z-10">
         <button
           v-show="!minsearch"
@@ -51,11 +50,11 @@
 </template>
 
 <script>
-import Currency from '../dropdown/Currency.vue'
+// import Currency from '../dropdown/Currency.vue'
 import Propertydrophome from '../dropdown/Propertydrophome.vue'
 import Signdrop from '../dropdown/Signdrop.vue'
 export default {
-  components: { Propertydrophome, Currency, Signdrop },
+  components: { Propertydrophome, Signdrop },
   computed: {
     size() {
       return this.$store.state.size

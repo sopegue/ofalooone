@@ -68,7 +68,7 @@
           </div>
         </div>
       </div>
-      <div class="wmin-900 m-0-auto h-x620 pt-8 px-20">
+      <div class="wmin-900 m-0-auto h-x620 pt-8 px-30">
         <div class="bg-e6e6e6 h-full w-full relative">
           <slider
             :index="index"
@@ -84,22 +84,8 @@
                 :class="{
                   slide: index === i + 1,
                 }"
-                ><img
-                  v-show="img.includes('images')"
-                  class="h-full w-full"
-                  :src="img"
-                  alt="Placeholder image" />
-                <p v-show="!img.includes('images')" class="w-full h-full">
-                  <video
-                    id="my-video"
-                    class="w-full h-full"
-                    controls
-                    preload="auto"
-                    data-setup="{}"
-                  >
-                    <source :src="img" type="video/mp4" />
-                  </video></p
-              ></a></figure
+                ><img class="h-full w-full" :src="img" alt="Image"
+              /></a></figure
           ></slider>
         </div>
       </div>

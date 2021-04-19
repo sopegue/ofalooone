@@ -77,22 +77,36 @@
           v-show="title === 'Louer'"
           class="dropdown-content bg-white border"
         >
-          <a class="dropdown-item size-13 clickable">Location totale</a>
-          <a class="dropdown-item size-13 clickable">Louer une part</a>
+          <a class="dropdown-item size-13 clickable" @click="location('totale')"
+            >Location totale</a
+          >
+          <a
+            class="dropdown-item size-13 clickable"
+            @click="location('partielle')"
+            >Louer une part</a
+          >
         </div>
         <div
           v-show="title === 'Acheter'"
           class="dropdown-content bg-white border"
         >
-          <a class="dropdown-item size-13 clickable">Achat total</a>
-          <a class="dropdown-item size-13 clickable">Acheter une part</a>
+          <a class="dropdown-item size-13 clickable" @click="achat('total')"
+            >Achat total</a
+          >
+          <a class="dropdown-item size-13 clickable" @click="achat('partiel')"
+            >Acheter une part</a
+          >
         </div>
         <div
           v-show="title === 'Trouver une propriété'"
           class="dropdown-content bg-white border"
         >
-          <a class="dropdown-item size-13 clickable">Acheter une propriété</a>
-          <a class="dropdown-item size-13 clickable">Louer une proprité</a>
+          <a class="dropdown-item size-13 clickable" @click="hide"
+            >Acheter une propriété</a
+          >
+          <a class="dropdown-item size-13 clickable" @click="hide"
+            >Louer une proprité</a
+          >
         </div>
       </div>
     </div>
@@ -112,6 +126,80 @@ export default {
   },
   data() {
     return {
+      filter: {
+        what: 'all',
+        achat_location: {
+          multiple: ['Tous types'],
+        },
+        part: {
+          tous: 'Toute part',
+        },
+        type_loc: {
+          tous: 'Tous types',
+        },
+        achat: {
+          type: "Tous types d'achats",
+          multiple: [],
+        },
+        rent: {
+          type: 'Tous types de locations',
+          multiple: [],
+        },
+        property: {
+          tous: 'Tous types de propriétés',
+          multiple: [],
+          tous_search: 'Tous types',
+        },
+        bed: {
+          tous: 'Tous types de pièces',
+          tous_search: 'Tous types',
+        },
+        bath: {
+          tous: 'Tous types',
+        },
+        search_price: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        price: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        price_loc: {
+          tous: 'Tout prix',
+          min: 0,
+          max: 0,
+        },
+        taille: {
+          tous_search: 'Tous types',
+          tous: 'Tous types de tailles',
+          min: 0,
+          max: 0,
+        },
+        garage: {
+          tous_search: 'Tous types',
+          tous: 'Tous types de garages',
+        },
+        date: {
+          tous: 'Tous temps',
+          date: null,
+        },
+        availability: {
+          tous: 'Tous types',
+          multiple: [],
+        },
+        indoor: {
+          multiple: [],
+        },
+        outdoor: {
+          multiple: [],
+        },
+        energy: {
+          multiple: [],
+        },
+      },
       focused: false,
     }
   },
@@ -119,6 +207,26 @@ export default {
   methods: {
     hide() {
       this.focused = false
+    },
+    achat(val) {
+      sessionStorage.clear()
+      this.filter.what = 'Acheter'
+      if (val === 'total') {
+        this.filter.achat_location.multiple = ['Achat total']
+      } else this.filter.achat_location.multiple = ['Acheter une part']
+      sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      this.hide()
+      location.assign('/recherche')
+    },
+    location(val) {
+      sessionStorage.clear()
+      this.filter.what = 'Louer'
+      if (val === 'totale') {
+        this.filter.achat_location.multiple = ['Location totale']
+      } else this.filter.achat_location.multiple = ['Louer une part']
+      sessionStorage.setItem('filter', JSON.stringify(this.filter))
+      this.hide()
+      location.assign('/recherche')
     },
   },
 }

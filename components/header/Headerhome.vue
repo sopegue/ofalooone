@@ -21,7 +21,7 @@
         <rightheader class="z-20 w-fit"></rightheader>
       </div>
       <div
-        v-show="minsearch && size < 404"
+        v-if="minsearch && size < 404"
         class="z-20 flex align-center space-x-2 pt-6"
       >
         <button
@@ -79,9 +79,9 @@ export default {
 </script>
 <style scoped>
 .header-home {
-  background-image: url('https://ofaloo.herokuapp.com/images/7.jpg');
+  background-image: url('http://127.0.0.1:8000/images/7.jpg');
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: scroll;
   background-position: center;
   background-size: cover;
 }

@@ -36,6 +36,23 @@ svg {
 .noclick {
   pointer-events: none !important;
 }
+.noclick div,
+.noclick span,
+.noclick input,
+.noclick img,
+.noclick video,
+.noclick a,
+.noclick p,
+.noclick table,
+.noclick label,
+.noclick h4,
+.noclick h3,
+.noclick h2,
+.noclick h1,
+.noclick * {
+  color: #bebebe !important;
+  pointer-events: none !important;
+}
 .click {
   pointer-events: all !important;
 }
@@ -98,6 +115,9 @@ body {
 }
 .bg-foot {
   background-color: #161b22 !important;
+}
+.trans-ease {
+  transition: 300ms ease all !important;
 }
 .logo-color {
   color: #2d3748 !important;

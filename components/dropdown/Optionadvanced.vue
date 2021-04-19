@@ -10,7 +10,7 @@
           <div
             aria-haspopup="true"
             aria-controls="dropdown-menu"
-            class="flex align-center space-x-1 button bg-transparent border-none rounded-full clickable select-none px-3"
+            class="flex align-center space-x-1 py-1 button bg-transparent border rounded clickable select-none px-3"
             @click="
               {
                 focused = !focused
@@ -19,13 +19,9 @@
           >
             <div class="flex align-center">
               <span
-                class="size-13 font-semibold block w-fit text-white wmax128 over"
-                ><span v-show="what === 'date'" class="text-white size-13"
-                  >Date d'arrivée ({{ currency }})</span
-                >
-                <span v-show="what !== 'date'" class="text-white size-13">{{
-                  currency
-                }}</span></span
+                class="size-12 font-semibold block w-fit text-white wmax128 over"
+              >
+                <span class="text-white size-12">{{ currency }}</span></span
               >
               <svg
                 class="w-4 h-4 relative top-03x ml-px transform text-white"
@@ -84,7 +80,14 @@
               </label>
             </a>
           </div>
-          <div v-show="what === 'bed' || what === 'achat' || what === 'garage'">
+          <div
+            v-show="
+              what === 'bed' ||
+              what === 'achat' ||
+              what === 'location' ||
+              what === 'garage'
+            "
+          >
             <a
               v-for="(element, i) in currencies"
               :key="i"
@@ -122,7 +125,7 @@
               />
             </div>
           </div>
-          <div v-show="what === 'price'">
+          <div v-show="what === 'price' || what === 'price-loc'">
             <a
               v-for="(element, i) in currencies"
               :key="i"
@@ -230,6 +233,10 @@ export default {
       type: String,
       default: '',
     },
+    content: {
+      type: Object,
+      default: () => {},
+    },
     left: {
       type: Boolean,
       default: false,
@@ -252,6 +259,7 @@ export default {
       min: '',
       date: new Date(),
       currentdate: new Date(),
+      filter: null,
     }
   },
   computed: {
@@ -276,6 +284,7 @@ export default {
           this.currency =
             '+ ' + (newv.length - 1).toString() + ' types de propriétés'
       }
+      this.$emit('options1', { tous: this.currency, tab: this.checkedCateg })
     },
     min(newcateg, oldcateg) {
       if (!newcateg.toString().includes(' ')) {
@@ -304,12 +313,78 @@ export default {
         this.checkedCateg = [this.currencies[0]]
       }
     },
+    filter(nv, ov) {
+      if (nv !== null) {
+        this.filling()
+      }
+    },
   },
   mounted() {
     this.currency = this.currencies[0]
     this.checkedCateg = [this.currencies[0]]
+    this.fill_ifOk()
   },
   methods: {
+    fill_ifOk() {
+      if (sessionStorage.filter_home) {
+        this.filter = JSON.parse(sessionStorage.getItem('filter_home'))
+      }
+    },
+    filling() {
+      if (this.what === 'achat') {
+        this.currency = this.filter.achat.type
+      }
+      if (this.what === 'garage') {
+        this.currency = this.filter.garage.tous
+      }
+      if (this.what === 'date') {
+        this.currency = this.filter.date.tous
+      }
+      if (this.what === 'location') {
+        this.currency = this.filter.rent.type
+      }
+      if (this.what === 'type') {
+        this.currency = this.filter.property.tous
+        this.checkedCateg = this.filter.property.multiple
+      }
+      if (this.what === 'bed') {
+        this.currency = this.filter.bed.tous
+      }
+      if (this.what === 'price') {
+        this.currency = this.filter.price.tous
+        this.min =
+          this.filter.price.min === 0 ? '' : this.filter.price.min.toString()
+        this.max =
+          this.filter.price.max === 0 ? '' : this.filter.price.max.toString()
+        if (this.currency.includes('Min') || this.currency.includes('Max')) {
+          this.setprice()
+        }
+      }
+      if (this.what === 'price-loc') {
+        this.currency = this.filter.price_loc.tous
+        this.min =
+          this.filter.price_loc.min === 0
+            ? ''
+            : this.filter.price_loc.min.toString()
+        this.max =
+          this.filter.price_loc.max === 0
+            ? ''
+            : this.filter.price_loc.max.toString()
+        if (this.currency.includes('Min') || this.currency.includes('Max')) {
+          this.setprice()
+        }
+      }
+      if (this.what === 'size') {
+        this.currency = this.filter.taille.tous
+        this.min =
+          this.filter.taille.min === 0 ? '' : this.filter.taille.min.toString()
+        this.max =
+          this.filter.taille.max === 0 ? '' : this.filter.taille.max.toString()
+        if (this.currency.includes('Min') || this.currency.includes('Max')) {
+          this.setsize()
+        }
+      }
+    },
     hide() {
       this.focused = false
     },
@@ -317,11 +392,36 @@ export default {
       this.currency = cur
       if (
         this.what === 'achat' ||
+        this.what === 'location' ||
+        this.what === 'bed' ||
+        this.what === 'garage' ||
+        this.what === 'date'
+      ) {
+        this.$emit('options', this.currency)
+      }
+      if (
+        this.what === 'price' ||
+        this.what === 'price-loc' ||
+        this.what === 'size'
+      ) {
+        this.$emit('options2', {
+          tous: this.currency,
+          min: +this.min,
+          max: +this.max,
+        })
+      }
+      if (this.what === 'type') {
+        this.$emit('options1', { tous: this.currency })
+      }
+      if (
+        this.what === 'achat' ||
+        this.what === 'location' ||
         this.what === 'bed' ||
         this.what === 'price' ||
         this.what === 'garage' ||
         this.what === 'date' ||
-        this.what === 'size'
+        this.what === 'size' ||
+        this.what === 'price-loc'
       )
         this.hide()
     },
@@ -346,13 +446,18 @@ export default {
     },
     setprice() {
       if (this.min !== '' && this.max !== '') {
-        if (+this.min <= +this.max)
-          this.currency =
-            'Min: ' +
-            this.formatMoney(this.min) +
-            ' FCFA & Max: ' +
-            this.formatMoney(this.max) +
-            ' FCFA'
+        if (+this.min <= +this.max) {
+          if (+this.min === +this.max) {
+            this.currency = 'Min: ' + this.formatMoney(this.min) + ' FCFA'
+          } else {
+            this.currency =
+              'Min: ' +
+              this.formatMoney(this.min) +
+              ' FCFA & Max: ' +
+              this.formatMoney(this.max) +
+              ' FCFA'
+          }
+        }
         if (+this.min > +this.max) {
           this.max = ''
           this.currency = 'Min: ' + this.formatMoney(this.min) + ' FCFA'
@@ -361,17 +466,27 @@ export default {
         this.currency = 'Max: ' + this.formatMoney(this.max) + ' FCFA'
       } else if (this.max === '' && this.min !== '')
         this.currency = 'Min: ' + this.formatMoney(this.min) + ' FCFA'
+      this.$emit('options2', {
+        tous: this.currency,
+        min: +this.min,
+        max: +this.max,
+      })
       this.hide()
     },
     setsize() {
       if (this.min !== '' && this.max !== '') {
-        if (+this.min <= +this.max)
-          this.currency =
-            'Min: ' +
-            this.formatMoney(this.min) +
-            ' m² & Max: ' +
-            this.formatMoney(this.max) +
-            ' m²'
+        if (+this.min <= +this.max) {
+          if (+this.min === +this.max) {
+            this.currency = 'Min: ' + this.formatMoney(this.min) + ' m²'
+          } else {
+            this.currency =
+              'Min: ' +
+              this.formatMoney(this.min) +
+              ' m² & Max: ' +
+              this.formatMoney(this.max) +
+              ' m²'
+          }
+        }
         if (+this.min > +this.max) {
           this.max = ''
           this.currency = 'Min: ' + this.formatMoney(this.min) + ' m²'
@@ -380,6 +495,11 @@ export default {
         this.currency = 'Max: ' + this.formatMoney(this.max) + ' m²'
       } else if (this.max === '' && this.min !== '')
         this.currency = 'Min: ' + this.formatMoney(this.min) + ' m²'
+      this.$emit('options2', {
+        tous: this.currency,
+        min: +this.min,
+        max: +this.max,
+      })
       this.hide()
     },
   },
@@ -391,7 +511,7 @@ input::placeholder {
 }
 .walele {
   animation: appear 0.2s;
-  top: 1.9rem !important;
+  top: 1.6rem !important;
 }
 .right {
   right: 0 !important;

@@ -10,14 +10,14 @@
           <div
             aria-haspopup="true"
             aria-controls="dropdown-menu"
-            class="flex align-center button border rounded clickable w-fit select-none space-x-1"
+            class="flex align-center w-fit button border rounded clickable w-fit select-none space-x-1"
             @click="
               {
                 focused = !focused
               }
             "
           >
-            <span class="size-12 logo-color font-semibold block w-fit">{{
+            <span class="size-13 logo-color font-semibold block w-fit">{{
               ctry
             }}</span>
             <svg
@@ -49,7 +49,7 @@
                   v-model="searching"
                   type="search"
                   placeholder="Choisir un pays"
-                  class="border border-gray-400 w-full no-outlines pl-2 pr-6 py-1 rounded size-145"
+                  class="border border-gray-400 w-full no-outlines pl-2 pr-6 py-1 rounded size-14"
                 />
                 <svg
                   class="w-4 h-4 absolute right-0 mr-4 text-gray-800"
@@ -93,7 +93,7 @@ export default {
     return {
       focused: false,
       searching: '',
-      ctry: 'Ivory coast',
+      ctry: '',
       lan: [
         "Côte d'Ivoire",
         'Nigeria',
@@ -121,41 +121,17 @@ export default {
     },
   },
   mounted() {
-    this.sendcur()
+    this.ctry = this.lan[0]
+    this.$emit('ctry', this.ctry)
   },
   methods: {
-    sendcur() {
-      const cur =
-        this.ctry === 'Rand ZAR'
-          ? 'ZAR'
-          : this.ctry === 'Naira NGN'
-          ? 'NGN'
-          : this.ctry === 'Franc CFA'
-          ? 'FCFA'
-          : this.ctry === 'Kwanza AOA'
-          ? 'AOA'
-          : this.ctry === 'Cedi GHS'
-          ? 'GHS'
-          : this.ctry === 'Shilling KES'
-          ? 'KES'
-          : this.ctry === 'Shilling UGX'
-          ? 'UGX'
-          : this.ctry === 'Rwanda franc RWF'
-          ? 'RWF'
-          : this.ctry === 'Pula BWP'
-          ? 'BWP'
-          : this.ctry === 'Euro'
-          ? 'Euro'
-          : 'USD'
-      this.$emit('money', cur)
-    },
     hide() {
       this.focused = false
     },
     setLang(value) {
       this.ctry = value
       this.focused = false
-      this.sendcur()
+      this.$emit('ctry', this.ctry)
     },
   },
 }
@@ -163,7 +139,7 @@ export default {
 <style scoped>
 .walele {
   animation: appear 0.2s;
-  top: 2.05rem !important;
+  top: 1.8rem !important;
   /*right: -12.1rem !important; */
 }
 .dodo {

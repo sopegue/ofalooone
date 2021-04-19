@@ -6,7 +6,7 @@
     >
       <button
         v-if="page > 1"
-        class="flex align-center space-x-1 bg-transparent border border-x008489 px-2 no-outlines rounded py-1"
+        class="flex align-center space-x-1 bg-transparent border border-x008489 px-2 no-outlines rounded py-0.6"
         :class="{
           'btn-008489': page > 1,
           'cursor-default': page <= 1,
@@ -25,9 +25,9 @@
             clip-rule="evenodd"
           ></path>
         </svg>
-        <span class="size-12 text-white">Previous</span>
+        <span class="size-12 text-white">Précédent</span>
       </button>
-      <div v-if="pagination.length <= 9" class="flex align-center space-x-1">
+      <div v-if="pagination <= 9" class="flex align-center space-x-1">
         <div v-for="(i, j) in pagination" :key="j">
           <button
             class="no-outlines pb-px rounded w-8x border border-x008489"
@@ -35,11 +35,7 @@
               'bg-008489 btn-paginations': i === page,
               'btn-pagination': i !== page,
             }"
-            @click="
-              {
-                current = i
-              }
-            "
+            @click="currenting(i)"
           >
             <span class="size-12">{{ i }}</span>
           </button>
@@ -55,11 +51,7 @@
                 'bg-008489 btn-paginations': i === page,
                 'btn-pagination': i !== page,
               }"
-              @click="
-                {
-                  current = i
-                }
-              "
+              @click="currenting(i)"
             >
               <span class="size-12">{{ i }}</span>
             </button>
@@ -70,30 +62,26 @@
               <span class="size-12">•••</span>
             </button>
             <button
-              v-if="Math.abs(i - pagination[pagination.length - 1]) == 2"
+              v-if="Math.abs(i - pagination) == 2"
               class="no-outlines pb-px rounded cursor-default"
             >
               <span class="size-12">•••</span>
             </button>
             <button
-              v-if="Math.abs(i - pagination[pagination.length - 1]) < 2"
+              v-if="Math.abs(i - pagination) < 2"
               class="no-outlines pb-px rounded w-8x border border-x008489"
               :class="{
                 'bg-008489 btn-paginations': i === page,
                 'btn-pagination': i !== page,
               }"
-              @click="
-                {
-                  current = i
-                }
-              "
+              @click="currenting(i)"
             >
               <span class="size-12">{{ i }}</span>
             </button>
           </div>
         </div>
         <div
-          v-if="page >= 4 && pagination[pagination.length - 1] - page > 5"
+          v-if="page >= 4 && pagination - page > 5"
           class="flex align-center space-x-1"
         >
           <div v-for="(i, j) in pagination" :id="'pagi' + i" :key="j">
@@ -110,41 +98,30 @@
                 'bg-008489 btn-paginations': i === page,
                 'btn-pagination': i !== page,
               }"
-              @click="
-                {
-                  current = i
-                }
-              "
+              @click="currenting(i)"
             >
               <span class="size-12">{{ i }}</span>
             </button>
             <button
-              v-if="Math.abs(i - pagination[pagination.length - 1]) == 2"
+              v-if="Math.abs(i - pagination) == 2"
               class="no-outlines pb-px rounded cursor-default"
             >
               <span class="size-12">•••</span>
             </button>
             <button
-              v-if="Math.abs(i - pagination[pagination.length - 1]) < 2"
+              v-if="Math.abs(i - pagination) < 2"
               class="no-outlines pb-px rounded w-8x border border-x008489"
               :class="{
                 'bg-008489 btn-paginations': i === page,
                 'btn-pagination': i !== page,
               }"
-              @click="
-                {
-                  current = i
-                }
-              "
+              @click="currenting(i)"
             >
               <span class="size-12">{{ i }}</span>
             </button>
           </div>
         </div>
-        <div
-          v-if="pagination[pagination.length - 1] - page <= 5"
-          class="flex align-center space-x-1"
-        >
+        <div v-if="pagination - page <= 5" class="flex align-center space-x-1">
           <div v-for="(i, j) in pagination" :id="'pagin' + i" :key="j">
             <button
               v-if="i === 2"
@@ -159,11 +136,7 @@
                 'bg-008489 btn-paginations': i === page,
                 'btn-pagination': i !== page,
               }"
-              @click="
-                {
-                  current = i
-                }
-              "
+              @click="currenting(i)"
             >
               <span class="size-12">{{ i }}</span>
             </button>
@@ -171,15 +144,15 @@
         </div>
       </div>
       <button
-        v-if="page < pagination[pagination.length - 1]"
-        class="flex align-center space-x-1 bg-transparent border border-x008489 px-4 no-outlines rounded py-1"
+        v-if="page < pagination"
+        class="flex align-center space-x-1 bg-transparent border border-x008489 px-4 no-outlines rounded py-0.6"
         :class="{
-          'btn-008489': page < pagination[pagination.length - 1],
-          'cursor-default': page >= pagination[pagination.length - 1],
+          'btn-008489': page < pagination,
+          'cursor-default': page >= pagination,
         }"
         @click="move('right')"
       >
-        <span class="size-12 text-white">Next</span>
+        <span class="size-12 text-white">Suivant</span>
         <svg
           class="w-3 h-3 mt-px text-white transform rotate-180"
           fill="currentColor"
@@ -223,15 +196,14 @@
       </button>
       <div>
         <span class="font-semibold color-008489"
-          >{{ page }}/{{ pagination.length }}</span
+          >{{ page }}/{{ pagination }}</span
         >
       </div>
       <button
         class="flex align-center space-x-1 bg-transparent border border-x008489 px-4 no-outlines rounded py-1"
         :class="{
-          'btn-pagination': page < pagination[pagination.length - 1],
-          'cursor-default logo-color':
-            page >= pagination[pagination.length - 1],
+          'btn-pagination': page < pagination,
+          'cursor-default logo-color': page >= pagination,
         }"
         @click="move('right')"
       >
@@ -255,11 +227,15 @@
 
 <script>
 export default {
-  data() {
-    return {
-      current: 1,
-      pagination: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
-    }
+  props: {
+    current: {
+      type: Number,
+      default: 1,
+    },
+    pagination: {
+      type: Number,
+      default: 1,
+    },
   },
   computed: {
     page() {
@@ -272,7 +248,7 @@ export default {
       return this.$store.state.domloading === true
     },
     end() {
-      return this.pagination[this.pagination.length - 1] - 6
+      return this.pagination - 6
     },
   },
   watch: {
@@ -281,9 +257,16 @@ export default {
         this.hidecontent()
       }
     },
+    // page(nv, ov) {
+    //   if (sessionStorage.pagination) sessionStorage.removeItem('pagination')
+    //   sessionStorage.setItem('pagination', nv)
+    // },
   },
-  updated() {
+  mounted() {
     if (!this.loading) this.hidecontent()
+    setInterval(() => {
+      if (!this.loading) this.hidecontent()
+    }, 500)
   },
   methods: {
     hidecontent() {
@@ -296,13 +279,17 @@ export default {
         if (myel.clientWidth === 0) myel.style.display = 'none'
       }
     },
+    currenting(val) {
+      this.$emit('page', val)
+    },
     move(value) {
       if (value === 'left') {
         if (this.page > 1) {
-          this.current--
+          this.$emit('page', this.current - 1)
         }
-      } else if (this.page < this.pagination[this.pagination.length - 1])
-        this.current++
+      } else if (this.page < this.pagination) {
+        this.$emit('page', this.current + 1)
+      }
       this.hidecontent()
     },
   },

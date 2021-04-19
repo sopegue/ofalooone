@@ -10,24 +10,22 @@
       :class="{ 'px-8': size > 640, 'px-2': size <= 640 }"
     >
       <div
-        v-show="!minsearch || size >= 700"
+        v-if="!minsearch || size >= 700"
         class="flex z-20 align-center pt-3"
-        :class="{ 'space-x-16': size > 889, 'justify-between': size <= 889 }"
+        :class="{
+          'space-x-16': size > 889,
+          'space-x-10 justify-between': size <= 889,
+        }"
       >
         <div class="z-20 relative w-fit flex align-center space-x-5">
           <burgerhomes v-show="size <= 1100"></burgerhomes
           ><home :color="'#004e66'" :scale="10" :textscale="50"></home>
         </div>
-        <searchbar
-          v-show="size >= 700"
-          color="ded"
-          class="w-full"
-          :class="{ 'ml-16': size <= 889 }"
-        ></searchbar>
+        <searchbar v-if="size >= 700" color="ded" class="w-full"></searchbar>
         <rightheaders class="z-20 w-fit"></rightheaders>
       </div>
       <div
-        v-show="minsearch && size < 700"
+        v-if="minsearch && size < 700"
         class="z-20 flex align-center space-x-2 pt-6"
       >
         <button

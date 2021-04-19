@@ -50,16 +50,14 @@
           </svg>
         </button>
         <div class="flex flex-col mt-5">
-          <propertydrop :title="'Acheter'"></propertydrop>
-          <propertydrop :title="'Louer'"></propertydrop>
-          <nuxt-link
-            to="/"
+          <propertydrop :title="'Acheter'" @close="hide"></propertydrop>
+          <propertydrop :title="'Louer'" @close="hide"></propertydrop>
+          <a
+            href="/devenir-agent"
             class="eefd border-b hover-008489 logo-color size-13 font-semibold pl-4 py-3"
-            >Devenir agent</nuxt-link
+            @click="hide"
+            >Devenir agent</a
           >
-          <div v-show="size <= 889" class="mt-5">
-            <currencymenu></currencymenu>
-          </div>
         </div>
       </div>
       <div class="w-full bg-black-tr h-full z-40" @mousedown="hide"></div>
@@ -68,10 +66,10 @@
 </template>
 
 <script>
-import Currencymenu from '../dropdown/Currencymenu'
+// import Currencymenu from '../dropdown/Currencymenu'
 import Propertydrop from '../dropdown/Propertydrop'
 export default {
-  components: { Propertydrop, Currencymenu },
+  components: { Propertydrop },
   props: {
     color: {
       type: String,

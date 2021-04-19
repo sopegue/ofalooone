@@ -35,21 +35,44 @@
             <div
               class="logo-color block sm:size-15 size-14 font-semibold mb-0.5"
             >
-              <h4 v-if="fifi === 'Acheter'">
-                Acheter des proriétés<span v-if="search !== ''"
-                  >, resultat de "{{ search }}"</span
-                >
-              </h4>
-              <h4 v-else-if="fifi === 'Louer'">
-                Louer des proriétés<span v-if="search !== ''"
-                  >, resultat de "{{ search }}"</span
-                >
-              </h4>
-              <h4 v-else>
-                Acheter et louer des proriétés<span v-if="search !== ''"
-                  >, resultat de "{{ search }}"</span
-                >
-              </h4>
+              <div>
+                <h4 v-if="fifi === 'Acheter'">
+                  <span
+                    v-if="
+                      $route.query.type !== null &&
+                      $route.query.type !== undefined
+                    "
+                    class="inline-block"
+                    >{{ $route.query.type }},&nbsp;</span
+                  >Acheter des proriétés<span v-if="search !== ''"
+                    >, resultat de "{{ search }}"</span
+                  >
+                </h4>
+                <h4 v-else-if="fifi === 'Louer'">
+                  <span
+                    v-if="
+                      $route.query.type !== null &&
+                      $route.query.type !== undefined
+                    "
+                    class="inline-block"
+                    >{{ $route.query.type }},&nbsp;</span
+                  >Louer des proriétés<span v-if="search !== ''"
+                    >, resultat de "{{ search }}"</span
+                  >
+                </h4>
+                <h4 v-else>
+                  <span
+                    v-if="
+                      $route.query.type !== null &&
+                      $route.query.type !== undefined
+                    "
+                    class="inline-block"
+                    >{{ $route.query.type }},&nbsp;</span
+                  >Acheter et louer des proriétés<span v-if="search !== ''"
+                    >, resultat de "{{ search }}"</span
+                  >
+                </h4>
+              </div>
             </div>
             <div v-if="!moring || charged">
               <span v-if="toting > 1" class="logo-color size-14"

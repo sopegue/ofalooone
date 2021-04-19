@@ -2,7 +2,7 @@
   <div class="bg-gray-800 py-3 flex flex-col space-y-5">
     <div class="border-b pb-3">
       <a
-        href="#"
+        href="https://ofalooagent.netlify.app"
         target="_blank"
         class="underline-hover w-fit text-white block font-semibold size-13 m-0-auto"
         >Aller sur le site de l'agent</a

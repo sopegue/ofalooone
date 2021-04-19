@@ -51,7 +51,7 @@ export default {
 .header-home {
   background-image: url('https://ofalooback.herokuapp.com/images/1.jpg');
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: scroll;
   background-position: center;
   background-size: cover;
 }

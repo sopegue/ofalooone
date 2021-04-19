@@ -499,6 +499,7 @@ export default {
         this.registering(form)
           .then((res) => {
             const data = res
+            console.log(res)
             if (data.status === '201') {
               // commit account created
               this.resetInfos()

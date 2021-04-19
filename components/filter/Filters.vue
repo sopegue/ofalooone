@@ -33,13 +33,13 @@
         </div>
         <div class="flex space-x-5 align-center">
           <button
-            class="border-none size-12 text-white px-5 pb-2 rounded button is-light"
+            class="border-none size-12 text-white px-5 pb-1.5 rounded button is-light"
             @click="reset"
           >
             Réinitialiser
           </button>
           <button
-            class="border-none size-12 text-white px-5 pb-2 rounded button btn-008489"
+            class="border-none size-12 text-white px-5 pb-1.5 rounded button btn-008489"
             @click="go"
           >
             Appliquer
@@ -211,13 +211,13 @@
       }"
     >
       <button
-        class="border-none size-12 text-white px-10 pb-2 rounded button is-light"
+        class="border-none size-12 text-white px-10 pb-1.5 rounded button is-light"
         @click="reset"
       >
         Réinitialiser
       </button>
       <button
-        class="border-none size-12 text-white px-8 pb-2 rounded button btn-008489"
+        class="border-none size-12 text-white px-8 pb-1.5 rounded button btn-008489"
         @click="go"
       >
         Appliquer

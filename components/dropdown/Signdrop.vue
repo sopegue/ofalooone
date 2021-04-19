@@ -4,24 +4,20 @@
       v-click-outside="hide"
       class="dropdown"
       :class="{ 'is-active': focused }"
-      @mouseleave="hide"
     >
-      <div class="dropdown-trigger w71px">
+      <div
+        class="dropdown-trigger w71px"
+        @click="
+          {
+            focused = !focused
+          }
+        "
+      >
         <client-only>
           <div
             aria-haspopup="true"
             aria-controls="dropdown-menu"
             class="flex align-center space-x-1 button bg-white border rounded-full clickable select-none"
-            @mouseover="
-              {
-                focused = true
-              }
-            "
-            @click="
-              {
-                focused = !focused
-              }
-            "
           >
             <p class="flex align-center">
               <img

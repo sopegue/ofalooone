@@ -65,6 +65,8 @@ export default {
       opacity: -1,
       width: 9999,
       stillscrolling: false,
+      previous: '/',
+      has_previous: false,
     }
   },
   computed: {
@@ -73,6 +75,12 @@ export default {
     },
     curoute() {
       return this.$route.path
+    },
+    woprevious() {
+      return this.$store.state.from
+    },
+    previously() {
+      return this.has_previous === true
     },
     loading() {
       return this.$store.state.domloading === true
@@ -91,12 +99,24 @@ export default {
         sessionStorage.removeItem('filter_home')
         sessionStorage.removeItem('activesearch')
       }
-      if (nv !== '/' && !nv.includes('/recherche')) {
-        sessionStorage.clear()
+      if (!nv.includes('/recherche')) {
+        sessionStorage.removeItem('filter')
+        sessionStorage.removeItem('search')
+        sessionStorage.removeItem('txt')
+        sessionStorage.removeItem('sort')
       }
     },
   },
   beforeMount() {
+    if (sessionStorage.previous) {
+      this.previous = sessionStorage.getItem('previous')
+      this.$store.commit('previous', this.previous)
+      this.has_previous = true
+      sessionStorage.setItem('previous', this.curoute)
+    } else {
+      this.has_previous = true
+      sessionStorage.setItem('previous', this.curoute)
+    }
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('resize', this.large)
     window.addEventListener('DOMContentLoaded', this.domload, false)
@@ -106,21 +126,40 @@ export default {
     window.removeEventListener('scroll', this.handleScroll)
     window.removeEventListener('DOMContentLoaded', this.domload, false)
   },
-  mounted() {
+  async mounted() {
     this.large()
     this.handleScroll()
     this.checkDomload()
     this.scrolltop()
-    if (this.curoute !== '/' && !this.curoute.includes('/recherche')) {
-      sessionStorage.clear()
+    if (!this.curoute.includes('/recherche')) {
+      sessionStorage.removeItem('filter')
+      sessionStorage.removeItem('search')
+      sessionStorage.removeItem('txt')
+      sessionStorage.removeItem('sort')
     }
     if (this.curoute !== '/') {
       sessionStorage.removeItem('filter_home')
       sessionStorage.removeItem('activesearch')
     }
-    // sessionStorage.setItem('filter_empty', JSON.stringify(this.filter))
+    if (!this.$auth.loggedIn) {
+      if (localStorage.hdzd) {
+        const data = await JSON.parse(localStorage.getItem('hdzd'))
+        this.logoutImmediatly(data)
+      }
+    }
   },
   methods: {
+    async logoutImmediatly(data) {
+      await fetch(
+        'https://ofalooback.herokuapp.com/api/client/logout/notoken/' +
+          data.odzd +
+          '/' +
+          data.scds
+      ).then((res) => {
+        // console.log(res.json())
+        localStorage.removeItem('hdzd')
+      })
+    },
     scrolltop() {
       window.scroll({
         top: 0,

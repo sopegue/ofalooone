@@ -496,7 +496,10 @@ export default {
       this.current = val
     },
     resetdone() {
-      sessionStorage.clear()
+      sessionStorage.removeItem('filter')
+      sessionStorage.removeItem('search')
+      sessionStorage.removeItem('txt')
+      sessionStorage.removeItem('sort')
       location.assign('/recherche')
     },
     next() {

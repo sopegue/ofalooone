@@ -10,6 +10,12 @@
 import Register from '~/components/authentication/Register.vue'
 export default {
   components: { Register },
+  middleware: 'noauth',
+  beforeMount() {
+    if (this.$auth.loggedIn) {
+      this.$router.replace('/redirecting-home')
+    }
+  },
 }
 </script>
 

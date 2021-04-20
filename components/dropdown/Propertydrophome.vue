@@ -209,7 +209,10 @@ export default {
       this.focused = false
     },
     achat(val) {
-      sessionStorage.clear()
+      sessionStorage.removeItem('filter')
+      sessionStorage.removeItem('search')
+      sessionStorage.removeItem('txt')
+      sessionStorage.removeItem('sort')
       this.filter.what = 'Acheter'
       if (val === 'total') {
         this.filter.achat_location.multiple = ['Achat total']
@@ -219,7 +222,10 @@ export default {
       location.assign('/recherche')
     },
     location(val) {
-      sessionStorage.clear()
+      sessionStorage.removeItem('filter')
+      sessionStorage.removeItem('search')
+      sessionStorage.removeItem('txt')
+      sessionStorage.removeItem('sort')
       this.filter.what = 'Louer'
       if (val === 'totale') {
         this.filter.achat_location.multiple = ['Location totale']

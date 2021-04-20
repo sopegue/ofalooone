@@ -9,6 +9,7 @@ export const state = () => ({
   hasscrolled: false,
   filter: null,
   reseting: false,
+  from: '/',
 
   regerror: false,
   regsuccess: false,
@@ -28,6 +29,9 @@ export const mutations = {
   },
   set_Domload(state, value) {
     state.domloading = value
+  },
+  previous(state, value) {
+    state.from = value
   },
   set_Size(state, value) {
     state.size = value

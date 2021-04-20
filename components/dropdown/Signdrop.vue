@@ -146,9 +146,6 @@ export default {
         : { name: 'Guest' }
     },
   },
-  mounted() {
-    console.log(this.user)
-  },
   methods: {
     hide() {
       this.focused = false

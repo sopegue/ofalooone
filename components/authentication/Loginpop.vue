@@ -236,6 +236,9 @@ export default {
       }
     },
   },
+  mounted() {
+    console.log(this.previous)
+  },
   methods: {
     infosValidated() {
       if (this.$linker.emailValidated(this.email)) {
@@ -247,6 +250,9 @@ export default {
       } else this.pwderr = true
 
       return this.mailerror === false && this.passerror === false
+    },
+    saveProp() {
+      console.log('saved if not already saved')
     },
     signin() {
       if (this.infosValidated()) {
@@ -261,18 +267,10 @@ export default {
           })
           .then((res) => {
             this.logging = false
+            console.log(res)
             if (res.data.status === 200) {
-              const tokenId = res.data.token.substr(
-                0,
-                res.data.token.indexOf('|')
-              )
-              const userId = this.$auth.user.id
-              const hdzd = {
-                odzd: userId,
-                scds: tokenId,
-              }
-              localStorage.setItem('hdzd', JSON.stringify(hdzd))
-              location.assign(this.previous)
+              console.log('logged')
+              this.saveProp()
             }
             if (res.data.status === 404) console.log('incorrects credentials')
             if (res.data.status === 500) console.log('Error on request')

@@ -225,7 +225,10 @@ export default {
   watch: {
     curoute(nv, ov) {
       if (nv !== '/' && !nv.includes('/recherche')) {
-        sessionStorage.clear()
+        sessionStorage.removeItem('filter')
+        sessionStorage.removeItem('search')
+        sessionStorage.removeItem('txt')
+        sessionStorage.removeItem('sort')
         this.currency = 'Acheter'
         this.search = ''
       }
@@ -242,7 +245,10 @@ export default {
     this.autoff()
 
     if (this.curoute !== '/' && !this.curoute.includes('/recherche')) {
-      sessionStorage.clear()
+      sessionStorage.removeItem('filter')
+      sessionStorage.removeItem('search')
+      sessionStorage.removeItem('txt')
+      sessionStorage.removeItem('sort')
       this.currency = 'Acheter'
       this.search = ''
     }

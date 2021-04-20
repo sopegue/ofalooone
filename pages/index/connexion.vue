@@ -13,11 +13,6 @@ import Login from '~/components/authentication/Login.vue'
 export default {
   components: { Login },
   middleware: 'noauth',
-  asyncData({ from }) {
-    const fromwhere = from
-    console.log(from)
-    return { fromwhere }
-  },
   computed: {
     logged() {
       return this.$auth.loggedIn === true

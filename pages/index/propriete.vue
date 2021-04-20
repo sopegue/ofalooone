@@ -406,7 +406,10 @@
             </div>
           </div>
           <div class="my-2">
-            <img src="https://ofalooback.herokuapp.com/images/prop.png" alt="Image" />
+            <img
+              src="https://ofalooback.herokuapp.com/images/prop.png"
+              alt="Image"
+            />
           </div>
           <div v-if="property.data.property.rent === 'yes'" class="mt-3.5">
             <span class="font-semibold size-13 logo-color flex"
@@ -457,7 +460,10 @@
             <a href="#" class="flex align-center space-x-2"
               ><img
                 class="rounded-full is-40x40"
-                :src="'https://ofalooback.herokuapp.com/storage/' + property.data.user_pic"
+                :src="
+                  'https://ofalooback.herokuapp.com/storage/' +
+                  property.data.user_pic
+                "
                 alt="Image"
               />
               <span class="size-14 font-semibold">{{
@@ -562,12 +568,30 @@
               Caractéristiques Appartement
             </h4>
             <div class="my-2">
-              <img src="https://ofalooback.herokuapp.com/images/prop.png" alt="Image" />
-              <img src="https://ofalooback.herokuapp.com/images/prop.png" alt="Image" />
-              <img src="https://ofalooback.herokuapp.com/images/prop.png" alt="Image" />
-              <img src="https://ofalooback.herokuapp.com/images/prop.png" alt="Image" />
-              <img src="https://ofalooback.herokuapp.com/images/prop.png" alt="Image" />
-              <img src="https://ofalooback.herokuapp.com/images/prop.png" alt="Image" />
+              <img
+                src="https://ofalooback.herokuapp.com/images/prop.png"
+                alt="Image"
+              />
+              <img
+                src="https://ofalooback.herokuapp.com/images/prop.png"
+                alt="Image"
+              />
+              <img
+                src="https://ofalooback.herokuapp.com/images/prop.png"
+                alt="Image"
+              />
+              <img
+                src="https://ofalooback.herokuapp.com/images/prop.png"
+                alt="Image"
+              />
+              <img
+                src="https://ofalooback.herokuapp.com/images/prop.png"
+                alt="Image"
+              />
+              <img
+                src="https://ofalooback.herokuapp.com/images/prop.png"
+                alt="Image"
+              />
             </div>
           </div>
         </div>
@@ -771,14 +795,18 @@ export default {
       for (let index = 0; index < this.property.data.images.length; index++) {
         const element = this.property.data.images[index]
         if (element.principal === 'yes') {
-          this.images.push('https://ofalooback.herokuapp.com/storage/' + element.url)
+          this.images.push(
+            'https://ofalooback.herokuapp.com/storage/' + element.url
+          )
           break
         }
       }
       for (let index = 0; index < this.property.data.images.length; index++) {
         const element = this.property.data.images[index]
         if (element.principal === 'no')
-          this.images.push('https://ofalooback.herokuapp.com/storage/' + element.url)
+          this.images.push(
+            'https://ofalooback.herokuapp.com/storage/' + element.url
+          )
       }
       this.ades = this.images
     },

@@ -17,14 +17,10 @@ export default {
     logged() {
       return this.$auth.loggedIn === true
     },
-    fromw() {
-      return this.fromwhere
-    },
   },
   watch: {
     logged(nv, ov) {
       console.log('watched logged:', nv)
-      console.log('from:', this.fromw)
     },
   },
   beforeMount() {

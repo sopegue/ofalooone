@@ -44,20 +44,34 @@
       </div>
       <div id="dropdown-menu" class="dropdown-menu walele" role="menu">
         <div class="dropdown-content bg-white border">
-          <a href="/connexion" class="block w-fit m-0-auto" @click="hide"
-            ><button class="btn-008489 rounded px-20 py-1 text-white size-14">
-              Se connecter
-            </button></a
-          >
-          <span class="size-12 pt-2 w-fit m-0-auto dropdown-item logo-color"
-            >Vous n'avez pas de compte ?
-            <a
-              href="/inscription"
-              class="clickable color-008489 underline-hover font-semibold"
-              @click="hide"
-              >Créer un compte</a
-            ></span
-          >
+          <div v-if="$auth.loggedIn">
+            <h4 class="font-semibold cursor-default size-15 logo-color px-4">
+              Bienvenue,
+              <span class="font-semibold size-15 logo-color">
+                {{ $auth.user.name | capitalize }} !
+              </span>
+            </h4>
+          </div>
+          <div v-else>
+            <client-only>
+              <a href="/connexion" class="block w-fit m-0-auto" @click="hide"
+                ><button
+                  class="btn-008489 rounded px-20 py-1 text-white size-14"
+                >
+                  Se connecter
+                </button></a
+              >
+              <div class="size-12 pt-2 w-fit m-0-auto dropdown-item logo-color">
+                Vous n'avez pas de compte ?
+                <a
+                  href="/inscription"
+                  class="clickable color-008489 underline-hover font-semibold"
+                  @click="hide"
+                  >Créer un compte</a
+                >
+              </div>
+            </client-only>
+          </div>
           <hr class="dropdown-divider" />
           <span class="size-135 font-semibold dropdown-item">Mon compte</span>
           <a
@@ -93,7 +107,7 @@
             ><span>Enregistrés</span></a
           >
           <hr class="dropdown-divider" />
-          <a href="#" class="block w-fit m-0-auto" @click="hide"
+          <a class="block w-fit m-0-auto" @click="logout"
             ><button
               class="button is-light ferfe rounded px-20 py-1 text-white size-14"
             >
@@ -107,6 +121,13 @@
 </template>
 <script>
 export default {
+  filters: {
+    capitalize(value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
+    },
+  },
   props: {
     title: {
       type: String,
@@ -122,6 +143,12 @@ export default {
   methods: {
     hide() {
       this.focused = false
+    },
+    async logout() {
+      this.hide()
+      await this.$auth.logout().then((res) => {
+        location.reload()
+      })
     },
   },
 }

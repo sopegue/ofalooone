@@ -78,6 +78,7 @@ import Sortresfav from '~/components/dropdown/Sortresfav'
 import Homeproplarge from '~/components/propriete/Homeproplarge.vue'
 export default {
   components: { Sortresfav, Homeproplarge },
+  middleware: 'auth',
   async asyncData({
     isDev,
     route,

@@ -12,6 +12,31 @@
 import Login from '~/components/authentication/Login.vue'
 export default {
   components: { Login },
+  middleware: 'noauth',
+  asyncData({ from }) {
+    const fromwhere = from
+    console.log(from)
+    return { fromwhere }
+  },
+  computed: {
+    logged() {
+      return this.$auth.loggedIn === true
+    },
+    fromw() {
+      return this.fromwhere
+    },
+  },
+  watch: {
+    logged(nv, ov) {
+      console.log('watched logged:', nv)
+      console.log('from:', this.fromw)
+    },
+  },
+  beforeMount() {
+    if (this.$auth.loggedIn) {
+      this.$router.replace('/redirecting-home')
+    }
+  },
 }
 </script>
 

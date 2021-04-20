@@ -182,6 +182,7 @@
 
 <script>
 export default {
+  middleware: 'auth',
   computed: {
     curoute() {
       return this.$route.path

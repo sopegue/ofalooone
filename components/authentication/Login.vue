@@ -2,12 +2,12 @@
   <div class="py-2">
     <div class="w-full flex flex-col">
       <div class="oath-log flex flex-col space-y-10 relative">
-        <div class="absolute w-full top-0 appearZ rounded-tl rounded-tr">
+        <!-- <div class="absolute w-full top-0 appearZ rounded-tl rounded-tr">
           <span
             class="block rounded-tl rounded-tr text-c bg-green-600 py-3 px-10 text-white font-semibold size-12"
             >Mot passe réinitialisé avec success √</span
           >
-        </div>
+        </div> -->
         <div
           class="border bg-white rounded px-5 sm:px-8 py-5 flex flex-col space-y-2"
         >
@@ -111,13 +111,16 @@
           <div class="w-full flex align-center space-x-2 pt-1">
             <input
               id="senupd"
+              v-model="rememberme"
               type="checkbox"
+              value="yes"
               class="border rounded no-outlines outline-none"
             />
             <label for="senupd" class="size-12">Se souvenir</label>
           </div>
           <a
             class="button block btn-008489 border rounded-md flex align-center space-x-2 relative top-05x bottom-0x"
+            :class="{ noclick: isloging }"
             @click="signin"
           >
             <span class="size-13 text-white font-semibold">Connexion </span></a
@@ -190,16 +193,27 @@
 </template>
 <script>
 export default {
+  props: {
+    from: {
+      type: String,
+      default: '/',
+    },
+  },
   data() {
     return {
       pwd: '',
       email: '',
       pwderr: false,
       maierror: false,
+      logging: false,
       pwdhid: true,
+      rememberme: [],
     }
   },
   computed: {
+    fromw() {
+      return this.from
+    },
     pwdhidden() {
       return this.pwdhid === true
     },
@@ -208,6 +222,12 @@ export default {
     },
     mailerror() {
       return this.maierror === true
+    },
+    isloging() {
+      return this.logging === true
+    },
+    remember() {
+      return this.rememberme === true
     },
   },
   watch: {
@@ -221,6 +241,12 @@ export default {
         this.pwderr = false
       }
     },
+    fromw(nv, ov) {
+      console.log('newfrom:', nv)
+    },
+  },
+  mounted() {
+    console.log(this.fromw)
   },
   methods: {
     infosValidated() {
@@ -235,7 +261,31 @@ export default {
       return this.mailerror === false && this.passerror === false
     },
     signin() {
-      if (this.infosValidated());
+      if (this.infosValidated()) {
+        this.logging = true
+        this.$auth
+          .loginWith('local', {
+            data: {
+              email: this.email,
+              password: this.pwd,
+              rememberme: this.remember,
+            },
+          })
+          .then((res) => {
+            this.logging = false
+            console.log(res)
+            if (res.data.status === 200) {
+              console.log('logged')
+              location.assign(this.from)
+            }
+            if (res.data.status === 404) console.log('incorrects credentials')
+            if (res.data.status === 500) console.log('Error on request')
+          })
+          .catch(() => {
+            this.logging = false
+            console.log('error client side')
+          })
+      }
     },
   },
 }

@@ -44,33 +44,19 @@
       </div>
       <div id="dropdown-menu" class="dropdown-menu walele" role="menu">
         <div class="dropdown-content bg-white border">
-          <div v-if="$auth.loggedIn">
-            <h4 class="font-semibold cursor-default size-15 logo-color px-4">
-              Bienvenue,
-              <span class="font-semibold size-15 logo-color">
-                {{ $auth.user.name | capitalize }} !
-              </span>
-            </h4>
-          </div>
-          <div v-else>
-            <client-only>
-              <a href="/connexion" class="block w-fit m-0-auto" @click="hide"
-                ><button
-                  class="btn-008489 rounded px-20 py-1 text-white size-14"
-                >
-                  Se connecter
-                </button></a
-              >
-              <div class="size-12 pt-2 w-fit m-0-auto dropdown-item logo-color">
-                Vous n'avez pas de compte ?
-                <a
-                  href="/inscription"
-                  class="clickable color-008489 underline-hover font-semibold"
-                  @click="hide"
-                  >Créer un compte</a
-                >
-              </div>
-            </client-only>
+          <a href="/connexion" class="block w-fit m-0-auto" @click="hide"
+            ><button class="btn-008489 rounded px-20 py-1 text-white size-14">
+              Se connecter
+            </button></a
+          >
+          <div class="size-12 pt-2 w-fit m-0-auto dropdown-item logo-color">
+            Vous n'avez pas de compte ?
+            <a
+              href="/inscription"
+              class="clickable color-008489 underline-hover font-semibold"
+              @click="hide"
+              >Créer un compte</a
+            >
           </div>
           <hr class="dropdown-divider" />
           <span class="size-135 font-semibold dropdown-item">Mon compte</span>

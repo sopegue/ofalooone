@@ -48,7 +48,7 @@
             <h4 class="font-semibold cursor-default size-15 logo-color px-4">
               Bienvenue,
               <span class="font-semibold size-15 logo-color">
-                {{ user.name | capitalize }} !
+                {{ user | capitalize }} !
               </span>
             </h4>
           </div>

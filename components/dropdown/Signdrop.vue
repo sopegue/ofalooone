@@ -48,7 +48,7 @@
             <h4 class="font-semibold cursor-default size-15 logo-color px-4">
               Bienvenue,
               <span class="font-semibold size-15 logo-color">
-                {{ user | capitalize }} !
+                {{ user.name | capitalize }} !
               </span>
             </h4>
           </div>
@@ -141,8 +141,13 @@ export default {
   },
   computed: {
     user() {
-      return this.$auth.user !== undefined ? this.$auth.user : { name: 'Guest' }
+      return this.$auth.user !== null && this.$auth.user !== undefined
+        ? this.$auth.user
+        : { name: 'Guest' }
     },
+  },
+  mounted() {
+    console.log(this.user)
   },
   methods: {
     hide() {

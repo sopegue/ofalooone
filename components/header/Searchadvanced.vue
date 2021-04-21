@@ -224,6 +224,7 @@
               'Le mois prochain',
             ]"
             @options="dating"
+            @optionsd="datingd"
           ></optionadvanced>
         </div>
       </div>
@@ -353,10 +354,13 @@ export default {
     properties(val) {
       this.filter.property.tous = val.tous
       if (val.tous === 'Tous types de propriétés') {
-        this.filter.property.multiple = ['Tous types de propriétés']
+        this.filter.property.multiple = ['Tous types']
       } else if (val.tab !== undefined) {
         this.filter.property.multiple = []
-        this.filter.property.multiple = val.tab
+        for (let index = 1; index < val.tab.length; index++) {
+          const element = val.tab[index]
+          this.filter.property.multiple.push(element)
+        }
       } else {
         this.filter.property.multiple = []
       }
@@ -405,6 +409,13 @@ export default {
     },
     dating(val) {
       this.filter.date.tous = val
+      this.filter.date.date = null
+      if (sessionStorage.filter_home) sessionStorage.removeItem('filter_home')
+      sessionStorage.setItem('filter_home', JSON.stringify(this.filter))
+    },
+    datingd(val) {
+      this.filter.date.tous = null
+      this.filter.date.date = val
       if (sessionStorage.filter_home) sessionStorage.removeItem('filter_home')
       sessionStorage.setItem('filter_home', JSON.stringify(this.filter))
     },

@@ -1,10 +1,6 @@
 <template>
-  <div>
-    <div
-      v-click-outside="hide"
-      class="dropdown"
-      :class="{ 'is-active': focused }"
-    >
+  <div v-click-outside="hide">
+    <div class="dropdown" :class="{ 'is-active': focused }">
       <div class="dropdown-trigger">
         <client-only>
           <div
@@ -119,9 +115,10 @@
               <span class="size-13 pb-1">Choisir une date</span>
               <input
                 v-model="dates"
-                class="no-outlines border px-1 py-1"
+                class="no-outlines cursor-pointer border px-1 size-13 py-1"
                 type="date"
                 :min="currentdate"
+                @change="datechange"
               />
             </div>
           </div>
@@ -253,24 +250,19 @@ export default {
   data() {
     return {
       focused: false,
+      dates: this.$moment(new Date()).format('YYYY-MM-DD'),
+      currentdate: this.$moment(new Date()).format('YYYY-MM-DD'),
       currency: '',
       checkedCateg: [],
       max: '',
       min: '',
-      date: new Date(),
-      currentdate: new Date(),
       filter: null,
+      dating: false,
     }
   },
   computed: {
-    dates: {
-      get() {
-        return this.date
-      },
-      set(newvalue) {
-        if (newvalue >= this.date && newvalue >= this.currentdate)
-          this.date = newvalue.toDateString()
-      },
+    hasdate() {
+      return this.dating === true
     },
   },
   watch: {
@@ -318,6 +310,13 @@ export default {
         this.filling()
       }
     },
+    hasdate(nv, ov) {
+      if (nv) {
+        this.dates = this.val
+      } else {
+        this.dates = this.$moment(this.val).format('LL')
+      }
+    },
   },
   mounted() {
     this.currency = this.currencies[0]
@@ -325,6 +324,17 @@ export default {
     this.fill_ifOk()
   },
   methods: {
+    datechange(e) {
+      this.dates = e.target.value
+      this.currency = this.$moment(e.target.value).format('LL')
+      // this.dating = false
+      this.$emit('optionsd', e.target.value)
+      this.hide()
+    },
+    makeitdate() {
+      this.dating = true
+    },
+    canceled() {},
     fill_ifOk() {
       if (sessionStorage.filter_home) {
         this.filter = JSON.parse(sessionStorage.getItem('filter_home'))
@@ -334,11 +344,16 @@ export default {
       if (this.what === 'achat') {
         this.currency = this.filter.achat.type
       }
+      if (this.what === 'date') {
+        if (this.filter.date.date === null) {
+          this.currency = this.filter.date.tous
+        } else {
+          const data = this.$moment(this.filter.date.date).format('LL')
+          this.currency = data
+        }
+      }
       if (this.what === 'garage') {
         this.currency = this.filter.garage.tous
-      }
-      if (this.what === 'date') {
-        this.currency = this.filter.date.tous
       }
       if (this.what === 'location') {
         this.currency = this.filter.rent.type

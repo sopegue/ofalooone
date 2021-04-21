@@ -41,7 +41,7 @@
           </div>
         </client-only>
       </div>
-      <div id="dropdown-menu" class="dropdown-menu walele" role="menu">
+      <div id="dropdown-menu" class="dropdown-menu z-15 walele" role="menu">
         <div
           class="dropdown-content bg-white border h-40maxs overflow-y-auto aside"
         >

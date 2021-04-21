@@ -28,6 +28,8 @@ export default {
     '@/plugins/directive.js',
     '@/plugins/linkformat.js',
     '@/plugins/utilities.js',
+    // { src: '@tailwindcss/forms', strategy: 'class' },
+    // { src: '@/plugins/datepicker.js', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -37,7 +39,9 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    // '@tailwindcss/forms',
     'nuxt-windicss',
+    '@nuxtjs/moment',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -50,6 +54,11 @@ export default {
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
   ],
+  moment: {
+    timezone: true,
+    defaultLocale: 'fr',
+    locales: ['fr'],
+  },
   auth: {
     localStorage: false,
     rewriteRedirects: true,

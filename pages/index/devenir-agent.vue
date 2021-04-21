@@ -17,7 +17,7 @@
       </div>
       <div class="absolute bottom-0 right-0 mb-25 mr-10">
         <a
-          href="/"
+          href="https://ofalooagent.netlify.app"
           target="_blank"
           class="button btn-008489 px-10 py-2 rounded border-white text-white size-14"
           >Rejoindre Ofaloo</a

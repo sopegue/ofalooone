@@ -41,7 +41,7 @@
           </div>
         </client-only>
       </div>
-      <div id="dropdown-menu" class="dropdown-menu walele" role="menu">
+      <div id="dropdown-menu" class="dropdown-menu walele z-15" role="menu">
         <div class="dropdown-content bg-white border">
           <a
             v-for="(element, i) in currencies"

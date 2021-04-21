@@ -115,7 +115,13 @@
                 <span class="size-12 block color-363636 pb-1"
                   >Choisir une date</span
                 >
-                <input class="no-outlines border px-1 py-1" type="date" />
+                <input
+                  v-model="dates"
+                  class="no-outlines cursor-pointer border px-1 size-13 py-1"
+                  type="date"
+                  :min="currentdate"
+                  @change="datechange"
+                />
               </div>
             </div>
             <div v-if="title === 'Prix'">
@@ -239,6 +245,8 @@ export default {
   },
   data() {
     return {
+      dates: this.$moment(new Date()).format('YYYY-MM-DD'),
+      currentdate: this.$moment(new Date()).format('YYYY-MM-DD'),
       index: 0,
       hidden: false,
       has_reset: false,
@@ -535,6 +543,10 @@ export default {
     this.fill_ifOk()
   },
   methods: {
+    datechange(e) {
+      this.dates = e.target.value
+      this.setDate(e.target.value)
+    },
     resetingAll() {
       if (sessionStorage.filter) sessionStorage.removeItem('filter')
       this.filter = this.filter_old
@@ -704,10 +716,22 @@ export default {
         sessionStorage.setItem('filter', JSON.stringify(this.filter))
       }
       if (this.title === "Date d'arrivée") {
+        this.dates = this.$moment(new Date()).format('YYYY-MM-DD')
         this.filter.date.tous = val
+        this.filter.date.date = null
         if (sessionStorage.filter) sessionStorage.removeItem('filter')
         sessionStorage.setItem('filter', JSON.stringify(this.filter))
       }
+    },
+    async setDate(val) {
+      if (sessionStorage.filter) {
+        this.filter = await JSON.parse(sessionStorage.getItem('filter'))
+      }
+      this.checkedCateg = []
+      this.filter.date.tous = null
+      this.filter.date.date = val
+      if (sessionStorage.filter) sessionStorage.removeItem('filter')
+      sessionStorage.setItem('filter', JSON.stringify(this.filter))
     },
     filling() {
       if (this.title === 'Achat et location') {
@@ -734,7 +758,11 @@ export default {
       }
       if (this.title === "Date d'arrivée") {
         this.checkedCateg = []
-        this.checkedCateg.push(this.filter.date.tous)
+        if (this.filter.date.date === null) {
+          this.checkedCateg.push(this.filter.date.tous)
+        } else {
+          this.dates = this.filter.date.date
+        }
       }
       if (this.title === 'Types de propriétés') {
         if (this.filter.property.multiple.length === 1) {
@@ -748,13 +776,27 @@ export default {
           }
         } else if (this.filter.property.multiple.length > 1) {
           this.checkedCateg = []
-          for (
-            let index = 0;
-            index < this.filter.property.multiple.length;
-            index++
+          if (
+            this.filter.property.multiple[0] === 'Tous types de propriétés' ||
+            this.filter.property.multiple[0] === 'Tous types'
           ) {
-            const element = this.filter.property.multiple[index]
-            this.checkedCateg.push(element)
+            for (
+              let index = 1;
+              index < this.filter.property.multiple.length;
+              index++
+            ) {
+              const element = this.filter.property.multiple[index]
+              this.checkedCateg.push(element)
+            }
+          } else {
+            for (
+              let index = 0;
+              index < this.filter.property.multiple.length;
+              index++
+            ) {
+              const element = this.filter.property.multiple[index]
+              this.checkedCateg.push(element)
+            }
           }
         } else if (this.filter.property.multiple.length === 0)
           this.checkedCateg = ['Tous types']

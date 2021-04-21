@@ -448,13 +448,15 @@ export default {
           console.log(this.filter)
           // this.properties = res
           this.properties.data = res.data
-          this.total = res.meta.total
+          if (res.meta !== undefined) this.total = res.meta.total
+          else this.total = 0
           this.error = false
           this.charged = true
           this.first = true
           this.fromPT = false
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(error)
           this.error = true
           this.charged = true
           this.first = true

@@ -147,8 +147,19 @@ export default {
         this.logoutImmediatly(data)
       }
     }
+    this.checkSearch()
   },
   methods: {
+    checkSearch() {
+      if (!localStorage.history) {
+        localStorage.setItem(
+          'history',
+          JSON.stringify({
+            searches: [],
+          })
+        )
+      }
+    },
     async logoutImmediatly(data) {
       await fetch(
         'https://ofalooback.herokuapp.com/api/client/logout/notoken/' +

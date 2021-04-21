@@ -1948,6 +1948,15 @@ fieldset[disabled] .button {
   min-width: 12px;
   width: 12px;
 }
+.is-smallest.delete,
+.is-smallest.modal-close {
+  height: 16px;
+  max-height: 16px;
+  max-width: 16px;
+  min-height: 16px;
+  min-width: 16px;
+  width: 16px;
+}
 .dropdown-content {
   background-color: #fff;
   border-radius: 4px;
@@ -1977,7 +1986,10 @@ fieldset[disabled] .button {
   -ms-user-select: none;
   user-select: none;
 }
-
+.max-h-24s {
+  min-height: 6em !important;
+  max-height: 6em !important;
+}
 .delete,
 .modal-close {
   -moz-appearance: none;
@@ -1991,15 +2003,15 @@ fieldset[disabled] .button {
   flex-grow: 0;
   flex-shrink: 0;
   font-size: 0;
-  height: 24px;
-  max-height: 24px;
-  max-width: 24px;
-  min-height: 24px;
-  min-width: 24px;
+  height: 20px;
+  max-height: 20px;
+  max-width: 20px;
+  min-height: 20px;
+  min-width: 20px;
   outline: 0;
   position: relative;
   vertical-align: top;
-  width: 24px;
+  width: 20px;
 }
 .delete.search {
   background-color: rgba(255, 255, 255, 0.822);

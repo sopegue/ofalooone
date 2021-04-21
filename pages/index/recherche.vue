@@ -444,10 +444,9 @@ export default {
       }
       this.apply()
         .then((res) => {
-          console.log(res)
-          console.log(this.filter)
           // this.properties = res
           this.properties.data = res.data
+          console.log(res)
           if (res.meta !== undefined) this.total = res.meta.total
           else this.total = 0
           this.error = false
@@ -455,8 +454,7 @@ export default {
           this.first = true
           this.fromPT = false
         })
-        .catch((error) => {
-          console.log(error)
+        .catch(() => {
           this.error = true
           this.charged = true
           this.first = true
@@ -481,7 +479,6 @@ export default {
       if (this.first) {
         this.apply()
           .then((res) => {
-            console.log(res + 'dd')
             // this.properties = res
             this.properties.data = res.data
             this.total = res.meta.total

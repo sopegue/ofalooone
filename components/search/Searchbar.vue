@@ -82,7 +82,7 @@
         id="byuyc"
         v-model="search"
         autocomplete="none"
-        class="w-full h-full outline-none pr-2 size-15 bg-white rounded-tl rounded-bl"
+        class="w-full h-full outline-none pr-7.5 size-15 bg-white rounded-tl rounded-bl"
         :class="{
           'ml-2': color !== 'text-white',
         }"
@@ -103,6 +103,15 @@
           }
         "
       />
+      <button
+        v-show="search !== ''"
+        class="absolute right-0 delete mr-2"
+        @click="
+          {
+            search = ''
+          }
+        "
+      ></button>
     </div>
     <button
       class="h-full btn-008489 absolute h-10 right-0 px-3 rounded-tr rounded-br text-white size-13 font-semibold"

@@ -148,8 +148,38 @@ export default {
       }
     }
     this.checkSearch()
+    this.redir()
   },
   methods: {
+    redir() {
+      if (
+        this.$route.query.q !== undefined &&
+        this.$route.query.q !== 'super-agent'
+      )
+        return location.assign('/recherche')
+      if (
+        this.$route.query.q !== null &&
+        this.$route.query.q !== undefined &&
+        this.$route.query.ofloowa !== null &&
+        this.$route.query.ofloowa !== undefined
+      )
+        return location.assign('/recherche')
+      if (
+        this.$route.query.ofloowa !== null &&
+        this.$route.query.ofloowa !== undefined
+      ) {
+        if (!this.$route.query.ofloowa.includes(' ')) {
+          if (
+            !isNaN(this.$route.query.ofloowa) &&
+            !this.$route.query.ofloowa.includes('.')
+          ) {
+            if (this.$route.query.ofloowa === '') {
+              return location.assign('/recherche')
+            }
+          } else return location.assign('/recherche')
+        } else return location.assign('/recherche')
+      }
+    },
     checkSearch() {
       if (!localStorage.history) {
         localStorage.setItem(

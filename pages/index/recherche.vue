@@ -44,7 +44,9 @@
                     "
                     class="inline-block"
                     >{{ $route.query.type }},&nbsp;</span
-                  >Acheter des proriétés<span v-if="search !== ''"
+                  >Acheter des proriétés<span
+                    v-if="search !== ''"
+                    class="logo-color"
                     >, resultat de "{{ search }}"</span
                   >
                 </h4>
@@ -56,7 +58,9 @@
                     "
                     class="inline-block"
                     >{{ $route.query.type }},&nbsp;</span
-                  >Louer des proriétés<span v-if="search !== ''"
+                  >Louer des proriétés<span
+                    v-if="search !== ''"
+                    class="logo-color"
                     >, resultat de "{{ search }}"</span
                   >
                 </h4>
@@ -68,7 +72,9 @@
                     "
                     class="inline-block"
                     >{{ $route.query.type }},&nbsp;</span
-                  >Acheter et louer des proriétés<span v-if="search !== ''"
+                  >Acheter et louer des proriétés<span
+                    v-if="search !== ''"
+                    class="logo-color"
                     >, resultat de "{{ search }}"</span
                   >
                 </h4>

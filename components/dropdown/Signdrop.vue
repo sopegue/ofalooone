@@ -106,16 +106,18 @@
               ></path></svg
             ><span>Enregistrés</span></a
           >
-          <div v-show="$auth.loggedIn">
-            <hr class="dropdown-divider" />
-            <a class="block w-fit m-0-auto" @click="logout"
-              ><button
-                class="button is-light ferfe rounded px-20 py-1 text-white size-14"
+          <client-only>
+            <div v-show="$auth.loggedIn">
+              <hr class="dropdown-divider" />
+              <a class="block w-fit m-0-auto" @click="logout"
+                ><button
+                  class="button is-light ferfe rounded px-20 py-1 text-white size-14"
+                >
+                  Se deconnecter
+                </button></a
               >
-                Se deconnecter
-              </button></a
-            >
-          </div>
+            </div>
+          </client-only>
         </div>
       </div>
     </div>

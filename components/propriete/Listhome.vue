@@ -16,8 +16,8 @@
     <div class="flex align-center justify-between px-3">
       <h4 class="logo-color size-18 font-semibold">{{ title }}</h4>
       <a
-        :href="'/recherche?type=' + title"
-        class="underline-hover text-c w-fit color-008489 block size-14"
+        class="underline-hover clickable text-c w-fit color-008489 block size-14"
+        @click="goto(title)"
         >Voir tout</a
       >
     </div>
@@ -135,6 +135,15 @@ export default {
     // this.fetchTitle()
   },
   methods: {
+    async goto(val) {
+      if (sessionStorage.filter_home) {
+        const data = await JSON.parse(sessionStorage.getItem('filter_home'))
+        data.property.multiple = [val]
+        if (sessionStorage.filter) sessionStorage.removeItem('filter')
+        sessionStorage.setItem('filter', JSON.stringify(data))
+        location.assign('/recherche')
+      }
+    },
     seemore() {
       this.charging = true
       this.moreprop()

@@ -68,12 +68,61 @@
             class="relative flex align-center w-full h-full rounded-tl rounded-bl"
           >
             <div
-              v-show="inputfocused && (searches.length > 0 || saved.length > 0)"
+              v-show="
+                inputfocused &&
+                activesearch !== 'Agent' &&
+                (searches.length > 0 || saved.length > 0)
+              "
               class="rounded-bl flex pb-2 flex-col border shadow rounded-br bg-white max-h-82 w-full absolute z-12 top-0 mt-11.5"
             >
               <client-only>
                 <div
                   v-show="
+                    activesearch !== 'Agent' &&
+                    searches !== null &&
+                    searches !== undefined &&
+                    searches.length > 0
+                  "
+                  class="max-h-40 pt-2 w-full overflow-y-auto"
+                  :class="{ 'border-b mb-1.5': saved.length > 0 }"
+                >
+                  <div class="flex flex-col pb-2">
+                    <div
+                      v-for="(res, i) in searches"
+                      :key="i"
+                      class="flex align-center space-x-1.5 px-3 py-1 clickable hover:bg-gray-100"
+                      @click="setSearch(res.adresse, res.ville)"
+                    >
+                      <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1"
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        ></path>
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1"
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                        ></path>
+                      </svg>
+                      <a
+                        class="search-res lowercase self-end block color-363636"
+                        >{{ res.adresse }}, {{ res.ville }}</a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div
+                  v-show="
+                    activesearch === 'Agent' &&
                     searches !== null &&
                     searches !== undefined &&
                     searches.length > 0
@@ -121,7 +170,10 @@
                   v-show="saved.length > 0"
                   class="max-h-35 flex flex-col space-y-1.5 pb-0.5 px-4 overflow-y-auto"
                 >
-                  <div class="flex align-center space-x-3">
+                  <div
+                    class="flex align-center space-x-3"
+                    :class="{ 'pt-2': searches.length <= 0 }"
+                  >
                     <h4 class="size-14 font-semibold logo-color">
                       Recherches récentes
                     </h4>
@@ -132,6 +184,7 @@
                       v-for="(ss, j) in saved"
                       :key="j"
                       class="flex align-center space-x-2 button py-0 is-light rounded-full w-fit m-1.5"
+                      @click="gose(ss)"
                     >
                       <span class="py-0.5 pl-1 size-13 font-semibold">{{
                         ss
@@ -618,6 +671,10 @@ export default {
       }).catch(() => {
         console.error("Oops, can't resolve your promise searching")
       })
+    },
+    gose(val) {
+      this.search = val
+      this.gotosearch()
     },
     async gotosearch() {
       if (sessionStorage.sort) sessionStorage.removeItem('sort')

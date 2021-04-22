@@ -73,11 +73,101 @@
         </div>
       </div>
     </div>
-    <div class="relative flex align-center w-full h-full mr-10">
+    <div
+      v-click-outside="hidesearch"
+      class="relative flex align-center w-full h-full mr-10"
+    >
       <div
-        v-show="inputfocused && search !== ''"
-        class="rounded-bl border rounded-br bg-white h-10 shadow-xs w-full absolute z-12 top-0 mt-9.5 -ml-0.8"
-      ></div>
+        v-show="
+          inputfocused &&
+          what !== 'Agent' &&
+          (searches.length > 0 || saved.length > 0)
+        "
+        class="rounded-bl flex pb-2 flex-col border shadow-md rounded-br bg-white max-h-82 w-full absolute z-12 top-0 mt-9.5 -ml-0.8"
+      >
+        <client-only>
+          <div
+            v-show="
+              searches !== null && searches !== undefined && searches.length > 0
+            "
+            class="max-h-40 pt-2 w-full overflow-y-auto"
+            :class="{ 'border-b mb-1.5': saved.length > 0 }"
+          >
+            <div class="flex flex-col pb-2">
+              <div
+                v-for="(res, i) in searches"
+                :key="i"
+                class="flex px-3 py-1 clickable hover:bg-gray-100"
+                @click="setSearch(res.adresse, res.ville)"
+              >
+                <svg
+                  class="w-5 h-5 min-w-5 min-h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  ></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  ></path>
+                </svg>
+                <a class="search-res ml-1 lowercase color-363636 oneline"
+                  >{{ res.adresse }}, {{ res.ville }}</a
+                >
+              </div>
+            </div>
+          </div>
+        </client-only>
+        <client-only>
+          <div
+            v-show="saved.length > 0"
+            class="max-h-35 flex flex-col space-y-1.5 pb-0.5 px-4 overflow-y-auto"
+          >
+            <div
+              class="flex align-center space-x-3"
+              :class="{ 'pt-2': searches.length <= 0 }"
+            >
+              <h4 class="size-14 font-semibold logo-color">
+                Recherches récentes
+              </h4>
+              <button class="delete mt-1" @click="deleteSearch"></button>
+            </div>
+            <div class="flex flex-wrap">
+              <a
+                v-for="(ss, j) in saved"
+                :key="j"
+                class="flex align-center space-x-2 button py-0 is-light rounded-full w-fit m-1.5"
+                @click="gose(ss)"
+              >
+                <span class="py-0.5 pl-1 size-13 font-semibold">{{ ss }}</span>
+                <svg
+                  class="w-4 h-4 color-363636"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </client-only>
+      </div>
       <input
         id="byuyc"
         v-model="search"
@@ -95,11 +185,6 @@
         @focus="
           {
             inputfocused = true
-          }
-        "
-        @blur="
-          {
-            inputfocused = false
           }
         "
       />
@@ -146,7 +231,6 @@ export default {
   data() {
     return {
       filter: {
-        what: 'all',
         achat_location: {
           multiple: ['Tous types'],
         },
@@ -224,11 +308,37 @@ export default {
       search: '',
       currency: '',
       currencies: ['Acheter', 'Louer', 'Agent'],
+      history: {
+        searches: [],
+      },
+      timestamp: 0,
+      toSearch: '',
+      results: [],
+      what: '',
     }
   },
   computed: {
     curoute() {
       return this.$route.path
+    },
+    size() {
+      return this.$store.state.size
+    },
+    saved() {
+      return this.history !== null &&
+        this.history !== undefined &&
+        this.history.searches !== undefined &&
+        this.history.searches !== undefined &&
+        this.history.searches.length > 0
+        ? this.history.searches
+        : []
+    },
+    searches() {
+      return this.results !== null &&
+        this.results !== undefined &&
+        this.results.length > 0
+        ? this.results.slice(0, 10)
+        : []
     },
   },
   watch: {
@@ -242,8 +352,24 @@ export default {
         this.search = ''
       }
     },
+    search(nv, ov) {
+      if (nv !== '') {
+        if (this.timestamp === 0 || Date.now() - this.timestamp > 200) {
+          this.timestamp = Date.now()
+          this.callme()
+        }
+      }
+    },
+    currency(nv, ov) {
+      this.what = nv
+    },
   },
-  mounted() {
+  async mounted() {
+    if (sessionStorage.filter) {
+      const data = await JSON.parse(sessionStorage.getItem('filter'))
+      this.what = data.what
+    }
+    console.log(this.what)
     this.currency = this.currencies[0]
     if (sessionStorage.search) {
       this.search = sessionStorage.getItem('search')
@@ -261,8 +387,83 @@ export default {
       this.currency = 'Acheter'
       this.search = ''
     }
+    this.checkSearch()
   },
   methods: {
+    hidesearch() {
+      this.inputfocused = false
+    },
+    deleteSearch() {
+      if (localStorage.history) localStorage.removeItem('history')
+      this.history.searches = []
+      localStorage.setItem('history', JSON.stringify(this.history))
+    },
+    async checkSearch() {
+      if (localStorage.history) {
+        this.history = await JSON.parse(localStorage.getItem('history'))
+      }
+    },
+    callme() {
+      this.pendingmail()
+        .then((res) => {
+          this.results = res.adresse
+          const text = document.querySelectorAll('.search-res')
+          const ss = this.search
+          if (this.searches.length > 0) {
+            setTimeout(() => {
+              for (let index = 0; index < text.length; index++) {
+                const result = text[index]
+                if (this.searches[index] !== undefined) {
+                  this.searches[index].adresse = this.searches[
+                    index
+                  ].adresse.toLowerCase()
+                  this.searches[index].ville = this.searches[
+                    index
+                  ].ville.toLowerCase()
+                  result.innerHTML = `${this.searches[index].adresse}, ${this.searches[index].ville}`
+                }
+                const html = result.innerHTML
+                const newText = html.replace(
+                  ss.toLowerCase(),
+                  `<strong>${ss}</strong>`
+                )
+                result.innerHTML = newText
+              }
+            }, 100)
+          }
+        })
+        .catch(() => {
+          console.error('Oops, maybe an undefined property for this error')
+        })
+    },
+    async setSearch(val1, val2) {
+      this.search = val1 + ', ' + val2
+      if (localStorage.history) {
+        this.history = await JSON.parse(localStorage.getItem('history'))
+      }
+      if (!this.history.searches.includes(this.search))
+        this.history.searches.unshift(this.search)
+      this.history.searches = this.history.searches.slice(0, 10)
+      if (localStorage.history) localStorage.removeItem('history')
+      localStorage.setItem('history', JSON.stringify(this.history))
+      this.searching()
+    },
+    async pendingmail() {
+      return await new Promise((resolve, reject) => {
+        resolve(
+          this.$axios.$get(
+            'https://ofalooback.herokuapp.com/api/properties/search/' +
+              this.search
+          )
+        )
+      }).catch(() => {
+        console.error("Oops, can't resolve your promise searching")
+      })
+    },
+    gose(val) {
+      this.search = val
+      this.searching()
+    },
     autoff() {
       const myel = document.getElementById('byuyc')
       myel.setAttribute('autocomplete', 'off')

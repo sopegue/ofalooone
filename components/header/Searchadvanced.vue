@@ -78,7 +78,6 @@
               <client-only>
                 <div
                   v-show="
-                    activesearch !== 'Agent' &&
                     searches !== null &&
                     searches !== undefined &&
                     searches.length > 0
@@ -94,7 +93,7 @@
                       @click="setSearch(res.adresse, res.ville)"
                     >
                       <svg
-                        class="w-5 h-5"
+                        class="w-5 h-5 min-w-5 min-h-5"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -113,52 +112,7 @@
                           d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                         ></path>
                       </svg>
-                      <a
-                        class="search-res lowercase self-end block color-363636"
-                        >{{ res.adresse }}, {{ res.ville }}</a
-                      >
-                    </div>
-                  </div>
-                </div>
-                <div
-                  v-show="
-                    activesearch === 'Agent' &&
-                    searches !== null &&
-                    searches !== undefined &&
-                    searches.length > 0
-                  "
-                  class="max-h-40 pt-2 w-full overflow-y-auto"
-                  :class="{ 'border-b mb-1.5': saved.length > 0 }"
-                >
-                  <div class="flex flex-col pb-2">
-                    <div
-                      v-for="(res, i) in searches"
-                      :key="i"
-                      class="flex align-center space-x-1.5 px-3 py-1 clickable hover:bg-gray-100"
-                      @click="setSearch(res.adresse, res.ville)"
-                    >
-                      <svg
-                        class="w-5 h-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1"
-                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                        ></path>
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1"
-                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                        ></path>
-                      </svg>
-                      <a
-                        class="search-res lowercase self-end block color-363636"
+                      <a class="search-res lowercase color-363636 oneline"
                         >{{ res.adresse }}, {{ res.ville }}</a
                       >
                     </div>

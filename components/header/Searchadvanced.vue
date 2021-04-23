@@ -62,7 +62,10 @@
         <h4 v-show="activesearch === 'Agent'" class="size-18 text-white mb-3">
           Trouver une propriété par agent
         </h4>
-        <div class="flex align-center hsin w-full">
+        <form
+          class="flex align-center hsin w-full"
+          @submit.prevent="gotosearch"
+        >
           <div
             v-click-outside="hidesearch"
             class="relative flex align-center w-full h-full rounded-tl rounded-bl"
@@ -208,7 +211,7 @@
           >
             Rechercher
           </button>
-        </div>
+        </form>
         <div
           v-show="activesearch === 'Acheter' || activesearch === 'Louer'"
           class="flex align-center flex-wrap pt-2"

@@ -157,6 +157,7 @@ export default {
     async logout() {
       this.hide()
       await this.$auth.logout().then((res) => {
+        if (localStorage.hdzd) localStorage.removeItem('hdzd')
         location.reload()
       })
     },

@@ -73,9 +73,10 @@
         </div>
       </div>
     </div>
-    <div
+    <form
       v-click-outside="hidesearch"
       class="relative flex align-center w-full h-full mr-10"
+      @submit.prevent="searching"
     >
       <div
         v-show="
@@ -197,7 +198,7 @@
           }
         "
       ></button>
-    </div>
+    </form>
     <button
       class="h-full btn-008489 absolute h-10 right-0 px-3 rounded-tr rounded-br text-white size-13 font-semibold"
       @click="searching"

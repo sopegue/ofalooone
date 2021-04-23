@@ -19,10 +19,14 @@
         class="flex align-center justify-between"
         :class="{ 'px-2': size <= 450 }"
       >
-        <a href="#" class="flex align-center space-x-2"
+        <a
+          :href="'/recherche?ofloowa=' + property.property.user_id"
+          class="flex align-center space-x-2"
           ><img
             class="rounded-full is-40x40"
-            :src="'https://ofalooback.herokuapp.com/storage/' + property.user_pic"
+            :src="
+              'https://ofalooback.herokuapp.com/storage/' + property.user_pic
+            "
             alt="Image"
           />
           <span class="size-14 font-semibold">{{
@@ -31,13 +35,13 @@
         >
         <a
           v-show="property.agence.super === 'yes'"
-          href="#"
+          href="/recherche?q=super-agent"
           class="button bg-transparent px-3 py-1 rounded border-008489ss size-12 color-008489"
           >Super agent</a
         >
       </div>
       <div class="mt-3">
-        <figure class="image relative is-4by3">
+        <figure class="image relative is-4by3 clickable">
           <img :src="getImgPrin" alt="Image" />
           <button
             v-if="property.links !== undefined && property.links !== null"
@@ -95,12 +99,17 @@
               ></path>
             </svg>
           </button>
+          <a
+            v-if="size <= 640"
+            :href="'/propriete?wyzes=' + property.property.id"
+            class="absolute top-0 bottom-0 left-0 right-0"
+          ></a>
           <div
-            v-show="hovered"
+            v-show="hovered && size > 640"
             class="absolute appearZ z-0 top-0 left-0 w-full h-full bg-black-tre"
           >
             <button
-              class="border-none size-12 text-white px-5 pb-2 rounded button btn-008489 both-centers"
+              class="border-none size-12 text-white px-5 pb-1.5 rounded button btn-008489 both-centers"
               @click="show_quick"
             >
               Aperçu rapide
@@ -129,7 +138,7 @@
         </figure>
       </div>
       <div
-        class="flex flex-col mt-2"
+        class="flex flex-col mt-2 clickable"
         :class="{ 'px-2.5': size <= 450 }"
         @click="gotoprop"
       >
@@ -140,13 +149,11 @@
           <div>
             <a
               v-if="property.property.proposition === 'Vente totale'"
-              href="/"
               title="Le prix indiqué représente le montant à payer pour toute la propriété"
               class="px-3 py-1 z-20 block w-fit rounded btn-008489s color-008489 font-semibold size-11 my-1"
               >Achat total</a
             ><a
               v-if="property.property.proposition === 'Vente partielle'"
-              href="/"
               :title="
                 'Le prix indiqué représente ' +
                 property.property.percentage_part.toString() +
@@ -160,14 +167,12 @@
             >
             <a
               v-if="property.property.proposition === 'Location totale'"
-              href="/"
               title="Le prix indiqué représente le montant à payer pour toute la propriété"
               class="px-3 py-1 z-20 block w-fit rounded btn-008489s color-008489 font-semibold size-11 my-1"
               >Location totale</a
             >
             <a
               v-if="property.property.proposition === 'Location partielle'"
-              href="/"
               :title="
                 'Le prix indiqué représente ' +
                 property.property.percentage_part.toString() +
@@ -258,7 +263,7 @@
         </div>
         <div class="flex align-center space-x-1 mt-1">
           <svg
-            class="w-6 h-6 logo-color -ml-1"
+            class="w-5 min-w-5 h-5 min-h-5 logo-color -ml-1"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -280,12 +285,57 @@
           <span class="logo-color size-14 over">{{ property.adresse }}</span>
         </div>
         <div class="mt-2">
-          <img src="https://ofalooback.herokuapp.com/images/prop.png" alt="Image" />
+          <div class="flex align-center space-x-3.5">
+            <div
+              v-if="property.property.bed > 0"
+              :title="property.property.bed + ' pièce(s)'"
+              class="flex align-center space-x-1.5"
+            >
+              <span>
+                <i class="fas size-16 logo-color fa-bed"></i>
+              </span>
+              <span class="logo-color">{{ property.property.bed }}</span>
+            </div>
+            <div
+              v-if="property.property.bath > 0"
+              :title="property.property.bath + ' salles(s) de bain(s)'"
+              class="flex align-center space-x-1.5"
+            >
+              <span>
+                <i class="fas size-16 logo-color fa-shower"></i>
+              </span>
+              <span class="logo-color">{{ property.property.bath }}</span>
+            </div>
+            <div
+              v-if="property.property.garage > 0"
+              :title="property.property.garage + ' garage(s)'"
+              class="flex align-center space-x-1.5"
+            >
+              <span>
+                <i class="fas size-16 logo-color fa-warehouse"></i>
+              </span>
+              <span class="logo-color">{{ property.property.garage }}</span>
+            </div>
+            <div
+              v-if="property.property.taille > 0"
+              :title="'La taille de la propriété'"
+              class="flex align-center space-x-1.5"
+            >
+              <span>
+                <i class="fas size-16 logo-color fa-ruler-vertical"></i>
+              </span>
+              <span class="logo-color">{{ property.property.taille }} m²</span>
+            </div>
+          </div>
         </div>
         <div class="py-2">
-          <span class="color-363636 size-11">Il y a 3 jours</span>
+          <span class="color-363636 size-11">{{
+            $utility.dating(
+              new Date($moment(property.property.created_at).format())
+            )
+          }}</span>
         </div>
-        <div v-if="property.property.rent === 'yes'" class="mt-2">
+        <div v-if="property.property.rent === 'yes'">
           <span class="font-semibold size-13 logo-color flex"
             ><svg
               class="mr-1.5"
@@ -357,25 +407,33 @@ export default {
         if (element.principal === 'yes')
           return 'https://ofalooback.herokuapp.com/storage/' + element.url
       }
-      return 'https://ofalooback.herokuapp.com/storage/' + this.property.images[0].url
+      return (
+        'https://ofalooback.herokuapp.com/storage/' +
+        this.property.images[0].url
+      )
     },
     size() {
       return this.$store.state.size
     },
   },
+  mounted() {},
   methods: {
     fillImages() {
       for (let index = 0; index < this.property.images.length; index++) {
         const element = this.property.images[index]
         if (element.principal === 'yes') {
-          this.images.push('https://ofalooback.herokuapp.com/storage/' + element.url)
+          this.images.push(
+            'https://ofalooback.herokuapp.com/storage/' + element.url
+          )
           break
         }
       }
       for (let index = 0; index < this.property.images.length; index++) {
         const element = this.property.images[index]
         if (element.principal === 'no')
-          this.images.push('https://ofalooback.herokuapp.com/storage/' + element.url)
+          this.images.push(
+            'https://ofalooback.herokuapp.com/storage/' + element.url
+          )
       }
     },
     close_quick() {

@@ -21,7 +21,7 @@
           <question
             :link1="{
               text: 'Acheter une propriété',
-              link: '/recherche?q=achat',
+              link: '/recherche',
             }"
             content="Acheter des propriétés, maisons, appartement, villa,
             haut-standings, bureaux, magasins, terrains partout en Côte d'Ivoire
@@ -31,7 +31,7 @@
           <question
             :link1="{
               text: 'Louer une propriété',
-              link: '/recherche?q=location',
+              link: '/recherche?',
             }"
             content="Louer des propriétés, maisons, appartement, villa,
             haut-standings, bureaux, magasins, terrains partout en Côte d'Ivoire
@@ -41,7 +41,7 @@
           <question
             :link1="{
               text: 'Rechercher une propriété',
-              link: '/recherche?q=all',
+              link: '/recherche',
             }"
             content="Vous pouvez demander à visiter 
             une propriété en vu d'un achat ou d'une 
@@ -52,7 +52,7 @@
           <question
             :link1="{
               text: 'Rechercher une propriété',
-              link: '/recherche?q=all',
+              link: '/recherche',
             }"
             content="Vous pouvez envoyer un message à 
             l'agent en charge d'une propriété pour savoir 
@@ -159,25 +159,25 @@
           >
           <span>Rejoignez-nous sur les réseaux sociaux</span>
           <p class="flex align-center space-x-3">
-            <a href="https://fb.com/saliistore" target="_blank"
+            <a href="#" target="_blank"
               ><i class="fab fa-twitter size-20 clickable"></i
             ></a>
-            <a href="https://fb.com/saliistore" target="_blank"
+            <a href="#" target="_blank"
               ><i class="fab fa-facebook size-20 clickable"></i
             ></a>
-            <a href="https://fb.com/saliistore" target="_blank"
+            <a href="#" target="_blank"
               ><i class="fab fa-instagram size-20 clickable"></i
             ></a>
-            <a href="https://fb.com/saliistore" target="_blank"
+            <a href="#" target="_blank"
               ><i class="fab fa-tiktok size-20 clickable"></i
             ></a>
-            <a href="https://fb.com/saliistore" target="_blank"
+            <a href="#" target="_blank"
               ><i class="fab fa-youtube size-20 clickable"></i
             ></a>
-            <a href="https://fb.com/saliistore" target="_blank"
+            <a href="#" target="_blank"
               ><i class="fab fa-snapchat-ghost size-20 clickable"></i
             ></a>
-            <!-- <a href="https://fb.com/saliistore" target="_blank"
+            <!-- <a href="#" target="_blank"
               ><i class="fab fa-linkedin-in size-20 clickable"></i
             ></a> -->
           </p>

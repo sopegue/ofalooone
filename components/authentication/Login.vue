@@ -108,16 +108,6 @@
               chiffres
             </p>
           </div>
-          <div class="w-full flex align-center space-x-2 pt-1">
-            <input
-              id="senupd"
-              v-model="rememberme"
-              type="checkbox"
-              value="yes"
-              class="border rounded no-outlines outline-none"
-            />
-            <label for="senupd" class="size-12">Se souvenir</label>
-          </div>
           <a
             class="button block btn-008489 border rounded-md flex align-center space-x-2 relative top-05x bottom-0x"
             :class="{ noclick: isloging }"

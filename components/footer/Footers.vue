@@ -101,22 +101,22 @@
             class="flex align-center space-x-4 text-white pt-1"
             :class="{ 'w-autoxx': size <= 767 }"
           >
-            <a href="https://fb.com/saliistore" target="_blank"
+            <a href="#" target="_blank"
               ><i class="fab fa-twitter size-20 clickable color-white"></i
             ></a>
-            <a href="https://fb.com/saliistore" target="_blank"
+            <a href="#" target="_blank"
               ><i class="fab fa-facebook size-20 clickable color-white"></i
             ></a>
-            <a href="https://fb.com/saliistore" target="_blank"
+            <a href="#" target="_blank"
               ><i class="fab fa-instagram size-20 clickable color-white"></i
             ></a>
-            <a href="https://fb.com/saliistore" target="_blank"
+            <a href="#" target="_blank"
               ><i class="fab fa-tiktok size-20 clickable color-white"></i
             ></a>
-            <a href="https://fb.com/saliistore" target="_blank"
+            <a href="#" target="_blank"
               ><i class="fab fa-youtube size-20 clickable color-white"></i
             ></a>
-            <a href="https://fb.com/saliistore" target="_blank"
+            <a href="#" target="_blank"
               ><i
                 class="fab fa-snapchat-ghost size-20 clickable color-white"
               ></i

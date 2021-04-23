@@ -20,7 +20,9 @@
     "
   >
     <div v-if="size < 830" class="flex align-center justify-between px-2 pt-2">
-      <a href="#" class="flex align-center space-x-2"
+      <a
+        :href="'/recherche?ofloowa=' + property.property.user_id"
+        class="flex align-center space-x-2"
         ><img
           class="rounded-full is-40x40"
           :src="'https://ofalooback.herokuapp.com/storage/' + property.user_pic"
@@ -30,13 +32,13 @@
       >
       <a
         v-show="property.agence.super === 'yes'"
-        href="#"
+        href="/recherche?q=super-agent"
         class="button bg-transparent px-3 py-1 rounded border-008489ss size-12 color-008489"
         >Super agent</a
       >
     </div>
     <figure
-      class="image relative"
+      class="image relative clickable"
       :class="{
         'is-360x216 rounded-tl rounded-bl ': size >= 830,
         'is-4by3 ': size < 830,
@@ -159,7 +161,9 @@
           class="flex align-center space-x-2"
           ><img
             class="rounded-full is-40x40"
-            :src="'https://ofalooback.herokuapp.com/storage/' + property.user_pic"
+            :src="
+              'https://ofalooback.herokuapp.com/storage/' + property.user_pic
+            "
             alt="Image"
           />
           <span class="size-14 font-semibold">{{
@@ -333,7 +337,10 @@
         }"
       >
         <div>
-          <img src="https://ofalooback.herokuapp.com/images/prop.png" alt="Image" />
+          <img
+            src="https://ofalooback.herokuapp.com/images/prop.png"
+            alt="Image"
+          />
         </div>
         <span class="color-363636 size-11">Il y a 3 jours</span>
       </div>
@@ -417,7 +424,10 @@ export default {
         if (element.principal === 'yes')
           return 'https://ofalooback.herokuapp.com/storage/' + element.url
       }
-      return 'https://ofalooback.herokuapp.com/storage/' + this.property.images[0].url
+      return (
+        'https://ofalooback.herokuapp.com/storage/' +
+        this.property.images[0].url
+      )
     },
   },
   methods: {
@@ -425,14 +435,18 @@ export default {
       for (let index = 0; index < this.property.images.length; index++) {
         const element = this.property.images[index]
         if (element.principal === 'yes') {
-          this.images.push('https://ofalooback.herokuapp.com/storage/' + element.url)
+          this.images.push(
+            'https://ofalooback.herokuapp.com/storage/' + element.url
+          )
           break
         }
       }
       for (let index = 0; index < this.property.images.length; index++) {
         const element = this.property.images[index]
         if (element.principal === 'no')
-          this.images.push('https://ofalooback.herokuapp.com/storage/' + element.url)
+          this.images.push(
+            'https://ofalooback.herokuapp.com/storage/' + element.url
+          )
       }
     },
     close_quick() {

@@ -154,7 +154,10 @@
           </div>
         </div>
         <div class="mt-1">
-          <img src="https://ofalooback.herokuapp.com/images/prop.png" alt="Image" />
+          <img
+            src="https://ofalooback.herokuapp.com/images/prop.png"
+            alt="Image"
+          />
         </div>
         <div class="flex align-center space-x-1 mt-1">
           <svg
@@ -251,7 +254,10 @@ export default {
         if (element.principal === 'yes')
           return 'https://ofalooback.herokuapp.com/storage/' + element.url
       }
-      return 'https://ofalooback.herokuapp.com/storage/' + this.property.images[0].url
+      return (
+        'https://ofalooback.herokuapp.com/storage/' +
+        this.property.images[0].url
+      )
     },
     size() {
       return this.$store.state.size
@@ -262,14 +268,18 @@ export default {
       for (let index = 0; index < this.property.images.length; index++) {
         const element = this.property.images[index]
         if (element.principal === 'yes') {
-          this.images.push('https://ofalooback.herokuapp.com/storage/' + element.url)
+          this.images.push(
+            'https://ofalooback.herokuapp.com/storage/' + element.url
+          )
           break
         }
       }
       for (let index = 0; index < this.property.images.length; index++) {
         const element = this.property.images[index]
         if (element.principal === 'no')
-          this.images.push('https://ofalooback.herokuapp.com/storage/' + element.url)
+          this.images.push(
+            'https://ofalooback.herokuapp.com/storage/' + element.url
+          )
       }
     },
     close_quick() {

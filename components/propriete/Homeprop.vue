@@ -66,7 +66,8 @@
           <button
             v-if="property.saved"
             class="absolute top-0 right-0 mt-2 mr-2 z-10"
-            title="Enregistrer"
+            title="Retirer de la liste"
+            @click.stop="desaved"
           >
             <svg
               class="w-7 h-7 text-white"
@@ -85,6 +86,7 @@
             v-else
             class="absolute top-0 right-0 mt-2 mr-2 z-10"
             title="Enregistrer"
+            @click.stop="savelist"
           >
             <svg
               class="w-7 h-7 text-white"
@@ -107,16 +109,18 @@
           <div
             v-show="hovered && size > 640"
             class="absolute appearZ z-0 top-0 left-0 w-full h-full bg-black-tre"
+            @click="gotoprop"
           >
             <button
               class="border-none size-12 text-white px-5 pb-1.5 rounded button btn-008489 both-centers"
-              @click="show_quick"
+              @click.stop="show_quick"
             >
               Aperçu rapide
             </button>
           </div>
           <div
             v-if="property.property.sold === 'yes'"
+            title="La propriété a été vendue"
             class="absolute z-10 bottom-0 left-0"
           >
             <button
@@ -128,6 +132,7 @@
           <div
             v-if="property.property.rent === 'yes'"
             class="absolute z-10 bottom-0 left-0"
+            title="La propriété a été mise en location"
           >
             <button
               class="border-none size-12 text-white rounded ml-2 mb-2 button bg-black-tre both-centers"
@@ -190,9 +195,10 @@
           <span
             v-if="property.property.price_fixed.toString() !== '0'"
             class="logo-color font-medium size-14 block over w180"
-            >{{ $linker.formatMoney(property.property.price_fixed.toString()) }}
-            FCFA
-            <span
+            >{{
+              $linker.formatMoney(property.property.price_fixed.toString())
+            }}
+            FCFA<span
               v-if="property.property.proposition.includes('Location')"
               class="logo-color font-medium size-14"
             >
@@ -200,8 +206,7 @@
             ><span
               v-if="property.property.negociable === 'yes'"
               class="logo-color font-medium size-14"
-            >
-              , négociable</span
+              >, négociable</span
             ></span
           >
           <span
@@ -222,8 +227,7 @@
             ><span
               v-if="property.property.negociable === 'yes'"
               class="logo-color font-medium size-14"
-            >
-              , négociable</span
+              >, négociable</span
             ></span
           >
           <span
@@ -240,8 +244,7 @@
             ><span
               v-if="property.property.negociable === 'yes'"
               class="logo-color font-medium size-14"
-            >
-              , négociable</span
+              >, négociable</span
             ></span
           >
           <span v-else class="logo-color font-medium size-14 block over w180"
@@ -256,8 +259,7 @@
             ><span
               v-if="property.property.negociable === 'yes'"
               class="logo-color font-medium size-14"
-            >
-              , négociable</span
+              >, négociable</span
             ></span
           >
         </div>
@@ -335,7 +337,12 @@
             )
           }}</span>
         </div>
-        <div v-if="property.property.rent === 'yes'">
+        <div
+          v-if="
+            property.property.rent === 'yes' &&
+            property.property.fin_loc !== null
+          "
+        >
           <span class="font-semibold size-13 logo-color flex"
             ><svg
               class="mr-1.5"
@@ -352,20 +359,9 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
               /></svg
-            >Disponible entre le 24 Mars 2021 et le 24 Mars 2021</span
+            >Disponible à partir du
+            {{ $moment(property.property.fin_loc).format('LL') }}</span
           ><br />
-          <!-- <span class="font-semibold logo-color"
-            >Disponible jusqu'au 24 Mars 2021</span
-          ><br />
-          <span class="font-semibold logo-color"
-            >Disponible jusqu'au 24 Mars 2021 et après le 24 Mars 2021</span
-          > 
-          <span class="font-semibold logo-color"
-            >Disponible après le 24 Mars 2021</span
-          > 
-          <span class="font-semibold logo-color"
-            >Disponible entre le 24 Mars 2021 et le 24 Mars 2021</span
-          >-->
         </div>
       </div>
       <articlemodal
@@ -438,6 +434,13 @@ export default {
     },
     close_quick() {
       this.quick = false
+    },
+    desaved() {},
+    savelist() {
+      if (!this.$auth.loggedIn) {
+        this.$store.commit('close_quick_sign', true)
+        document.body.style = 'overflow: hidden'
+      }
     },
     show_quick() {
       if (this.images.length <= 0) this.fillImages()

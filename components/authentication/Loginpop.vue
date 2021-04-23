@@ -8,9 +8,7 @@
             >Mot passe réinitialisé avec success √</span
           >
         </div> -->
-        <div
-          class="border bg-white rounded px-5 sm:px-8 py-5 flex flex-col space-y-2"
-        >
+        <div class="border bg-white px-5 sm:px-8 py-5 flex flex-col space-y-2">
           <h4 class="text-center size-16 logo-color font-semibold mb-1">
             Connexion à Ofaloo
           </h4>
@@ -107,16 +105,6 @@
               Le mot de passe doit contenir au moins 8 caractères avec lettres &
               chiffres
             </p>
-          </div>
-          <div class="w-full flex align-center space-x-2 pt-1">
-            <input
-              id="senupd"
-              v-model="rememberme"
-              type="checkbox"
-              value="yes"
-              class="border rounded no-outlines outline-none"
-            />
-            <label for="senupd" class="size-12">Se souvenir</label>
           </div>
           <a
             class="button block btn-008489 border rounded-md flex align-center space-x-2 relative top-05x bottom-0x"
@@ -269,7 +257,9 @@ export default {
             this.logging = false
             console.log(res)
             if (res.data.status === 200) {
-              console.log('logged')
+              this.$store.commit('close_quick_sign', false)
+              document.body.style = 'overflow: visible'
+              console.log('logged and saving article')
               this.saveProp()
             }
             if (res.data.status === 404) console.log('incorrects credentials')

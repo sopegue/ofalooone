@@ -1,5 +1,8 @@
 <template>
   <div class="relative">
+    <div v-if="signing" class="z-50">
+      <loginmodal></loginmodal>
+    </div>
     <div
       v-if="deleting"
       class="absolute z-10000 top-0 bottom-0 right-0 left-0 bg-black-tr"
@@ -53,11 +56,12 @@
 
 <script>
 import Footers from '~/components/footer/Footers.vue'
+import Loginmodal from '~/components/modal/Loginmodal.vue'
 import Headerhome from '~/components/header/Headerhome.vue'
 import Headers from '~/components/header/Headers.vue'
 import Home from '~/components/Homepage.vue'
 export default {
-  components: { Footers, Headers, Headerhome, Home },
+  components: { Footers, Headers, Headerhome, Home, Loginmodal },
   data() {
     return {
       scroll: false,
@@ -90,6 +94,9 @@ export default {
     },
     deleting() {
       return this.$store.state.accountdeleting === true
+    },
+    signing() {
+      return this.$store.state.quicksign === true
     },
   },
   watch: {

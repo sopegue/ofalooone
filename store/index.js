@@ -6,6 +6,7 @@ export const state = () => ({
   size: 9999,
   minsearch: false,
   domloading: true,
+  quicksign: false,
   hasscrolled: false,
   filter: null,
   reseting: false,
@@ -35,6 +36,9 @@ export const mutations = {
   },
   set_Size(state, value) {
     state.size = value
+  },
+  close_quick_sign(state, value) {
+    state.quicksign = value
   },
   set_Reseting(state, value) {
     state.reseting = value

@@ -63,6 +63,15 @@
               />
             </svg>
           </button>
+          <div
+            v-if="notification"
+            class="absolute w-fit top-10 right-0 appearZ z-10"
+          >
+            <span
+              class="block text-c bg-green-600 py-1.5 px-4 text-white font-semibold size-11"
+              >Enregistrée √</span
+            >
+          </div>
           <button
             v-if="property.saved"
             class="absolute top-0 right-0 mt-2 mr-2 z-10"
@@ -388,6 +397,7 @@ export default {
     return {
       hovered: false,
       quick: false,
+      notif: false,
       images: [],
     }
   },
@@ -396,6 +406,12 @@ export default {
       return (
         this.property.property !== undefined && this.property.property !== null
       )
+    },
+    here() {
+      return this.$store.state.component
+    },
+    notification() {
+      return this.notif === true
     },
     getImgPrin() {
       for (let index = 0; index < this.property.images.length; index++) {
@@ -412,7 +428,19 @@ export default {
       return this.$store.state.size
     },
   },
-  mounted() {},
+  watch: {
+    here(nv, ov) {
+      if (nv === this.id) {
+        this.notif = true
+        setTimeout(() => {
+          this.notif = false
+        }, 3000)
+      }
+    },
+  },
+  mounted() {
+    this.id = this._uid
+  },
   methods: {
     fillImages() {
       for (let index = 0; index < this.property.images.length; index++) {
@@ -439,6 +467,7 @@ export default {
     savelist() {
       if (!this.$auth.loggedIn) {
         this.$store.commit('close_quick_sign', true)
+        this.$store.commit('precom', this.id)
         document.body.style = 'overflow: hidden'
       }
     },

@@ -7,6 +7,8 @@ export const state = () => ({
   minsearch: false,
   domloading: true,
   quicksign: false,
+  component: -1,
+  precom: -1,
   hasscrolled: false,
   filter: null,
   reseting: false,
@@ -39,6 +41,12 @@ export const mutations = {
   },
   close_quick_sign(state, value) {
     state.quicksign = value
+  },
+  precom(state, value) {
+    state.precom = value
+  },
+  component(state, value) {
+    state.component = value
   },
   set_Reseting(state, value) {
     state.reseting = value

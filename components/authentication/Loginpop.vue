@@ -189,6 +189,7 @@ export default {
       maierror: false,
       logging: false,
       pwdhid: true,
+      id: null,
       rememberme: [],
     }
   },
@@ -211,6 +212,9 @@ export default {
     remember() {
       return this.rememberme === true
     },
+    precom() {
+      return this.$store.state.precom
+    },
   },
   watch: {
     email() {
@@ -225,7 +229,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.previous)
+    this.id = this._uid
   },
   methods: {
     infosValidated() {
@@ -258,6 +262,7 @@ export default {
             console.log(res)
             if (res.data.status === 200) {
               this.$store.commit('close_quick_sign', false)
+              this.$store.commit('component', this.precom)
               document.body.style = 'overflow: visible'
               console.log('logged and saving article')
               this.saveProp()

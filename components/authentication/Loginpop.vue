@@ -261,11 +261,11 @@ export default {
             this.logging = false
             console.log(res)
             if (res.data.status === 200) {
+              this.saveProp()
               this.$store.commit('close_quick_sign', false)
               this.$store.commit('component', this.precom)
               document.body.style = 'overflow: visible'
               console.log('logged and saving article')
-              this.saveProp()
             }
             if (res.data.status === 404) console.log('incorrects credentials')
             if (res.data.status === 500) console.log('Error on request')

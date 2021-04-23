@@ -52,8 +52,12 @@
             </div>
             <!-- here for save and non saved property -->
             <div class="flex align-center space-x-5">
-              <button class="flex align-center hover-008489 space-x-1 mt-1">
-                <!-- <svg
+              <button
+                class="flex align-center hover-008489 space-x-1 mt-1"
+                @click="savelist"
+              >
+                <svg
+                  v-if="property.property.saved"
                   class="w-5 h-5 logo-color"
                   fill="currentColor"
                   stroke="currentColor"
@@ -64,8 +68,9 @@
                     stroke-width="1"
                     d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
                   ></path>
-                </svg> -->
+                </svg>
                 <svg
+                  v-else
                   class="w-5 h-5 logo-color"
                   fill="none"
                   stroke="currentColor"
@@ -447,13 +452,59 @@
                     >
                   </div>
                 </div>
-                <div class="my-2">
-                  <img
-                    src="https://ofalooback.herokuapp.com/images/prop.png"
-                    alt="Image"
-                  />
+                <div class="mt-2">
+                  <div class="flex align-center space-x-3.5">
+                    <div
+                      v-if="property.property.bed > 0"
+                      :title="property.property.bed + ' pièce(s)'"
+                      class="flex align-center space-x-1.5"
+                    >
+                      <span>
+                        <i class="fas size-16 logo-color fa-bed"></i>
+                      </span>
+                      <span class="logo-color">{{
+                        property.property.bed
+                      }}</span>
+                    </div>
+                    <div
+                      v-if="property.property.bath > 0"
+                      :title="property.property.bath + ' salles(s) de bain(s)'"
+                      class="flex align-center space-x-1.5"
+                    >
+                      <span>
+                        <i class="fas size-16 logo-color fa-shower"></i>
+                      </span>
+                      <span class="logo-color">{{
+                        property.property.bath
+                      }}</span>
+                    </div>
+                    <div
+                      v-if="property.property.garage > 0"
+                      :title="property.property.garage + ' garage(s)'"
+                      class="flex align-center space-x-1.5"
+                    >
+                      <span>
+                        <i class="fas size-16 logo-color fa-warehouse"></i>
+                      </span>
+                      <span class="logo-color">{{
+                        property.property.garage
+                      }}</span>
+                    </div>
+                    <div
+                      v-if="property.property.taille > 0"
+                      :title="'La taille de la propriété'"
+                      class="flex align-center space-x-1.5"
+                    >
+                      <span>
+                        <i class="fas size-16 logo-color fa-ruler-vertical"></i>
+                      </span>
+                      <span class="logo-color"
+                        >{{ property.property.taille }} m²</span
+                      >
+                    </div>
+                  </div>
                 </div>
-                <div v-if="property.property.rent === 'yes'" class="pb-0">
+                <div v-if="property.property.rent === 'yes'" class="w-fit mt-3">
                   <span class="font-semibold size-13 logo-color flex"
                     ><svg
                       class="mr-1.5"
@@ -470,14 +521,9 @@
                         stroke-linecap="round"
                         stroke-linejoin="round"
                       /></svg
-                    >Disponible à partir du 24 Mars 2021</span
+                    >Disponible à partir du
+                    {{ $moment(property.property.fin_loc).format('LL') }}</span
                   ><br />
-                  <!-- <span class="font-semibold logo-color"
-            >Disponible jusqu'au 24 Mars 2021</span
-          ><br />
-          <span class="font-semibold logo-color"
-            >Disponible jusqu'au 24 Mars 2021 et après le 24 Mars 2021</span
-          > -->
                 </div>
                 <div
                   :class="{
@@ -485,10 +531,16 @@
                     'py-2': property.property.rent !== 'yes',
                   }"
                 >
-                  <span class="color-363636 size-11">Il y a 3 jours</span>
+                  <span class="color-363636 size-11">{{
+                    $utility.dating(
+                      new Date($moment(property.property.created_at).format())
+                    )
+                  }}</span>
                 </div>
                 <div class="flex align-center space-x-4 justify-between py-2">
-                  <a href="#" class="flex align-center space-x-2"
+                  <a
+                    :href="'/recherche?ofloowa=' + property.property.user_id"
+                    class="flex align-center space-x-2"
                     ><img
                       class="rounded-full is-40x40"
                       :src="
@@ -503,7 +555,7 @@
                   >
                   <a
                     v-show="property.agence.super === 'yes'"
-                    href="#"
+                    href="/recherche?q=super-agent"
                     class="button bg-transparent px-3 py-1 rounded border-008489ss size-12 color-008489"
                     >Super agent</a
                   >
@@ -756,6 +808,13 @@ export default {
     },
     indexed(val) {
       this.index = val
+    },
+    desaved() {},
+    savelist() {
+      if (!this.$auth.loggedIn) {
+        // this.$store.commit('ads_id', this.id)
+        location.assign('/connexion')
+      }
     },
   },
 }

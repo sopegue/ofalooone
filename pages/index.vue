@@ -32,7 +32,7 @@
       />
       <button
         v-show="scrollpos > 728"
-        class="button w-fit h-fit sticky appearyh bottom-18 right-5 pos-right absolute z-16 bg-white rounded shadow no-outlines border-gray-400 gotop self-end"
+        class="button w-fit h-fit sticky appearyh bottom-19 right-5 pos-right absolute z-16 bg-white rounded shadow no-outlines border-gray-400 gotop self-end"
         @click="scrolltop"
       >
         <svg
@@ -51,17 +51,19 @@
       <div class="clear-both"></div>
       <footers></footers>
     </div>
+    <popup></popup>
   </div>
 </template>
 
 <script>
 import Footers from '~/components/footer/Footers.vue'
+import Popup from '~/components/agreement/Popup.vue'
 import Loginmodal from '~/components/modal/Loginmodal.vue'
 import Headerhome from '~/components/header/Headerhome.vue'
 import Headers from '~/components/header/Headers.vue'
 import Home from '~/components/Homepage.vue'
 export default {
-  components: { Footers, Headers, Headerhome, Home, Loginmodal },
+  components: { Footers, Headers, Headerhome, Home, Loginmodal, Popup },
   data() {
     return {
       scroll: false,
@@ -74,6 +76,19 @@ export default {
     }
   },
   computed: {
+    url() {
+      return this.$store.state.url
+    },
+    title() {
+      return this.$store.state.title
+    },
+    description() {
+      return this.description
+    },
+    image() {
+      return this.$store.state.image
+    },
+
     isScrolled() {
       return this.$store.state.scrollpos === true
     },
@@ -115,6 +130,7 @@ export default {
     },
   },
   beforeMount() {
+    if (!localStorage.cookies) localStorage.setItem('cookies', 'approving')
     if (sessionStorage.previous) {
       this.previous = sessionStorage.getItem('previous')
       this.$store.commit('previous', this.previous)

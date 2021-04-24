@@ -172,7 +172,7 @@
       <input
         id="byuyc"
         v-model="search"
-        autocomplete="none"
+        autocomplete="off"
         class="w-full h-full outline-none pr-7.5 size-15 bg-white rounded-tl rounded-bl"
         :class="{
           'ml-2': color !== 'text-white',
@@ -341,7 +341,11 @@ export default {
         ? this.results.slice(0, 10)
         : []
     },
+    loading() {
+      return this.$store.state.domloading === true
+    },
   },
+
   watch: {
     curoute(nv, ov) {
       if (nv !== '/' && !nv.includes('/recherche')) {
@@ -378,7 +382,6 @@ export default {
     if (sessionStorage.txt) {
       this.currency = sessionStorage.getItem('txt')
     }
-    this.autoff()
 
     if (this.curoute !== '/' && !this.curoute.includes('/recherche')) {
       sessionStorage.removeItem('filter')
@@ -464,10 +467,6 @@ export default {
     gose(val) {
       this.search = val
       this.searching()
-    },
-    autoff() {
-      const myel = document.getElementById('byuyc')
-      myel.setAttribute('autocomplete', 'off')
     },
     hide() {
       this.focused = false

@@ -17,12 +17,25 @@ export const state = () => ({
   regerror: false,
   regsuccess: false,
   accountdeleting: false,
+
+  url: '',
+  type: 'article',
+  title: '',
+  description: '',
+  image: '',
 })
 
 export const mutations = {
   // User info
   setRorS(state, value) {
     state.currentSearch = value
+  },
+  set_meta(state, value) {
+    state.url = value.url
+    state.type = 'article'
+    state.title = value.title
+    state.description = value.description
+    state.image = value.image
   },
   set_HasScrolled(state, value) {
     state.hasscrolled = value

@@ -759,6 +759,40 @@ export default {
       ades: [],
     }
   },
+  head() {
+    return {
+      meta: [
+        // `hid` est un identifiant unique. N'utilisez pas `vmid` pour cela car cela ne marchera pas.
+        {
+          hid: 'og:url',
+          property: 'og:url',
+          content:
+            'https://www.ofaloo.com/propriete/?wyzes=' +
+            this.property.data.property.id,
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'article',
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: this.property.data.property.type,
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: this.property.data.adresse,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: this.getImgPrin,
+        },
+      ],
+    }
+  },
   computed: {
     ads() {
       return this.images
@@ -768,6 +802,17 @@ export default {
         this.property !== undefined &&
         this.property.data !== undefined &&
         this.property.data.property !== undefined
+      )
+    },
+    getImgPrin() {
+      for (let index = 0; index < this.property.data.images.length; index++) {
+        const element = this.property.data.images[index]
+        if (element.principal === 'yes')
+          return 'https://ofalooback.herokuapp.com/storage/' + element.url
+      }
+      return (
+        'https://ofalooback.herokuapp.com/storage/' +
+        this.property.images[0].url
       )
     },
     size() {

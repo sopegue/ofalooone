@@ -14,14 +14,18 @@
       <listhome :titler="'Terrain'" class="border-b pb-6"></listhome>
       <!-- <listhome :titler="'Villa'"></listhome> -->
       <!-- <listhome :property="'Villa'" class="border-b pb-8"></listhome> -->
+      <div class="pb-5 sm:px-8 px-4">
+        <sameagent :title="'Récemment consultées'"></sameagent>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Listhome from '~/components/propriete/Listhome.vue'
+import Sameagent from '~/components/Sameagent.vue'
 export default {
-  components: { Listhome },
+  components: { Listhome, Sameagent },
   data() {
     return {
       error: false,

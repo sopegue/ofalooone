@@ -382,13 +382,11 @@
             <div>
               <a
                 v-if="property.data.property.proposition === 'Vente totale'"
-                href="/"
                 title="Le prix indiqué représente le montant à payer pour toute la propriété"
                 class="px-3 py-1 z-20 block w-fit rounded btn-008489s color-008489 font-semibold size-11 my-1"
                 >Achat total</a
               ><a
                 v-if="property.data.property.proposition === 'Vente partielle'"
-                href="/"
                 :title="
                   'Le prix indiqué représente ' +
                   property.data.property.percentage_part.toString() +
@@ -402,7 +400,6 @@
               >
               <a
                 v-if="property.data.property.proposition === 'Location totale'"
-                href="/"
                 title="Le prix indiqué représente le montant à payer pour toute la propriété"
                 class="px-3 py-1 z-20 block w-fit rounded btn-008489s color-008489 font-semibold size-11 my-1"
                 >Location totale</a
@@ -411,7 +408,6 @@
                 v-if="
                   property.data.property.proposition === 'Location partielle'
                 "
-                href="/"
                 :title="
                   'Le prix indiqué représente ' +
                   property.data.property.percentage_part.toString() +
@@ -425,13 +421,74 @@
               >
             </div>
           </div>
-          <div class="my-2">
-            <img
-              src="https://ofalooback.herokuapp.com/images/prop.png"
-              alt="Image"
-            />
+          <div class="mt-2">
+            <div class="flex align-center space-x-3.5">
+              <div
+                v-if="property.data.property.bed > 0"
+                :title="property.data.property.bed + ' pièce(s)'"
+                class="flex align-center space-x-1.5"
+              >
+                <span>
+                  <i class="fas size-16 logo-color fa-bed"></i>
+                </span>
+                <span class="logo-color">{{ property.data.property.bed }}</span>
+              </div>
+              <div
+                v-if="property.data.property.bath > 0"
+                :title="property.data.property.bath + ' salles(s) de bain(s)'"
+                class="flex align-center space-x-1.5"
+              >
+                <span>
+                  <i class="fas size-16 logo-color fa-shower"></i>
+                </span>
+                <span class="logo-color">{{
+                  property.data.property.bath
+                }}</span>
+              </div>
+              <div
+                v-if="property.data.property.garage > 0"
+                :title="property.data.property.garage + ' garage(s)'"
+                class="flex align-center space-x-1.5"
+              >
+                <span>
+                  <i class="fas size-16 logo-color fa-warehouse"></i>
+                </span>
+                <span class="logo-color">{{
+                  property.data.property.garage
+                }}</span>
+              </div>
+              <div
+                v-if="property.data.property.taille > 0"
+                :title="'La taille de la propriété'"
+                class="flex align-center space-x-1.5"
+              >
+                <span>
+                  <i class="fas size-16 logo-color fa-ruler-vertical"></i>
+                </span>
+                <span class="logo-color"
+                  >{{ property.data.property.taille }} m²</span
+                >
+              </div>
+            </div>
           </div>
-          <div v-if="property.data.property.rent === 'yes'" class="mt-3.5">
+          <div
+            :class="{
+              'pb-2': property.data.property.rent === 'yes',
+              'py-2': property.data.property.rent !== 'yes',
+            }"
+          >
+            <span class="color-363636 size-11">{{
+              $utility.dating(
+                new Date($moment(property.data.property.created_at).format())
+              )
+            }}</span>
+          </div>
+          <div
+            v-if="
+              property.data.property.rent === 'yes' &&
+              property.data.property.fin_loc !== null
+            "
+          >
             <span class="font-semibold size-13 logo-color flex"
               ><svg
                 class="mr-1.5"
@@ -448,22 +505,9 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 /></svg
-              >Disponible à partir du 24 Mars 2021</span
+              >Disponible à partir du
+              {{ $moment(property.data.property.fin_loc).format('LL') }}</span
             ><br />
-            <!-- <span class="font-semibold logo-color"
-            >Disponible jusqu'au 24 Mars 2021</span
-          ><br />
-          <span class="font-semibold logo-color"
-            >Disponible jusqu'au 24 Mars 2021 et après le 24 Mars 2021</span
-          > -->
-          </div>
-          <div
-            :class="{
-              'pb-2': property.data.property.rent === 'yes',
-              'py-2': property.data.property.rent !== 'yes',
-            }"
-          >
-            <span class="color-363636 size-11">Il y a 3 jours</span>
           </div>
           <div v-if="size >= 770" class="py-3">
             <a
@@ -477,7 +521,9 @@
 
         <div class="w180es defss h-fit p-2 border rounded">
           <div class="flex align-center space-x-4 justify-between py-2">
-            <a href="#" class="flex align-center space-x-2"
+            <a
+              :href="'/recherche?ofloowa=' + property.data.property.user_id"
+              class="flex align-center space-x-2"
               ><img
                 class="rounded-full is-40x40"
                 :src="
@@ -492,7 +538,7 @@
             >
             <a
               v-show="property.data.agence.super === 'yes'"
-              href="#"
+              href="/recherche?q=super-agent"
               class="button bg-transparent px-3 py-1 rounded border-008489ss size-12 color-008489"
               >Super agent</a
             >
@@ -712,12 +758,14 @@
                 <h4 class="logo-color block size-14 font-semibold">
                   Vendez et louez vos propriétés
                 </h4>
-                <span class="logo-color size-14">Devenir agent sur Ofaloo</span>
+                <a href="/devenir-agent" class="logo-color size-14"
+                  >Devenez agent sur Ofaloo</a
+                >
               </div>
               <div>
-                <button class="button no-outlines border-transparent">
+                <a href="/devenir-agent" class="no-outlines border-transparent">
                   <svg
-                    class="w-9 h-9 transform -rotate-90 logo-color"
+                    class="w-9 h-9 transform -rotate-90 logo-color mr-2"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
@@ -728,7 +776,7 @@
                       clip-rule="evenodd"
                     ></path>
                   </svg>
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -781,6 +829,16 @@ export default {
   },
   head() {
     return {
+      title:
+        this.property.data.property.type +
+        ' - ' +
+        this.property.data.adresse +
+        ', ' +
+        this.$linker.formatMoney(
+          this.property.data.property.price_fixed.toString()
+        ) +
+        ' FCFA' +
+        ' | Ofaloo',
       meta: [
         // `hid` est un identifiant unique. N'utilisez pas `vmid` pour cela car cela ne marchera pas.
         {

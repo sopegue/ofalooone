@@ -321,6 +321,16 @@ export default {
       fromPT: false,
     }
   },
+  head() {
+    return {
+      title:
+        this.search !== ''
+          ? 'Rechercher des propriétés, resultat(s) de ' +
+            this.search +
+            ' | Ofaloo'
+          : 'Rechercher des propriétés | Ofaloo',
+    }
+  },
   computed: {
     dataOk() {
       return this.properties.data !== undefined

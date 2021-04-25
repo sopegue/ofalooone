@@ -105,8 +105,7 @@
                      13 5 13C5.80892 13 6.54306 12.6798 7.08263 12.1593L12.0227
                       14.6293C12.0077 14.7508 12 14.8745 12 15C12 16.6569 13.3431 
                       18 15 18C16.6569 18 18 16.6569 18 15C18 13.3431 16.6569 12 15 
-                      name:''
-,                      12C14.1911 12 13.457 12.3201 12.9174 12.8406L7.97733 10.3706C7.9923 10.2492 8 10.1255 8 10C8 9.8745 7.99229 9.7508 7.97733 9.62934L12.9174 7.15932C13.4569 7.67984 14.1911 8 15 8Z"
+                      12C14.1911 12 13.457 12.3201 12.9174 12.8406L7.97733 10.3706C7.9923 10.2492 8 10.1255 8 10C8 9.8745 7.99229 9.7508 7.97733 9.62934L12.9174 7.15932C13.4569 7.67984 14.1911 8 15 8Z"
                 fill="#2d3748"
               />
             </svg>
@@ -786,34 +785,34 @@ export default {
         // `hid` est un identifiant unique. N'utilisez pas `vmid` pour cela car cela ne marchera pas.
         {
           hid: 'og:url',
-          name: 'og:url',
           property: 'og:url',
+          name: 'og:url',
           content:
             'https://www.ofaloo.com/propriete/?wyzes=' +
             this.property.data.property.id,
         },
         {
           hid: 'og:type',
-          name: 'og:type',
           property: 'og:type',
+          name: 'og:type',
           content: 'article',
         },
         {
           hid: 'og:title',
-          name: 'og:title',
           property: 'og:title',
+          name: 'og:title',
           content: this.property.data.property.type,
         },
         {
           hid: 'og:description',
-          name: 'og:description',
           property: 'og:description',
+          name: 'og:description',
           content: this.property.data.adresse,
         },
         {
           hid: 'og:image',
-          name: 'og:image',
           property: 'og:image',
+          name: 'og:image',
           content: this.getImgPrin,
         },
       ],

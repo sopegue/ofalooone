@@ -1,4 +1,5 @@
 export default {
+  mode: 'universal',
   meta: {
     ogType: false,
     ogTitle: false,

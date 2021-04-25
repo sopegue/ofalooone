@@ -22,7 +22,7 @@
       >
         <div class="flex space-x-1 mt-1">
           <svg
-            class="w-6 h-6 logo-color -ml-px"
+            class="w-6 h-6 min-h-6 min-w-6 logo-color -ml-px"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -46,19 +46,21 @@
         <div class="flex align-center space-x-5">
           <!-- a modifier -->
           <button class="flex align-center hover-008489 space-x-1 mt-1">
-            <!-- <svg
-                  class="w-5 h-5 logo-color"
-                  fill="currentColor"
-                  stroke="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-width="1"
-                    d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
-                  ></path>
-                </svg> -->
             <svg
+              v-if="property.data.property.saved"
+              class="w-5 h-5 logo-color"
+              fill="currentColor"
+              stroke="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-width="1"
+                d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
+              ></path>
+            </svg>
+            <svg
+              v-else
               class="w-5 h-5 logo-color"
               fill="none"
               stroke="currentColor"
@@ -70,7 +72,14 @@
                 d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
               ></path>
             </svg>
-            <span class="logo-color size-14 makeme-008489">Enregistrer</span>
+            <span
+              v-if="!property.data.property.saved"
+              class="logo-color size-14 makeme-008489"
+              >Enregistrer</span
+            >
+            <span v-else class="logo-color size-14 makeme-008489"
+              >Enregistrée</span
+            >
           </button>
           <button
             v-click-outside="hideshare"
@@ -104,16 +113,27 @@
               v-show="share"
               class="absolute bg-white top-0 right-0 mt-6 z-20 appearZ w-fit flex align-center space-x-4 border py-2 px-5 rounded"
             >
-              <a href="https://fb.com/saliistore" target="_blank"
+              <a
+                class="twitter-share-button"
+                :href="
+                  'https://twitter.com/intent/tweet?text=https://www.ofaloo.com/propriete/?wyzes=' +
+                  property.data.property.id
+                "
+                data-size="large"
+                title="Partager sur Twitter"
+                target="_blank"
                 ><i class="fab fa-twitter size-20 clickable logo-color"></i
               ></a>
-              <a href="https://fb.com/saliistore" target="_blank"
+              <a
+                href="https://fb.com/saliistore"
+                title="Partager sur Facebook"
+                target="_blank"
                 ><i class="fab fa-facebook size-20 clickable logo-color"></i
               ></a>
-              <a href="https://fb.com/saliistore" target="_blank"
-                ><i class="fab fa-instagram size-20 clickable logo-color"></i
-              ></a>
-              <a href="https://fb.com/saliistore" target="_blank"
+              <a
+                href="https://fb.com/saliistore"
+                title="Partager par email"
+                target="_blank"
                 ><svg
                   class="w-6 h-6 logo-color -ml-1 -mt-px makeme-008489"
                   viewBox="0 0 20 20"

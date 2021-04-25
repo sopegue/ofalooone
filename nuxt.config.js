@@ -1,4 +1,9 @@
 export default {
+  meta: {
+    ogType: false,
+    ogTitle: false,
+    ogDescription: false,
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     loading: false,

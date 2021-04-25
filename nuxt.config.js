@@ -1,12 +1,13 @@
 export default {
+  target: 'server',
   meta: {
     ogType: false,
     ogTitle: false,
     ogDescription: false,
   },
+  loading: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    loading: false,
     title: 'Acheter et louer des propriétés - Ofaloo',
     meta: [
       { charset: 'utf-8' },

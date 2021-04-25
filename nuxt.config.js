@@ -1,5 +1,4 @@
 export default {
-  target: 'server',
   meta: {
     ogType: false,
     ogTitle: false,

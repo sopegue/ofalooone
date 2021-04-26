@@ -472,22 +472,11 @@
             </div>
           </div>
           <div
-            :class="{
-              'pb-2': property.data.property.rent === 'yes',
-              'py-2': property.data.property.rent !== 'yes',
-            }"
-          >
-            <span class="color-363636 size-11">{{
-              $utility.dating(
-                new Date($moment(property.data.property.created_at).format())
-              )
-            }}</span>
-          </div>
-          <div
             v-if="
               property.data.property.rent === 'yes' &&
               property.data.property.fin_loc !== null
             "
+            class="pt-3"
           >
             <span class="font-semibold size-13 logo-color flex"
               ><svg
@@ -508,6 +497,19 @@
               >Disponible à partir du
               {{ $moment(property.data.property.fin_loc).format('LL') }}</span
             ><br />
+          </div>
+
+          <div
+            :class="{
+              'pb-2': property.data.property.rent === 'yes',
+              'py-2': property.data.property.rent !== 'yes',
+            }"
+          >
+            <span class="color-363636 size-11">{{
+              $utility.dating(
+                new Date($moment(property.data.property.created_at).format())
+              )
+            }}</span>
           </div>
           <div v-if="size >= 770" class="py-3">
             <a

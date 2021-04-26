@@ -118,18 +118,13 @@
                   v-show="share"
                   class="absolute bg-white top-0 right-0 mt-7 z-20 appearZ w-fit flex align-center space-x-4 border py-2 px-5 rounded"
                 >
-                  <a href="https://fb.com/saliistore" target="_blank"
+                  <a href="#" title="Partager sur Twitter" target="_blank"
                     ><i class="fab fa-twitter size-20 clickable logo-color"></i
                   ></a>
-                  <a href="https://fb.com/saliistore" target="_blank"
+                  <a href="#" title="Partager sur Facebook" target="_blank"
                     ><i class="fab fa-facebook size-20 clickable logo-color"></i
                   ></a>
-                  <a href="https://fb.com/saliistore" target="_blank"
-                    ><i
-                      class="fab fa-instagram size-20 clickable logo-color"
-                    ></i
-                  ></a>
-                  <a href="https://fb.com/saliistore" target="_blank"
+                  <a href="#" title="Partager par email" target="_blank"
                     ><svg
                       class="w-6 h-6 logo-color -ml-1 -mt-px makeme-008489"
                       viewBox="0 0 20 20"

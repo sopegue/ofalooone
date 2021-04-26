@@ -6,15 +6,15 @@
       </h4>
     </div>
     <div class="pb-1.5">
-      <imgs></imgs>
+      <imges></imges>
     </div>
   </div>
 </template>
 
 <script>
-import Imgs from './Imgs.vue'
+import Imges from './Imges.vue'
 export default {
-  components: { Imgs },
+  components: { Imges },
   props: {
     title: {
       type: String,

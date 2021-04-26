@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="need && !loading"
-    class="px-5 sticky appearyb z-16 bottom-0 py-4 w-full bg-white shadow flex border-t"
+    class="sm:px-20 px-6 sticky appearyb z-16 bottom-0 py-4 w-full bg-white shadow flex border-t"
     :class="{
       'items-center space-x-20 justify-between': size > 840,
       'flex-col space-y-3': size <= 840,
@@ -28,7 +28,7 @@
         >
       </div>
     </div>
-    <div class="flex items-center space-x-3">
+    <div class="flex items-center space-x-6">
       <button class="button btn-008489 px-6 rounded text-white" @click="accept">
         Accepter
       </button>

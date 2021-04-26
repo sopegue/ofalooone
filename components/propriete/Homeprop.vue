@@ -293,7 +293,9 @@
               d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
             ></path>
           </svg>
-          <span class="logo-color size-14 over">{{ property.adresse }}</span>
+          <span class="logo-color size-14 over"
+            >{{ property.adresse }}, {{ property.ville }}</span
+          >
         </div>
         <div class="mt-2">
           <div class="flex align-center space-x-3.5">

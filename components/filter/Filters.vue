@@ -235,12 +235,14 @@
         <h4 class="logo-color block size-14 font-semibold">
           Vendez et louez vos propriétés
         </h4>
-        <span class="logo-color size-14">Devenir agent sur Ofaloo</span>
+        <a href="/devenir-agent" class="logo-color size-14"
+          >Devenez agent sur Ofaloo</a
+        >
       </div>
       <div>
-        <button class="button no-outlines border-transparent">
+        <a href="/devenir-agent" class="no-outlines border-transparent">
           <svg
-            class="w-9 h-9 transform -rotate-90 logo-color"
+            class="w-9 h-9 transform -rotate-90 logo-color mr-2"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -251,7 +253,7 @@
               clip-rule="evenodd"
             ></path>
           </svg>
-        </button>
+        </a>
       </div>
     </div>
     <!-- <div

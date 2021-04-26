@@ -70,14 +70,18 @@
         <!-- <div class="can-add-ads"></div> -->
       </div>
     </div>
+    <div class="px-4 pt-1 bg-white rounded mt-20">
+      <sameagent :title="'Récemment consultées'"></sameagent>
+    </div>
   </div>
 </template>
 
 <script>
 import Sortresfav from '~/components/dropdown/Sortresfav'
 import Homeproplarge from '~/components/propriete/Homeproplarge.vue'
+import Sameagent from '~/components/Sameagent.vue'
 export default {
-  components: { Sortresfav, Homeproplarge },
+  components: { Sortresfav, Homeproplarge, Sameagent },
   middleware: 'auth',
   async asyncData({
     isDev,

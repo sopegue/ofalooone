@@ -215,6 +215,12 @@
         @resetdone="resetdone"
       ></filters>
     </div>
+    <div class="px-4 pt-1 bg-white rounded mt-20">
+      <sameagent :title="'Récemment consultées'"></sameagent>
+    </div>
+    <div class="px-4 pt-1 bg-white rounded mt-10">
+      <sameagents :title="'Propriétés à Abidjan'"></sameagents>
+    </div>
   </div>
 </template>
 
@@ -223,8 +229,10 @@ import Sortres from '~/components/dropdown/Sortres.vue'
 import Filters from '~/components/filter/Filters.vue'
 // import Pagination from '~/components/pagination/Pagination.vue'
 import Homeproplarge from '~/components/propriete/Homeproplarge.vue'
+import Sameagent from '~/components/Sameagent.vue'
+import Sameagents from '~/components/Sameagents.vue'
 export default {
-  components: { Sortres, Homeproplarge, Filters },
+  components: { Sortres, Homeproplarge, Filters, Sameagent, Sameagents },
   middleware: 'recherche',
   data() {
     return {

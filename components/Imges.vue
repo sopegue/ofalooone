@@ -28,7 +28,7 @@
       </div>
     </client-only>
     <div
-      id="eltoscrol"
+      id="zebe"
       class="flex align-center relative space-x-6 wtag overflow-x-auto scrollnone"
     >
       <homepropsame
@@ -161,12 +161,12 @@ export default {
       } while (currentDate - date < milliseconds)
     },
     scrollLeft() {
-      const scroll = document.getElementById('eltoscrol').scrollLeft
-      const scr = document.getElementById('eltoscrol').scrollWidth
-      const cl = document.getElementById('eltoscrol').clientWidth
+      const scroll = document.getElementById('zebe').scrollLeft
+      const scr = document.getElementById('zebe').scrollWidth
+      const cl = document.getElementById('zebe').clientWidth
       if (scroll - this.clr > 5) this.tagscrol = true
       else this.tagscrol = false
-      document.getElementById('eltoscrol').scroll({
+      document.getElementById('zebe').scroll({
         top: scroll - this.clr,
         left: scroll - this.clr,
         behavior: 'smooth',
@@ -179,12 +179,12 @@ export default {
       // this.sleep(this.clr)
     },
     scrollRight() {
-      const scroll = document.getElementById('eltoscrol').scrollLeft
-      const scr = document.getElementById('eltoscrol').scrollWidth
-      const cl = document.getElementById('eltoscrol').clientWidth
+      const scroll = document.getElementById('zebe').scrollLeft
+      const scr = document.getElementById('zebe').scrollWidth
+      const cl = document.getElementById('zebe').clientWidth
       if (scroll + this.clr > 5) this.tagscrol = true
       else this.tagscrol = false
-      document.getElementById('eltoscrol').scroll({
+      document.getElementById('zebe').scroll({
         top: scroll + this.clr,
         left: scroll + this.clr,
         behavior: 'smooth',
@@ -196,17 +196,17 @@ export default {
       }
     },
     handleScroll() {
-      const cl = document.getElementById('eltoscrol').clientWidth
-      const scroll = document.getElementById('eltoscrol').scrollLeft
-      const scr = document.getElementById('eltoscrol').scrollWidth
+      const cl = document.getElementById('zebe').clientWidth
+      const scroll = document.getElementById('zebe').scrollLeft
+      const scr = document.getElementById('zebe').scrollWidth
       if (scr - cl <= scroll) this.reachtotal = true
       else this.reachtotal = false
       if (scroll <= 0) this.tagscrol = false
       else this.tagscrol = true
     },
     scrollable() {
-      const scr = document.getElementById('eltoscrol').scrollWidth
-      const cl = document.getElementById('eltoscrol').clientWidth
+      const scr = document.getElementById('zebe').scrollWidth
+      const cl = document.getElementById('zebe').clientWidth
       if (scr > cl) {
         this.hasscroll = true
       } else {
@@ -214,7 +214,7 @@ export default {
       }
     },
     large() {
-      const el = document.getElementById('eltoscrol')
+      const el = document.getElementById('zebe')
       if (el !== null) {
         const scr = el.scrollWidth
         const cl = el.clientWidth

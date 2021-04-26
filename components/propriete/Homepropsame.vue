@@ -1,5 +1,5 @@
 <template>
-  <div class="clickable" @click="gotoprop">
+  <div class="clickable" @click.stop="gotoprop">
     <div v-show="!dataOk"></div>
     <div
       v-if="dataOk"
@@ -18,10 +18,11 @@
       <div class="mt-3">
         <figure class="image relative is-4by3">
           <img :src="getImgPrin" alt="Image" />
-          <div
+          <a
             v-show="hovered"
+            :href="'/propriete?wyzes=' + property.property.id"
             class="absolute appearZ z-0 top-0 left-0 w-full h-full bg-black-trer"
-          ></div>
+          ></a>
           <button
             v-if="property.links !== undefined && property.links !== null"
             class="absolute cursor-default bottom-0 right-0 mb-2 mr-2 z-10"
@@ -42,10 +43,20 @@
               />
             </svg>
           </button>
+          <div
+            v-if="notification"
+            class="absolute w-fit top-10 right-0 appearZ z-10"
+          >
+            <span
+              class="block text-c bg-green-600 py-1.5 px-4 text-white font-semibold size-11"
+              >Enregistrée √</span
+            >
+          </div>
           <button
             v-if="property.saved"
             class="absolute top-0 right-0 mt-2 mr-2 z-10"
-            title="Enregistrer"
+            title="Retirer de la liste"
+            @click.stop="desaved"
           >
             <svg
               class="w-7 h-7 text-white"
@@ -64,6 +75,7 @@
             v-else
             class="absolute top-0 right-0 mt-2 mr-2 z-10"
             title="Enregistrer"
+            @click.stop="savelist"
           >
             <svg
               class="w-7 h-7 text-white"
@@ -103,7 +115,7 @@
       <div
         class="flex flex-col mt-2"
         :class="{ 'px-2.5': size <= 450 }"
-        @click="gotoprop"
+        @click.stop="gotoprop"
       >
         <div class="flex align-center justify-between">
           <h4 class="logo-color size-15 font-semibold">
@@ -112,13 +124,11 @@
           <div>
             <a
               v-if="property.property.proposition === 'Vente totale'"
-              href="/"
               title="Le prix indiqué représente le montant à payer pour toute la propriété"
               class="px-3 py-1 z-20 block w-fit rounded btn-008489s color-008489 font-semibold size-11 my-1"
               >Achat total</a
             ><a
               v-if="property.property.proposition === 'Vente partielle'"
-              href="/"
               :title="
                 'Le prix indiqué représente ' +
                 property.property.percentage_part.toString() +
@@ -132,14 +142,12 @@
             >
             <a
               v-if="property.property.proposition === 'Location totale'"
-              href="/"
               title="Le prix indiqué représente le montant à payer pour toute la propriété"
               class="px-3 py-1 z-20 block w-fit rounded btn-008489s color-008489 font-semibold size-11 my-1"
               >Location totale</a
             >
             <a
               v-if="property.property.proposition === 'Location partielle'"
-              href="/"
               :title="
                 'Le prix indiqué représente ' +
                 property.property.percentage_part.toString() +
@@ -153,15 +161,81 @@
             >
           </div>
         </div>
-        <div class="mt-1">
-          <img
-            src="https://ofalooback.herokuapp.com/images/prop.png"
-            alt="Image"
-          />
+        <div>
+          <span
+            v-if="property.property.price_fixed.toString() !== '0'"
+            class="logo-color font-medium size-14 block over w180"
+            >{{
+              $linker.formatMoney(property.property.price_fixed.toString())
+            }}
+            FCFA<span
+              v-if="property.property.proposition.includes('Location')"
+              class="logo-color font-medium size-14"
+            >
+              {{ property.property.location_freq }}</span
+            ><span
+              v-if="property.property.negociable === 'yes'"
+              class="logo-color font-medium size-14"
+              >, négociable</span
+            ></span
+          >
+          <span
+            v-else-if="
+              property.property.price_min.toString() !== '0' &&
+              property.property.price_max.toString() !== '0'
+            "
+            class="logo-color font-medium size-14 block over w180"
+            >{{ $linker.formatMoney(property.property.price_min.toString()) }}
+            FCFA -
+            {{ $linker.formatMoney(property.property.price_max.toString()) }}
+            FCFA
+            <span
+              v-if="property.property.proposition.includes('Location')"
+              class="logo-color font-medium size-14"
+            >
+              {{ property.property.location_freq }}</span
+            ><span
+              v-if="property.property.negociable === 'yes'"
+              class="logo-color font-medium size-14"
+              >, négociable</span
+            ></span
+          >
+          <span
+            v-else-if="property.property.price_min.toString() === '0'"
+            class="logo-color font-medium size-14 block over w180"
+            >Jusqu'à
+            {{ $linker.formatMoney(property.property.price_max.toString()) }}
+            FCFA
+            <span
+              v-if="property.property.proposition.includes('Location')"
+              class="logo-color font-medium size-14"
+            >
+              {{ property.property.location_freq }}</span
+            ><span
+              v-if="property.property.negociable === 'yes'"
+              class="logo-color font-medium size-14"
+              >, négociable</span
+            ></span
+          >
+          <span v-else class="logo-color font-medium size-14 block over w180"
+            >A partir de
+            {{ $linker.formatMoney(property.property.price_min.toString()) }}
+            FCFA
+            <span
+              v-if="property.property.proposition.includes('Location')"
+              class="logo-color font-medium size-14"
+            >
+              {{ property.property.location_freq }}</span
+            ><span
+              v-if="property.property.negociable === 'yes'"
+              class="logo-color font-medium size-14"
+              >, négociable</span
+            ></span
+          >
         </div>
         <div class="flex align-center space-x-1 mt-1">
           <svg
-            class="w-6 h-6 logo-color"
+            class="w-5 min-w-5 h-5 min-h-5 logo-color -ml-1"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -180,39 +254,9 @@
               d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
             ></path>
           </svg>
-          <span class="logo-color size-14 over">{{ property.adresse }}</span>
-        </div>
-        <div v-if="property.property.rent === 'yes'" class="mt-2">
-          <span class="font-semibold size-13 logo-color flex"
-            ><svg
-              class="mr-1.5"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8 7V3M16 7V3M7 11H17M5 21H19C20.1046 21 21 20.1046 21 19V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V19C3 20.1046 3.89543 21 5 21Z"
-                stroke="#2d3748"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              /></svg
-            >Disponible entre le 24 Mars 2021 et le 24 Mars 2021</span
-          ><br />
-          <!-- <span class="font-semibold logo-color"
-            >Disponible jusqu'au 24 Mars 2021</span
-          ><br />
-          <span class="font-semibold logo-color"
-            >Disponible jusqu'au 24 Mars 2021 et après le 24 Mars 2021</span
-          > 
-          <span class="font-semibold logo-color"
-            >Disponible après le 24 Mars 2021</span
-          > 
-          <span class="font-semibold logo-color"
-            >Disponible entre le 24 Mars 2021 et le 24 Mars 2021</span
-          >-->
+          <span class="logo-color size-14 over"
+            >{{ property.adresse }}, {{ property.ville }}</span
+          >
         </div>
       </div>
       <articlemodal
@@ -248,6 +292,9 @@ export default {
         this.property.property !== undefined && this.property.property !== null
       )
     },
+    notification() {
+      return this.notif === true
+    },
     getImgPrin() {
       for (let index = 0; index < this.property.images.length; index++) {
         const element = this.property.images[index]
@@ -282,6 +329,14 @@ export default {
           )
       }
     },
+    savelist() {
+      if (!this.$auth.loggedIn) {
+        this.$store.commit('close_quick_sign', true)
+        this.$store.commit('precom', this.id)
+        document.body.style = 'overflow: hidden'
+      }
+    },
+    desaved() {},
     close_quick() {
       this.quick = false
     },

@@ -6,7 +6,7 @@
       'space-x-4.5': size >= 830,
       rounded: size > 499,
       'border-b pb-3': size <= 499,
-      'flex-col space-y-3': size < 830,
+      'flex-col space-y-3 pb-4': size < 830,
     }"
     @mouseover="
       {
@@ -69,10 +69,20 @@
           />
         </svg>
       </button>
+      <div
+        v-if="notification"
+        class="absolute w-fit top-10 right-0 appearZ z-10"
+      >
+        <span
+          class="block text-c bg-green-600 py-1.5 px-4 text-white font-semibold size-11"
+          >Enregistrée √</span
+        >
+      </div>
       <button
         v-if="property.saved"
         class="absolute top-0 right-0 mt-2 mr-2 z-10"
-        title="Enregistrer"
+        title="Retirer de la liste"
+        @click.stop="desaved"
       >
         <svg
           class="w-7 h-7 text-white"
@@ -91,6 +101,7 @@
         v-else
         class="absolute top-0 right-0 mt-2 mr-2 z-10"
         title="Enregistrer"
+        @click.stop="savelist"
       >
         <svg
           class="w-7 h-7 text-white"
@@ -105,13 +116,19 @@
           ></path>
         </svg>
       </button>
+      <a
+        v-if="size <= 640"
+        :href="'/propriete?wyzes=' + property.property.id"
+        class="absolute top-0 bottom-0 left-0 right-0"
+      ></a>
       <div
         v-show="size > 640 && hovered"
         class="absolute appearZ z-0 top-0 left-0 w-full h-full bg-black-tre"
+        @click="gotoprop"
       >
         <button
           class="border-none size-12 text-white px-5 pb-2 rounded button btn-008489 both-centers"
-          @click="show_quick"
+          @click.stop="show_quick"
         >
           Aperçu rapide
         </button>
@@ -226,9 +243,10 @@
           v-if="property.property.price_fixed.toString() !== '0'"
           class="logo-color font-medium size-14 block over w-max-96"
           :class="{ 'w-max-96': size >= 500, w180: size < 500 }"
-          >{{ $linker.formatMoney(property.property.price_fixed.toString()) }}
-          FCFA
-          <span
+          >{{
+            $linker.formatMoney(property.property.price_fixed.toString())
+          }}
+          FCFA<span
             v-if="property.property.proposition.includes('Location')"
             class="logo-color font-medium size-14"
           >
@@ -236,8 +254,7 @@
           ><span
             v-if="property.property.negociable === 'yes'"
             class="logo-color font-medium size-14"
-          >
-            , négociable</span
+            >, négociable</span
           ></span
         >
         <span
@@ -330,26 +347,62 @@
         >
       </div>
       <div
-        class="pt-2 flex"
-        :class="{
-          'pb-4 align-center justify-between': size >= 830,
-          'pb-3 flex-col space-y-3': size < 830,
-        }"
+        class="pt-1.5 flex sm:flex-row flex-col sm:justify-between sm:space-y-0 space-y-5"
       >
-        <div>
-          <img
-            src="https://ofalooback.herokuapp.com/images/prop.png"
-            alt="Image"
-          />
+        <div class="flex align-center space-x-3.5">
+          <div
+            v-if="property.property.bed > 0"
+            :title="property.property.bed + ' pièce(s)'"
+            class="flex align-center space-x-1.5"
+          >
+            <span>
+              <i class="fas size-16 logo-color fa-bed"></i>
+            </span>
+            <span class="logo-color">{{ property.property.bed }}</span>
+          </div>
+          <div
+            v-if="property.property.bath > 0"
+            :title="property.property.bath + ' salles(s) de bain(s)'"
+            class="flex align-center space-x-1.5"
+          >
+            <span>
+              <i class="fas size-16 logo-color fa-shower"></i>
+            </span>
+            <span class="logo-color">{{ property.property.bath }}</span>
+          </div>
+          <div
+            v-if="property.property.garage > 0"
+            :title="property.property.garage + ' garage(s)'"
+            class="flex align-center space-x-1.5"
+          >
+            <span>
+              <i class="fas size-16 logo-color fa-warehouse"></i>
+            </span>
+            <span class="logo-color">{{ property.property.garage }}</span>
+          </div>
+          <div
+            v-if="property.property.taille > 0"
+            :title="'La taille de la propriété'"
+            class="flex align-center space-x-1.5"
+          >
+            <span>
+              <i class="fas size-16 logo-color fa-ruler-vertical"></i>
+            </span>
+            <span class="logo-color">{{ property.property.taille }} m²</span>
+          </div>
         </div>
-        <span class="color-363636 size-11">Il y a 3 jours</span>
+        <span class="color-363636 size-11">{{
+          $utility.dating(
+            new Date($moment(property.property.created_at).format())
+          )
+        }}</span>
       </div>
       <div
         v-if="property.property.rent === 'yes'"
-        :class="{ 'absolute bottom-0': size >= 830 }"
+        :class="{ 'absolute bottom-0': size >= 830, 'pt-3': size < 830 }"
       >
-        <div class="font-semibold size-14 logo-color flex">
-          <svg
+        <span class="font-semibold size-13 logo-color flex"
+          ><svg
             class="mr-1.5"
             width="20"
             height="20"
@@ -364,23 +417,9 @@
               stroke-linecap="round"
               stroke-linejoin="round"
             /></svg
-          ><span class="size-13" :class="{ 'w-max-360 over': size >= 830 }"
-            >Disponible entre le 24 Mars et le 24 Mars 2021</span
-          >
-        </div>
-        <br />
-        <!-- <span class="font-semibold logo-color"
-            >Disponible jusqu'au 24 Mars 2021</span
-          ><br />
-          <span class="font-semibold logo-color"
-            >Disponible jusqu'au 24 Mars 2021 et après le 24 Mars 2021</span
-          > 
-          <span class="font-semibold logo-color"
-            >Disponible après le 24 Mars 2021</span
-          > 
-          <span class="font-semibold logo-color"
-            >Disponible entre le 24 Mars 2021 et le 24 Mars 2021</span
-          >-->
+          >Disponible à partir du
+          {{ $moment(property.property.fin_loc).format('LL') }}</span
+        ><br />
       </div>
     </div>
     <articlemodal
@@ -406,12 +445,17 @@ export default {
     return {
       hovered: false,
       quick: false,
+      notif: false,
+      id: null,
       images: [],
     }
   },
   computed: {
     size() {
       return this.$store.state.size
+    },
+    notification() {
+      return this.notif === true
     },
     dataOk() {
       return (
@@ -430,7 +474,11 @@ export default {
       )
     },
   },
+  mounted() {
+    this.id = this._uid
+  },
   methods: {
+    desaved() {},
     fillImages() {
       for (let index = 0; index < this.property.images.length; index++) {
         const element = this.property.images[index]
@@ -447,6 +495,13 @@ export default {
           this.images.push(
             'https://ofalooback.herokuapp.com/storage/' + element.url
           )
+      }
+    },
+    savelist() {
+      if (!this.$auth.loggedIn) {
+        this.$store.commit('close_quick_sign', true)
+        this.$store.commit('precom', this.id)
+        document.body.style = 'overflow: hidden'
       }
     },
     close_quick() {

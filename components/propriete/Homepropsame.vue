@@ -258,6 +258,50 @@
             >{{ property.adresse }}, {{ property.ville }}</span
           >
         </div>
+        <div class="mt-2">
+          <div class="flex align-center space-x-3.5">
+            <div
+              v-if="property.property.bed > 0"
+              :title="property.property.bed + ' pièce(s)'"
+              class="flex align-center space-x-1.5"
+            >
+              <span>
+                <i class="fas size-16 logo-color fa-bed"></i>
+              </span>
+              <span class="logo-color">{{ property.property.bed }}</span>
+            </div>
+            <div
+              v-if="property.property.bath > 0"
+              :title="property.property.bath + ' salles(s) de bain(s)'"
+              class="flex align-center space-x-1.5"
+            >
+              <span>
+                <i class="fas size-16 logo-color fa-shower"></i>
+              </span>
+              <span class="logo-color">{{ property.property.bath }}</span>
+            </div>
+            <div
+              v-if="property.property.garage > 0"
+              :title="property.property.garage + ' garage(s)'"
+              class="flex align-center space-x-1.5"
+            >
+              <span>
+                <i class="fas size-16 logo-color fa-warehouse"></i>
+              </span>
+              <span class="logo-color">{{ property.property.garage }}</span>
+            </div>
+            <div
+              v-if="property.property.taille > 0"
+              :title="'La taille de la propriété'"
+              class="flex align-center space-x-1.5"
+            >
+              <span>
+                <i class="fas size-16 logo-color fa-ruler-vertical"></i>
+              </span>
+              <span class="logo-color">{{ property.property.taille }} m²</span>
+            </div>
+          </div>
+        </div>
       </div>
       <articlemodal
         v-if="quick"

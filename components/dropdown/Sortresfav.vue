@@ -79,6 +79,7 @@ export default {
         'Le plus ancien',
         'Prix croissant',
         'Prix décroissant',
+        'Studio',
         'Maison',
         'Appartement',
         'Villa',
@@ -86,8 +87,6 @@ export default {
         'Bureau',
         'Magasin',
         'Terrain',
-        'Agent, A-Z',
-        'Agent, Z-A',
       ],
     }
   },
@@ -101,6 +100,7 @@ export default {
     },
     setcur(cur) {
       this.currency = cur
+      this.$emit('sort', this.currency)
       this.hide()
     },
   },

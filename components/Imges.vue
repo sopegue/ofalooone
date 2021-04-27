@@ -1,5 +1,5 @@
 <template>
-  <div v-if="has_data" class="wmax-x656 plus50px flex align-center relative">
+  <div class="wmax-x656 plus50px flex align-center relative">
     <client-only>
       <div
         class="absolute is-lights rounded left-0 nexttag z-15 p-1"
@@ -29,12 +29,12 @@
     </client-only>
     <div
       id="zebe"
-      class="flex align-center relative space-x-6 wtag overflow-x-auto scrollnone"
+      class="flex relative space-x-6 wtag overflow-x-auto scrollnone"
     >
       <homepropsame
-        v-for="index in 7"
-        :key="index"
-        :property="properties.data[0]"
+        v-for="(index, i) in data"
+        :key="i"
+        :property="index"
       ></homepropsame>
     </div>
 
@@ -72,7 +72,7 @@ import Homepropsame from './propriete/Homepropsame.vue'
 export default {
   components: { Homepropsame },
   props: {
-    imgs: {
+    data: {
       type: Array,
       default: () => [],
     },
@@ -96,16 +96,7 @@ export default {
       clr: 1024,
     }
   },
-  async fetch() {
-    this.title = this.titler
-    this.properties = await fetch(
-      'https://ofalooback.herokuapp.com/api/properties/bytype/Maison'
-    ).then((res) => res.json())
-  },
   computed: {
-    has_data() {
-      return this.properties.data !== undefined
-    },
     canscroll() {
       return this.hasscroll === true
     },

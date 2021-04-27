@@ -1,12 +1,18 @@
 <template>
   <div>
-    <div class="pb-1 pt-2.5">
-      <h4 class="logo-color size-16 font-semibold">
+    <div v-if="okay" class="pb-1 pt-2.5">
+      <h4
+        v-if="title === 'Propriétés à'"
+        class="logo-color size-16 font-semibold"
+      >
+        {{ title }} {{ ville }}
+      </h4>
+      <h4 v-else class="logo-color size-16 font-semibold">
         {{ title }}
       </h4>
     </div>
-    <div class="pb-1.5">
-      <imges></imges>
+    <div v-if="dataOk" class="pb-1.5">
+      <imges :data="properties.data"></imges>
     </div>
   </div>
 </template>
@@ -18,8 +24,50 @@ export default {
   props: {
     title: {
       type: String,
-      default: " D'autres propriétés du même agent",
+      default: "D'autres propriétés du même agent",
     },
+    ag: {
+      type: Number,
+      default: -1,
+    },
+    ville: {
+      type: String,
+      default: 'Abidjan',
+    },
+  },
+  data() {
+    return {
+      properties: null,
+      ok: false,
+      viewed: [],
+    }
+  },
+  async fetch() {
+    try {
+      this.properties = await fetch(
+        'https://ofalooback.herokuapp.com/api/properties/villes/' +
+          this.ville +
+          '/' +
+          this.ag
+      ).then((res) => res.json())
+      if (this.properties === null) {
+        this.properties = { data: [] }
+      }
+      this.ok = true
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  computed: {
+    okay() {
+      return this.ok === true
+    },
+    dataOk() {
+      return this.properties !== null && this.properties.data !== undefined
+    },
+  },
+  mounted() {
+    this.$emit('loaded')
   },
 }
 </script>

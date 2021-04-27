@@ -1,7 +1,7 @@
 <template>
   <div v-if="dataOk" class="bg-white w-full h-full relative">
     <div
-      class="flex flex-col py-10"
+      class="flex flex-col py-10 border-b"
       :class="{
         'px-10': size >= 1050 && size < 1200,
         'px-0': size < 1050,
@@ -41,7 +41,9 @@
               d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
             ></path>
           </svg>
-          <span class="logo-color size-15">{{ property.data.adresse }}</span>
+          <span class="logo-color size-15"
+            >{{ property.data.adresse }}, {{ property.data.ville }}</span
+          >
         </div>
         <div class="flex align-center space-x-5">
           <!-- a modifier -->
@@ -785,9 +787,34 @@
         </div>
       </div>
     </div>
-    <div class="pb-5">
-      <sameagent></sameagent>
+    <div class="py-6">
+      <div v-if="recently">
+        <sameagent
+          :exclude="true"
+          :ag="property.data.property.user_id"
+          :toexclude="property.data.property.id"
+        ></sameagent>
+      </div>
+      <div v-if="villing" class="px-4 pt-1 bg-white rounded">
+        <sameagents
+          v-show="okay"
+          :title="'Propriétés à'"
+          :ag="property.data.property.id"
+          :ville="property.data.ville"
+          @loaded="datating"
+        ></sameagents>
+      </div>
     </div>
+    <!-- <iframe
+      src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fvideos%2F10153231379946729%2F&width=500&show_text=false&height=280&appId"
+      width="500"
+      height="280"
+      style="border: none; overflow: hidden"
+      scrolling="no"
+      frameborder="0"
+      allowfullscreen="true"
+      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+    ></iframe> -->
     <imgmodal
       v-if="quick"
       :ads="ades"
@@ -803,20 +830,32 @@ import Bigadsbig from '~/components/propriete/Bigadsbig.vue'
 import Imgmodal from '~/components/modal/Imgmodal.vue'
 import Typeprop from '~/components/dropdown/Typeprop.vue'
 import Sameagent from '~/components/Sameagent.vue'
+import Sameagents from '~/components/Sameagents.vue'
 
 export default {
-  components: { Smstype, Bigadsbig, Imgmodal, Typeprop, Sameagent },
+  components: { Smstype, Bigadsbig, Imgmodal, Typeprop, Sameagent, Sameagents },
   middleware: 'query',
-  async asyncData({ query }) {
-    const property = await fetch(
-      'https://ofalooback.herokuapp.com/api/property/' + query.wyzes
-    ).then((res) => res.json())
-    return { property }
+  async asyncData({ query, redirect }) {
+    try {
+      let property = await fetch(
+        'https://ofalooback.herokuapp.com/api/property/' + query.wyzes
+      ).then((res) => res.json())
+      if (property.data.message) {
+        property = { data: {} }
+        return redirect('/')
+      }
+      return { property }
+    } catch (error) {
+      console.log(error)
+    }
   },
   data() {
     return {
       inside: false,
       showtel: false,
+      ok: false,
+      recent: false,
+      ville: false,
       hovered1: false,
       share: false,
       hovered2: false,
@@ -831,62 +870,77 @@ export default {
   },
   head() {
     return {
-      title:
-        this.property.data.property.type +
-        ' - ' +
-        this.property.data.adresse +
-        ', ' +
-        this.$linker.formatMoney(
-          this.property.data.property.price_fixed.toString()
-        ) +
-        ' FCFA' +
-        ' | Ofaloo',
-      meta: [
-        // `hid` est un identifiant unique. N'utilisez pas `vmid` pour cela car cela ne marchera pas.
-        {
-          hid: 'og:url',
-          property: 'og:url',
-          name: 'og:url',
-          content:
-            'https://www.ofaloo.com/propriete/?wyzes=' +
-            this.property.data.property.id,
-        },
-        {
-          hid: 'og:type',
-          property: 'og:type',
-          name: 'og:type',
-          content: 'article',
-        },
-        {
-          hid: 'og:title',
-          property: 'og:title',
-          name: 'og:title',
-          content: this.property.data.property.type,
-        },
-        {
-          hid: 'og:description',
-          property: 'og:description',
-          name: 'og:description',
-          content: this.property.data.adresse,
-        },
-        {
-          hid: 'og:image',
-          property: 'og:image',
-          name: 'og:image',
-          content: this.getImgPrin,
-        },
-      ],
+      title: this.dataOk
+        ? this.property.data.property.type +
+          ' - ' +
+          this.property.data.adresse +
+          ', ' +
+          this.$linker.formatMoney(
+            this.property.data.property.price_fixed.toString()
+          ) +
+          ' FCFA' +
+          ' | Ofaloo'
+        : '',
+      // meta: [
+      //   // `hid` est un identifiant unique. N'utilisez pas `vmid` pour cela car cela ne marchera pas.
+      //   {
+      //     hid: 'og:url',
+      //     property: 'og:url',
+      //     name: 'og:url',
+      //     content:
+      //       'https://www.ofaloo.com/propriete/?wyzes=' +
+      //       this.property.data.property.id,
+      //   },
+      //   {
+      //     hid: 'og:type',
+      //     property: 'og:type',
+      //     name: 'og:type',
+      //     content: 'article',
+      //   },
+      //   {
+      //     hid: 'og:title',
+      //     property: 'og:title',
+      //     name: 'og:title',
+      //     content: this.property.data.property.type,
+      //   },
+      //   {
+      //     hid: 'og:description',
+      //     property: 'og:description',
+      //     name: 'og:description',
+      //     content: this.property.data.adresse,
+      //   },
+      //   {
+      //     hid: 'og:image',
+      //     property: 'og:image',
+      //     name: 'og:image',
+      //     content: this.getImgPrin,
+      //   },
+      // ],
     }
   },
   computed: {
+    recently() {
+      return this.recent === true
+    },
+    villing() {
+      return this.ville === true
+    },
+    okay() {
+      return this.ok === true
+    },
     ads() {
-      return this.images
+      return this.images !== null &&
+        this.images !== undefined &&
+        this.images.length > 0
+        ? this.images
+        : []
     },
     dataOk() {
       return (
+        this.property !== null &&
         this.property !== undefined &&
         this.property.data !== undefined &&
-        this.property.data.property !== undefined
+        this.property.data.status !== undefined
       )
     },
     getImgPrin() {
@@ -910,35 +964,94 @@ export default {
   created() {
     this.fillImages()
   },
+  beforeMount() {
+    this.savetorecent()
+    if (!this.dataOk) this.$router.push('/')
+
+    this.getPropVille()
+    this.getOtherProp()
+  },
   mounted() {
-    this.increment()
+    if (this.dataOk) this.increment()
   },
   methods: {
+    async savetorecent() {
+      if (localStorage.viewed) {
+        const data = await JSON.parse(localStorage.getItem('viewed'))
+        if (!data.includes(this.property.data.property.id)) {
+          data.unshift(this.property.data.property.id)
+          localStorage.removeItem('viewed')
+          localStorage.setItem('viewed', JSON.stringify(data.slice(0, 10)))
+        }
+      } else {
+        const data = [this.property.data.property.id]
+        localStorage.setItem('viewed', JSON.stringify(data))
+      }
+    },
+    datating() {
+      this.ok = true
+    },
+    async getPropVille() {
+      try {
+        const result = await fetch(
+          'https://ofalooback.herokuapp.com/api/properties/villesfirst/' +
+            this.property.data.ville +
+            '/' +
+            this.property.data.property.id
+        ).then((res) => res.json())
+        if (result > 0) {
+          this.ville = true
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async getOtherProp() {
+      try {
+        const result = await fetch(
+          'https://ofalooback.herokuapp.com/api/properties/agfirst/' +
+            this.property.data.property.user_id +
+            '/' +
+            this.property.data.property.id
+        ).then((res) => res.json())
+        if (result > 0) {
+          this.recent = true
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    },
     async increment() {
-      const result = await fetch(
-        'https://ofalooback.herokuapp.com/api/property/visit/' +
-          this.property.data.property.id
-      ).then((res) => res.json())
-      console.log(result)
+      try {
+        const result = await fetch(
+          'https://ofalooback.herokuapp.com/api/property/visit/' +
+            this.property.data.property.id
+        ).then((res) => res.json())
+        console.log(result)
+      } catch (error) {
+        console.log(error)
+      }
     },
     fillImages() {
-      for (let index = 0; index < this.property.data.images.length; index++) {
-        const element = this.property.data.images[index]
-        if (element.principal === 'yes') {
-          this.images.push(
-            'https://ofalooback.herokuapp.com/storage/' + element.url
-          )
-          break
+      if (this.dataOk) {
+        for (let index = 0; index < this.property.data.images.length; index++) {
+          const element = this.property.data.images[index]
+          if (element.principal === 'yes') {
+            this.images.push(
+              'https://ofalooback.herokuapp.com/storage/' + element.url
+            )
+            break
+          }
         }
+        for (let index = 0; index < this.property.data.images.length; index++) {
+          const element = this.property.data.images[index]
+          if (element.principal === 'no')
+            this.images.push(
+              'https://ofalooback.herokuapp.com/storage/' + element.url
+            )
+        }
+        this.ades = this.images
       }
-      for (let index = 0; index < this.property.data.images.length; index++) {
-        const element = this.property.data.images[index]
-        if (element.principal === 'no')
-          this.images.push(
-            'https://ofalooback.herokuapp.com/storage/' + element.url
-          )
-      }
-      this.ades = this.images
     },
     hideshare() {
       this.share = false

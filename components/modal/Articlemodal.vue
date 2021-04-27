@@ -48,7 +48,9 @@
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                 ></path>
               </svg>
-              <span class="logo-color size-14">{{ property.adresse }}</span>
+              <span class="logo-color size-14"
+                >{{ property.adresse }}, {{ property.ville }}</span
+              >
             </div>
             <!-- here for save and non saved property -->
             <div class="flex align-center space-x-5">
@@ -781,10 +783,26 @@ export default {
       return this.index - 1
     },
   },
+  beforeMount() {
+    this.savetorecent()
+  },
   mounted() {
     this.increment()
   },
   methods: {
+    async savetorecent() {
+      if (localStorage.viewed) {
+        const data = await JSON.parse(localStorage.getItem('viewed'))
+        if (!data.includes(this.property.property.id)) {
+          data.unshift(this.property.property.id)
+          localStorage.removeItem('viewed')
+          localStorage.setItem('viewed', JSON.stringify(data.slice(0, 10)))
+        }
+      } else {
+        const data = [this.property.property.id]
+        localStorage.setItem('viewed', JSON.stringify(data))
+      }
+    },
     async increment() {
       const result = await fetch(
         'https://ofalooback.herokuapp.com/api/property/visit/' +

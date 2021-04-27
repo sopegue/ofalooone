@@ -250,7 +250,6 @@ export default {
             },
           })
           .then((res) => {
-            this.logging = false
             if (res.data.status === 200) {
               const tokenId = res.data.token.substr(
                 0,
@@ -264,8 +263,14 @@ export default {
               localStorage.setItem('hdzd', JSON.stringify(hdzd))
               location.assign(this.previous)
             }
-            if (res.data.status === 404) console.log('incorrects credentials')
-            if (res.data.status === 500) console.log('Error on request')
+            if (res.data.status === 404) {
+              this.logging = false
+              console.log('incorrects credentials')
+            }
+            if (res.data.status === 500) {
+              this.logging = false
+              console.log('Error on request')
+            }
           })
           .catch(() => {
             this.logging = false

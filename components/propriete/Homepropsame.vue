@@ -235,7 +235,7 @@
         </div>
         <div class="flex align-center space-x-1 mt-1">
           <svg
-            class="w-5 min-w-5 h-5 min-h-5 logo-color -ml-1"
+            class="w-5 min-w-5 h-5 min-h-5 logo-color"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -303,20 +303,12 @@
           </div>
         </div>
       </div>
-      <articlemodal
-        v-if="quick"
-        :property="property"
-        :images="images"
-        @close_quick="close_quick"
-      ></articlemodal>
     </div>
   </div>
 </template>
 
 <script>
-import Articlemodal from '../modal/Articlemodal.vue'
 export default {
-  components: { Articlemodal },
   props: {
     property: {
       type: Object,

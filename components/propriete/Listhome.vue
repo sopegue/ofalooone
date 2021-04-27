@@ -37,12 +37,15 @@
         Chargement des propriétés...
       </p>
       <a
+        :class="{ noclick: loading }"
         class="button block w-fit m-0-auto bg-transparent px-5 py-2 rounded border-008489ss size-13 color-008489"
         @click="seemore"
         >Voir plus de
-        <span class="transform lowercase size-13 color-008489">{{
-          title
-        }}</span></a
+        <span
+          :class="{ noclick: loading }"
+          class="transform lowercase size-13 color-008489"
+          >{{ title }}</span
+        ></a
       >
     </div>
   </div>

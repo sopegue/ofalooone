@@ -22,7 +22,7 @@
         "
       >
         <button
-          v-if="link"
+          v-show="haslink"
           class="absolute z-10 cursor-default bottom-0 right-0 mb-2 mr-2"
           title="Contient un ou plusieurs lien vidéo(s)"
         >
@@ -90,6 +90,9 @@ export default {
     },
     myindex() {
       return this.indexer
+    },
+    haslink() {
+      return this.link === true
     },
   },
   watch: {

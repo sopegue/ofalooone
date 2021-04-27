@@ -73,7 +73,7 @@ export default {
       local: {
         token: {
           property: 'token',
-          maxAge: 3600,
+          maxAge: 18000,
           // required: true,
           // type: 'Bearer'
         },

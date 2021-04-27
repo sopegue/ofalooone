@@ -190,7 +190,7 @@
             <p v-if="moring" class="h-fit w-fit h-centers mb-4">
               Chargement des propriétés...
             </p>
-            <div class="w-full">
+            <div class="w-full" :class="{ noclick: moring }">
               <a
                 class="button block w-fit m-0-auto bg-white px-5 py-2 rounded border-008489ss size-14 color-008489"
                 @click="next"
@@ -208,18 +208,23 @@
         <!-- <div class="can-add-ads"></div> -->
       </div>
       <filters
-        v-if="size >= 1150"
+        v-show="size >= 1150"
         @go="go"
         @going="going"
         @finished="finished"
         @resetdone="resetdone"
       ></filters>
     </div>
-    <div class="px-4 pt-1 bg-white rounded mt-20">
+    <div v-show="recently" class="px-4 pt-1 pb-1.5 bg-white rounded mt-20">
       <sameagent :title="'Récemment consultées'"></sameagent>
     </div>
-    <div class="px-4 pt-1 bg-white rounded mt-10">
-      <sameagents :title="'Propriétés à Abidjan'"></sameagents>
+    <div v-show="villing" class="px-4 pt-1 pb-1.5 bg-white rounded mt-10">
+      <sameagents
+        v-show="okay"
+        :title="'Propriétés à'"
+        :ville="ipadresse !== null ? ipadresse.city : 'unknown'"
+        @loaded="datating"
+      ></sameagents>
     </div>
   </div>
 </template>
@@ -236,6 +241,10 @@ export default {
   middleware: 'recherche',
   data() {
     return {
+      ipadresse: null,
+      ok: false,
+      recent: false,
+      ville: false,
       filter: {
         what: 'all',
         achat_location: {
@@ -345,8 +354,17 @@ export default {
         ? this.properties.data.length > 0
         : false
     },
+    recently() {
+      return this.recent === true
+    },
+    villing() {
+      return this.ville === true
+    },
+    okay() {
+      return this.ok === true
+    },
     propLength() {
-      return this.properties.data !== undefined
+      return this.properties !== undefined && this.properties.data !== undefined
         ? this.properties.data.length
         : 0
     },
@@ -410,14 +428,55 @@ export default {
     },
   },
   beforeMount() {
+    this.getIP().then(() => {
+      if (this.ipadresse !== null && this.ipadresse !== undefined) {
+        this.getPropVille()
+      } else {
+        console.log('perm denied')
+      }
+    })
+    // this.getPropVille()
+    if (localStorage.viewed) {
+      this.recent = true
+    } else {
+      this.recent = false
+    }
     if (sessionStorage.sort) {
       this.sort = sessionStorage.getItem('sort')
     }
     this.fill()
     this.getproperties()
-    if (!this.has_load) console.log('isloading')
   },
   methods: {
+    datating() {
+      this.ok = true
+    },
+    async getPropVille() {
+      // console.log(this.ipadresse.city)
+      try {
+        const result = await fetch(
+          'https://ofalooback.herokuapp.com/api/properties/villesfirst/' +
+            this.ipadresse.city +
+            '/-4'
+        ).then((res) => res.json())
+        if (result > 0) {
+          this.ville = true
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async getIP() {
+      try {
+        const result = await fetch(
+          'https://ipinfo.io/?token=c2507a294b3386'
+        ).then((res) => res.json())
+        this.ipadresse = result
+      } catch (error) {
+        this.ipadresse = null
+        console.log("Can't read ipadresse")
+      }
+    },
     async searching() {
       this.charged = false
       if (sessionStorage.search) {
@@ -470,7 +529,6 @@ export default {
         .then((res) => {
           // this.properties = res
           this.properties.data = res.data
-          console.log(res)
           if (res.meta !== undefined) this.total = res.meta.total
           else this.total = 0
           this.error = false

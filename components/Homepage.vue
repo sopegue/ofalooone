@@ -14,7 +14,7 @@
       <listhome :titler="'Terrain'" class="border-b pb-6"></listhome>
       <!-- <listhome :titler="'Villa'"></listhome> -->
       <!-- <listhome :property="'Villa'" class="border-b pb-8"></listhome> -->
-      <div class="pb-5 sm:px-8 px-4">
+      <div class="sm:px-8 px-4">
         <sameagent :title="'Récemment consultées'"></sameagent>
       </div>
     </div>

@@ -89,8 +89,8 @@ export default {
       this.getViewed()
         .then((res) => {
           this.properties = res
-          this.ok = true
           this.$emit('loaded')
+          this.ok = true
         })
         .catch((err) => {
           console.log(err)

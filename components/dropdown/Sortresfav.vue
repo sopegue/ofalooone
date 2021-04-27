@@ -73,8 +73,9 @@ export default {
   data() {
     return {
       focused: false,
-      currency: '',
+      currency: 'Le plus pertinent',
       currencies: [
+        'Le plus pertinent',
         'Le plus récent',
         'Le plus ancien',
         'Prix croissant',

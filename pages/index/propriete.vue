@@ -795,7 +795,7 @@
           :toexclude="property.data.property.id"
         ></sameagent>
       </div>
-      <div v-if="villing" class="px-4 pt-1 bg-white rounded">
+      <div v-if="villing" class="px-4 pt-3 bg-white rounded">
         <sameagents
           v-show="okay"
           :title="'Propriétés à'"

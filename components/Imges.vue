@@ -2,6 +2,7 @@
   <div class="wmax-x656 plus50px flex align-center relative">
     <client-only>
       <div
+        v-if="size >= 640"
         class="absolute is-lights rounded left-0 nexttag z-15 p-1"
         :class="{ hidden: !scrollxl }"
         @click="scrollLeft"
@@ -40,6 +41,7 @@
 
     <client-only>
       <div
+        v-if="size >= 640"
         class="absolute is-lights right-0 nexttag z-15 p-1"
         :class="{ hidden: scrollxr }"
         @click="scrollRight"

@@ -14,8 +14,11 @@
       <listhome :titler="'Terrain'" class="border-b pb-6"></listhome>
       <!-- <listhome :titler="'Villa'"></listhome> -->
       <!-- <listhome :property="'Villa'" class="border-b pb-8"></listhome> -->
-      <div class="sm:px-8 px-4">
-        <sameagent :title="'Récemment consultées'"></sameagent>
+      <div v-show="recently" class="sm:px-8 px-4">
+        <sameagent
+          :title="'Récemment consultées'"
+          @loaded="loaaded"
+        ></sameagent>
       </div>
     </div>
   </div>
@@ -29,6 +32,7 @@ export default {
   data() {
     return {
       error: false,
+      recent: false,
     }
   },
   computed: {
@@ -37,6 +41,14 @@ export default {
     },
     erroring() {
       return this.error === true
+    },
+    recently() {
+      return this.recent === true
+    },
+  },
+  methods: {
+    loaaded() {
+      this.recent = true
     },
   },
 }

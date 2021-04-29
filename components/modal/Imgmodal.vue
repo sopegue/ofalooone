@@ -90,7 +90,7 @@
           </slider>
         </div>
 
-        <div v-show="!onimage">
+        <div v-if="false">
           <div
             class="flex align-center space-x-8 w-fit mx-auto border rounded px-5 py-2"
           >

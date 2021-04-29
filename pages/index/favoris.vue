@@ -1,107 +1,99 @@
 <template>
   <div class="pt-8 pb-12" :class="{ 'px-0 bg-white': size < 499 }">
     <client-only>
-      <div
-        class="flex m-0-auto"
-        :class="{
-          'w-fit': size >= 850,
-          'px-20': size > 600 && size <= 829,
-          'flex-col m-0-auto': size < 1050,
-        }"
-      >
-        <div class="flex flex-col w600s space-y-5">
-          <div
-            class="flex px-4 py-2 bg-white h-16min"
-            :class="{
-              'justify-between space-x-2 align-center': size >= 450,
-              'flex-col space-y-3': size < 450,
-              rounded: size > 499,
-              'border-t border-b': size <= 499,
-            }"
-          >
-            <div>
-              <div class="flex space-x-2 font-semibold size-14">
-                <svg
-                  class="w-6 h-6 logo-color"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
-                  ></path>
-                </svg>
-                <span class="logo-color font-semibold size-14"
-                  >Liste d'enregistrements</span
-                >
-              </div>
-              <div v-if="!moring || !charging" class="px-1.8">
-                <span v-if="toting > 1" class="logo-color size-14"
-                  >1-{{ propLength }} sur {{ toting }} résultats</span
-                >
-                <span v-else-if="toting === 1" class="logo-color size-14"
-                  >1 résultat</span
-                >
-                <span v-else class="logo-color size-14">0 résultat</span>
-              </div>
-            </div>
-            <div
-              class="pb-1"
-              :class="{
-                'self-end ': size >= 450,
-              }"
-            >
-              <sortresfav @sort="sorting"></sortresfav>
-            </div>
-          </div>
-          <p v-if="loading" class="py-4 text-c">Chargement des propriétés</p>
-          <div v-else-if="!erroring">
-            <div
-              v-if="dataOk"
-              class="flex flex-col"
-              :class="{
-                'space-y-3': size < 499,
-                'rounded space-y-8': size > 499,
-              }"
-            >
-              <homeproplarge
-                v-for="(prop, i) in dating"
-                :key="i"
-                :property="prop"
-              ></homeproplarge>
-            </div>
-            <p v-else class="py-4 text-c flex flex-col items-center space-y-5">
-              <span>Vous n'avez pas encore enrégistré de propriété</span>
-              <a
-                href="/recherche"
-                class="button px-4 py-2 rounded btn-008489 size-12 text-white"
-                >Rechercher une propriété</a
+      <div class="flex flex-col space-y-5 xl:px-50 lg:px-20">
+        <div
+          class="flex px-4 py-2 bg-white h-16min w-full"
+          :class="{
+            'justify-between space-x-2 align-center': size >= 450,
+            'flex-col space-y-3': size < 450,
+            rounded: size > 499,
+            'border-t border-b': size <= 499,
+          }"
+        >
+          <div>
+            <div class="flex space-x-2 font-semibold size-14">
+              <svg
+                class="w-6 h-6 logo-color"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
               >
-            </p>
-          </div>
-          <div
-            v-if="propLength < toting && !charging"
-            class="pt-10 w-fulls"
-            :class="{
-              'px-2.5': size <= 500,
-            }"
-          >
-            <p v-if="moring" class="h-fit w-fit h-centers mb-4">
-              Chargement des propriétés...
-            </p>
-            <div class="w-full" :class="{ noclick: moring }">
-              <a
-                class="button block w-fit m-0-auto bg-white px-5 py-2 rounded border-008489ss size-14 color-008489"
-                @click="next"
-                >Plus de propriétés ({{ toting - propLength }})</a
+                <path
+                  d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
+                ></path>
+              </svg>
+              <span class="logo-color font-semibold size-14"
+                >Liste d'enregistrements</span
               >
             </div>
+            <div v-if="!moring || !charging" class="px-1.8">
+              <span v-if="toting > 1" class="logo-color size-14"
+                >1-{{ propLength }} sur {{ toting }} résultats</span
+              >
+              <span v-else-if="toting === 1" class="logo-color size-14"
+                >1 résultat</span
+              >
+              <span v-else class="logo-color size-14">0 résultat</span>
+            </div>
           </div>
-          <p v-else-if="!charging" class="h-fit w-fit h-centers mt-5">
-            --- Fin des résultats ---
-          </p>
-          <!-- <div class="can-add-ads"></div> -->
+          <div
+            v-if="toting > 0"
+            class="pb-1"
+            :class="{
+              'self-end ': size >= 450,
+            }"
+          >
+            <sortresfav @sort="sorting"></sortresfav>
+          </div>
         </div>
+        <p v-if="loading" class="py-4 text-c">Chargement des propriétés</p>
+        <div v-else-if="!erroring">
+          <div
+            v-if="dataOk"
+            class="flex flex-col"
+            :class="{
+              'space-y-3': size < 499,
+              'rounded space-y-8': size > 499,
+            }"
+          >
+            <homeproplarge
+              v-for="(prop, i) in dating"
+              :key="i"
+              :property="prop"
+            ></homeproplarge>
+          </div>
+          <p v-else class="py-4 text-c flex flex-col items-center space-y-5">
+            <span>Vous n'avez pas encore enrégistré de propriété</span>
+            <a
+              href="/recherche"
+              class="button px-4 py-2 rounded btn-008489 size-12 text-white"
+              >Rechercher une propriété</a
+            >
+          </p>
+        </div>
+        <div
+          v-if="propLength < toting && !charging"
+          class="pt-5 w-fulls"
+          :class="{
+            'px-2.5': size <= 500,
+          }"
+        >
+          <p v-if="moring" class="h-fit w-fit h-centers mb-4">
+            Chargement des propriétés...
+          </p>
+          <div class="w-full" :class="{ noclick: moring }">
+            <a
+              class="button block w-fit m-0-auto bg-white px-5 py-2 rounded border-008489ss size-14 color-008489"
+              @click="next"
+              >Plus de propriétés ({{ toting - propLength }})</a
+            >
+          </div>
+        </div>
+        <p v-else-if="!charging" class="h-fit w-fit h-centers mt-5">
+          --- Fin des résultats ---
+        </p>
+        <!-- <div class="can-add-ads"></div> -->
       </div>
       <div
         v-show="recently && authorize"

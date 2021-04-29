@@ -1,5 +1,5 @@
 <template>
-  <div class="py-2">
+  <div class="py-2 px-3">
     <div class="w-full flex flex-col">
       <div class="oath-log flex flex-col space-y-10 relative">
         <!-- <div class="absolute w-full top-0 appearZ rounded-tl rounded-tr">

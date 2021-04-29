@@ -1023,11 +1023,10 @@ export default {
     },
     async increment() {
       try {
-        const result = await fetch(
+        await fetch(
           'https://ofalooback.herokuapp.com/api/property/visit/' +
             this.property.data.property.id
         ).then((res) => res.json())
-        console.log(result)
       } catch (error) {
         console.log(error)
       }

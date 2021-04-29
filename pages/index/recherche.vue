@@ -112,7 +112,7 @@
           @resetdone="resetdone"
         ></filters>
         <div
-          v-if="charged && $route.query.ofloowa !== undefined"
+          v-if="charged && $route.query.ofloowa !== undefined && propLength > 0"
           class="flex w-fulls align-center space-x-2 justify-between px-3 py-2 bg-008489"
           :class="{
             rounded: size > 500,
@@ -142,7 +142,8 @@
           v-if="
             charged &&
             $route.query.q !== undefined &&
-            $route.query.q === 'super-agent'
+            $route.query.q === 'super-agent' &&
+            propLength > 0
           "
           class="flex w-fulls align-center justify-between px-3 py-2 bg-008489"
           :class="{
@@ -152,7 +153,7 @@
           <div class="flex align-center space-x-2">
             <span class="text-white">Rechercher des propriétés de </span>
             <a
-              class="button noclick block bg-transparent px-3 h-fit rounded border-white size-12 text-white"
+              class="button cursor-default block bg-transparent px-3 h-fit rounded border-white size-12 text-white"
               >Super agent</a
             >
           </div>
@@ -350,7 +351,7 @@ export default {
   },
   computed: {
     dataOk() {
-      return this.properties.data !== undefined
+      return this.properties !== undefined && this.properties.data !== undefined
         ? this.properties.data.length > 0
         : false
     },
@@ -369,22 +370,30 @@ export default {
         : 0
     },
     user_pic() {
-      return this.properties.data.length > 0
+      return this.properties !== undefined &&
+        this.properties.data !== undefined &&
+        this.properties.data.length > 0
         ? this.properties.data[0].user_pic
         : 'default/user/user.png'
     },
     user_id() {
-      return this.properties.data.length > 0
+      return this.properties !== undefined &&
+        this.properties.data !== undefined &&
+        this.properties.data.length > 0
         ? this.properties.data[0].property.user_id
         : 0
     },
     user_name() {
-      return this.properties.data.length > 0
+      return this.properties !== undefined &&
+        this.properties.data !== undefined &&
+        this.properties.data.length > 0
         ? this.properties.data[0].agence.name
         : 'Agent'
     },
     supery() {
       return (
+        this.properties !== undefined &&
+        this.properties.data !== undefined &&
         this.properties.data.length > 0 &&
         this.properties.data[0].agence.super === 'yes'
       )
@@ -446,6 +455,7 @@ export default {
     }
     this.fill()
     this.getproperties()
+    console.log(this.$route.query.q, this.$route.query.ofloowa)
   },
   methods: {
     datating() {
@@ -535,6 +545,7 @@ export default {
           this.charged = true
           this.first = true
           this.fromPT = false
+          // console.log(res)
         })
         .catch(() => {
           this.error = true
@@ -607,6 +618,8 @@ export default {
             filter: this.filter,
             search: this.search,
             sort: this.sort,
+            q: this.$route.query.q,
+            ofloowa: this.$route.query.ofloowa,
           })
         )
       }).catch(() => {
@@ -624,6 +637,8 @@ export default {
             filter: this.filter,
             search: this.search,
             sort: this.sort,
+            q: this.$route.query.q,
+            ofloowa: this.$route.query.ofloowa,
           })
         )
       }).catch(() => {

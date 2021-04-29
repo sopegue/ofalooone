@@ -111,7 +111,7 @@
               <hr class="dropdown-divider" />
               <a class="block w-fit m-0-auto" @click="logout"
                 ><button
-                  class="button is-light ferfe rounded px-20 py-1 text-white size-14"
+                  class="button is-light ferfe px-20 py-1 text-white size-14"
                 >
                   Se deconnecter
                 </button></a

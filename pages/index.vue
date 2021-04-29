@@ -52,6 +52,7 @@
       <footers></footers>
     </div>
     <popup></popup>
+    <div id="fb-root"></div>
   </div>
 </template>
 

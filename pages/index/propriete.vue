@@ -816,11 +816,13 @@
       allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
     ></iframe> -->
     <imgmodal
-      v-if="quick"
+      v-show="quick"
       :ads="ades"
       :activeindex="index"
+      :links="property.data.links"
       @close_quick="close_quick"
     ></imgmodal>
+    <!-- <fb link="https://fb.watch/5a4cfgCqsp/"></fb> -->
   </div>
 </template>
 
@@ -831,9 +833,17 @@ import Imgmodal from '~/components/modal/Imgmodal.vue'
 import Typeprop from '~/components/dropdown/Typeprop.vue'
 import Sameagent from '~/components/Sameagent.vue'
 import Sameagents from '~/components/Sameagents.vue'
+// import Fb from '~/components/social/Fb.vue'
 
 export default {
-  components: { Smstype, Bigadsbig, Imgmodal, Typeprop, Sameagent, Sameagents },
+  components: {
+    Smstype,
+    Bigadsbig,
+    Imgmodal,
+    Typeprop,
+    Sameagent,
+    Sameagents,
+  },
   middleware: 'query',
   async asyncData({ query, redirect }) {
     try {

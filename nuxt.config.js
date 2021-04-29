@@ -7,8 +7,22 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: 'Ofaloo.com',
+      },
     ],
-    script: [{ src: 'https://use.fontawesome.com/releases/v5.14.0/js/all.js' }],
+    script: [
+      { src: 'https://use.fontawesome.com/releases/v5.14.0/js/all.js' },
+      {
+        src: 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v10.0',
+        async: true,
+        defer: true,
+        body: true,
+        crossorigin: 'anonymous',
+      },
+    ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: '/assets/css/pc.css' },

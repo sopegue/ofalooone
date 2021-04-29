@@ -23,7 +23,7 @@
       <div class="border-b pb-3">
         <div class="w-fit m-0-auto">
           <div class="flex align-center space-x-3">
-            <button @click="gotos(1)">
+            <button @click="gotos('image')">
               <svg
                 class="w-7 h-7"
                 viewBox="0 0 24 24"
@@ -32,7 +32,7 @@
               >
                 <path
                   d="M4 16L8.58579 11.4142C9.36683 10.6332 10.6332 10.6332 11.4142 11.4142L16 16M14 14L15.5858 12.4142C16.3668 11.6332 17.6332 11.6332 18.4142 12.4142L20 14M14 8H14.01M6 20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4H6C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20Z"
-                  :stroke="!curimage ? '#2d3748' : curimage ? '#fff' : '#fff'"
+                  :stroke="!onimage ? '#2d3748' : '#fff'"
                   stroke-width="1"
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -41,16 +41,16 @@
             </button>
             <button
               :class="{
-                noclick: hasvideo.length === 0,
-                click: hasvideo.length !== 0,
+                noclick: !hasvideo,
+                click: hasvideo,
               }"
-              @click="gotos(2)"
+              @click="gotos('video')"
             >
               <svg
                 class="w-7 h-7"
                 :class="{
-                  'logo-color': hasvideo.length === 0 || curimage,
-                  'text-white': hasvideo.length !== 0 && !curimage,
+                  'logo-color': onimage,
+                  'text-white': !onimage,
                 }"
                 fill="none"
                 stroke="currentColor"
@@ -69,7 +69,7 @@
         </div>
       </div>
       <div class="wmin-900 m-0-auto h-x620 pt-8 px-30">
-        <div class="bg-e6e6e6 h-full w-full relative">
+        <div v-show="onimage" class="bg-e6e6e6 h-full w-full relative">
           <slider
             :index="index"
             :adslength="ads.length"
@@ -85,8 +85,130 @@
                   slide: index === i + 1,
                 }"
                 ><img class="h-full w-full" :src="img" alt="Image"
-              /></a></figure
-          ></slider>
+              /></a>
+            </figure>
+          </slider>
+        </div>
+
+        <div v-show="!onimage">
+          <div
+            class="flex align-center space-x-8 w-fit mx-auto border rounded px-5 py-2"
+          >
+            <p
+              v-if="links.fb !== null && links.fb !== undefined"
+              class="clickable"
+              :class="{ noclick: links.fb === null || links.fb === undefined }"
+              @click="
+                {
+                  curvid = 'fb'
+                }
+              "
+            >
+              <img src="/social/fb.png" alt="" class="h-8 w-8" />
+            </p>
+            <p
+              v-if="links.yt !== null && links.yt !== undefined"
+              class="clickable"
+              :class="{ noclick: links.yt === null || links.yt === undefined }"
+              @click="
+                {
+                  curvid = 'yt'
+                }
+              "
+            >
+              <img src="/social/yt.png" alt="" class="h-8 w-8" />
+            </p>
+            <p
+              v-if="links.tiktok && links.tiktok !== undefined"
+              class="clickable"
+              :class="{
+                noclick: links.tiktok === null || links.tiktok === undefined,
+              }"
+              @click="
+                {
+                  curvid = 'tiktok'
+                }
+              "
+            >
+              <img src="/social/tiktok.png" alt="" class="h-8 w-8" />
+            </p>
+            <p
+              v-if="links.insta !== null && links.insta !== undefined"
+              class="clickable"
+              :class="{
+                noclick: links.insta === null || links.insta === undefined,
+              }"
+              @click="
+                {
+                  curvid = 'insta'
+                }
+              "
+            >
+              <img src="/social/insta.png" alt="" class="h-8 w-8" />
+            </p>
+          </div>
+          <div
+            v-show="curvid === 'tiktok'"
+            class="color-white sm:px-10 px-5 pt-5"
+          >
+            <svg
+              class="w-6 h-6 min-h-6 min-w-6 color-white h-centers mb-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            <span class="text-white"
+              >Si la video Tik Tok ne fonctionne pas convenablement, essayez de
+              désactiver votre bloqueur de publicité(AdBlock) puis
+              réessayer.</span
+            >
+          </div>
+          <div
+            class="pt-10"
+            :class="{
+              ' w-fit mx-auto':
+                curvid === 'yt' || curvid === 'tiktok' || curvid === 'insta',
+            }"
+          >
+            <div class="flex flex-col items-center">
+              <fb
+                v-show="
+                  links.fb !== null && links.fb !== undefined && curvid === 'fb'
+                "
+                :link="links.fb"
+              ></fb>
+            </div>
+            <yt
+              v-show="
+                links.yt !== null && links.yt !== undefined && curvid === 'yt'
+              "
+              :link="links.yt"
+            ></yt>
+            <tiktok
+              v-show="
+                links.tiktok &&
+                links.tiktok !== undefined &&
+                curvid === 'tiktok'
+              "
+              :link="links.tiktok"
+            ></tiktok>
+            <insta
+              v-show="
+                links.insta !== null &&
+                links.insta !== undefined &&
+                curvid === 'insta'
+              "
+              :link="links.insta"
+            ></insta>
+          </div>
         </div>
       </div>
     </div>
@@ -95,9 +217,13 @@
 
 <script>
 // import Smstype from '../dropdown/Smstype.vue'
+import Fb from '~/components/social/Fb.vue'
+import Yt from '~/components/social/Yt.vue'
+import Tiktok from '~/components/social/Tiktok.vue'
+import Insta from '~/components/social/Insta.vue'
 import Slider from '~/components/slider/Slider.vue'
 export default {
-  components: { Slider },
+  components: { Slider, Fb, Yt, Tiktok, Insta },
   props: {
     activeindex: {
       type: Number,
@@ -106,6 +232,10 @@ export default {
     ads: {
       type: Array,
       default: () => [],
+    },
+    links: {
+      type: Object,
+      default: () => {},
     },
   },
   data() {
@@ -119,13 +249,13 @@ export default {
       active: 0,
       index: 1,
       left: false,
+      imaging: true,
+      curvid: '',
     }
   },
   computed: {
     hasvideo() {
-      return this.ads.filter((x) => {
-        return x.includes('videos')
-      })
+      return this.links !== null && this.links !== undefined
     },
     myindex() {
       return this.indexer
@@ -136,27 +266,32 @@ export default {
     curindex() {
       return this.index - 1
     },
+    onimage() {
+      return this.imaging === true
+    },
     yoindex() {
       return this.index
     },
   },
   mounted() {
     this.index = this.activeindex
+    if (this.hasvideo) {
+      if (this.links.fb !== null && this.links.fb !== undefined)
+        this.curvid = 'fb'
+      else if (this.links.yt !== null && this.links.yt !== undefined)
+        this.curvid = 'yt'
+      else if (this.links.tiktok !== null && this.links.tiktok !== undefined)
+        this.curvid = 'tiktok'
+      else if (this.links.insta !== null && this.links.insta !== undefined)
+        this.curvid = 'insta'
+    }
   },
   methods: {
     gotos(val) {
-      if (val === 1) {
-        this.index = 1
-        this.curimage = true
+      if (val === 'image') {
+        this.imaging = true
       } else {
-        for (let indexes = 0; indexes < this.ads.length; indexes++) {
-          const element = this.ads[indexes]
-          if (element.includes('videos')) {
-            this.index = this.ads.indexOf(element) + 1
-            this.curimage = false
-            break
-          }
-        }
+        this.imaging = false
       }
     },
     hidebody() {

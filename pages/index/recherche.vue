@@ -119,7 +119,7 @@
           }"
         >
           <div class="flex align-center space-x-5 w-fits">
-            <a href="#z" class="flex w-fits align-center space-x-2"
+            <a class="flex w-fits align-center space-x-2"
               ><img
                 class="rounded-full is-40x40 self-startes"
                 :src="'https://ofalooback.herokuapp.com/storage/' + user_pic"
@@ -131,12 +131,16 @@
             >
             <a
               v-if="supery"
-              :href="'/recherche?ofloowa=' + user_id"
+              href="/recherche/?q=super-agent"
               class="button w-fits block bg-transparent px-3 h-fit rounded border-white size-12 text-white"
               >Super agent</a
             >
           </div>
-          <button class="delete search text-white" aria-label="close"></button>
+          <button
+            class="delete search text-white"
+            aria-label="close"
+            @click="gotorecherche"
+          ></button>
         </div>
         <div
           v-if="
@@ -157,7 +161,11 @@
               >Super agent</a
             >
           </div>
-          <button class="delete search text-white" aria-label="close"></button>
+          <button
+            class="delete search text-white"
+            aria-label="close"
+            @click="gotorecherche"
+          ></button>
         </div>
 
         <p v-if="has_error" class="h-fit w-fit h-centers mt-5">
@@ -592,6 +600,9 @@ export default {
       sessionStorage.removeItem('search')
       sessionStorage.removeItem('txt')
       sessionStorage.removeItem('sort')
+      location.assign('/recherche')
+    },
+    gotorecherche() {
       location.assign('/recherche')
     },
     next() {

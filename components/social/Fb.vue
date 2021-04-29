@@ -25,9 +25,6 @@ export default {
       return this.$store.state.size
     },
   },
-  mounted() {
-    console.log(this.link)
-  },
 }
 </script>
 

@@ -48,7 +48,7 @@ export default {
       )
         .then((res) => res.json())
         .catch(() => console.log("can't get embed link yt"))
-      console.log(this.embed)
+      // console.log(this.embed)
     },
   },
 }

@@ -44,7 +44,7 @@ export default {
       this.embed = await fetch('https://www.tiktok.com/oembed?url=' + this.link)
         .then((res) => res.json())
         .catch(() => console.log("can't get embed link yt"))
-      console.log(this.embed)
+      // console.log(this.embed)
     },
   },
 }

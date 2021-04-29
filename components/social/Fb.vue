@@ -6,8 +6,8 @@
     data-show-text="false"
   >
     <blockquote :cite="link" class="fb-xfbml-parse-ignore">
-      <a :href="link">Propriété(s) publiée(s) sur Facebook.</a>
-      <p>Propriété(s) publiée(s) sur Facebook.</p>
+      <a :href="link" class="color-white">Propriété(s) publiée(s) sur Facebook.</a>
+      <p class="color-white">Propriété(s) publiée(s) sur Facebook.</p>
     </blockquote>
   </div>
 </template>

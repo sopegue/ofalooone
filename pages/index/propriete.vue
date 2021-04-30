@@ -653,52 +653,80 @@
             <h4 class="logo-color size-16 font-semibold mb-5">
               Caractéristiques Appartement
             </h4>
-            <div class="my-2">
-              <img
-                src="https://ofalooback.herokuapp.com/images/prop.png"
-                alt="Image"
-              />
-              <img
-                src="https://ofalooback.herokuapp.com/images/prop.png"
-                alt="Image"
-              />
-              <img
-                src="https://ofalooback.herokuapp.com/images/prop.png"
-                alt="Image"
-              />
-              <img
-                src="https://ofalooback.herokuapp.com/images/prop.png"
-                alt="Image"
-              />
-              <img
-                src="https://ofalooback.herokuapp.com/images/prop.png"
-                alt="Image"
-              />
-              <img
-                src="https://ofalooback.herokuapp.com/images/prop.png"
-                alt="Image"
-              />
+            <div class="my-2 flex flex-col space-y-5">
+              <div v-show="has_in">
+                <h4 class="logo-color size-13 pb-2 font-semibold">Intérieur</h4>
+                <div class="flex flex-wrap">
+                  <div
+                    v-for="op in options.indoor"
+                    :key="op"
+                    class="flex items-center space-x-1.5 column is-one-fifth"
+                    :class="{ 'mx-5': size < 600 }"
+                  >
+                    <span
+                      ><i class="far fa-check-square color-363636"></i
+                    ></span>
+                    <span class="logo-color">{{ op }}</span>
+                  </div>
+                </div>
+              </div>
+              <div v-show="has_out">
+                <h4 class="logo-color size-13 pb-2 font-semibold">
+                  Extérieure
+                </h4>
+                <div class="flex flex-wrap">
+                  <div
+                    v-for="op in options.outdoor"
+                    :key="op"
+                    class="flex items-center space-x-1.5 column is-one-fifth"
+                    :class="{ 'mx-5': size < 600 }"
+                  >
+                    <span
+                      ><i class="far fa-check-square color-363636"></i
+                    ></span>
+                    <span class="logo-color">{{ op }}</span>
+                  </div>
+                </div>
+              </div>
+              <div v-show="has_en">
+                <h4 class="logo-color size-13 pb-2 font-semibold">
+                  Contrôle de l'énergie
+                </h4>
+                <div class="flex flex-wrap">
+                  <div
+                    v-for="op in options.energy"
+                    :key="op"
+                    class="flex items-center space-x-1.5 column is-one-fifth"
+                    :class="{ 'mx-5': size < 600 }"
+                  >
+                    <span
+                      ><i class="far fa-check-square color-363636"></i
+                    ></span>
+                    <span class="logo-color">{{ op }}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div v-if="links !== null" id="social" class="border-b pb-8">
         <div>
-          <h4 class="logo-color size-16 font-semibold mb-5 mt-5 w-fit mx-auto">
+          <h4 class="logo-color size-16 font-semibold mt-5 w-fit mx-auto">
             Réseaux sociaux
           </h4>
         </div>
         <div>
           <div
             v-if="links.yt !== null && links.yt !== undefined"
-            class="pt-6 border-t mt-7"
+            class="pt-6 border-t mt-6"
           >
             <h4 class="logo-color size-16 font-semibold mb-5">Vidéo Youtube</h4>
             <yt :link="links.yt"></yt>
           </div>
           <div
             v-if="links.tiktok && links.tiktok !== undefined"
-            class="pt-6 border-t mt-7"
+            class="pt-6 border-t mt-6"
           >
             <h4 class="logo-color size-16 font-semibold mb-5">Vidéo Tik Tok</h4>
             <div
@@ -728,7 +756,7 @@
           </div>
           <div
             v-if="links.insta !== null && links.insta !== undefined"
-            class="pt-6 border-t mt-7"
+            class="pt-6 border-t mt-6"
           >
             <h4 class="logo-color size-16 font-semibold mb-5">
               Vidéo Instagram
@@ -950,6 +978,11 @@ export default {
       hovered3: false,
       zoom: false,
       quick: false,
+      options: {
+        indoor: [],
+        outdoor: [],
+        energy: [],
+      },
       active: 0,
       images: [],
       index: 1,
@@ -1016,6 +1049,22 @@ export default {
     okay() {
       return this.ok === true
     },
+    has_options() {
+      return (
+        this.property !== undefined &&
+        this.property.data.options !== null &&
+        this.property.data.options !== undefined
+      )
+    },
+    has_in() {
+      return this.options.indoor.length > 0
+    },
+    has_out() {
+      return this.options.outdoor.length > 0
+    },
+    has_en() {
+      return this.options.energy.length > 0
+    },
     ads() {
       return this.images !== null &&
         this.images !== undefined &&
@@ -1064,12 +1113,29 @@ export default {
       this.savetorecent()
       this.getPropVille()
       this.getOtherProp()
+      this.checkOptions()
     }
   },
   mounted() {
     if (this.dataOk) this.increment()
   },
   methods: {
+    checkOptions() {
+      if (this.has_options) {
+        this.property.data.options.forEach((option) => {
+          if (option.options.type === 'indoor') {
+            this.options.indoor.push(option.options.title)
+          }
+          if (option.options.type === 'outdoor') {
+            this.options.outdoor.push(option.options.title)
+          }
+          if (option.options.type === 'energie') {
+            this.options.energy.push(option.options.title)
+          }
+        })
+      }
+      console.log(this.options)
+    },
     async savetorecent() {
       if (localStorage.viewed) {
         const data = await JSON.parse(localStorage.getItem('viewed'))

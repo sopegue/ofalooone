@@ -27,9 +27,9 @@
               'space-x-4 align-center justify-between': size >= 556,
             }"
           >
-            <div class="flex align-center space-x-1 mt-1">
+            <div class="flex space-x-1 mt-1">
               <svg
-                class="w-6 h-6 logo-color -ml-px"
+                class="w-6 h-6 min-h-6 min-w-6 logo-color -ml-px"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -634,35 +634,65 @@
                   </button>
                 </div>
               </div>
-              <div class="border-b pb-5">
+              <div v-if="has_options" class="border-b pb-5">
                 <h4 class="logo-color size-16 font-semibold mb-5">
                   Appartement Caractéristiques
                 </h4>
-                <div class="my-2">
-                  <img
-                    src="https://ofalooback.herokuapp.com/images/prop.png"
-                    alt="Image"
-                  />
-                  <img
-                    src="https://ofalooback.herokuapp.com/images/prop.png"
-                    alt="Image"
-                  />
-                  <img
-                    src="https://ofalooback.herokuapp.com/images/prop.png"
-                    alt="Image"
-                  />
-                  <img
-                    src="https://ofalooback.herokuapp.com/images/prop.png"
-                    alt="Image"
-                  />
-                  <img
-                    src="https://ofalooback.herokuapp.com/images/prop.png"
-                    alt="Image"
-                  />
-                  <img
-                    src="https://ofalooback.herokuapp.com/images/prop.png"
-                    alt="Image"
-                  />
+                <div class="my-2 flex flex-col space-y-5">
+                  <div v-show="has_in">
+                    <h4 class="logo-color size-13 pb-2 font-semibold">
+                      Intérieur
+                    </h4>
+                    <div class="flex flex-wrap">
+                      <div
+                        v-for="op in options.indoor"
+                        :key="op"
+                        class="flex items-center space-x-1.5 column is-one-fifth"
+                        :class="{ 'mx-5': size < 600 }"
+                      >
+                        <span
+                          ><i class="far fa-check-square color-363636"></i
+                        ></span>
+                        <span class="logo-color">{{ op }}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-show="has_out">
+                    <h4 class="logo-color size-13 pb-2 font-semibold">
+                      Extérieure
+                    </h4>
+                    <div class="flex flex-wrap">
+                      <div
+                        v-for="op in options.outdoor"
+                        :key="op"
+                        class="flex items-center space-x-1.5 column is-one-fifth"
+                        :class="{ 'mx-5': size < 600 }"
+                      >
+                        <span
+                          ><i class="far fa-check-square color-363636"></i
+                        ></span>
+                        <span class="logo-color">{{ op }}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-show="has_en">
+                    <h4 class="logo-color size-13 pb-2 font-semibold">
+                      Contrôle de l'énergie
+                    </h4>
+                    <div class="flex flex-wrap">
+                      <div
+                        v-for="op in options.energy"
+                        :key="op"
+                        class="flex items-center space-x-1.5 column is-one-fifth"
+                        :class="{ 'mx-5': size < 600 }"
+                      >
+                        <span
+                          ><i class="far fa-check-square color-363636"></i
+                        ></span>
+                        <span class="logo-color">{{ op }}</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -767,6 +797,11 @@ export default {
   data() {
     return {
       inside: false,
+      options: {
+        indoor: [],
+        outdoor: [],
+        energy: [],
+      },
       showtel: false,
       share: false,
       hovered1: false,
@@ -795,6 +830,22 @@ export default {
         this.property.property !== null
       )
     },
+    has_options() {
+      return (
+        this.property !== undefined &&
+        this.property.options !== null &&
+        this.property.options !== undefined
+      )
+    },
+    has_in() {
+      return this.options.indoor.length > 0
+    },
+    has_out() {
+      return this.options.outdoor.length > 0
+    },
+    has_en() {
+      return this.options.energy.length > 0
+    },
     next1() {
       if (this.images.length - 1 - this.curindex <= 1) {
         if (this.images.length - 1 - this.curindex === 1)
@@ -816,11 +867,28 @@ export default {
   },
   beforeMount() {
     this.savetorecent()
+    this.checkOptions()
   },
   mounted() {
     this.increment()
   },
   methods: {
+    checkOptions() {
+      if (this.has_options) {
+        this.property.options.forEach((option) => {
+          if (option.options.type === 'indoor') {
+            this.options.indoor.push(option.options.title)
+          }
+          if (option.options.type === 'outdoor') {
+            this.options.outdoor.push(option.options.title)
+          }
+          if (option.options.type === 'energie') {
+            this.options.energy.push(option.options.title)
+          }
+        })
+      }
+      console.log(this.options)
+    },
     async savetorecent() {
       if (localStorage.viewed) {
         const data = await JSON.parse(localStorage.getItem('viewed'))

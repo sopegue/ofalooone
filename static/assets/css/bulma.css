@@ -1990,6 +1990,21 @@ fieldset[disabled] .button {
   min-height: 6em !important;
   max-height: 6em !important;
 }
+.columns.is-gapless {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+}
+.columns.is-gapless > .column {
+  margin: 0;
+  padding: 0 !important;
+}
+.columns.is-gapless:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+.columns.is-gapless:last-child {
+  margin-bottom: 0;
+}
 .delete,
 .modal-close {
   -moz-appearance: none;

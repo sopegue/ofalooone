@@ -8,6 +8,7 @@ export const state = () => ({
   domloading: true,
   quicksign: false,
   component: -1,
+  tosave: -1,
   precom: -1,
   hasscrolled: false,
   filter: null,
@@ -17,6 +18,8 @@ export const state = () => ({
   regerror: false,
   regsuccess: false,
   accountdeleting: false,
+
+  fromprop: false,
 
   url: '',
   type: 'article',
@@ -45,6 +48,12 @@ export const mutations = {
   },
   set_Domload(state, value) {
     state.domloading = value
+  },
+  set_prop(state, value) {
+    state.fromprop = value
+  },
+  set_tosave(state, value) {
+    state.tosave = value
   },
   previous(state, value) {
     state.from = value

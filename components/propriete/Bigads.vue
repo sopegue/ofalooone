@@ -18,7 +18,7 @@
           <a
             v-if="link"
             class="absolute bottom-0 right-0 mb-2 mr-2 z-10"
-            title="Contient un ou plusieurs lien vidéo(s)"
+            title="Contient un ou plusieurs lien(s) vidéo(s)"
             :href="'/propriete?wyzes=' + ids + '#social'"
           >
             <svg

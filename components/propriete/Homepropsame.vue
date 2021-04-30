@@ -26,7 +26,7 @@
           <a
             v-if="property.links !== undefined && property.links !== null"
             class="absolute bottom-0 right-0 mb-2 mr-2 z-10"
-            title="Contient un ou plusieurs lien vidéo(s)"
+            title="Contient un ou plusieurs lien(s) vidéo(s)"
             :href="'/propriete?wyzes=' + property.property.id + '#social'"
           >
             <svg
@@ -46,10 +46,10 @@
           </a>
           <div
             v-if="notification"
-            class="absolute w-fit top-10 right-0 appearZ z-10"
+            class="absolute rounded w-fit top-10 right-0 appearZ z-10"
           >
             <span
-              class="block text-c bg-green-600 py-1.5 px-4 text-white font-semibold size-11"
+              class="block text-c bg-green-600 rounded py-1.5 px-4 text-white font-semibold size-11"
               >Enregistrée √</span
             >
           </div>
@@ -370,7 +370,10 @@ export default {
       if (!this.$auth.loggedIn) {
         this.$store.commit('close_quick_sign', true)
         this.$store.commit('precom', this.id)
+        this.$store.commit('set_tosave', this.property.property.id)
         document.body.style = 'overflow: hidden'
+      } else {
+        // save or desaved
       }
     },
     desaved() {},

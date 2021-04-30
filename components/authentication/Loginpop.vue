@@ -111,8 +111,13 @@
             :class="{ noclick: isloging }"
             @click="signin"
           >
-            <span class="size-13 text-white font-semibold">Connexion </span></a
-          >
+            <span
+              class="size-13 flex items-center space-x-2 text-white font-semibold"
+              ><span class="size-13 text-white font-semibold">Connexion</span>
+              <span v-show="isloging" class="w-fit h-fit"
+                ><i class="animate-spin fas fa-circle-notch color-white"></i
+              ></span> </span
+          ></a>
           <div class="w-fit m-0-auto">
             <div
               class="flex flex-col sm:flex-row align-center text-center space-x-2 size-13 mt-5"
@@ -215,6 +220,12 @@ export default {
     precom() {
       return this.$store.state.precom
     },
+    fromprop() {
+      return this.$store.state.fromprop
+    },
+    curoute() {
+      return this.$route.path
+    },
   },
   watch: {
     email() {
@@ -263,7 +274,14 @@ export default {
             if (res.data.status === 200) {
               this.saveProp()
               this.$store.commit('close_quick_sign', false)
-              this.$store.commit('component', this.precom)
+              if (!this.curoute.includes('/propriete')) {
+                this.$store.commit('component', this.precom)
+              } else {
+                this.$store.commit('set_prop', true)
+                setTimeout(() => {
+                  this.$store.commit('set_prop', false)
+                }, 5000)
+              }
               document.body.style = 'overflow: visible'
               console.log('logged and saving article')
             }

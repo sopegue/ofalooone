@@ -24,7 +24,7 @@
         <a
           v-show="haslink"
           class="absolute z-10 bottom-0 right-0 mb-2 mr-2 z-12"
-          title="Contient un ou plusieurs lien vidéo(s)"
+          title="Contient un ou plusieurs lien(s) vidéo(s)"
           href="#social"
           @click.stop=""
         >

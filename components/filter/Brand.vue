@@ -511,9 +511,9 @@ export default {
       if (
         this.title === 'Achat et location' ||
         this.title === 'Types de propriétés' ||
-        this.title === 'Indoor' ||
-        this.title === 'Outdoor' ||
-        this.title === "Contrôle d'énergie" ||
+        this.title === 'Intérieur' ||
+        this.title === 'Extérieur' ||
+        this.title === "Contrôle de l'énergie" ||
         this.title === 'Disponibilité'
       ) {
         this.fill_filter(newv)
@@ -631,7 +631,7 @@ export default {
         if (sessionStorage.filter) sessionStorage.removeItem('filter')
         sessionStorage.setItem('filter', JSON.stringify(this.filter))
       }
-      if (this.title === 'Indoor') {
+      if (this.title === 'Intérieur') {
         if (val.includes('Tous types')) {
           this.filter.indoor.multiple = ['Tous types']
         } else {
@@ -640,7 +640,7 @@ export default {
         if (sessionStorage.filter) sessionStorage.removeItem('filter')
         sessionStorage.setItem('filter', JSON.stringify(this.filter))
       }
-      if (this.title === 'Outdoor') {
+      if (this.title === 'Extérieur') {
         if (val.includes('Tous types')) {
           this.filter.outdoor.multiple = ['Tous types']
         } else {
@@ -649,7 +649,7 @@ export default {
         if (sessionStorage.filter) sessionStorage.removeItem('filter')
         sessionStorage.setItem('filter', JSON.stringify(this.filter))
       }
-      if (this.title === "Contrôle d'énergie") {
+      if (this.title === "Contrôle de l'énergie") {
         if (val.includes('Tous types')) {
           this.filter.energy.multiple = ['Tous types']
         } else {
@@ -846,21 +846,21 @@ export default {
       if (this.title === 'Type de location') {
         this.checkedCateg = [this.filter.type_loc.tous]
       }
-      if (this.title === 'Indoor') {
+      if (this.title === 'Intérieur') {
         if (this.filter.indoor.multiple.length === 0) {
           this.checkedCateg = ['Tous types']
         } else {
           this.checkedCateg = this.filter.indoor.multiple
         }
       }
-      if (this.title === 'Outdoor') {
+      if (this.title === 'Extérieur') {
         if (this.filter.outdoor.multiple.length === 0) {
           this.checkedCateg = ['Tous types']
         } else {
           this.checkedCateg = this.filter.outdoor.multiple
         }
       }
-      if (this.title === "Contrôle d'énergie") {
+      if (this.title === "Contrôle de l'énergie") {
         if (this.filter.energy.multiple.length === 0) {
           this.checkedCateg = ['Tous types']
         } else {

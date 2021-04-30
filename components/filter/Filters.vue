@@ -184,21 +184,21 @@
       <brand
         number="1"
         :content="['Tous types', 'Jacuzzi']"
-        :title="'Indoor'"
+        :title="'Intérieur'"
         @there="there"
         @done="done"
       ></brand>
       <brand
         number="1"
         :content="['Tous types', 'Balcon']"
-        :title="'Outdoor'"
+        :title="'Extérieur'"
         @there="there"
         @done="done"
       ></brand>
       <brand
         number="1"
         :content="['Tous types', 'Climatiseur']"
-        :title="'Contrôle d\'énergie'"
+        :title="'Contrôle de l\'énergie'"
         @there="there"
         @done="done"
       ></brand>

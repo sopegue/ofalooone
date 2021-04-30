@@ -118,7 +118,8 @@
                 </svg>
                 <div
                   v-show="share"
-                  class="absolute bg-white top-0 right-0 mt-6 z-20 appearZ w-fit flex align-center space-x-4 border py-2 px-5 rounded"
+                  class="absolute bg-white top-0 mt-6 z-20 appearZ w-fit flex align-center space-x-4 border py-2 px-5 rounded"
+                  :class="{ 'right-0': size >= 556, 'left-0': size < 556 }"
                 >
                   <a
                     class="twitter-share-button"

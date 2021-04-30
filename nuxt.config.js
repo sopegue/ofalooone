@@ -13,16 +13,7 @@ export default {
         content: 'Ofaloo.com',
       },
     ],
-    script: [
-      { src: 'https://use.fontawesome.com/releases/v5.14.0/js/all.js' },
-      {
-        src: 'https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v10.0',
-        async: true,
-        defer: true,
-        body: true,
-        crossorigin: 'anonymous',
-      },
-    ],
+    script: [{ src: 'https://use.fontawesome.com/releases/v5.14.0/js/all.js' }],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: '/assets/css/pc.css' },

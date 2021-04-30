@@ -124,20 +124,36 @@
                 data-size="large"
                 title="Partager sur Twitter"
                 target="_blank"
-                ><i class="fab fa-twitter size-20 clickable logo-color"></i
+                ><i class="fab fa-twitter size-20 clickable twi-col"></i
               ></a>
               <a
                 href="https://fb.com/saliistore"
                 title="Partager sur Facebook"
                 target="_blank"
-                ><i class="fab fa-facebook size-20 clickable logo-color"></i
+                ><iframe
+                  :src="
+                    'https://www.facebook.com/plugins/share_button.php?href=https://www.ofaloo.com/propriete/?wyzes=' +
+                    property.data.property.id +
+                    '&layout=button&size=small&width=81&height=20&appId'
+                  "
+                  width="81"
+                  height="20"
+                  style="border: none; overflow: hidden"
+                  scrolling="no"
+                  frameborder="0"
+                  allowfullscreen="true"
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                ></iframe
               ></a>
               <a
-                href="https://fb.com/saliistore"
+                :href="
+                  'mailto:?subject=Propriétés à acheter et louer sur le site Ofaloo.com&amp;body=Découvrez cette superbe propriété sur https://www.ofaloo.com/propriete/?wyzes=' +
+                  property.data.property.id
+                "
                 title="Partager par email"
                 target="_blank"
                 ><svg
-                  class="w-6 h-6 logo-color -ml-1 -mt-px makeme-008489"
+                  class="w-7 min-w-7 h-7 min-h-7 logo-color"
                   viewBox="0 0 20 20"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -666,6 +682,61 @@
           </div>
         </div>
       </div>
+      <div v-if="links !== null" id="social" class="border-b pb-8">
+        <div>
+          <h4 class="logo-color size-16 font-semibold mb-5 mt-5 w-fit mx-auto">
+            Réseaux sociaux
+          </h4>
+        </div>
+        <div>
+          <div
+            v-if="links.yt !== null && links.yt !== undefined"
+            class="pt-6 border-t mt-7"
+          >
+            <h4 class="logo-color size-16 font-semibold mb-5">Vidéo Youtube</h4>
+            <yt :link="links.yt"></yt>
+          </div>
+          <div
+            v-if="links.tiktok && links.tiktok !== undefined"
+            class="pt-6 border-t mt-7"
+          >
+            <h4 class="logo-color size-16 font-semibold mb-5">Vidéo Tik Tok</h4>
+            <div
+              class="flex items-center justify-center sm:flex-row flex-col sm:space-x-3 sm:space-y-0 space-y-3 pb-5"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+              <span
+                >Si la video Tik Tok ne fonctionne pas convenablement, essayez
+                de désactiver votre bloqueur de publicité(AdBlock) puis
+                ré-actualiser la page.</span
+              >
+            </div>
+            <tiktok :link="links.tiktok"></tiktok>
+          </div>
+          <div
+            v-if="links.insta !== null && links.insta !== undefined"
+            class="pt-6 border-t mt-7"
+          >
+            <h4 class="logo-color size-16 font-semibold mb-5">
+              Vidéo Instagram
+            </h4>
+            <insta :link="links.insta"></insta>
+          </div>
+        </div>
+      </div>
       <div class="flex w-full">
         <div id="contact-agent" class="w-full mt-3 h-fit p-2">
           <h4 class="logo-color size-16 font-semibold mb-5">
@@ -834,6 +905,10 @@ import Typeprop from '~/components/dropdown/Typeprop.vue'
 import Sameagent from '~/components/Sameagent.vue'
 import Sameagents from '~/components/Sameagents.vue'
 // import Fb from '~/components/social/Fb.vue'
+import Yt from '~/components/social/Yt.vue'
+import Tiktok from '~/components/social/Tiktok.vue'
+import Insta from '~/components/social/Insta.vue'
+// import Fb from '~/components/social/Fb.vue'
 
 export default {
   components: {
@@ -843,6 +918,9 @@ export default {
     Typeprop,
     Sameagent,
     Sameagents,
+    Yt,
+    Tiktok,
+    Insta,
   },
   middleware: 'query',
   async asyncData({ query, redirect }) {
@@ -945,6 +1023,12 @@ export default {
         ? this.images
         : []
     },
+    links() {
+      return this.property.data.links !== null &&
+        this.property.data.links !== undefined
+        ? this.property.data.links
+        : null
+    },
     dataOk() {
       return (
         this.property !== null &&
@@ -975,11 +1059,12 @@ export default {
     this.fillImages()
   },
   beforeMount() {
-    this.savetorecent()
     if (!this.dataOk) this.$router.push('/')
-
-    this.getPropVille()
-    this.getOtherProp()
+    else {
+      this.savetorecent()
+      this.getPropVille()
+      this.getOtherProp()
+    }
   },
   mounted() {
     if (this.dataOk) this.increment()

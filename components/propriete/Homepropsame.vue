@@ -23,10 +23,11 @@
             :href="'/propriete?wyzes=' + property.property.id"
             class="absolute appearZ z-0 top-0 left-0 w-full h-full bg-black-trer"
           ></a>
-          <button
+          <a
             v-if="property.links !== undefined && property.links !== null"
-            class="absolute cursor-default bottom-0 right-0 mb-2 mr-2 z-10"
+            class="absolute bottom-0 right-0 mb-2 mr-2 z-10"
             title="Contient un ou plusieurs lien vidéo(s)"
+            :href="'/propriete?wyzes=' + property.property.id + '#social'"
           >
             <svg
               class="w-8 h-8 text-white"
@@ -42,7 +43,7 @@
                 fill="#00000041"
               />
             </svg>
-          </button>
+          </a>
           <div
             v-if="notification"
             class="absolute w-fit top-10 right-0 appearZ z-10"

@@ -1,6 +1,6 @@
 <template>
   <div v-if="embed !== null && embed !== undefined">
-    <div v-html="embed.html"></div>
+    <div class="mx-auto w-fit" v-html="embed.html"></div>
     <script async src="https://www.tiktok.com/embed.js"></script>
   </div>
 </template>

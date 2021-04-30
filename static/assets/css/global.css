@@ -7,6 +7,9 @@ body,
 html {
   scroll-behavior: smooth !important;
 }
+.twi-col {
+  color: #1da1f2 !important;
+}
 a,
 p,
 span,

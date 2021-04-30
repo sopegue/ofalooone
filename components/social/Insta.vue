@@ -1,6 +1,6 @@
 <template>
   <div v-if="embed !== null && embed !== undefined">
-    <div v-html="embed.html"></div>
+    <div class="lg:w-2/5 md:w-3/5 sm:w-4/5 mx-auto" v-html="embed.html"></div>
     <script async src="//www.instagram.com/embed.js"></script>
   </div>
 </template>

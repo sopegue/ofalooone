@@ -1,6 +1,6 @@
 <template>
   <div v-if="embed !== null && embed !== undefined">
-    <div v-html="embed.html"></div>
+    <div class="flex flex-col items-center" v-html="embed.html"></div>
   </div>
 </template>
 
@@ -16,6 +16,7 @@ export default {
     return {
       embed: null,
       sizure: 500,
+      already: false,
     }
   },
   computed: {
@@ -34,9 +35,6 @@ export default {
         this.process(728)
       }
     },
-  },
-  mounted() {
-    this.process()
   },
   methods: {
     async process(val = 728) {

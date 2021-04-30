@@ -8,23 +8,25 @@
       @goindex="goindex"
     >
       <figure
-        class="image clickable h-full w-full relative"
+        class="image clickable h-full w-full relative z-10"
         @mouseleave="
           {
             hovered1 = false
           }
         "
-        @click="show_quick"
+        @click.stop="show_quick"
         @mouseover="
           {
             hovered1 = true
           }
         "
       >
-        <button
+        <a
           v-show="haslink"
-          class="absolute z-10 cursor-default bottom-0 right-0 mb-2 mr-2"
+          class="absolute z-10 bottom-0 right-0 mb-2 mr-2 z-12"
           title="Contient un ou plusieurs lien vidéo(s)"
+          href="#social"
+          @click.stop=""
         >
           <svg
             class="w-8 h-8 text-white"
@@ -40,7 +42,7 @@
               fill="#00000041"
             />
           </svg>
-        </button>
+        </a>
         <div
           v-show="hovered1"
           class="absolute appearZ z-0 top-0 left-0 w-full h-full bg-black-trer"

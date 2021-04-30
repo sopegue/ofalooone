@@ -122,10 +122,7 @@
                 >
                   <a
                     class="twitter-share-button"
-                    :href="
-                      'https://twitter.com/intent/tweet?text=https://www.ofaloo.com/propriete/?wyzes=' +
-                      property.property.id
-                    "
+                    :href="`https://twitter.com/intent/tweet?text=https://www.ofaloo.com/propriete/?wyzes=${property.property.id}`"
                     data-size="large"
                     title="Partager sur Twitter"
                     target="_blank"
@@ -136,11 +133,7 @@
                     title="Partager sur Facebook"
                     target="_blank"
                     ><iframe
-                      :src="
-                        'https://www.facebook.com/plugins/share_button.php?href=https://www.ofaloo.com/propriete/?wyzes=' +
-                        property.property.id +
-                        '&layout=button&size=small&width=81&height=20&appId'
-                      "
+                      :src="`https://www.facebook.com/plugins/share_button.php?href=https://www.ofaloo.com/propriete/?wyzes=${property.property.id}&layout=button&size=small&width=81&height=20&appId`"
                       width="81"
                       height="20"
                       style="border: none; overflow: hidden"
@@ -152,10 +145,7 @@
                   ></a>
                   <a
                     v-show="size < 640"
-                    :href="
-                      'mailto:?subject=Propriétés à acheter et louer sur le site Ofaloo.com&amp;body=Découvrez cette superbe propriété sur https://www.ofaloo.com/propriete/?wyzes=' +
-                      property.property.id
-                    "
+                    :href="`mailto:?subject=Propriétés à acheter et louer sur le site Ofaloo.com&amp;body=Découvrez cette superbe propriété sur https://www.ofaloo.com/propriete/?wyzes=${property.property.id}`"
                     title="Partager par email"
                     ><svg
                       class="w-7 min-w-7 h-7 min-h-7 logo-color"

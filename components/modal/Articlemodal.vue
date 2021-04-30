@@ -118,28 +118,58 @@
                 </svg>
                 <div
                   v-show="share"
-                  class="absolute bg-white top-0 right-0 mt-7 z-20 appearZ w-fit flex align-center space-x-4 border py-2 px-5 rounded"
+                  class="absolute bg-white top-0 right-0 mt-6 z-20 appearZ w-fit flex align-center space-x-4 border py-2 px-5 rounded"
                 >
-                  <a href="#" title="Partager sur Twitter" target="_blank"
-                    ><i class="fab fa-twitter size-20 clickable logo-color"></i
+                  <a
+                    class="twitter-share-button"
+                    :href="
+                      'https://twitter.com/intent/tweet?text=https://www.ofaloo.com/propriete/?wyzes=' +
+                      property.property.id
+                    "
+                    data-size="large"
+                    title="Partager sur Twitter"
+                    target="_blank"
+                    ><i class="fab fa-twitter size-20 clickable twi-col"></i
                   ></a>
-                  <a href="#" title="Partager sur Facebook" target="_blank"
-                    ><i class="fab fa-facebook size-20 clickable logo-color"></i
+                  <a
+                    href="https://fb.com/saliistore"
+                    title="Partager sur Facebook"
+                    target="_blank"
+                    ><iframe
+                      :src="
+                        'https://www.facebook.com/plugins/share_button.php?href=https://www.ofaloo.com/propriete/?wyzes=' +
+                        property.property.id +
+                        '&layout=button&size=small&width=81&height=20&appId'
+                      "
+                      width="81"
+                      height="20"
+                      style="border: none; overflow: hidden"
+                      scrolling="no"
+                      frameborder="0"
+                      allowfullscreen="true"
+                      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                    ></iframe
                   ></a>
-                  <a href="#" title="Partager par email" target="_blank"
+                  <a
+                    v-show="size < 640"
+                    :href="
+                      'mailto:?subject=Propriétés à acheter et louer sur le site Ofaloo.com&amp;body=Découvrez cette superbe propriété sur https://www.ofaloo.com/propriete/?wyzes=' +
+                      property.property.id
+                    "
+                    title="Partager par email"
                     ><svg
-                      class="w-6 h-6 logo-color -ml-1 -mt-px makeme-008489"
+                      class="w-7 min-w-7 h-7 min-h-7 logo-color"
                       viewBox="0 0 20 20"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
                         d="M2.00333 5.88355L9.99995 9.88186L17.9967 5.8835C17.9363 4.83315 17.0655 4 16 4H4C2.93452 4 2.06363 4.83318 2.00333 5.88355Z"
-                        fill="#2d3748"
+                        fill="#004e66"
                       />
                       <path
                         d="M18 8.1179L9.99995 12.1179L2 8.11796V14C2 15.1046 2.89543 16 4 16H16C17.1046 16 18 15.1046 18 14V8.1179Z"
-                        fill="#2d3748"
+                        fill="#004e66"
                       />
                     </svg>
                   </a>

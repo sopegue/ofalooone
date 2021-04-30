@@ -146,12 +146,12 @@
                 ></iframe
               ></a>
               <a
+                v-show="size < 640"
                 :href="
                   'mailto:?subject=Propriétés à acheter et louer sur le site Ofaloo.com&amp;body=Découvrez cette superbe propriété sur https://www.ofaloo.com/propriete/?wyzes=' +
                   property.data.property.id
                 "
                 title="Partager par email"
-                target="_blank"
                 ><svg
                   class="w-7 min-w-7 h-7 min-h-7 logo-color"
                   viewBox="0 0 20 20"
@@ -160,11 +160,11 @@
                 >
                   <path
                     d="M2.00333 5.88355L9.99995 9.88186L17.9967 5.8835C17.9363 4.83315 17.0655 4 16 4H4C2.93452 4 2.06363 4.83318 2.00333 5.88355Z"
-                    fill="#2d3748"
+                    fill="#004e66"
                   />
                   <path
                     d="M18 8.1179L9.99995 12.1179L2 8.11796V14C2 15.1046 2.89543 16 4 16H16C17.1046 16 18 15.1046 18 14V8.1179Z"
-                    fill="#2d3748"
+                    fill="#004e66"
                   />
                 </svg>
               </a>

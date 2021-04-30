@@ -143,10 +143,7 @@
                       allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                     ></iframe
                   ></a>
-                  <a
-                    v-show="size < 640"
-                    :href="`mailto:?subject=Propriétés à acheter et louer sur le site Ofaloo.com&amp;body=Découvrez cette superbe propriété sur https://www.ofaloo.com/propriete/?wyzes=${property.property.id}`"
-                    title="Partager par email"
+                  <a v-show="size < 640" :href="mail" title="Partager par email"
                     ><svg
                       class="w-7 min-w-7 h-7 min-h-7 logo-color"
                       viewBox="0 0 20 20"
@@ -835,6 +832,9 @@ export default {
     },
     has_en() {
       return this.options.energy.length > 0
+    },
+    mail() {
+      return `mailto:?subject=Propriétés à acheter et louer sur le site Ofaloo.com&amp;body=Découvrez cette superbe propriété sur https://www.ofaloo.com/propriete/?wyzes=${this.property.property.id}`
     },
     next1() {
       if (this.images.length - 1 - this.curindex <= 1) {

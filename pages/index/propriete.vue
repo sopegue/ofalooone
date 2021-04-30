@@ -730,7 +730,7 @@
           >
             <h4 class="logo-color size-16 font-semibold mb-5">Vidéo Tik Tok</h4>
             <div
-              class="flex items-center justify-center sm:flex-row flex-col sm:space-x-3 sm:space-y-0 space-y-3 pb-5"
+              class="flex items-center justify-center sm:flex-row flex-col sm:space-x-1.5 sm:space-y-0 space-y-3 pb-5"
             >
               <svg
                 class="w-6 h-6"

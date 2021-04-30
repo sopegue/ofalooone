@@ -201,6 +201,7 @@
                 </button>
               </div>
               <bigads
+                :ids="property.property.id"
                 :indexer="index"
                 :ads="images"
                 :link="property.links !== null"

@@ -15,7 +15,7 @@ export default {
     ],
     script: [{ src: 'https://use.fontawesome.com/releases/v5.14.0/js/all.js' }],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/myfavicon.ico' },
       { rel: 'stylesheet', href: '/assets/css/pc.css' },
       { rel: 'stylesheet', href: '/assets/css/bulma.css' },
       {

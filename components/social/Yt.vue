@@ -1,6 +1,6 @@
 <template>
   <div v-if="embed !== null && embed !== undefined">
-    <div class="flex flex-col items-center" v-html="embed.html"></div>
+    <div id="yt" class="flex flex-col items-center" v-html="embed.html"></div>
   </div>
 </template>
 
@@ -17,6 +17,7 @@ export default {
       embed: null,
       sizure: 500,
       already: false,
+      firsttime: true,
     }
   },
   computed: {
@@ -27,14 +28,8 @@ export default {
       return this.sizure
     },
   },
-  watch: {
-    size(nv, ov) {
-      if (nv >= 360 && nv < 550) {
-        this.process(nv - 50)
-      } else if (nv >= 500) {
-        this.process(728)
-      }
-    },
+  beforeMount() {
+    this.process()
   },
   methods: {
     async process(val = 728) {

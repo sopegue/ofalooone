@@ -68,6 +68,30 @@ svg {
   position: relative !important;
   top: -2rem !important;
 }
+#yt iframe {
+  width: 75% !important;
+  height: 460px !important;
+}
+@media screen and (max-width: 910px) {
+  #yt iframe {
+    width: 100% !important;
+  }
+}
+@media screen and (max-width: 740px) {
+  #yt iframe {
+    height: 360px !important;
+  }
+}
+@media screen and (max-width: 500px) {
+  #yt iframe {
+    height: 240px !important;
+  }
+}
+@media screen and (max-width: 420px) {
+  #yt iframe {
+    height: 200px !important;
+  }
+}
 .rate:not(:checked) > input {
   position: absolute;
 }

@@ -87,11 +87,6 @@ svg {
     height: 240px !important;
   }
 }
-@media screen and (max-width: 420px) {
-  #yt iframe {
-    height: 200px !important;
-  }
-}
 .rate:not(:checked) > input {
   position: absolute;
 }

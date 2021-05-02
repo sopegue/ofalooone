@@ -10,7 +10,7 @@
     >
       <div
         v-if="!minsearch || size >= 700"
-        class="flex z-20 align-center pt-0.65"
+        class="flex z-20 align-center pt-0.7"
         :class="{
           'space-x-16': size > 889,
           'space-x-10 justify-between': size <= 889,

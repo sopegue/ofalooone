@@ -8,7 +8,7 @@
     </div>
     <div
       v-if="deleting"
-      class="absolute z-10000 top-0 bottom-0 right-0 left-0 bg-black-tr"
+      class="fixed z-10000 top-0 bottom-0 right-0 left-0 bg-black-tr"
     >
       <span
         class="size-20 font-semibold text-white block h-fit w-fit vertical-center m-0-auto"

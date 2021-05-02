@@ -68,6 +68,7 @@ export default {
   auth: {
     localStorage: false,
     rewriteRedirects: true,
+    resetOnError: true,
     redirect: {
       login: '/connexion',
       logout: false,

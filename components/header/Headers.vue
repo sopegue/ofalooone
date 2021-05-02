@@ -2,16 +2,15 @@
   <div
     class="bg-white relative w-full"
     :class="{ 'border-b': scrollpos >= 0 }"
-    :style="setheight(76)"
+    :style="setheight(57)"
   >
-    <div class="absolute bgtr h-full w-full z-0"></div>
     <div
       class="z-10 relative"
       :class="{ 'px-8': size > 640, 'px-2': size <= 640 }"
     >
       <div
         v-if="!minsearch || size >= 700"
-        class="flex z-20 align-center pt-3"
+        class="flex z-20 align-center pt-0.8"
         :class="{
           'space-x-16': size > 889,
           'space-x-10 justify-between': size <= 889,
@@ -26,7 +25,7 @@
       </div>
       <div
         v-if="minsearch && size < 700"
-        class="z-20 flex align-center space-x-2 pt-6"
+        class="z-20 flex align-center space-x-2 pt-2"
       >
         <button
           class="button border-none dezz rounded-full h-fit w-fit p-1"

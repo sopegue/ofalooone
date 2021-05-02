@@ -66,6 +66,7 @@ export default {
     locales: ['fr'],
   },
   auth: {
+    plugins: ['@/plugins/auth.js'],
     localStorage: false,
     rewriteRedirects: true,
     resetOnError: true,

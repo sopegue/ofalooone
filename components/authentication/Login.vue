@@ -113,8 +113,13 @@
             :class="{ noclick: isloging }"
             @click="signin"
           >
-            <span class="size-13 text-white font-semibold">Connexion </span></a
-          >
+            <span
+              class="size-13 flex items-center space-x-2 text-white font-semibold"
+              ><span class="size-13 text-white font-semibold">Connexion</span>
+              <span v-show="isloging" class="w-fit h-fit"
+                ><i class="animate-spin fas fa-circle-notch color-white"></i
+              ></span> </span
+          ></a>
           <div class="w-fit m-0-auto">
             <div
               class="flex flex-col sm:flex-row align-center text-center space-x-2 size-13 mt-5"

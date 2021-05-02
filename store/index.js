@@ -15,6 +15,9 @@ export const state = () => ({
   reseting: false,
   from: '/',
 
+  delmod: false,
+  del: false,
+
   regerror: false,
   regsuccess: false,
   accountdeleting: false,
@@ -49,6 +52,14 @@ export const mutations = {
   set_Domload(state, value) {
     state.domloading = value
   },
+  SET_DEL_MOD(state, value) {
+    state.delmod = value
+  },
+
+  SET_DEL_ACC(state, value) {
+    state.del = value
+  },
+
   set_prop(state, value) {
     state.fromprop = value
   },

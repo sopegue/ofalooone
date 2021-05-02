@@ -332,6 +332,9 @@ export default {
     notification() {
       return this.notif === true
     },
+    here() {
+      return this.$store.state.component
+    },
     getImgPrin() {
       for (let index = 0; index < this.property.images.length; index++) {
         const element = this.property.images[index]
@@ -345,6 +348,16 @@ export default {
     },
     size() {
       return this.$store.state.size
+    },
+  },
+  watch: {
+    here(nv, ov) {
+      if (nv === this.id) {
+        this.notif = true
+        setTimeout(() => {
+          this.notif = false
+        }, 3000)
+      }
     },
   },
   methods: {

@@ -93,13 +93,11 @@
                 </button>
               </div> -->
             </div>
-            <div class="flex flex-col text-center">
+            <div class="flex flex-col text-center pt-1.5">
               <span class="size-18 logo-color font-semibold"
-                >Yaya Sopegue Soro</span
+                >{{ $auth.user.surname }} {{ $auth.user.name }}</span
               >
-              <span class="size-12 color-363636f"
-                >yayasopeguesoro@gmail.com</span
-              >
+              <span class="size-12 color-363636f">{{ $auth.user.email }}</span>
             </div>
           </div>
           <div
@@ -116,8 +114,9 @@
               :class="{
                 'dropdown-item': size >= 850,
                 'font-semibold color-008489 items-perm cursor-default':
-                  curoute === '/user' && size >= 850,
-                'font-semibold list-active': curoute === '/user' && size < 850,
+                  (curoute === '/user' || curoute === '/user/') && size >= 850,
+                'font-semibold list-active':
+                  (curoute === '/user' || curoute === '/user/') && size < 850,
               }"
               >Mes informations</a
             >
@@ -128,9 +127,9 @@
               :class="{
                 'dropdown-item': size >= 850,
                 'font-semibold color-008489 items-perm cursor-default':
-                  curoute === '/user/password' && size >= 850,
+                  curoute.includes('/user/password') && size >= 850,
                 'font-semibold list-active':
-                  curoute === '/user/password' && size < 850,
+                  curoute.includes('/user/password') && size < 850,
               }"
               >Mot de passe</a
             >
@@ -142,9 +141,9 @@
               :class="{
                 'dropdown-item': size >= 850,
                 'font-semibold color-008489 items-perm cursor-default':
-                  curoute === '/user/parametres' && size >= 850,
+                  curoute.includes('/user/parametres') && size >= 850,
                 'font-semibold list-active':
-                  curoute === '/user/parametres' && size < 850,
+                  curoute.includes('/user/parametres') && size < 850,
               }"
               >Paramètres du compte</a
             >
@@ -156,9 +155,9 @@
               :class="{
                 'dropdown-item': size >= 850,
                 'font-semibold color-008489 items-perm cursor-default':
-                  curoute === '/user/parametres' && size >= 850,
+                  curoute.includes('/user/parametres') && size >= 850,
                 'font-semibold list-active':
-                  curoute === '/user/parametres' && size < 850,
+                  curoute.includes('/user/parametres') && size < 850,
               }"
               >Paramètres</a
             >

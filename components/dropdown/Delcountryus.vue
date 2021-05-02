@@ -121,7 +121,16 @@ export default {
     },
   },
   mounted() {
-    this.ctry = this.lan[0]
+    if (
+      this.$auth.user.adresse !== null &&
+      this.$auth.user.adresse !== undefined
+    ) {
+      this.ctry =
+        this.$auth.user.adresse.pays === null ||
+        this.$auth.user.adresse.pays === undefined
+          ? '--Choisir un pays--'
+          : this.$auth.user.adresse.pays
+    }
     this.$emit('ctry', this.ctry)
   },
   methods: {

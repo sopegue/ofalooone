@@ -36,7 +36,7 @@
         </h4>
         <div class="pt-1 w-fit">
           <button
-            class="border-none size-11 w-fit text-white py-1 px-10 pb-1 rounded button btn-008489"
+            class="border-none size-12 w-fit text-white py-1 px-10 pb-1 rounded button btn-008489"
           >
             Confirmer votre adresse email
           </button>
@@ -46,12 +46,18 @@
         <h4 class="logo-color size-13 pb-1">Fermeture de compte</h4>
         <div class="pt-1 w-fit">
           <button
-            class="border-none size-11 w-fit text-white py-1 px-10 pb-1 rounded button bghover-008489er"
-            @click="deletion"
+            class="border-none size-12 w-fit text-white py-1 px-10 pb-1 rounded button bghover-008489er"
+            @click="dell"
           >
             Supprimer mon compte
           </button>
         </div>
+      </div>
+      <div v-if="mod" class="w-fit appearZ mt-4">
+        <span
+          class="block size-13 px-5 py-1 h-full color-white border rounded bg-green-600 text-green-600"
+          >Enregistré √</span
+        >
       </div>
     </div>
   </div>
@@ -62,49 +68,138 @@ export default {
   data() {
     return {
       checkedCateg: [],
+      wannadelete: false,
+      first: true,
+      stat: null,
+      notif: false,
     }
+  },
+  computed: {
+    del() {
+      return this.wannadelete === true
+    },
+    firstly() {
+      return this.first === true
+    },
+    mod() {
+      return this.notif === true
+    },
+    deling() {
+      return this.$store.state.del === true
+    },
   },
   watch: {
     checkedCateg(nv, ov) {
-      if (nv.length > 0) {
-        if (nv.length === 2) {
-          this.pendingmail('update_sold', 'yes', 1, 'sopoudegoyos@gmail.com')
-          this.pendingmail('update_rent', 'yes', 1, 'sopoudegoyos@gmail.com')
-        } else if (nv.length === 1) {
-          if (nv.includes('del-loca')) {
-            this.pendingmail('update_rent', 'yes', 1, 'sopoudegoyos@gmail.com')
-            this.pendingmail('update_sold', 'no', 1, 'sopoudegoyos@gmail.com')
-          } else {
-            this.pendingmail('update_rent', 'no', 1, 'sopoudegoyos@gmail.com')
-            this.pendingmail('update_sold', 'yes', 1, 'sopoudegoyos@gmail.com')
+      if (!this.firstly) {
+        if (nv.length > 0) {
+          if (nv.length === 2) {
+            this.pendingmail(
+              'update_sold',
+              'yes',
+              this.$auth.user.id,
+              this.$auth.user.email
+            )
+            this.pendingmail(
+              'update_rent',
+              'yes',
+              this.$auth.user.id,
+              this.$auth.user.email
+            )
+          } else if (nv.length === 1) {
+            if (nv.includes('del-loca')) {
+              this.pendingmail(
+                'update_rent',
+                'yes',
+                this.$auth.user.id,
+                this.$auth.user.email
+              )
+              this.pendingmail(
+                'update_sold',
+                'no',
+                this.$auth.user.id,
+                this.$auth.user.email
+              )
+            } else {
+              this.pendingmail(
+                'update_rent',
+                'no',
+                this.$auth.user.id,
+                this.$auth.user.email
+              )
+              this.pendingmail(
+                'update_sold',
+                'yes',
+                this.$auth.user.id,
+                this.$auth.user.email
+              )
+            }
           }
+        } else {
+          this.pendingmail(
+            'update_sold',
+            'no',
+            this.$auth.user.id,
+            this.$auth.user.email
+          )
+          this.pendingmail(
+            'update_rent',
+            'no',
+            this.$auth.user.id,
+            this.$auth.user.email
+          )
         }
-      } else {
-        this.pendingmail('update_sold', 'no', 1, 'sopoudegoyos@gmail.com')
-        this.pendingmail('update_rent', 'no', 1, 'sopoudegoyos@gmail.com')
+      }
+    },
+    deling(nv, ov) {
+      if (nv) {
+        this.deletion()
       }
     },
   },
+  beforeMount() {
+    if (this.$auth.user.retired_sold === 'yes') {
+      this.checkedCateg.push('del-sold')
+    }
+    if (this.$auth.user.retired_rent === 'yes') {
+      this.checkedCateg.push('del-loca')
+    }
+    setTimeout(() => {
+      this.first = false
+    }, 500)
+  },
   methods: {
+    dell() {
+      this.$store.commit('SET_DEL_MOD', true)
+      document.body.style.overflow = 'hidden'
+    },
     async pendingmail(prop, what, id, email) {
-      const data = await fetch(
-        'https://ofalooback.herokuapp.com/api/saved/' +
-          prop +
-          '/' +
-          what +
-          '/' +
-          id +
-          '/' +
-          email
-      ).then((res) => res.json())
-      console.log(data)
+      // console.log(prop, what, id, email)
+      const data = await this.$axios.$post('saved', {
+        prop,
+        what,
+        id,
+        email,
+      })
+      this.stat = data
+      if (data.status === '200') {
+        this.notif = true
+        setTimeout(() => {
+          this.notif = false
+        }, 3000)
+      }
     },
     async deletion() {
       this.$store.commit('set_Deleting', true)
-      const data = await this.$axios.$delete('client/' + 1)
-      console.log(data)
-      this.$store.commit('set_Deleting', false)
-      // location.assign('/')
+      await this.$axios.$delete('client/' + this.$auth.user.id)
+      // console.log(data)
+      await this.$auth
+        .logout()
+        .then(() => {
+          location.assign('/')
+        })
+        .catch(() => {
+          location.assign('/')
+        })
     },
   },
 }

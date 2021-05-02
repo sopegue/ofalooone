@@ -463,6 +463,9 @@ export default {
         this.property.property !== undefined && this.property.property !== null
       )
     },
+    here() {
+      return this.$store.state.component
+    },
     getImgPrin() {
       for (let index = 0; index < this.property.images.length; index++) {
         const element = this.property.images[index]
@@ -473,6 +476,16 @@ export default {
         'https://ofalooback.herokuapp.com/storage/' +
         this.property.images[0].url
       )
+    },
+  },
+  watch: {
+    here(nv, ov) {
+      if (nv === this.id) {
+        this.notif = true
+        setTimeout(() => {
+          this.notif = false
+        }, 3000)
+      }
     },
   },
   mounted() {

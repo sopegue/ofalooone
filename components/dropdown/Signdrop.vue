@@ -45,9 +45,9 @@
       <div id="dropdown-menu" class="dropdown-menu walele" role="menu">
         <div class="dropdown-content bg-white border">
           <div v-show="$auth.loggedIn">
-            <h4 class="font-semibold cursor-default size-15 logo-color px-4">
+            <h4 class="font-semibold cursor-default size-14 logo-color px-4">
               Bienvenue,
-              <span class="font-semibold size-15 logo-color">
+              <span class="font-semibold size-14 logo-color">
                 {{ user.name | capitalize }} !
               </span>
             </h4>

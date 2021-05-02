@@ -190,13 +190,25 @@
           />
         </div>
       </div>
-      <div class="pt-3 sm:pb-5 pb-0 w-fit">
+      <div
+        class="pt-3 sm:pb-5 pb-0 w-fit flex sm:flex-row flex-col sm:space-y-0 space-y-3 sm:items-center sm:space-x-4"
+      >
         <button
           class="border-none size-12 m-0-auto w-fit text-white px-10 pb-1.5 rounded button btn-008489"
+          :class="{
+            'noclick bg-gray-800': creating,
+            'btn-008489': !creating,
+          }"
           @click="signup"
         >
           Mettra à jour mes données
         </button>
+        <div v-if="mod" class="w-fit appearZ">
+          <span
+            class="block size-13 px-5 py-1 h-full color-white border rounded bg-green-600 text-green-600"
+            >Enregistré √</span
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -215,7 +227,7 @@ export default {
       email: '',
       phone: '',
       adresse: '',
-      pays: '',
+      pays: '--Choisir un pays--',
       ville: '',
       cp: '',
 
@@ -233,6 +245,7 @@ export default {
       surnameerror: false,
       pwdhid: true,
       notpwdok: false,
+      success: false,
 
       wenwrong: false,
       checkletter: [],
@@ -250,6 +263,9 @@ export default {
     },
     creating() {
       return this.accounting === true
+    },
+    mod() {
+      return this.success === true
     },
     samepwd() {
       return (
@@ -341,13 +357,50 @@ export default {
     },
   },
   fetchOnServer: false,
+  beforeMount() {
+    this.serve()
+  },
   methods: {
+    serve() {
+      this.email = this.$auth.user.email
+      this.name = this.$auth.user.name
+      this.surname =
+        this.$auth.user.surname === null ||
+        this.$auth.user.surname === undefined
+          ? ''
+          : this.$auth.user.surname
+      this.phone =
+        this.$auth.user.phone === null || this.$auth.user.phone === undefined
+          ? ''
+          : this.$auth.user.phone
+      if (
+        this.$auth.user.adresse !== null &&
+        this.$auth.user.adresse !== undefined
+      ) {
+        this.adresse =
+          this.$auth.user.adresse.adresse === null ||
+          this.$auth.user.adresse.adresse === undefined
+            ? ''
+            : this.$auth.user.adresse.adresse
+        this.ville =
+          this.$auth.user.adresse.ville === null ||
+          this.$auth.user.adresse.ville === undefined
+            ? ''
+            : this.$auth.user.adresse.ville
+        this.cp =
+          this.$auth.user.adresse.cp === null ||
+          this.$auth.user.adresse.cp === undefined
+            ? ''
+            : this.$auth.user.adresse.cp
+      }
+    },
     payser(val) {
       this.pays = val
     },
     async freemail() {
-      const taken = await this.$axios.$post('client/existence', {
+      const taken = await this.$axios.$post('client/existence/user', {
         email: this.email,
+        current: this.$auth.user.email,
       })
       if (taken.status === 'taken') {
         this.mailtaken = true
@@ -357,8 +410,9 @@ export default {
     },
     async pendingmail() {
       if (this.$linker.emailValidated(this.email)) {
-        const taken = await this.$axios.$post('client/existence', {
+        const taken = await this.$axios.$post('client/existence/user', {
           email: this.email,
+          current: this.$auth.user.email,
         })
         if (taken.status === 'taken') {
           this.livemailtaken = true
@@ -399,8 +453,9 @@ export default {
       const form = new FormData()
       if (this.infosValidated()) {
         this.accounting = true
-        form.append('id', 1)
+        form.append('id', this.$auth.user.id)
         form.append('email', this.email)
+        form.append('current', this.$auth.user.email)
         form.append('name', this.name)
 
         form.append('surname', this.surname)
@@ -423,18 +478,25 @@ export default {
           // this.resetInfos()
           this.mailtaken = false
           this.wenwrong = false
+          this.success = true
+          this.accounting = false
+          await this.$auth.fetchUser()
+          setTimeout(() => {
+            this.success = false
+          }, 3000)
         }
         if (data.status === '500') {
+          this.accounting = false
           this.wenwrong = true
           this.mailtaken = false
           // commit account not created
         }
         if (data.status === '200') {
+          this.accounting = false
           this.mailtaken = true
           this.wenwrong = false
           // commit account not created
         }
-        this.accounting = false
       }
     },
   },

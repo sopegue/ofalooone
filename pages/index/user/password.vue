@@ -210,24 +210,35 @@
           >
             Le mot de passe et la confirmation ne correspondent pas.
           </p>
+
+          <p
+            v-show="nochange"
+            class="size-12 appearZ text-red-700 leading-4 pt-2"
+          >
+            L'ancien mot de passe entré est le même que le nouveau mot de passe
+          </p>
         </div>
       </div>
-      <p v-show="nochange" class="size-12 appearZ text-red-700 leading-4">
-        L'ancien mot de passe et le nouveau mot de passe sont les mêmes
-      </p>
       <div
-        class="pt-5 w-fit"
-        :class="{
-          noclick:
-            curpwd.length === 0 && pwd.length === 0 && pwdcf.length === 0,
-        }"
+        class="pt-5 lg:pb-5 pb-0 w-fit flex lg:flex-row flex-col lg:space-y-0 space-y-3 lg:items-center lg:space-x-4"
       >
         <button
           class="border-none size-12 w-fit text-white sm:px-24 px-15 pb-1.5 rounded button btn-008489"
+          :class="{
+            noclick:
+              (curpwd.length === 0 && pwd.length === 0 && pwdcf.length === 0) ||
+              creating,
+          }"
           @click="signup"
         >
           Modifier le mot de passe
         </button>
+        <div v-if="changed" class="w-fit appearZ">
+          <span
+            class="block px-5 py-1 h-full color-white size-13 border rounded bg-green-600 text-green-600"
+            >Mot de passe mis à jour √</span
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -256,7 +267,7 @@ export default {
       pwdhid: true,
       curpwdhid: true,
       notpwdok: false,
-
+      pwdsuccess: false,
       wenwrong: false,
     }
   },
@@ -276,6 +287,9 @@ export default {
     },
     pwdhidden() {
       return this.pwdhid === true
+    },
+    changed() {
+      return this.pwdsuccess === true
     },
     nochange() {
       return this.nothingchanged === true && this.curpwdinco === false
@@ -365,20 +379,49 @@ export default {
     },
     async signup() {
       if (this.infosValidated()) {
-        const taken = await this.$axios.$post('client/pwd/existence', {
-          email: 'com@com.com',
-          id: 20,
-          password: this.curpwd,
-        })
         if (this.curpwd === this.pwd) this.nothingchanged = true
-        else this.nothingchanged = false
-        if (taken.status === '200') {
-          this.curpwdinco = false
-        } else this.curpwdinco = true
-        if (taken.status === '401') {
-          location.assign('/')
+        else {
+          this.accounting = true
+          const taken = await this.$axios.$post('client/pwd/existence', {
+            email: this.$auth.user.email,
+            id: this.$auth.user.id,
+            password: this.curpwd,
+          })
+          // console.log(taken)
+          this.nothingchanged = false
+          if (taken.status === '200') {
+            await this.$axios.$post('client/pwd/update', {
+              email: this.$auth.user.email,
+              id: this.$auth.user.id,
+              password: this.pwd,
+            })
+            // NOTHING GARANTIE THAT PWD WILL BE CHANGED
+            // YOU GOT TO FIND A BETTER SOLUTION
+            // TRY TO USE PROMISE TO DISPLAY MESSAGE OF
+            // SUCCESS OR FAILURE
+            this.pwdsuccess = true
+            setTimeout(() => {
+              this.pwdsuccess = false
+            }, 3000)
+            this.curpwd = ''
+            this.pwd = ''
+            this.pwdcf = ''
+            this.accounting = false
+          } else if (taken.status === '404') {
+            this.curpwdinco = true
+            this.pwd = ''
+            this.pwdcf = ''
+            this.accounting = false
+          } else {
+            this.curpwd = ''
+            this.pwd = ''
+            this.pwdcf = ''
+            this.accounting = false
+            await this.$auth.logout().then(() => {
+              location.assign('/')
+            })
+          }
         }
-        console.log(taken)
       }
     },
   },

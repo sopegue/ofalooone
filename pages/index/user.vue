@@ -30,7 +30,7 @@
           <div
             class="flex pb-8"
             :class="{
-              'px-6 space-x-5': size < 850,
+              'px-6 space-x-5': size < 850 && size >= 467,
               'flex-col space-y-2.5 justify-center border-b':
                 size >= 850 || size < 467,
             }"

@@ -502,9 +502,56 @@ export default {
             console.log(res)
             if (data.status === '201') {
               // commit account created
-              this.resetInfos()
-              this.mailtaken = false
-              this.wenwrong = false
+              this.$auth
+                .loginWith('local', {
+                  data: {
+                    email: this.email,
+                    password: this.pwd,
+                    rememberme: true,
+                  },
+                })
+                .then((res) => {
+                  if (res.data.status === 200) {
+                    const tokenId = res.data.token.substr(
+                      0,
+                      res.data.token.indexOf('|')
+                    )
+                    const userId = this.$auth.user.id
+                    const hdzd = {
+                      odzd: userId,
+                      scds: tokenId,
+                    }
+                    localStorage.setItem('hdzd', JSON.stringify(hdzd))
+
+                    this.accounting = false
+                    this.resetInfos()
+                    this.mailtaken = false
+                    this.wenwrong = false
+
+                    this.$router.go(-1)
+                  }
+                  if (res.data.status === 404) {
+                    this.accounting = false
+                    this.resetInfos()
+                    this.mailtaken = false
+                    this.wenwrong = false
+                    console.log('incorrects credentials')
+                  }
+                  if (res.data.status === 500) {
+                    this.accounting = false
+                    this.resetInfos()
+                    this.mailtaken = false
+                    this.wenwrong = false
+                    console.log('Error on request')
+                  }
+                })
+                .catch(() => {
+                  this.accounting = false
+                  this.resetInfos()
+                  this.mailtaken = false
+                  this.wenwrong = false
+                  console.log('error client side')
+                })
             }
             if (data.status === '500') {
               this.wenwrong = true

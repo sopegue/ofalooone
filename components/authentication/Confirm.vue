@@ -39,12 +39,8 @@
           </div>
           <div class="w-fit m-0-auto pt-3">
             <div class="flex align-center text-center space-x-2 size-13 mt-5">
-              <a href="/connexion" class="color-008489 underline-hover"
-                >Se connecter</a
-              >
-              <span>|</span>
-              <a href="/inscription" class="color-008489 underline-hover"
-                >Créer un compte</a
+              <a href="/" class="color-008489 underline-hover"
+                >Aller à l'accueil</a
               >
             </div>
           </div>

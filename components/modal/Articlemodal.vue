@@ -781,6 +781,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    compo: {
+      type: Number,
+      default: -1,
+    },
   },
   data() {
     return {
@@ -880,24 +884,31 @@ export default {
       }
       console.log(this.options)
     },
+    sort(val, first) {
+      const newarray = [first]
+      val.forEach((element) => {
+        if (element !== first) newarray.push(element)
+      })
+      return newarray
+    },
     async savetorecent() {
       if (localStorage.viewed) {
-        const data = await JSON.parse(localStorage.getItem('viewed'))
+        let data = await JSON.parse(localStorage.getItem('viewed'))
         if (!data.includes(this.property.property.id)) {
           data.unshift(this.property.property.id)
-          localStorage.removeItem('viewed')
-          localStorage.setItem('viewed', JSON.stringify(data.slice(0, 10)))
+        } else if (data.length > 0) {
+          data = this.sort(data, this.property.property.id)
         }
+
+        localStorage.removeItem('viewed')
+        localStorage.setItem('viewed', JSON.stringify(data.slice(0, 10)))
       } else {
         const data = [this.property.property.id]
         localStorage.setItem('viewed', JSON.stringify(data))
       }
     },
     async increment() {
-      await fetch(
-        'https://ofalooback.herokuapp.com/api/property/visit/' +
-          this.property.property.id
-      ).then((res) => res.json())
+      await this.$axios.$get('property/visit/' + this.property.property.id)
     },
     hideshare() {
       this.share = false

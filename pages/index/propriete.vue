@@ -57,45 +57,47 @@
           </div>
           <div class="flex align-center space-x-5">
             <!-- a modifier -->
-            <button
-              class="flex align-center hover-008489 space-x-1 mt-1"
-              @click="savelist"
-            >
-              <svg
-                v-if="property.data.property.saved"
-                class="w-5 h-5 logo-color"
-                fill="currentColor"
-                stroke="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
+            <client-only>
+              <button
+                class="flex align-center hover-008489 space-x-1 mt-1"
+                @click="savelist"
               >
-                <path
-                  stroke-width="1"
-                  d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
-                ></path>
-              </svg>
-              <svg
-                v-else
-                class="w-5 h-5 logo-color"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-width="1"
-                  d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
-                ></path>
-              </svg>
-              <span
-                v-if="!property.data.property.saved"
-                class="logo-color size-14 makeme-008489"
-                >Enregistrer</span
-              >
-              <span v-else class="logo-color size-14 makeme-008489"
-                >Enregistrée</span
-              >
-            </button>
+                <svg
+                  v-if="has_saved"
+                  class="w-5 h-5 logo-color"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-width="1"
+                    d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
+                  ></path>
+                </svg>
+                <svg
+                  v-if="has_desaved"
+                  class="w-5 h-5 logo-color"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    stroke-width="1"
+                    d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
+                  ></path>
+                </svg>
+                <span
+                  v-if="has_desaved"
+                  class="logo-color size-14 makeme-008489"
+                  >Enregistrer</span
+                >
+                <span v-if="has_saved" class="logo-color size-14 makeme-008489"
+                  >Enregistrée</span
+                >
+              </button>
+            </client-only>
             <button
               v-click-outside="hideshare"
               class="flex align-center relative hover-008489 space-x-1 mt-1"
@@ -951,11 +953,11 @@ export default {
     Insta,
   },
   middleware: 'query',
-  async asyncData({ query, redirect }) {
+  async asyncData({ query, redirect, $axios, $auth }) {
     try {
-      let property = await fetch(
-        'https://ofalooback.herokuapp.com/api/property/' + query.wyzes
-      ).then((res) => res.json())
+      let property = await $axios.$get(
+        ($auth.loggedIn ? 'auth-property/' : 'property/') + query.wyzes
+      )
       if (property.data.message) {
         property = { data: {} }
         return redirect('/')
@@ -978,6 +980,9 @@ export default {
       hovered3: false,
       zoom: false,
       quick: false,
+      saved: false,
+      desavedd: false,
+      notif: false,
       options: {
         indoor: [],
         outdoor: [],
@@ -1043,6 +1048,12 @@ export default {
     recently() {
       return this.recent === true
     },
+    has_saved() {
+      return this.saved === true
+    },
+    has_desaved() {
+      return this.desavedd === true
+    },
     villing() {
       return this.ville === true
     },
@@ -1057,7 +1068,7 @@ export default {
       )
     },
     notification() {
-      return this.$store.state.fromprop === true
+      return this.$store.state.fromprop === true || this.notif === true
     },
     has_in() {
       return this.options.indoor.length > 0
@@ -1110,6 +1121,14 @@ export default {
       return this.index - 1
     },
   },
+  watch: {
+    notification(nv, ov) {
+      if (nv) {
+        this.saved = true
+        this.desavedd = false
+      }
+    },
+  },
   created() {
     this.fillImages()
   },
@@ -1121,6 +1140,8 @@ export default {
       this.getOtherProp()
       this.checkOptions()
     }
+    if (this.property.data.saved) this.saved = true
+    else this.desavedd = true
   },
   mounted() {
     if (this.dataOk) this.increment()
@@ -1140,16 +1161,17 @@ export default {
           }
         })
       }
-      console.log(this.options)
     },
     async savetorecent() {
       if (localStorage.viewed) {
-        const data = await JSON.parse(localStorage.getItem('viewed'))
+        let data = await JSON.parse(localStorage.getItem('viewed'))
         if (!data.includes(this.property.data.property.id)) {
           data.unshift(this.property.data.property.id)
-          localStorage.removeItem('viewed')
-          localStorage.setItem('viewed', JSON.stringify(data.slice(0, 10)))
+        } else if (data.length > 0) {
+          data = this.sort(data, this.property.data.property.id)
         }
+        localStorage.removeItem('viewed')
+        localStorage.setItem('viewed', JSON.stringify(data.slice(0, 10)))
       } else {
         const data = [this.property.data.property.id]
         localStorage.setItem('viewed', JSON.stringify(data))
@@ -1158,14 +1180,22 @@ export default {
     datating() {
       this.ok = true
     },
+    sort(val, first) {
+      const newarray = [first]
+      val.forEach((element) => {
+        if (element !== first) newarray.push(element)
+      })
+      return newarray
+    },
     async getPropVille() {
       try {
-        const result = await fetch(
-          'https://ofalooback.herokuapp.com/api/properties/villesfirst/' +
+        const result = await this.$axios.$get(
+          (this.$auth.loggedIn ? 'aproperties' : 'properties') +
+            '/villesfirst/' +
             this.property.data.ville +
             '/' +
             this.property.data.property.id
-        ).then((res) => res.json())
+        )
         if (result > 0) {
           this.ville = true
         }
@@ -1175,12 +1205,13 @@ export default {
     },
     async getOtherProp() {
       try {
-        const result = await fetch(
-          'https://ofalooback.herokuapp.com/api/properties/agfirst/' +
+        const result = await this.$axios.$get(
+          (this.$auth.loggedIn ? 'aproperties' : 'properties') +
+            '/agfirst/' +
             this.property.data.property.user_id +
             '/' +
             this.property.data.property.id
-        ).then((res) => res.json())
+        )
         if (result > 0) {
           this.recent = true
         }
@@ -1190,10 +1221,9 @@ export default {
     },
     async increment() {
       try {
-        await fetch(
-          'https://ofalooback.herokuapp.com/api/property/visit/' +
-            this.property.data.property.id
-        ).then((res) => res.json())
+        await this.$axios.$get(
+          'property/visit/' + this.property.data.property.id
+        )
       } catch (error) {
         console.log(error)
       }
@@ -1245,6 +1275,30 @@ export default {
     indexed(val) {
       this.index = val
     },
+    async saveProp() {
+      return await new Promise((resolve, reject) => {
+        resolve(
+          this.$axios.$post('save/property', {
+            prop: this.property.data.property.id,
+            user: this.$auth.loggedIn ? this.$auth.user.id : -1,
+          })
+        )
+      }).catch(() => {
+        console.error("Oops, can't resolve your promise saving")
+      })
+    },
+    async desaved() {
+      return await new Promise((resolve, reject) => {
+        resolve(
+          this.$axios.$post('unsave/property', {
+            prop: this.property.data.property.id,
+            user: this.$auth.loggedIn ? this.$auth.user.id : -1,
+          })
+        )
+      }).catch(() => {
+        console.error("Oops, can't resolve your promise saving")
+      })
+    },
     savelist() {
       if (!this.$auth.loggedIn) {
         this.$store.commit('close_quick_sign', true)
@@ -1252,6 +1306,22 @@ export default {
         document.body.style = 'overflow: hidden'
       } else {
         // save or desaved
+        if (this.has_saved) {
+          this.desaved().then((res) => {
+            this.desavedd = true
+            this.saved = false
+          })
+        }
+        if (this.has_desaved) {
+          this.saveProp().then((res) => {
+            this.saved = true
+            this.desavedd = false
+            this.notif = true
+            setTimeout(() => {
+              this.notif = false
+            }, 3000)
+          })
+        }
       }
     },
   },

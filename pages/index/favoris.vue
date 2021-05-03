@@ -27,7 +27,7 @@
                 >Liste d'enregistrements</span
               >
             </div>
-            <div v-if="!moring || !charging" class="px-1.8">
+            <div v-if="(!moring || !charging) && !erroring" class="px-1.8">
               <span v-if="toting > 1" class="logo-color size-14"
                 >1-{{ propLength }} sur {{ toting }} résultats</span
               >
@@ -72,6 +72,9 @@
             >
           </p>
         </div>
+        <p v-else class="h-fit w-fit h-centers mb-4">
+          Oops, erreur pendant le chargement des propriétés.
+        </p>
         <div
           v-if="propLength < toting && !charging"
           class="pt-5 w-fulls"
@@ -90,7 +93,10 @@
             >
           </div>
         </div>
-        <p v-else-if="!charging" class="h-fit w-fit h-centers mt-5">
+        <p
+          v-else-if="!charging && propLength !== 0 && propLength === toting"
+          class="h-fit w-fit h-centers mt-5"
+        >
           --- Fin des résultats ---
         </p>
         <!-- <div class="can-add-ads"></div> -->
@@ -137,6 +143,9 @@ export default {
     recently() {
       return this.recent === true
     },
+    relfav() {
+      return this.$store.state.relfav
+    },
     propLength() {
       return this.properties !== undefined && this.properties.data !== undefined
         ? this.properties.data.length
@@ -175,6 +184,13 @@ export default {
       return this.error === true
     },
   },
+  watch: {
+    relfav(nv, ov) {
+      if (nv) {
+        this.getFav()
+      }
+    },
+  },
   beforeMount() {
     this.getFav()
     if (localStorage.viewed) {
@@ -188,18 +204,19 @@ export default {
       this.current = 1
       this.charging = true
       try {
-        this.properties = await fetch(
-          'https://ofalooback.herokuapp.com/api/properties/fav/' +
-            this.$auth.user.id +
-            '/' +
-            this.sort
-        ).then((res) => res.json())
+        this.properties = await this.$axios.$get(
+          'properties' + '/fav/' + this.$auth.user.id + '/' + this.sort
+        )
         this.charging = false
+
+        this.$store.commit('rel_fav', false)
         if (this.properties.meta !== undefined)
           this.total = this.properties.meta.total
         else this.total = 0
       } catch (err) {
-        console.clear()
+        this.charging = false
+        this.$store.commit('rel_fav', false)
+        console.error(err)
         this.error = true
         this.properties = undefined
       }
@@ -220,9 +237,15 @@ export default {
       this.more = true
       this.sort = this.sort.replace(/\s/g, '-')
       try {
-        const data = await fetch(
-          `https://ofalooback.herokuapp.com/api/properties/fav/${this.$auth.user.id}/${this.sort}?page=${this.current}`
-        ).then((res) => res.json())
+        const data = await this.$axios.$get(
+          'properties' +
+            '/fav/' +
+            this.$auth.user.id +
+            '/' +
+            this.sort +
+            '?page=' +
+            this.current
+        )
         data.data.forEach((element) => {
           this.properties.data.push(element)
         })

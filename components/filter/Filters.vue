@@ -95,7 +95,7 @@
         @done="done"
       ></brand>
       <brand
-        v-show="has_location"
+        v-show="false"
         number="2"
         :content="[
           'Tous temps',

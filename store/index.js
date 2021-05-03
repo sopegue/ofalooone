@@ -24,6 +24,8 @@ export const state = () => ({
 
   fromprop: false,
 
+  relfav: false,
+
   url: '',
   type: 'article',
   title: '',
@@ -48,6 +50,9 @@ export const mutations = {
   },
   set_Scroll(state, value) {
     state.scrollpos = value
+  },
+  rel_fav(state, value) {
+    state.relfav = value
   },
   set_Domload(state, value) {
     state.domloading = value

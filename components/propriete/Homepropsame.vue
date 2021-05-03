@@ -54,15 +54,15 @@
             >
           </div>
           <button
-            v-if="property.saved"
+            v-show="property.saved || has_saved"
             class="absolute top-0 right-0 mt-2 mr-2 z-10"
             title="Retirer de la liste"
-            @click.stop="desaved"
+            @click.stop="savelist"
           >
             <svg
               class="w-7 h-7 text-white"
               fill="currentColor"
-              stroke="currentColor"
+              stroke="#00000041"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -73,7 +73,7 @@
             </svg>
           </button>
           <button
-            v-else
+            v-show="!property.saved || has_desaved"
             class="absolute top-0 right-0 mt-2 mr-2 z-10"
             title="Enregistrer"
             @click.stop="savelist"
@@ -321,6 +321,10 @@ export default {
       hovered: false,
       quick: false,
       images: [],
+      id: null,
+      notif: false,
+      saved: false,
+      desavedd: false,
     }
   },
   computed: {
@@ -329,8 +333,17 @@ export default {
         this.property.property !== undefined && this.property.property !== null
       )
     },
+    has_saved() {
+      return this.saved === true
+    },
+    has_desaved() {
+      return this.desavedd === true
+    },
     notification() {
       return this.notif === true
+    },
+    curoute() {
+      return this.$route.path
     },
     here() {
       return this.$store.state.component
@@ -354,11 +367,18 @@ export default {
     here(nv, ov) {
       if (nv === this.id) {
         this.notif = true
+        this.saved = true
+        this.desavedd = false
         setTimeout(() => {
           this.notif = false
         }, 3000)
       }
     },
+  },
+  mounted() {
+    this.id = this._uid
+    if (this.property.saved) this.saved = true
+    else this.desavedd = true
   },
   methods: {
     fillImages() {
@@ -379,6 +399,30 @@ export default {
           )
       }
     },
+    async saveProp() {
+      return await new Promise((resolve, reject) => {
+        resolve(
+          this.$axios.$post('save/property', {
+            prop: this.property.property.id,
+            user: this.$auth.loggedIn ? this.$auth.user.id : -1,
+          })
+        )
+      }).catch(() => {
+        console.error("Oops, can't resolve your promise saving")
+      })
+    },
+    async desaved() {
+      return await new Promise((resolve, reject) => {
+        resolve(
+          this.$axios.$post('unsave/property', {
+            prop: this.property.property.id,
+            user: this.$auth.loggedIn ? this.$auth.user.id : -1,
+          })
+        )
+      }).catch(() => {
+        console.error("Oops, can't resolve your promise saving")
+      })
+    },
     savelist() {
       if (!this.$auth.loggedIn) {
         this.$store.commit('close_quick_sign', true)
@@ -387,9 +431,27 @@ export default {
         document.body.style = 'overflow: hidden'
       } else {
         // save or desaved
+        if (this.has_saved) {
+          this.desaved().then((res) => {
+            this.desavedd = true
+            this.saved = false
+          })
+        }
+        if (this.has_desaved) {
+          this.saveProp().then((res) => {
+            this.saved = true
+            this.desavedd = false
+            this.notif = true
+            setTimeout(() => {
+              this.notif = false
+            }, 3000)
+            if (this.curoute.includes('/favoris')) {
+              this.$store.commit('rel_fav', true)
+            }
+          })
+        }
       }
     },
-    desaved() {},
     close_quick() {
       this.quick = false
     },

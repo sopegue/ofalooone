@@ -30,6 +30,12 @@ div {
 svg {
   color: #1f2937;
 }
+.saved {
+  fill: currentColor !important;
+}
+.notsaved {
+  fill: #00000041 !important;
+}
 .col-1f2937 {
   color: #1f2937;
 }

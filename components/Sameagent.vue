@@ -53,12 +53,14 @@ export default {
   async fetch() {
     try {
       if (this.title === "D'autres propriétés du même agent") {
-        this.properties = await fetch(
-          'https://ofalooback.herokuapp.com/api/properties/ag/' +
+        this.properties = await this.$axios.$get(
+          (this.$auth.loggedIn ? 'aproperties' : 'properties') +
+            '/ag/' +
             this.ag +
             '/' +
             this.toexclude
-        ).then((res) => res.json())
+        )
+
         this.ok = true
       }
     } catch (error) {
@@ -99,9 +101,12 @@ export default {
     async getViewed() {
       return await new Promise((resolve, reject) => {
         resolve(
-          this.$axios.$post('properties/viewed', {
-            viewed: this.viewed,
-          })
+          this.$axios.$post(
+            (this.$auth.loggedIn ? 'aproperties' : 'properties') + '/viewed',
+            {
+              viewed: this.viewed,
+            }
+          )
         )
       }).catch(() => {
         console.error("Oops, can't resolve your promise viewing")

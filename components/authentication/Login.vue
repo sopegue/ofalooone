@@ -266,7 +266,7 @@ export default {
                 scds: tokenId,
               }
               localStorage.setItem('hdzd', JSON.stringify(hdzd))
-              this.$router.go(-1)
+              location.assign(this.previous)
             }
             if (res.data.status === 404) {
               this.logging = false

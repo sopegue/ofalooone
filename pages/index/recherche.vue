@@ -472,11 +472,12 @@ export default {
     async getPropVille() {
       // console.log(this.ipadresse.city)
       try {
-        const result = await fetch(
-          'https://ofalooback.herokuapp.com/api/properties/villesfirst/' +
+        const result = await this.$axios.$get(
+          (this.$auth.loggedIn ? 'aproperties' : 'properties') +
+            '/villesfirst/' +
             this.ipadresse.city +
             '/-4'
-        ).then((res) => res.json())
+        )
         if (result > 0) {
           this.ville = true
         }
@@ -625,13 +626,16 @@ export default {
       this.charged = false
       return await new Promise((resolve, reject) => {
         resolve(
-          this.$axios.$post('properties/search', {
-            filter: this.filter,
-            search: this.search,
-            sort: this.sort,
-            q: this.$route.query.q,
-            ofloowa: this.$route.query.ofloowa,
-          })
+          this.$axios.$post(
+            (this.$auth.loggedIn ? 'aproperties' : 'properties') + '/search',
+            {
+              filter: this.filter,
+              search: this.search,
+              sort: this.sort,
+              q: this.$route.query.q,
+              ofloowa: this.$route.query.ofloowa,
+            }
+          )
         )
       }).catch(() => {
         this.error = true
@@ -644,13 +648,18 @@ export default {
       this.more = true
       return await new Promise((resolve, reject) => {
         resolve(
-          this.$axios.$post('properties/search?page=' + this.current, {
-            filter: this.filter,
-            search: this.search,
-            sort: this.sort,
-            q: this.$route.query.q,
-            ofloowa: this.$route.query.ofloowa,
-          })
+          this.$axios.$post(
+            (this.$auth.loggedIn ? 'aproperties' : 'properties') +
+              '/search?page=' +
+              this.current,
+            {
+              filter: this.filter,
+              search: this.search,
+              sort: this.sort,
+              q: this.$route.query.q,
+              ofloowa: this.$route.query.ofloowa,
+            }
+          )
         )
       }).catch(() => {
         this.error = true

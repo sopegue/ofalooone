@@ -140,7 +140,7 @@
               <h4 class="size-14 font-semibold logo-color">
                 Recherches récentes
               </h4>
-              <button class="delete mt-1" @click="deleteSearch"></button>
+              <a class="delete mt-1" @click="deleteSearch"></a>
             </div>
             <div class="flex flex-wrap">
               <a
@@ -189,7 +189,7 @@
           }
         "
       />
-      <button
+      <a
         v-show="search !== ''"
         class="absolute right-0 delete mr-2"
         @click="
@@ -197,7 +197,7 @@
             search = ''
           }
         "
-      ></button>
+      ></a>
     </form>
     <button
       class="h-full btn-008489 absolute h-10 right-0 px-3 rounded-tr rounded-br text-white size-13 font-semibold"
@@ -349,7 +349,6 @@ export default {
   watch: {
     curoute(nv, ov) {
       if (nv !== '/' && !nv.includes('/recherche')) {
-        sessionStorage.removeItem('filter')
         sessionStorage.removeItem('search')
         sessionStorage.removeItem('txt')
         sessionStorage.removeItem('sort')
@@ -374,7 +373,7 @@ export default {
       const data = await JSON.parse(sessionStorage.getItem('filter'))
       this.what = data.what
     }
-    console.log(this.what)
+    // console.log(this.what)
     this.currency = this.currencies[0]
     if (sessionStorage.search) {
       this.search = sessionStorage.getItem('search')
@@ -384,7 +383,6 @@ export default {
     }
 
     if (this.curoute !== '/' && !this.curoute.includes('/recherche')) {
-      sessionStorage.removeItem('filter')
       sessionStorage.removeItem('search')
       sessionStorage.removeItem('txt')
       sessionStorage.removeItem('sort')

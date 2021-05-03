@@ -76,9 +76,11 @@ export default {
   async fetch() {
     this.title = this.titler
     try {
-      this.property = await fetch(
-        'https://ofalooback.herokuapp.com/api/properties/bytype/' + this.titler
-      ).then((res) => res.json())
+      this.property = await this.$axios.$get(
+        (this.$auth.loggedIn ? 'aproperties' : 'properties') +
+          '/bytype/' +
+          this.titler
+      )
       if (
         this.property !== undefined &&
         this.property.data !== null &&
@@ -154,10 +156,11 @@ export default {
     async moreprop() {
       try {
         this.property = undefined
-        this.property = await fetch(
-          'https://ofalooback.herokuapp.com/api/properties/bytype/skip/' +
+        this.property = await this.$axios.$get(
+          (this.$auth.loggedIn ? 'aproperties' : 'properties') +
+            '/bytype/skip/' +
             this.titler
-        ).then((res) => res.json())
+        )
         if (
           this.property !== undefined &&
           this.property.data !== null &&
@@ -176,7 +179,7 @@ export default {
       }
     },
     // async fetchTitle() {
-    //   this.properties = await this.$axios.$post('properties/bytype', {
+    //   this.properties = await this.$axios.$post((this.$auth.loggedIn ? 'aproperties':'properties')+'/bytype', {
     //     type: this.title,
     //   })
     // },

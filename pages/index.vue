@@ -137,7 +137,6 @@ export default {
         sessionStorage.removeItem('activesearch')
       }
       if (!nv.includes('/recherche')) {
-        sessionStorage.removeItem('filter')
         sessionStorage.removeItem('search')
         sessionStorage.removeItem('txt')
         sessionStorage.removeItem('sort')
@@ -170,7 +169,6 @@ export default {
     this.checkDomload()
     this.scrolltop()
     if (!this.curoute.includes('/recherche')) {
-      sessionStorage.removeItem('filter')
       sessionStorage.removeItem('search')
       sessionStorage.removeItem('txt')
       sessionStorage.removeItem('sort')
@@ -229,15 +227,12 @@ export default {
       }
     },
     async logoutImmediatly(data) {
-      await fetch(
-        'https://ofalooback.herokuapp.com/api/client/logout/notoken/' +
-          data.odzd +
-          '/' +
-          data.scds
-      ).then((res) => {
-        // console.log(res.json())
-        localStorage.removeItem('hdzd')
-      })
+      await this.$axios
+        .$get('client/logout/notoken/' + data.odzd + '/' + data.scds)
+        .then((res) => {
+          // console.log(res.json())
+          localStorage.removeItem('hdzd')
+        })
     },
     scrolltop() {
       window.scroll({

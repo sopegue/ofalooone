@@ -80,15 +80,15 @@
         >
       </div>
       <button
-        v-if="property.saved"
+        v-show="property.saved || has_saved"
         class="absolute top-0 right-0 mt-2 mr-2 z-10"
         title="Retirer de la liste"
-        @click.stop="desaved"
+        @click.stop="savelist"
       >
         <svg
           class="w-7 h-7 text-white"
           fill="currentColor"
-          stroke="currentColor"
+          stroke="#00000041"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -99,7 +99,7 @@
         </svg>
       </button>
       <button
-        v-else
+        v-show="!property.saved || has_desaved"
         class="absolute top-0 right-0 mt-2 mr-2 z-10"
         title="Enregistrer"
         @click.stop="savelist"
@@ -425,6 +425,7 @@
     </div>
     <articlemodal
       v-if="quick"
+      :compo="id"
       :property="property"
       :images="images"
       @close_quick="close_quick"
@@ -449,6 +450,8 @@ export default {
       notif: false,
       id: null,
       images: [],
+      saved: false,
+      desavedd: false,
     }
   },
   computed: {
@@ -458,10 +461,19 @@ export default {
     notification() {
       return this.notif === true
     },
+    has_saved() {
+      return this.saved === true
+    },
+    has_desaved() {
+      return this.desavedd === true
+    },
     dataOk() {
       return (
         this.property.property !== undefined && this.property.property !== null
       )
+    },
+    curoute() {
+      return this.$route.path
     },
     here() {
       return this.$store.state.component
@@ -481,7 +493,10 @@ export default {
   watch: {
     here(nv, ov) {
       if (nv === this.id) {
+        // console.log(this.notif, 'here')
         this.notif = true
+        this.saved = true
+        this.desavedd = false
         setTimeout(() => {
           this.notif = false
         }, 3000)
@@ -490,6 +505,8 @@ export default {
   },
   mounted() {
     this.id = this._uid
+    if (this.property.saved) this.saved = true
+    else this.desavedd = true
   },
   methods: {
     fillImages() {
@@ -510,15 +527,60 @@ export default {
           )
       }
     },
-    desaved() {},
+    async saveProp() {
+      return await new Promise((resolve, reject) => {
+        resolve(
+          this.$axios.$post('save/property', {
+            prop: this.property.property.id,
+            user: this.$auth.loggedIn ? this.$auth.user.id : -1,
+          })
+        )
+      }).catch(() => {
+        console.error("Oops, can't resolve your promise saving")
+      })
+    },
+    async desaved() {
+      return await new Promise((resolve, reject) => {
+        resolve(
+          this.$axios.$post('unsave/property', {
+            prop: this.property.property.id,
+            user: this.$auth.loggedIn ? this.$auth.user.id : -1,
+          })
+        )
+      }).catch(() => {
+        console.error("Oops, can't resolve your promise saving")
+      })
+    },
     savelist() {
       if (!this.$auth.loggedIn) {
+        // console.log('here')
         this.$store.commit('close_quick_sign', true)
         this.$store.commit('precom', this.id)
         this.$store.commit('set_tosave', this.property.property.id)
         document.body.style = 'overflow: hidden'
       } else {
         // save or desaved
+        if (this.has_saved) {
+          this.desaved().then((res) => {
+            this.desavedd = true
+            this.saved = false
+            if (this.curoute.includes('/favoris')) {
+              this.$store.commit('rel_fav', true)
+            }
+            console.log(this.notif)
+          })
+        }
+        if (this.has_desaved) {
+          this.saveProp().then((res) => {
+            this.saved = true
+            this.desavedd = false
+            this.notif = true
+            setTimeout(() => {
+              this.notif = false
+              console.log(this.notif)
+            }, 3000)
+          })
+        }
       }
     },
     close_quick() {

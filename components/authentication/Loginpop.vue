@@ -223,6 +223,9 @@ export default {
     fromprop() {
       return this.$store.state.fromprop
     },
+    tosave() {
+      return this.$store.state.tosave
+    },
     curoute() {
       return this.$route.path
     },
@@ -254,8 +257,17 @@ export default {
 
       return this.mailerror === false && this.passerror === false
     },
-    saveProp() {
-      console.log('saved if not already saved')
+    async saveProp() {
+      return await new Promise((resolve, reject) => {
+        resolve(
+          this.$axios.$post('save/property', {
+            prop: this.tosave,
+            user: this.$auth.loggedIn ? this.$auth.user.id : -1,
+          })
+        )
+      }).catch(() => {
+        console.error("Oops, can't resolve your promise saving")
+      })
     },
     signin() {
       if (this.infosValidated()) {
@@ -270,20 +282,19 @@ export default {
           })
           .then((res) => {
             this.logging = false
-            console.log(res)
             if (res.data.status === 200) {
               this.saveProp()
               this.$store.commit('close_quick_sign', false)
               if (!this.curoute.includes('/propriete')) {
                 this.$store.commit('component', this.precom)
               } else {
+                this.$store.commit('component', this.precom)
                 this.$store.commit('set_prop', true)
                 setTimeout(() => {
                   this.$store.commit('set_prop', false)
                 }, 5000)
               }
               document.body.style = 'overflow: visible'
-              console.log('logged and saving article')
             }
             if (res.data.status === 404) console.log('incorrects credentials')
             if (res.data.status === 500) console.log('Error on request')

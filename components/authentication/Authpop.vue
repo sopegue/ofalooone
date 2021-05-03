@@ -739,10 +739,9 @@ export default {
   },
   methods: {
     async increment() {
-      const result = await fetch(
-        'https://ofalooback.herokuapp.com/api/property/visit/' +
-          this.property.property.id
-      ).then((res) => res.json())
+      const result = await this.$axios.$get(
+        'property/visit/' + this.property.property.id
+      )
       console.log(result)
     },
     hideshare() {

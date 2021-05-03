@@ -44,12 +44,13 @@ export default {
   },
   async fetch() {
     try {
-      this.properties = await fetch(
-        'https://ofalooback.herokuapp.com/api/properties/villes/' +
+      this.properties = await this.$axios.$get(
+        (this.$auth.loggedIn ? 'aproperties' : 'properties') +
+          '/villes/' +
           this.ville +
           '/' +
           this.ag
-      ).then((res) => res.json())
+      )
       if (this.properties === null) {
         this.properties = { data: [] }
       }

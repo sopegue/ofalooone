@@ -7,7 +7,7 @@
           'adv-active': activesearch === 'Acheter',
           'w-full': size <= 500,
         }"
-        @click="
+        @click.stop="
           {
             activesearch = 'Acheter'
           }
@@ -21,7 +21,7 @@
           'adv-active': activesearch === 'Louer',
           'w-full': size <= 500,
         }"
-        @click="
+        @click.stop="
           {
             activesearch = 'Louer'
           }
@@ -35,7 +35,7 @@
           'adv-active': activesearch === 'Agent',
           'w-full': size <= 500,
         }"
-        @click="
+        @click.stop="
           {
             activesearch = 'Agent'
           }
@@ -93,7 +93,7 @@
                       v-for="(res, i) in searches"
                       :key="i"
                       class="flex align-center space-x-1.5 px-3 py-1 clickable hover:bg-gray-100"
-                      @click="setSearch(res.adresse, res.ville)"
+                      @click.stop="setSearch(res.adresse, res.ville)"
                     >
                       <svg
                         class="w-5 h-5 min-w-5 min-h-5"
@@ -134,14 +134,14 @@
                     <h4 class="size-14 font-semibold logo-color">
                       Recherches récentes
                     </h4>
-                    <button class="delete mt-1" @click="deleteSearch"></button>
+                    <a class="delete mt-1" @click.stop="deleteSearch"></a>
                   </div>
                   <div class="flex flex-wrap">
                     <a
                       v-for="(ss, j) in saved"
                       :key="j"
                       class="flex align-center space-x-2 button py-0 is-light rounded-full w-fit m-1.5"
-                      @click="gose(ss)"
+                      @click.stop="gose(ss)"
                     >
                       <span class="py-0.5 pl-1 size-13 font-semibold">{{
                         ss
@@ -194,20 +194,20 @@
                 }
               "
             />
-            <button
+            <a
               v-show="search !== ''"
               class="absolute right-0 delete mr-1.5"
-              @click="
+              @click.stop="
                 {
                   search = ''
                 }
               "
-            ></button>
+            ></a>
           </div>
           <button
             class="h-full button btn-008489 rounded-tr rounded-br text-white size-13 font-semibold"
             :class="{ 'px-6': size > 500, 'px-3': size <= 500 }"
-            @click="gotosearch"
+            @click.stop="gotosearch"
           >
             Rechercher
           </button>
@@ -311,7 +311,7 @@
             @options="garaging"
           ></optionadvanced>
           <optionadvanced
-            v-if="activesearch === 'Louer'"
+            v-if="false"
             class="mx-1 my-1"
             :what="'date'"
             :left="true"

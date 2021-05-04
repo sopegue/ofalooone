@@ -161,6 +161,14 @@ export default {
         this.deletion()
       }
     },
+    resulat(nv, ov) {
+      if (nv !== null && nv.status === '200') {
+        this.sendMail(nv.token).then((res) => console.log(res))
+        setTimeout(() => {
+          this.resulat = null
+        }, 3000)
+      }
+    },
   },
   beforeMount() {
     if (this.$auth.user.retired_sold === 'yes') {
@@ -205,9 +213,6 @@ export default {
       this.getHash().then((res) => {
         this.resulat = res
       })
-      if (this.resulat !== null && this.resulat.status === '200') {
-        this.sendMail(this.resulat.token).then((res) => console.log(res))
-      }
     },
     dell() {
       this.$store.commit('SET_DEL_MOD', true)

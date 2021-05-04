@@ -90,9 +90,9 @@ const linker = {
           style="
             font-family: system-ui;
             padding-bottom: 3rem;
-            margin-left: 10px !important;
+            margin-left: 5rem !important;
             color: #2d3748;
-            margin-right: 10px !important;
+            margin-right: 5rem !important;
           "
         >
           <div style="display: flex !important; align-items: center !important">
@@ -190,16 +190,79 @@ const linker = {
             </a>
             <div
               style="
-                margin-top: 30px !important;
+                margin-top: 40px !important;
                 font-size: 16px !important;
                 padding-top: 1.5rem;
                 border-top: 1px solid #e2e8f0;
               "
             >
+              <div style="
+              margin: 0 auto !important;
+              width: fit-content !important;
+              display: block;
+              ">
               <span
-                >Si vous n'avez pas créer de compte avec cette adresse email,
-                veuillez s'il vous plaît ignorer cet email et le supprimer.</span
+              style="
+              margin: 0 auto !important;
+              width: fit-content !important;
+              display: block;
+              "
+                >Avez-vous une question ou besoin d'une assistance ?</span
               >
+              <div style="margin-top: 1rem !important; 
+                      display: flex !important; 
+                      align-items: center !important;
+                      justify-items: center;
+                      justify-content: center;">
+              <a
+                style="
+                  color: #004e66 !important;
+                  padding: 10px 20px !important;
+                  border: 1px #004e66 solid;
+                  background-color: transparent;
+                  border-radius: 10px;
+                  font-size: 16px !important;
+                  text-decoration: none !important;
+                  width: 160px !important;
+                  text-align: center;
+                  display: block;
+                "
+                href="https://www.ofaloo.com/contactez-nous/"
+                >Contactez-nous</a
+              >
+              <a
+                style="
+                  color: #004e66 !important;
+                  padding: 10px 20px !important;
+                  border: 1px #004e66 solid;
+                  background-color: transparent;
+                  border-radius: 10px;
+                  font-size: 16px !important;
+                  text-decoration: none !important;
+                  width: 160px !important;
+                  display: block;
+                  margin-left: 2rem;
+                  text-align: center;
+                "
+                href="https://www.ofaloo.com/faq/"
+                >FAQs</a
+              >
+              </div>
+              </div>
+              
+            <div
+            style="
+              margin-top: 30px !important;
+              font-size: 16px !important;
+              padding-top: 1.5rem;
+              border-top: 1px solid #e2e8f0;
+            "
+          >
+            <span
+              >Si vous n'avez pas créer de compte avec cette adresse email,
+              veuillez s'il vous plaît ignorer cet email et le supprimer.</span
+            >
+          </div>
             </div>
           </div>
         </div>

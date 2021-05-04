@@ -177,7 +177,7 @@ export default {
       return await new Promise((resolve, reject) => {
         resolve(
           this.$axios.$post('sendmail', {
-            email: 'yayasopeguesoro@gmail.com',
+            email: this.$auth.user.email,
             mail: this.$linker.email(
               res,
               this.$auth.user.email,

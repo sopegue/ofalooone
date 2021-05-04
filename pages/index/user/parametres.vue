@@ -25,18 +25,23 @@
       <div class="pt-3">
         <h4 class="logo-color size-13 pb-1">
           Confirmation de l'adresse email
-          <span class="font-semibold size-125"
-            >(Votre adresse n'est pas confirmée / Votre adresse est
-            confirmée)</span
+          <span
+            v-if="$auth.user.email_verified_at !== null"
+            class="font-semibold size-125"
+            >(Votre adresse est confirmée)</span
+          >
+          <span v-else class="font-semibold size-125"
+            >(Votre adresse n'est pas confirmée)</span
           >
         </h4>
         <h4 class="logo-color size-13 pb-1">
           Adresse actuelle:
           <span class="size-13 color-363636f">yayasopeguesoro@gmail.com</span>
         </h4>
-        <div class="pt-1 w-fit">
+        <div v-if="$auth.user.email_verified_at === null" class="pt-1 w-fit">
           <button
             class="border-none size-12 w-fit text-white py-1 px-10 pb-1 rounded button btn-008489"
+            @click="verify"
           >
             Confirmer votre adresse email
           </button>
@@ -168,6 +173,40 @@ export default {
     }, 500)
   },
   methods: {
+    async sendMail(res) {
+      return await new Promise((resolve, reject) => {
+        resolve(
+          this.$axios.$post('http://localhost:8000/api/sendmail', {
+            email: 'yayasopeguesoro@gmail.com',
+            mail: this.$linker.email(
+              res,
+              this.$auth.user.email,
+              this.$auth.user.name
+            ),
+          })
+        )
+      }).catch(() => {
+        console.error("Oops, can't resolve your promise sending mail")
+      })
+    },
+    async getHash() {
+      return await new Promise((resolve, reject) => {
+        resolve(
+          this.$axios.$get(
+            'hash/' + this.$auth.user.id + '/' + this.$auth.user.email
+          )
+        )
+      }).catch(() => {
+        console.error("Oops, can't resolve your promise getting hash")
+      })
+    },
+    verify() {
+      this.getHash().then((res) => {
+        if (res.status === '200') {
+          this.sendMail(res.token).then((res) => console.log(res))
+        }
+      })
+    },
     dell() {
       this.$store.commit('SET_DEL_MOD', true)
       document.body.style.overflow = 'hidden'

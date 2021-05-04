@@ -275,7 +275,10 @@
             ></span
           >
         </div>
-        <div class="flex align-center space-x-1 mt-1">
+        <div
+          :title="property.adresse + ', ' + property.ville"
+          class="flex align-center space-x-1 mt-1"
+        >
           <svg
             class="w-5 min-w-5 h-5 min-h-5 logo-color -ml-1"
             fill="none"
@@ -383,6 +386,8 @@
         :compo="id"
         :property="property"
         :images="images"
+        :asaved="has_saved"
+        :adesaved="has_desaved"
         @close_quick="close_quick"
       ></articlemodal>
     </div>
@@ -419,6 +424,9 @@ export default {
     here() {
       return this.$store.state.component
     },
+    herede() {
+      return this.$store.state.decomponent
+    },
     has_saved() {
       return this.saved === true
     },
@@ -446,12 +454,20 @@ export default {
   watch: {
     here(nv, ov) {
       if (nv === this.id) {
+        // console.log(this.notif, 'here')
         this.notif = true
         this.saved = true
         this.desavedd = false
         setTimeout(() => {
           this.notif = false
         }, 3000)
+      }
+    },
+    herede(nv, ov) {
+      if (nv === this.id) {
+        // console.log(this.notif, 'here')
+        this.saved = false
+        this.desavedd = true
       }
     },
   },

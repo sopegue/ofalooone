@@ -651,7 +651,7 @@
           </div>
         </div>
       </div>
-      <div class="w-full border-b border-t pt-5 pb-5">
+      <div v-if="has_options" class="w-full border-t pt-5 pb-5">
         <div class="w-full">
           <div>
             <h4 class="logo-color size-16 font-semibold mb-5">
@@ -712,7 +712,7 @@
           </div>
         </div>
       </div>
-      <div v-if="links !== null" id="social" class="border-b pb-8">
+      <div v-if="links !== null" id="social" class="border-t pb-8">
         <div>
           <h4 class="logo-color size-16 font-semibold mt-5 w-fit mx-auto">
             Réseaux sociaux
@@ -767,7 +767,7 @@
           </div>
         </div>
       </div>
-      <div class="flex w-full">
+      <div class="flex w-full border-t">
         <div id="contact-agent" class="w-full mt-3 h-fit p-2">
           <h4 class="logo-color size-16 font-semibold mb-5">
             Contacter l'agent
@@ -824,7 +824,6 @@
                     'Acheteur',
                     'Locataire',
                     'Agent immobilier',
-                    'Agent sur Ofaloo',
                     'Investisseur',
                     'Vendeur',
                     'Autre',
@@ -917,7 +916,7 @@
       allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
     ></iframe> -->
     <imgmodal
-      v-show="quick"
+      v-if="quick"
       :ads="ades"
       :activeindex="index"
       :links="property.data.links"
@@ -1064,7 +1063,8 @@ export default {
       return (
         this.property !== undefined &&
         this.property.data.options !== null &&
-        this.property.data.options !== undefined
+        this.property.data.options !== undefined &&
+        this.property.data.options.length > 0
       )
     },
     notification() {

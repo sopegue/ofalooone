@@ -320,7 +320,10 @@
           ></span
         >
       </div>
-      <div class="flex space-x-1 mt-1">
+      <div
+        :title="property.adresse + ', ' + property.ville"
+        class="flex space-x-1 mt-1"
+      >
         <svg
           class="w-6 h-6 logo-color -ml-1"
           fill="none"
@@ -428,6 +431,8 @@
       :compo="id"
       :property="property"
       :images="images"
+      :asaved="has_saved"
+      :adesaved="has_desaved"
       @close_quick="close_quick"
     ></articlemodal>
   </div>
@@ -478,6 +483,9 @@ export default {
     here() {
       return this.$store.state.component
     },
+    herede() {
+      return this.$store.state.decomponent
+    },
     getImgPrin() {
       for (let index = 0; index < this.property.images.length; index++) {
         const element = this.property.images[index]
@@ -500,6 +508,13 @@ export default {
         setTimeout(() => {
           this.notif = false
         }, 3000)
+      }
+    },
+    herede(nv, ov) {
+      if (nv === this.id) {
+        // console.log(this.notif, 'here')
+        this.saved = false
+        this.desavedd = true
       }
     },
   },
@@ -567,7 +582,6 @@ export default {
             if (this.curoute.includes('/favoris')) {
               this.$store.commit('rel_fav', true)
             }
-            console.log(this.notif)
           })
         }
         if (this.has_desaved) {
@@ -577,7 +591,6 @@ export default {
             this.notif = true
             setTimeout(() => {
               this.notif = false
-              console.log(this.notif)
             }, 3000)
           })
         }

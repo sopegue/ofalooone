@@ -234,7 +234,10 @@
             ></span
           >
         </div>
-        <div class="flex align-center space-x-1 mt-1">
+        <div
+          :title="property.adresse + ', ' + property.ville"
+          class="flex align-center space-x-1 mt-1"
+        >
           <svg
             class="w-5 min-w-5 h-5 min-h-5 logo-color"
             fill="none"

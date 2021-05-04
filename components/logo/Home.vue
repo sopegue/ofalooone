@@ -2,14 +2,11 @@
   <a href="/" class="flex w-fit align-center">
     <logo :color="color" :scale="scaling"></logo>
     <span
-      class="font-semibold select-none transform pl-5"
+      class="font-semibold select-none transform pl-2.5 size-28"
       :class="{
         'col-1f2937': textcolor === '#1f2937',
         'text-white': textcolor === '#fff',
         'col-008489': textcolor === '#008489',
-        'scale-125': textscaling === 25,
-        'scale-150': textscaling === 50,
-        'scale-110': textscaling === 10,
       }"
       >Ofaloo</span
     >

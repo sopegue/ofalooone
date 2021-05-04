@@ -53,59 +53,76 @@
               >
             </div>
             <!-- here for save and non saved property -->
-            <div class="flex align-center space-x-5">
-              <button
-                class="flex align-center hover-008489 space-x-1 mt-1"
-                @click="savelist"
+            <div class="relative">
+              <div
+                v-if="notification"
+                class="absolute rounded w-fit top-7.5 left-0 appearZ z-15"
               >
-                <svg
-                  v-if="property.property.saved"
-                  class="w-5 h-5 logo-color"
-                  fill="currentColor"
-                  stroke="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
+                <span
+                  class="block text-c bg-green-600 rounded py-1.5 px-4 text-white font-semibold size-11"
+                  >Enregistrée √</span
                 >
-                  <path
-                    stroke-width="1"
-                    d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
-                  ></path>
-                </svg>
-                <svg
-                  v-else
-                  class="w-5 h-5 logo-color"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
+              </div>
+              <div class="flex align-center space-x-5">
+                <client-only>
+                  <button
+                    class="flex align-center hover-008489 space-x-1 mt-1"
+                    @click="savelist"
+                  >
+                    <svg
+                      v-if="asaved"
+                      class="w-5 h-5 logo-color"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-width="1"
+                        d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
+                      ></path>
+                    </svg>
+                    <svg
+                      v-if="adesaved"
+                      class="w-5 h-5 logo-color"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-width="1"
+                        d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
+                      ></path>
+                    </svg>
+                    <span
+                      v-if="adesaved"
+                      class="logo-color size-14 makeme-008489"
+                      >Enregistrer</span
+                    >
+                    <span v-if="asaved" class="logo-color size-14 makeme-008489"
+                      >Enregistrée</span
+                    >
+                  </button>
+                </client-only>
+                <button
+                  v-click-outside="hideshare"
+                  class="flex align-center relative hover-008489 space-x-1 mt-1"
+                  @click="
+                    {
+                      share = !share
+                    }
+                  "
                 >
-                  <path
-                    stroke-width="1"
-                    d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z"
-                  ></path>
-                </svg>
-                <span class="logo-color size-14 makeme-008489"
-                  >Enregistrer</span
-                >
-              </button>
-              <button
-                v-click-outside="hideshare"
-                class="flex align-center relative hover-008489 space-x-1 mt-1"
-                @click="
-                  {
-                    share = !share
-                  }
-                "
-              >
-                <svg
-                  class="w-5 h-5 logo-color -ml-1 makeme-008489"
-                  stroke="none"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M15 8C16.6569 8 18 6.65685 18 5C18 3.34315 16.6569
+                  <svg
+                    class="w-5 h-5 logo-color -ml-1 makeme-008489"
+                    stroke="none"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15 8C16.6569 8 18 6.65685 18 5C18 3.34315 16.6569
                      2 15 2C13.3431 2 12 3.34315 12 5C12 5.12548 12.0077 
                      5.24917 12.0227 5.37061L7.08259 7.84064C6.54303 7.32015 
                      5.8089 7 5 7C3.34315 7 2 8.34315 2 10C2 11.6569 3.34315 
@@ -113,57 +130,61 @@
                       14.6293C12.0077 14.7508 12 14.8745 12 15C12 16.6569 13.3431 
                       18 15 18C16.6569 18 18 16.6569 18 15C18 13.3431 16.6569 12 15 
                       12C14.1911 12 13.457 12.3201 12.9174 12.8406L7.97733 10.3706C7.9923 10.2492 8 10.1255 8 10C8 9.8745 7.99229 9.7508 7.97733 9.62934L12.9174 7.15932C13.4569 7.67984 14.1911 8 15 8Z"
-                    fill="#2d3748"
-                  />
-                </svg>
-                <div
-                  v-show="share"
-                  class="absolute bg-white top-0 mt-6 z-20 appearZ w-fit flex align-center space-x-4 border py-2 px-5 rounded"
-                  :class="{ 'right-0': size >= 556, 'left-0': size < 556 }"
-                >
-                  <a
-                    class="twitter-share-button"
-                    :href="`https://twitter.com/intent/tweet?text=https://www.ofaloo.com/propriete/?wyzes=${property.property.id}`"
-                    data-size="large"
-                    title="Partager sur Twitter"
-                    target="_blank"
-                    ><i class="fab fa-twitter size-20 clickable twi-col"></i
-                  ></a>
-                  <a
-                    href="https://fb.com/saliistore"
-                    title="Partager sur Facebook"
-                    target="_blank"
-                    ><iframe
-                      :src="`https://www.facebook.com/plugins/share_button.php?href=https://www.ofaloo.com/propriete/?wyzes=${property.property.id}&layout=button&size=small&width=81&height=20&appId`"
-                      width="81"
-                      height="20"
-                      style="border: none; overflow: hidden"
-                      scrolling="no"
-                      frameborder="0"
-                      allowfullscreen="true"
-                      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                    ></iframe
-                  ></a>
-                  <a v-show="size < 640" :href="mail" title="Partager par email"
-                    ><svg
-                      class="w-7 min-w-7 h-7 min-h-7 logo-color"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M2.00333 5.88355L9.99995 9.88186L17.9967 5.8835C17.9363 4.83315 17.0655 4 16 4H4C2.93452 4 2.06363 4.83318 2.00333 5.88355Z"
-                        fill="#004e66"
-                      />
-                      <path
-                        d="M18 8.1179L9.99995 12.1179L2 8.11796V14C2 15.1046 2.89543 16 4 16H16C17.1046 16 18 15.1046 18 14V8.1179Z"
-                        fill="#004e66"
-                      />
-                    </svg>
-                  </a>
-                </div>
-                <span class="logo-color size-14 makeme-008489">Partager</span>
-              </button>
+                      fill="#2d3748"
+                    />
+                  </svg>
+                  <div
+                    v-show="share"
+                    class="absolute bg-white top-0 mt-6 z-20 appearZ w-fit flex align-center space-x-4 border py-2 px-5 rounded"
+                    :class="{ 'right-0': size >= 556, 'left-0': size < 556 }"
+                  >
+                    <a
+                      class="twitter-share-button"
+                      :href="`https://twitter.com/intent/tweet?text=https://www.ofaloo.com/propriete/?wyzes=${property.property.id}`"
+                      data-size="large"
+                      title="Partager sur Twitter"
+                      target="_blank"
+                      ><i class="fab fa-twitter size-20 clickable twi-col"></i
+                    ></a>
+                    <a
+                      href="https://fb.com/saliistore"
+                      title="Partager sur Facebook"
+                      target="_blank"
+                      ><iframe
+                        :src="`https://www.facebook.com/plugins/share_button.php?href=https://www.ofaloo.com/propriete/?wyzes=${property.property.id}&layout=button&size=small&width=81&height=20&appId`"
+                        width="81"
+                        height="20"
+                        style="border: none; overflow: hidden"
+                        scrolling="no"
+                        frameborder="0"
+                        allowfullscreen="true"
+                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                      ></iframe
+                    ></a>
+                    <a
+                      v-show="size < 640"
+                      :href="mail"
+                      title="Partager par email"
+                      ><svg
+                        class="w-7 min-w-7 h-7 min-h-7 logo-color"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M2.00333 5.88355L9.99995 9.88186L17.9967 5.8835C17.9363 4.83315 17.0655 4 16 4H4C2.93452 4 2.06363 4.83318 2.00333 5.88355Z"
+                          fill="#004e66"
+                        />
+                        <path
+                          d="M18 8.1179L9.99995 12.1179L2 8.11796V14C2 15.1046 2.89543 16 4 16H16C17.1046 16 18 15.1046 18 14V8.1179Z"
+                          fill="#004e66"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+                  <span class="logo-color size-14 makeme-008489">Partager</span>
+                </button>
+              </div>
             </div>
           </div>
           <div class="h-402max flex space-x-6">
@@ -683,6 +704,42 @@
                   </div>
                 </div>
               </div>
+              <div
+                class="flex align-center border justify-between h-16 rounded bg-white"
+                :class="{
+                  'w-full': size < 500,
+                  'h-centers': size < 640,
+                  w360: size >= 500,
+                }"
+              >
+                <div class="pl-3">
+                  <h4 class="logo-color block size-14 font-semibold">
+                    Vendez et louez vos propriétés
+                  </h4>
+                  <a href="/devenir-agent" class="logo-color size-14"
+                    >Devenez agent sur Ofaloo</a
+                  >
+                </div>
+                <div>
+                  <a
+                    href="/devenir-agent"
+                    class="no-outlines border-transparent"
+                  >
+                    <svg
+                      class="w-9 h-9 transform -rotate-90 logo-color mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
             </div>
             <div class="w180e defss h-fit p-2 border rounded">
               <h4 class="logo-color border-b text-c size-13 pb-2 font-semibold">
@@ -731,7 +788,6 @@
                       'Acheteur',
                       'Locataire',
                       'Agent immobilier',
-                      'Agent sur Ofaloo',
                       'Investisseur',
                       'Vendeur',
                       'Autre',
@@ -785,6 +841,14 @@ export default {
       type: Number,
       default: -1,
     },
+    asaved: {
+      type: Boolean,
+      default: false,
+    },
+    adesaved: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -799,6 +863,9 @@ export default {
       hovered1: false,
       hovered2: false,
       hovered3: false,
+      saved: false,
+      desavedd: false,
+      notif: false,
       zoom: false,
       active: 0,
       index: 1,
@@ -815,6 +882,18 @@ export default {
     size() {
       return this.$store.state.size
     },
+    here() {
+      return this.$store.state.component
+    },
+    notification() {
+      return this.notif === true
+    },
+    has_saved() {
+      return this.saved === true
+    },
+    has_desaved() {
+      return this.desavedd === true
+    },
     dataOk() {
       return (
         this.property !== undefined &&
@@ -826,11 +905,15 @@ export default {
       return (
         this.property !== undefined &&
         this.property.options !== null &&
-        this.property.options !== undefined
+        this.property.options !== undefined &&
+        this.property.options.length > 0
       )
     },
     has_in() {
       return this.options.indoor.length > 0
+    },
+    curoute() {
+      return this.$route.path
     },
     has_out() {
       return this.options.outdoor.length > 0
@@ -860,9 +943,24 @@ export default {
       return this.index - 1
     },
   },
+  watch: {
+    here(nv, ov) {
+      if (nv === this.compo) {
+        // console.log(this.notif, 'here')
+        this.notif = true
+        this.saved = true
+        this.desavedd = false
+        setTimeout(() => {
+          this.notif = false
+        }, 3000)
+      }
+    },
+  },
   beforeMount() {
     this.savetorecent()
     this.checkOptions()
+    if (this.property.saved) this.saved = true
+    else this.desavedd = true
   },
   mounted() {
     this.increment()
@@ -922,11 +1020,64 @@ export default {
     indexed(val) {
       this.index = val
     },
-    desaved() {},
+    async saveProp() {
+      return await new Promise((resolve, reject) => {
+        resolve(
+          this.$axios.$post('save/property', {
+            prop: this.property.property.id,
+            user: this.$auth.loggedIn ? this.$auth.user.id : -1,
+          })
+        )
+      }).catch(() => {
+        console.error("Oops, can't resolve your promise saving")
+      })
+    },
+    async desaved() {
+      return await new Promise((resolve, reject) => {
+        resolve(
+          this.$axios.$post('unsave/property', {
+            prop: this.property.property.id,
+            user: this.$auth.loggedIn ? this.$auth.user.id : -1,
+          })
+        )
+      }).catch(() => {
+        console.error("Oops, can't resolve your promise saving")
+      })
+    },
     savelist() {
       if (!this.$auth.loggedIn) {
-        // this.$store.commit('ads_id', this.id)
-        location.assign('/connexion')
+        this.close()
+        this.$store.commit('close_quick_sign', true)
+        this.$store.commit('precom', this.compo)
+        this.$store.commit('set_tosave', this.property.property.id)
+        document.body.style = 'overflow: hidden'
+      } else {
+        // save or desaved
+        if (this.asaved) {
+          this.$store.commit('precom', -1)
+          this.$store.commit('decomponent', -1)
+          this.desaved().then((res) => {
+            this.desavedd = true
+            this.saved = false
+            this.$store.commit('decomponent', this.compo)
+            if (this.curoute.includes('/favoris')) {
+              this.$store.commit('rel_fav', true)
+            }
+          })
+        }
+        if (this.adesaved) {
+          this.$store.commit('precom', -1)
+          this.$store.commit('component', -1)
+          this.saveProp().then((res) => {
+            this.saved = true
+            this.desavedd = false
+            this.notif = true
+            this.$store.commit('component', this.compo)
+            setTimeout(() => {
+              this.notif = false
+            }, 3000)
+          })
+        }
       }
     },
   },

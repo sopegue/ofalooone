@@ -28,7 +28,6 @@
       </button>
     </div>
     <div
-      v-show="size >= 460"
       class="d-dot block h-fit z-10 self-end mb-2 flex align-center space-x-3"
     >
       <span

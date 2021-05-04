@@ -16,7 +16,7 @@
             Non, annuler
           </button>
           <button
-            class="button is-danger font-semibold rounded-md no-outlines outline-none size-12 px-5"
+            class="button bghover-008489er text-white font-semibold rounded-md no-outlines outline-none size-12 px-5"
             @click="deleteaccount"
           >
             Oui, supprimer

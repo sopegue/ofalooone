@@ -8,6 +8,7 @@ export const state = () => ({
   domloading: true,
   quicksign: false,
   component: -1,
+  decomponent: -1,
   tosave: -1,
   precom: -1,
   hasscrolled: false,
@@ -85,6 +86,9 @@ export const mutations = {
   },
   component(state, value) {
     state.component = value
+  },
+  decomponent(state, value) {
+    state.decomponent = value
   },
   set_Reseting(state, value) {
     state.reseting = value

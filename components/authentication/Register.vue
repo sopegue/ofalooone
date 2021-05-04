@@ -358,6 +358,9 @@ export default {
     invalidsurname() {
       return this.surnameerror === true
     },
+    previous() {
+      return this.$store.state.from
+    },
   },
   watch: {
     email(nv, ov) {
@@ -528,7 +531,7 @@ export default {
                     this.mailtaken = false
                     this.wenwrong = false
 
-                    this.$router.go(-1)
+                    location.assign(this.previous)
                   }
                   if (res.data.status === 404) {
                     this.accounting = false

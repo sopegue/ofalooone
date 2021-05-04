@@ -163,7 +163,7 @@ export default {
     },
     resulat(nv, ov) {
       if (nv !== null && nv.status === '200') {
-        this.sendMail(nv.token).then((res) => alert('sent'))
+        this.sendMail(nv.token).then((res) => console.log(res))
         setTimeout(() => {
           this.resulat = null
         }, 3000)
@@ -185,7 +185,7 @@ export default {
     async sendMail(res) {
       return await new Promise((resolve, reject) => {
         resolve(
-          this.$axios.$post('http://localhost:8000/api/sendmail', {
+          this.$axios.$post('sendmail', {
             email: 'yayasopeguesoro@gmail.com',
             mail: this.$linker.email(
               res,

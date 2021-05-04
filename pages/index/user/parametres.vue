@@ -163,7 +163,7 @@ export default {
     },
     resulat(nv, ov) {
       if (nv !== null && nv.status === '200') {
-        this.sendMail(nv.token).then((res) => console.log(res))
+        this.sendMail(nv.token).then((res) => alert('sent'))
         setTimeout(() => {
           this.resulat = null
         }, 3000)

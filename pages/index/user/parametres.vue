@@ -77,6 +77,7 @@ export default {
       first: true,
       stat: null,
       notif: false,
+      resulat: null,
     }
   },
   computed: {
@@ -202,10 +203,11 @@ export default {
     },
     verify() {
       this.getHash().then((res) => {
-        if (res.status === '200') {
-          this.sendMail(res.token).then((res) => console.log(res))
-        }
+        this.resulat = res
       })
+      if (this.resulat !== null && this.resulat.status === '200') {
+        this.sendMail(this.resulat.token).then((res) => console.log(res))
+      }
     },
     dell() {
       this.$store.commit('SET_DEL_MOD', true)

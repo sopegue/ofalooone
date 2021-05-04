@@ -77,7 +77,6 @@ export default {
       first: true,
       stat: null,
       notif: false,
-      resulat: null,
     }
   },
   computed: {
@@ -161,14 +160,6 @@ export default {
         this.deletion()
       }
     },
-    resulat(nv, ov) {
-      if (nv !== null && nv.status === '200') {
-        this.sendMail(nv.token).then((res) => console.log(res))
-        setTimeout(() => {
-          this.resulat = null
-        }, 3000)
-      }
-    },
   },
   beforeMount() {
     if (this.$auth.user.retired_sold === 'yes') {
@@ -211,7 +202,9 @@ export default {
     },
     verify() {
       this.getHash().then((res) => {
-        this.resulat = res
+        if (res.status === '200') {
+          this.sendMail(res.token).then((res) => console.log(res))
+        }
       })
     },
     dell() {

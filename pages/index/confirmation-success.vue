@@ -10,6 +10,11 @@
 import Confirmsuccess from '~/components/authentication/Confirmsuccess.vue'
 export default {
   components: { Confirmsuccess },
+  beforeMount() {
+    if (!localStorage.success) {
+      this.$router.replace('/')
+    }
+  },
 }
 </script>
 

@@ -36,7 +36,9 @@
         </h4>
         <h4 class="logo-color size-13 pb-1">
           Adresse actuelle:
-          <span class="size-13 color-363636f">yayasopeguesoro@gmail.com</span>
+          <span class="size-13 logo-color font-semibold">{{
+            $auth.user.email
+          }}</span>
         </h4>
         <div v-if="$auth.user.email_verified_at === null" class="pt-1 w-fit">
           <button
@@ -173,39 +175,10 @@ export default {
     }, 500)
   },
   methods: {
-    async sendMail(res) {
-      return await new Promise((resolve, reject) => {
-        resolve(
-          this.$axios.$post('sendmail', {
-            email: this.$auth.user.email,
-            mail: this.$linker.email(
-              res,
-              this.$auth.user.email,
-              this.$auth.user.name
-            ),
-          })
-        )
-      }).catch(() => {
-        console.error("Oops, can't resolve your promise sending mail")
-      })
-    },
-    async getHash() {
-      return await new Promise((resolve, reject) => {
-        resolve(
-          this.$axios.$get(
-            'hash/' + this.$auth.user.id + '/' + this.$auth.user.email
-          )
-        )
-      }).catch(() => {
-        console.error("Oops, can't resolve your promise getting hash")
-      })
-    },
     verify() {
-      this.getHash().then((res) => {
-        if (res.status === '200') {
-          this.sendMail(res.token).then((res) => console.log(res))
-        }
-      })
+      if (localStorage.conf) localStorage.removeItem('conf')
+      localStorage.setItem('conf', true)
+      location.assign('/confirmation')
     },
     dell() {
       this.$store.commit('SET_DEL_MOD', true)

@@ -10,6 +10,12 @@
 import Confirm from '~/components/authentication/Confirm.vue'
 export default {
   components: { Confirm },
+  middleware: 'auth',
+  beforeMount() {
+    if (!localStorage.conf) {
+      this.$router.replace('/')
+    }
+  },
 }
 </script>
 

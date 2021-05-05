@@ -83,16 +83,27 @@ const linker = {
           .bb:hover {
             background-color: #0a3d4d !important;
           }
+          @media screen and (max-width: 640px) {
+            .home {
+              width: 100% !important;
+              padding-left: 2.5rem !important;
+              padding-right: 2.5rem !important;
+              width: fit-content !important;
+            }
+            .auto-width {
+              width: auto !important;
+            }
+          }
         </style>
       </head>
       <body>
-        <div
+        <div class="home"
           style="
             font-family: system-ui;
             padding-bottom: 3rem;
-            margin-left: 5rem !important;
             color: #2d3748;
-            margin-right: 5rem !important;
+            width: 767px;
+            margin: 0 auto !important;
           "
         >
           <div style="display: flex !important; align-items: center !important">
@@ -123,14 +134,14 @@ const linker = {
             <span
               style="
                 font-weight: 600 !important;
-                font-size: 36px;
+                font-size: 28px;
                 color: #004e66;
                 margin-left: 5px;
               "
               >Ofaloo</span
             >
           </div>
-          <div style="margin-top: 25px !important; font-size: 20px !important">
+          <div style="margin-top: 25px !important; font-size: 18px !important">
             <div>
               <span
                 style="
@@ -175,14 +186,14 @@ const linker = {
             <div style="margin-top: 30px !important">
               <span>Toute l'équipe Ofaloo,</span>
             </div>
-            <div style="margin-top: 20px !important; font-size: 20px !important">
+            <div style="margin-top: 20px !important; font-size: 18px !important">
               <span>Ou vérifiez votre compte en utilisant le lien suivant:</span>
             </div>
             <a
               href="https://www.ofaloo.com/vef?email=${email}&alinux=${hash}"
               style="
                 margin-top: 30px !important;
-                font-size: 18px !important;
+                font-size: 16px !important;
                 color: #004e66;
               "
             >
@@ -214,7 +225,7 @@ const linker = {
                       align-items: center !important;
                       justify-items: center;
                       justify-content: center;">
-              <a
+              <a class="auto-width"
                 style="
                   color: #004e66 !important;
                   padding: 10px 20px !important;
@@ -223,14 +234,14 @@ const linker = {
                   border-radius: 10px;
                   font-size: 16px !important;
                   text-decoration: none !important;
-                  width: 160px !important;
+                  width: 160px;
                   text-align: center;
                   display: block;
                 "
                 href="https://www.ofaloo.com/contactez-nous/"
                 >Contactez-nous</a
               >
-              <a
+              <a class="auto-width"
                 style="
                   color: #004e66 !important;
                   padding: 10px 20px !important;
@@ -239,7 +250,7 @@ const linker = {
                   border-radius: 10px;
                   font-size: 16px !important;
                   text-decoration: none !important;
-                  width: 160px !important;
+                  width: 160px;
                   display: block;
                   margin-left: 2rem;
                   text-align: center;

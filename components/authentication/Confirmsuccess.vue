@@ -8,18 +8,18 @@
           <h4 class="size-16 logo-color font-semibold mb-2">
             Confirmation de l'adresse email
           </h4>
-          <div class="w-fit appearZ">
+          <div class="appearZ">
             <span
-              class="block px-5 py-0.6 border rounded border-green-600 text-green-600"
+              class="block text-center px-5 py-0.6 border rounded border-green-600 text-green-600"
               >Votre adresse email a été confirmée avec succès √</span
             >
           </div>
           <div class="w-fit m-0-auto">
             <div class="flex align-center space-x-2 size-13 mt-5">
               <a
-                href="#"
+                href="/"
                 class="button btn-008489 text-white rounded size-12 px-10"
-                >Continuer</a
+                >Aller à l'accueil</a
               >
             </div>
           </div>

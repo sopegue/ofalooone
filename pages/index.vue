@@ -177,6 +177,15 @@ export default {
       sessionStorage.removeItem('filter_home')
       sessionStorage.removeItem('activesearch')
     }
+    if (!this.curoute.includes('/confirmation-success')) {
+      localStorage.removeItem('success')
+    }
+    if (!this.curoute.includes('/expirated-link')) {
+      localStorage.removeItem('invalid')
+    }
+    if (!this.curoute.includes('/confirmation')) {
+      localStorage.removeItem('conf')
+    }
     if (!this.$auth.loggedIn) {
       if (localStorage.hdzd) {
         const data = await JSON.parse(localStorage.getItem('hdzd'))

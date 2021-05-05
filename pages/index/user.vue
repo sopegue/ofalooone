@@ -30,7 +30,7 @@
           <div
             class="flex pb-8"
             :class="{
-              'px-6 space-x-5': size < 850 && size >= 467,
+              'px-6 align-center space-x-5': size < 850 && size >= 467,
               'flex-col space-y-2.5 justify-center border-b':
                 size >= 850 || size < 467,
             }"
@@ -47,55 +47,12 @@
                   src="https://ofalooback.herokuapp.com/images/4.jpg"
                   alt="Image"
                 />
-                <button
-                  class="absolute bottom-0 right-0 -mr-10.5 rounded-full border-none p-3 button is-lightsz"
-                >
-                  <svg
-                    class="h-5 w-5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M15.2322 5.23223L18.7677 8.76777M16.7322 3.73223C17.7085 2.75592 19.2914 2.75592 20.2677 3.73223C21.244 4.70854 21.244 6.29146 20.2677 7.26777L6.5 21.0355H3V17.4644L16.7322 3.73223Z"
-                      stroke="#2d3748"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
-                <!-- <div
-                  v-if="size < 850 && size > 467"
-                  class="absolute bottom-0 right-0 flex space-x-4 -mr-62 mb-2"
-                >
-                  <button class="button is-light size-12 rounded px-5">
-                    Annuler
-                  </button>
-                  <button
-                    class="button btn-008489 text-white size-12 rounded px-5"
-                  >
-                    Enregister
-                  </button>
-                </div> -->
               </figure>
-              <!-- <div
-                v-if="size > 850 || size < 467"
-                class="flex space-x-4 pt-5 pb-3"
-              >
-                <button class="button is-light size-12 rounded px-5">
-                  Annuler
-                </button>
-                <button
-                  class="button btn-008489 text-white size-12 rounded px-5"
-                >
-                  Enregister
-                </button>
-              </div> -->
             </div>
             <div class="flex flex-col text-center pt-1.5">
               <span class="size-18 logo-color font-semibold"
-                >{{ $auth.user.surname }} {{ $auth.user.name }}</span
+                >{{ $linker.capitalize($auth.user.surname) }}
+                {{ $linker.capitalize($auth.user.name) }}</span
               >
               <span class="size-12 color-363636f">{{ $auth.user.email }}</span>
             </div>
@@ -104,7 +61,7 @@
             :class="{
               'py-2': size >= 850,
               'nav-desc flex align-center': size < 850,
-              'justify-between': size < 467,
+              'justify-between px-2.5': size < 467,
             }"
           >
             <a

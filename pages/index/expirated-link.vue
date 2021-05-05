@@ -1,9 +1,9 @@
 <template>
-  <div class="py-18">
+  <div class="py-25">
     <div class="w-full flex flex-col">
       <div class="oath-log flex flex-col space-y-10">
         <div
-          class="border bg-white rounded px-5 sm:px-8 py-5 flex flex-col space-y-2"
+          class="border m-0-auto lg:w-3/5 md:w-4/5 bg-white rounded px-5 sm:px-8 py-5 flex flex-col space-y-2"
         >
           <h4 class="size-16 logo-color font-semibold mb-2">
             Lien de verification invalide

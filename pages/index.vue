@@ -144,11 +144,7 @@ export default {
     },
   },
   beforeMount() {
-    if (document.readyState !== 'loading') {
-      this.domload()
-    } else {
-      window.addEventListener('DOMContentLoaded', this.domload, false)
-    }
+    window.addEventListener('DOMContentLoaded', this.domload, false)
     if (!localStorage.cookies) localStorage.setItem('cookies', 'approving')
     if (sessionStorage.previous) {
       this.previous = sessionStorage.getItem('previous')
@@ -168,6 +164,11 @@ export default {
     window.removeEventListener('DOMContentLoaded', this.domload, false)
   },
   async mounted() {
+    if (document.readyState !== 'loading') {
+      this.domload()
+    } else {
+      window.addEventListener('DOMContentLoaded', this.domload, false)
+    }
     this.large()
     this.handleScroll()
     this.scrolltop()

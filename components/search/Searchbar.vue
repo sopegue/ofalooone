@@ -76,7 +76,7 @@
     <form
       v-click-outside="hidesearch"
       class="relative flex align-center w-full h-full mr-10"
-      @submit.prevent="searching"
+      @submit.prevent="searchingme"
     >
       <div
         v-show="
@@ -448,6 +448,19 @@ export default {
       this.history.searches = this.history.searches.slice(0, 10)
       if (localStorage.history) localStorage.removeItem('history')
       localStorage.setItem('history', JSON.stringify(this.history))
+      this.searching()
+    },
+    async searchingme() {
+      if (this.search !== '') {
+        if (localStorage.history) {
+          this.history = await JSON.parse(localStorage.getItem('history'))
+        }
+        if (!this.history.searches.includes(this.search))
+          this.history.searches.unshift(this.search)
+        this.history.searches = this.history.searches.slice(0, 10)
+        if (localStorage.history) localStorage.removeItem('history')
+        localStorage.setItem('history', JSON.stringify(this.history))
+      }
       this.searching()
     },
     async pendingmail() {

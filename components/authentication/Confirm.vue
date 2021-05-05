@@ -18,7 +18,7 @@
           </div>
           <div>
             <span class="logo-color"
-              >Vous n'avez pas réçu de lien ?
+              >Vous n'avez pas reçu de lien ?
               <a
                 :class="{
                   'color-008489 underline-hover clickable': cansend,

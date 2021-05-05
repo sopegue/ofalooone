@@ -64,7 +64,7 @@
         </h4>
         <form
           class="flex align-center hsin w-full"
-          @submit.prevent="gotosearch"
+          @submit.prevent="searchingme"
         >
           <div
             v-click-outside="hidesearch"
@@ -631,6 +631,19 @@ export default {
     },
     gose(val) {
       this.search = val
+      this.gotosearch()
+    },
+    async searchingme() {
+      if (this.search !== '') {
+        if (localStorage.history) {
+          this.history = await JSON.parse(localStorage.getItem('history'))
+        }
+        if (!this.history.searches.includes(this.search))
+          this.history.searches.unshift(this.search)
+        this.history.searches = this.history.searches.slice(0, 10)
+        if (localStorage.history) localStorage.removeItem('history')
+        localStorage.setItem('history', JSON.stringify(this.history))
+      }
       this.gotosearch()
     },
     async gotosearch() {

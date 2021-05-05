@@ -42,7 +42,7 @@ export default {
       return await new Promise((resolve, reject) => {
         resolve(
           this.$axios.$get(
-            'http://localhost:8000/api/verification/' +
+            'verification/' +
               this.$route.query.email +
               '/' +
               this.$route.query.alinux

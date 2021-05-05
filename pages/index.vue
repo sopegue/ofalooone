@@ -144,6 +144,11 @@ export default {
     },
   },
   beforeMount() {
+    if (document.readyState !== 'loading') {
+      this.domload()
+    } else {
+      window.addEventListener('DOMContentLoaded', this.domload, false)
+    }
     if (!localStorage.cookies) localStorage.setItem('cookies', 'approving')
     if (sessionStorage.previous) {
       this.previous = sessionStorage.getItem('previous')
@@ -156,7 +161,6 @@ export default {
     }
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('resize', this.large)
-    window.addEventListener('DOMContentLoaded', this.domload, false)
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.large)
@@ -166,7 +170,6 @@ export default {
   async mounted() {
     this.large()
     this.handleScroll()
-    this.checkDomload()
     this.scrolltop()
     if (!this.curoute.includes('/recherche')) {
       sessionStorage.removeItem('search')
@@ -249,13 +252,6 @@ export default {
         left: 0,
         behavior: 'smooth',
       })
-    },
-    checkDomload() {
-      if (document.readyState !== 'loading') {
-        this.domload()
-      } else {
-        window.addEventListener('DOMContentLoaded', this.domload, false)
-      }
     },
     large() {
       this.width = window.innerWidth

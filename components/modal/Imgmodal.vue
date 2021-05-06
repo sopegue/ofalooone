@@ -1,7 +1,7 @@
 <template>
-  <div class="modal ml0 is-active">
+  <div class="modal ml0 is-active" :class="{ 'min-w-70': size <= 768 }">
     <div class="modal-background w-full h-full bg-foot"></div>
-    <div class="absolute top-0 left-0 ml-12 mt-3 z-10">
+    <div class="absolute top-0 left-0 ml-12 mt-2 z-10">
       <button class="bg-transparent no-outlines outline-none" @click="close">
         <svg
           class="w-8 h-8 color-white"
@@ -19,30 +19,14 @@
         </svg>
       </button>
     </div>
-    <div class="modal-content w-full h-full" :class="{ 'py-5': size <= 768 }">
-      <div class="border-b pb-3">
-        <div class="w-fit m-0-auto">
-          <div class="flex align-center space-x-3">
-            <button class="cursor-default">
-              <svg
-                class="w-7 h-7"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M4 16L8.58579 11.4142C9.36683 10.6332 10.6332 10.6332 11.4142 11.4142L16 16M14 14L15.5858 12.4142C16.3668 11.6332 17.6332 11.6332 18.4142 12.4142L20 14M14 8H14.01M6 20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4H6C4.89543 4 4 4.89543 4 6V18C4 19.1046 4.89543 20 6 20Z"
-                  stroke="#2d3748"
-                  stroke-width="1"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="wmin-900 m-0-auto h-x620 pt-8 px-30">
+    <div
+      class="modal-content w-full h-full"
+      :class="{ 'pt-12 min-w-70': size <= 768 }"
+    >
+      <div
+        class="m-0-auto md:px-30 lg:w-2/3 md:w-full sm:max-w-360"
+        :class="{ h416: size > 500, 'h-76': size <= 500 }"
+      >
         <div class="bg-e6e6e6 h-full w-full relative">
           <slider
             :index="index"
@@ -63,6 +47,33 @@
             </figure>
           </slider>
         </div>
+        <span
+          v-show="desc[index - 1] !== null"
+          class="py-2 block text-white text-center"
+          >Description: {{ desc[index - 1] }}</span
+        >
+        <div
+          class="flex justify-center space-x-5 pt-3.5 w-full overflow-x-auto"
+        >
+          <a
+            v-for="(i, j) in ads"
+            :key="j"
+            class="clickable w-fit h-fit rounded border border-transparent"
+            :class="{ shadow: now === j, 'hover:border-white': now !== j }"
+            @click="
+              {
+                index = j + 1
+              }
+            "
+          >
+            <figure
+              class="image is-96x96 rounded"
+              :class="{ 'border-2': now === j }"
+            >
+              <img class="rounded w-full" :src="i" alt="Image" />
+            </figure>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -79,6 +90,10 @@ export default {
       default: 1,
     },
     ads: {
+      type: Array,
+      default: () => [],
+    },
+    desc: {
       type: Array,
       default: () => [],
     },
@@ -109,6 +124,9 @@ export default {
     myindex() {
       return this.indexer
     },
+    now() {
+      return this.index - 1
+    },
     size() {
       return this.$store.state.size
     },
@@ -124,6 +142,7 @@ export default {
   },
   mounted() {
     this.index = this.activeindex
+    this.active = this.index
     if (this.hasvideo) {
       if (this.links.fb !== null && this.links.fb !== undefined)
         this.curvid = 'fb'
@@ -134,6 +153,7 @@ export default {
       else if (this.links.insta !== null && this.links.insta !== undefined)
         this.curvid = 'insta'
     }
+    console.log(this.desc)
   },
   methods: {
     gotos(val) {

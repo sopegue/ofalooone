@@ -28,7 +28,8 @@
       </button>
     </div>
     <div
-      class="d-dot block h-fit z-10 self-end mb-2 flex align-center space-x-3"
+      v-show="!$route.path.includes('/propriete')"
+      class="d-dot block h-fit z-15 self-end mb-2 flex align-center space-x-3"
     >
       <span
         v-for="i in adslength"

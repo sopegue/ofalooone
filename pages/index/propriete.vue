@@ -905,24 +905,14 @@
         ></sameagents>
       </div>
     </div>
-    <!-- <iframe
-      src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook%2Fvideos%2F10153231379946729%2F&width=500&show_text=false&height=280&appId"
-      width="500"
-      height="280"
-      style="border: none; overflow: hidden"
-      scrolling="no"
-      frameborder="0"
-      allowfullscreen="true"
-      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-    ></iframe> -->
     <imgmodal
       v-if="quick"
       :ads="ades"
+      :desc="desc"
       :activeindex="index"
       :links="property.data.links"
       @close_quick="close_quick"
     ></imgmodal>
-    <!-- <fb link="https://fb.watch/5a4cfgCqsp/"></fb> -->
   </div>
 </template>
 
@@ -989,6 +979,7 @@ export default {
       },
       active: 0,
       images: [],
+      desc: [],
       index: 1,
       ades: [],
     }
@@ -1241,6 +1232,7 @@ export default {
         }
         for (let index = 0; index < this.property.data.images.length; index++) {
           const element = this.property.data.images[index]
+          this.desc.push(element.desc)
           if (element.principal === 'no')
             this.images.push(
               'https://ofalooback.herokuapp.com/storage/' + element.url

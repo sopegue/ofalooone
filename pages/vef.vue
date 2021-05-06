@@ -31,7 +31,7 @@ export default {
                 if (localStorage.hdzd) localStorage.removeItem('hdzd')
                 location.reload()
               })
-            }
+            } else location.assign('/')
           }
         })
         .catch(() => {

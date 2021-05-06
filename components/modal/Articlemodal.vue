@@ -146,10 +146,7 @@
                       target="_blank"
                       ><i class="fab fa-twitter size-20 clickable twi-col"></i
                     ></a>
-                    <a
-                      href="https://fb.com/saliistore"
-                      title="Partager sur Facebook"
-                      target="_blank"
+                    <a title="Partager sur Facebook" target="_blank"
                       ><iframe
                         :src="`https://www.facebook.com/plugins/share_button.php?href=https://www.ofaloo.com/propriete/?wyzes=${property.property.id}&layout=button&size=small&width=81&height=20&appId`"
                         width="81"

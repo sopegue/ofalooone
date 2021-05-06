@@ -52,27 +52,27 @@
           class="py-2 block text-white text-center"
           >Description: {{ desc[index - 1] }}</span
         >
-        <div
-          class="flex justify-center space-x-5 pt-3.5 w-full overflow-x-auto"
-        >
-          <a
-            v-for="(i, j) in ads"
-            :key="j"
-            class="clickable w-fit h-fit rounded border border-transparent"
-            :class="{ shadow: now === j, 'hover:border-white': now !== j }"
-            @click="
-              {
-                index = j + 1
-              }
-            "
-          >
-            <figure
-              class="image is-96x96 rounded"
-              :class="{ 'border-2': now === j }"
+        <div class="flex justify-center w-auto">
+          <div class="flex space-x-5 pt-3.5 px-1.5 overflow-x-auto">
+            <a
+              v-for="(i, j) in ads"
+              :key="j"
+              class="clickable w-fit h-fit rounded border border-transparent"
+              :class="{ shadow: now === j, 'hover:border-white': now !== j }"
+              @click="
+                {
+                  index = j + 1
+                }
+              "
             >
-              <img class="rounded w-full" :src="i" alt="Image" />
-            </figure>
-          </a>
+              <figure
+                class="image is-96x96 rounded"
+                :class="{ 'border-2': now === j }"
+              >
+                <img class="rounded w-full" :src="i" alt="Image" />
+              </figure>
+            </a>
+          </div>
         </div>
       </div>
     </div>

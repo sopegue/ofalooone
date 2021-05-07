@@ -59,7 +59,7 @@
           <div>
             <span
               >Une fois la recherche effectuée, cliquez pour voir plus d'images,
-              vidéos, localisations et d'informations sur les propriétés.</span
+              vidéos, localisations et d'informations sur la propriété.</span
             >
           </div>
         </div>

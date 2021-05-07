@@ -226,7 +226,7 @@
     <div
       class="flex align-center w-full justify-between h-16 bg-white"
       :class="{
-        'sticky top-12xss': size >= 1100,
+        'sticky top-18': size >= 1100,
         'border-t': size <= 500,
         rounded: size > 500,
       }"

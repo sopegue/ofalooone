@@ -779,7 +779,7 @@
             <div
               class="w-full lg:w-2/5 md:w-3/5 sm:w-3/4 border rounded px-6 pt-4 pb-10 flex flex-col space-y-2"
             >
-              <div class="w-full">
+              <div class="w-full" :class="{ noclick: authmail.length > 0 }">
                 <label for="email" class="size-13">Email</label>
                 <br />
                 <input
@@ -798,6 +798,21 @@
                 >
                   Veuillez enter un email valide !
                 </p>
+              </div>
+              <div
+                v-show="$auth.loggedIn"
+                class="w-full flex align-center space-x-2 pt-1"
+              >
+                <input
+                  id="senupd"
+                  v-model="authmail"
+                  type="checkbox"
+                  value="yes"
+                  class="border rounded no-outlines outline-none"
+                />
+                <label for="senupd" class="size-12"
+                  >Utiliser l'adresse email de mon compte</label
+                >
               </div>
               <div class="w-full">
                 <label for="username" class="size-13">Nom</label>
@@ -885,7 +900,7 @@
               </p>
               <p
                 v-show="sent"
-                class="size-12 appearZ text-green-700 leading-4 pt-1"
+                class="size-13 appearZ text-green-700 leading-4 pt-1"
               >
                 Votre message a été envoyé avec succès √
               </p>
@@ -1034,6 +1049,7 @@ export default {
       desc: [],
       index: 1,
       ades: [],
+      authmail: [],
       email: '',
       name: '',
       tel: '',
@@ -1186,6 +1202,11 @@ export default {
         this.desavedd = false
       }
     },
+    authmail(nv, ov) {
+      if (nv.length > 0) {
+        this.email = this.$auth.user.email
+      }
+    },
     email(nv, ov) {
       if (this.mailerror) {
         this.maierror = false
@@ -1237,6 +1258,8 @@ export default {
   mounted() {
     if (this.dataOk) this.increment()
     this.prepare()
+    if (this.$auth.loggedIn && this.authmail.length > 0)
+      this.email = this.$auth.user.email
   },
   methods: {
     prepare() {

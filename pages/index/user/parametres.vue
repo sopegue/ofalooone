@@ -28,10 +28,10 @@
           <span
             v-if="$auth.user.email_verified_at !== null"
             class="font-semibold size-125"
-            >(Votre adresse est confirmée)</span
+            >(Votre adresse email est confirmée)</span
           >
           <span v-else class="font-semibold size-125"
-            >(Votre adresse n'est pas confirmée)</span
+            >(Votre adresse email n'est pas confirmée)</span
           >
         </h4>
         <h4 class="logo-color size-13 pb-1">
@@ -49,7 +49,7 @@
           </button>
         </div>
       </div>
-      <div class="pt-6">
+      <div class="pt-4">
         <h4 class="logo-color size-13 pb-1">Fermeture de compte</h4>
         <div class="pt-1 w-fit">
           <button

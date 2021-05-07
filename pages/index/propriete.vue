@@ -784,25 +784,49 @@
                 <br />
                 <input
                   id="email"
+                  v-model="email"
                   type="text"
                   class="border w-full py-1 h-7 size-14 rounded no-outlines px-2"
+                  :class="{
+                    'border-red-700': mailerror,
+                    'border-green-700': $linker.emailValidated(email),
+                  }"
                 />
+                <p
+                  v-show="mailerror"
+                  class="size-12 appearZ text-red-700 leading-4 pt-1"
+                >
+                  Veuillez enter un email valide !
+                </p>
               </div>
               <div class="w-full">
                 <label for="username" class="size-13">Nom</label>
                 <br />
                 <input
                   id="username"
+                  v-model="name"
                   autocomplete="none"
                   type="text"
                   class="border w-full py-1 h-7 size-14 rounded no-outlines px-2"
+                  :class="{
+                    'border-red-700': nameerror,
+                    'border-green-700':
+                      name.length >= 2 && $linker.onlyLetters(name),
+                  }"
                 />
+                <p
+                  v-show="nameerror"
+                  class="size-12 appearZ text-red-700 leading-4 pt-1"
+                >
+                  Veuillez enter votre nom !
+                </p>
               </div>
               <div class="w-full">
                 <label for="phone" class="size-13">Téléphone</label>
                 <br />
                 <input
                   id="phone"
+                  v-model="tel"
                   autocomplete="none"
                   type="tel"
                   class="border w-full py-1 h-7 size-14 rounded no-outlines px-2"
@@ -811,7 +835,7 @@
               <div class="w-full">
                 <label for="request" class="size-14">Requête</label>
                 <br />
-                <smstype></smstype>
+                <smstype @req="req"></smstype>
               </div>
               <div class="w-full">
                 <label for="request" class="size-14">Vous êtes</label>
@@ -825,25 +849,56 @@
                     'Vendeur',
                     'Autre',
                   ]"
+                  @val="type"
                 ></typeprop>
               </div>
               <div class="w-full">
                 <label for="coment2x" class="size-14">Message</label>
-                <div class="border rounded w-full">
+                <div
+                  class="border rounded w-full"
+                  :class="{
+                    'border-red-700': contenterror,
+                    'border-green-700': content.length >= 2,
+                  }"
+                >
                   <textarea
                     id="coment2x"
+                    v-model="content"
                     wrap="hard"
                     class="w-full aside noscroll toyo size-15 px-2 py-01 text-gray-700 focus:outline-none mt-1"
                     placeholder="Ecrire un message"
                     rows="5"
                   ></textarea>
                 </div>
+                <p
+                  v-show="contenterror"
+                  class="size-12 appearZ text-red-700 leading-4 pt-1"
+                >
+                  Veuillez écrire un message !
+                </p>
               </div>
+              <p
+                v-show="err"
+                class="size-12 appearZ text-red-700 leading-4 pt-1"
+              >
+                Oops, une erreur s'est produite pendant l'envoi du message
+              </p>
+              <p
+                v-show="sent"
+                class="size-12 appearZ text-green-700 leading-4 pt-1"
+              >
+                Votre message a été envoyé avec succès √
+              </p>
               <div class="w-full">
                 <button
-                  class="border-none w-full size-12 text-white px-5 pb-2 rounded button btn-008489 both-centers"
+                  class="border-none w-full size-12 text-white px-5 pb-2 flex align-center space-x-2 rounded button btn-008489 both-centers"
+                  :class="{ noclick: onsent }"
+                  @click="send"
                 >
-                  Envoyer
+                  <span class="size-12 text-white">Envoyer</span>
+                  <span v-show="onsent" class="w-fit h-fit"
+                    ><i class="animate-spin fas fa-circle-notch color-white"></i
+                  ></span>
                 </button>
               </div>
             </div>
@@ -979,6 +1034,38 @@ export default {
       desc: [],
       index: 1,
       ades: [],
+      email: '',
+      name: '',
+      tel: '',
+      content: '',
+      mess: {
+        email: '',
+        name: '',
+        tel: '',
+        req: '',
+        type: '',
+        content: '',
+      },
+      prop: {
+        id: 0,
+        agence: '',
+        image: '',
+        type: '',
+        price: '',
+        proposition: '',
+        adresse: '',
+        bed: 0,
+        bath: 0,
+        garage: 0,
+        size: 0,
+      },
+      maierror: false,
+      nerror: false,
+      perror: false,
+      cerror: false,
+      error: false,
+      success: false,
+      sending: false,
     }
   },
   head() {
@@ -994,41 +1081,6 @@ export default {
           ' FCFA' +
           ' | Ofaloo'
         : '',
-      // meta: [
-      //   // `hid` est un identifiant unique. N'utilisez pas `vmid` pour cela car cela ne marchera pas.
-      //   {
-      //     hid: 'og:url',
-      //     property: 'og:url',
-      //     name: 'og:url',
-      //     content:
-      //       'https://www.ofaloo.com/propriete/?wyzes=' +
-      //       this.property.data.property.id,
-      //   },
-      //   {
-      //     hid: 'og:type',
-      //     property: 'og:type',
-      //     name: 'og:type',
-      //     content: 'article',
-      //   },
-      //   {
-      //     hid: 'og:title',
-      //     property: 'og:title',
-      //     name: 'og:title',
-      //     content: this.property.data.property.type,
-      //   },
-      //   {
-      //     hid: 'og:description',
-      //     property: 'og:description',
-      //     name: 'og:description',
-      //     content: this.property.data.adresse,
-      //   },
-      //   {
-      //     hid: 'og:image',
-      //     property: 'og:image',
-      //     name: 'og:image',
-      //     content: this.getImgPrin,
-      //   },
-      // ],
     }
   },
   computed: {
@@ -1038,8 +1090,26 @@ export default {
     has_saved() {
       return this.saved === true
     },
+    err() {
+      return this.error === true
+    },
+    sent() {
+      return this.success === true
+    },
+    onsent() {
+      return this.sending === true
+    },
     has_desaved() {
       return this.desavedd === true
+    },
+    mailerror() {
+      return this.maierror === true
+    },
+    nameerror() {
+      return this.nerror === true
+    },
+    contenterror() {
+      return this.cerror === true
     },
     villing() {
       return this.ville === true
@@ -1116,6 +1186,39 @@ export default {
         this.desavedd = false
       }
     },
+    email(nv, ov) {
+      if (this.mailerror) {
+        this.maierror = false
+      }
+      this.error = false
+    },
+    name() {
+      if (this.nameerror) {
+        this.nerror = false
+      }
+      this.error = false
+    },
+    tel(newval, oldval) {
+      this.error = false
+      if (!newval.includes(' ')) {
+        if (
+          (newval.length === 1 && newval.lastIndexOf('+') === 0) ||
+          (newval.length > 1 &&
+            newval.lastIndexOf('+') === 0 &&
+            !isNaN(newval.substr(1, newval.length - 1)) &&
+            !newval.substr(1, newval.length - 1).includes('.')) ||
+          (!isNaN(newval) && !newval.includes('.'))
+        )
+          this.tel = newval
+        else this.tel = oldval
+      } else this.tel = oldval
+    },
+    content() {
+      if (this.contenterror) {
+        this.cerror = false
+      }
+      this.error = false
+    },
   },
   created() {
     this.fillImages()
@@ -1133,8 +1236,111 @@ export default {
   },
   mounted() {
     if (this.dataOk) this.increment()
+    this.prepare()
   },
   methods: {
+    prepare() {
+      this.prop.id = this.property.data.property.id
+      this.prop.agence = this.property.data.agence.name
+      this.prop.image = this.getImgPrin
+      this.prop.type = this.property.data.property.type
+      this.prop.proposition = this.property.data.property.proposition
+      if (this.property.data.property.proposition.includes('partielle')) {
+        this.prop.proposition =
+          this.prop.proposition +
+          ' (' +
+          this.property.data.property.percentage_part.toString() +
+          '%)'
+      }
+      this.prop.price =
+        this.$linker.formatMoney(
+          this.property.data.property.price_fixed.toString()
+        ) + ' FCFA'
+      if (this.property.data.property.proposition.includes('Location')) {
+        this.prop.price =
+          this.prop.price + ' ' + this.property.data.property.location_freq
+      }
+      if (this.property.data.property.negociable === 'yes') {
+        this.prop.price = this.prop.price + ', négociable'
+      }
+      this.prop.adresse =
+        this.property.data.adresse + ', ' + this.property.data.ville
+      this.prop.bed = this.property.data.property.bed
+      this.prop.bath = this.property.data.property.bath
+      this.prop.garage = this.property.data.property.garage
+      this.prop.size = this.property.data.property.taille
+    },
+    req(val) {
+      this.mess.req = val
+    },
+    type(val) {
+      this.mess.type = val
+    },
+    validated() {
+      if (this.$linker.emailValidated(this.email)) {
+        this.maierror = false
+      } else this.maierror = true
+
+      if (this.name.length > 1 && this.$linker.onlyLetters(this.name)) {
+        this.nerror = false
+      } else this.nerror = true
+
+      if (this.content.length >= 2) {
+        this.cerror = false
+      } else this.cerror = true
+
+      return (
+        this.mailerror === false &&
+        this.nameerror === false &&
+        this.contenterror === false
+      )
+    },
+    send() {
+      this.error = false
+      if (this.validated()) {
+        this.sending = true
+        this.mess.email = this.email
+        this.mess.name = this.name
+        this.mess.tel = this.tel
+        this.mess.content = this.content
+        const html = this.$linker.message(this.prop, this.mess)
+        this.sendMess(html)
+          .then((result) => {
+            console.log(result)
+            this.sending = false
+            if (result.status !== '200') this.error = true
+            else {
+              this.success = true
+              this.email = ''
+              this.name = ''
+              this.tel = ''
+              this.content = ''
+              setTimeout(() => {
+                this.success = false
+              }, 4000)
+            }
+          })
+          .catch((err) => {
+            this.error = true
+            this.sending = false
+            console.log(err)
+          })
+      }
+    },
+    async sendMess(html) {
+      return await new Promise((resolve, reject) => {
+        resolve(
+          this.$axios.$post('message', {
+            email: 'yayasopeguesoro@gmail.com',
+            message: html,
+            user: this.$auth.loggedIn ? this.$auth.user.id : null,
+            prop: this.property.data.property.id,
+          })
+        )
+      }).catch(() => {
+        console.error("Oops, can't resolve your promise sending message")
+      })
+    },
     checkOptions() {
       if (this.has_options) {
         this.property.data.options.forEach((option) => {

@@ -69,12 +69,20 @@ export default {
     return {
       focused: false,
       currency: '',
-      currencies: ['Visite', 'Paiement', "Plus d'informations", 'Autres'],
+      currencies: [
+        'Visite',
+        'Achat',
+        'Location',
+        'Moyen de paiement',
+        "Plus d'informations",
+        'Autres',
+      ],
     }
   },
   computed: {},
   mounted() {
     this.currency = this.currencies[0]
+    this.$emit('req', this.currency)
   },
   methods: {
     hide() {
@@ -82,6 +90,7 @@ export default {
     },
     setcur(cur) {
       this.currency = cur
+      this.$emit('req', this.currency)
       this.hide()
     },
   },

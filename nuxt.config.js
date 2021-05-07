@@ -13,7 +13,14 @@ export default {
         content: 'Ofaloo.com',
       },
     ],
-    script: [{ src: 'https://use.fontawesome.com/releases/v5.14.0/js/all.js' }],
+    script: [
+      { src: 'https://use.fontawesome.com/releases/v5.14.0/js/all.js' },
+      {
+        'data-ad-client': 'ca-pub-5641089263339283',
+        async: true,
+        src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+      },
+    ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/myfavicon.ico' },
       { rel: 'stylesheet', href: '/assets/css/pc.css' },

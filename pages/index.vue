@@ -146,15 +146,6 @@ export default {
   beforeMount() {
     window.addEventListener('DOMContentLoaded', this.domload, false)
     if (!localStorage.cookies) localStorage.setItem('cookies', 'approving')
-    if (sessionStorage.previous) {
-      this.previous = sessionStorage.getItem('previous')
-      this.$store.commit('previous', this.previous)
-      this.has_previous = true
-      sessionStorage.setItem('previous', this.curoute)
-    } else {
-      this.has_previous = true
-      sessionStorage.setItem('previous', this.curoute)
-    }
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('resize', this.large)
   },

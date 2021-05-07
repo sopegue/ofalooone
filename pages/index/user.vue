@@ -42,11 +42,7 @@
               }"
             >
               <figure class="image relative rounded-full is-110x110 m-0-auto">
-                <img
-                  class="rounded-full"
-                  src="https://ofalooback.herokuapp.com/images/4.jpg"
-                  alt="Image"
-                />
+                <img class="rounded-full" src="/img/user.png" alt="Image" />
               </figure>
             </div>
             <div class="flex flex-col text-center pt-1.5">

@@ -22,7 +22,7 @@
             <p class="flex align-center">
               <img
                 class="rounded-full is-36x36"
-                src="https://ofalooback.herokuapp.com/images/4.jpg"
+                src="/img/user.png"
                 alt="Image"
               />
               <svg

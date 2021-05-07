@@ -1337,6 +1337,7 @@ export default {
               this.email = ''
               this.name = ''
               this.tel = ''
+              this.authmail = []
               this.content = ''
               setTimeout(() => {
                 this.success = false

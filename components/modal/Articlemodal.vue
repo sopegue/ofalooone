@@ -1201,6 +1201,7 @@ export default {
               this.name = ''
               this.tel = ''
               this.content = ''
+              this.authmail = []
               setTimeout(() => {
                 this.success = false
               }, 4000)

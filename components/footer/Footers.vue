@@ -116,11 +116,6 @@
             <a href="#" target="_blank"
               ><i class="fab fa-youtube size-20 clickable color-white"></i
             ></a>
-            <a href="#" target="_blank"
-              ><i
-                class="fab fa-snapchat-ghost size-20 clickable color-white"
-              ></i
-            ></a>
             <!-- <a href="https://fb.com/saliistore" target="_blank"
               ><i class="fab fa-linkedin-in size-20 clickable color-white"></i
             ></a> -->

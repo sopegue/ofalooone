@@ -642,9 +642,10 @@
             <h4 class="logo-color size-16 font-semibold mb-5">
               Informations Appartement
             </h4>
-            <div class="my-2">
-              {{ property.data.property.informations }}
-            </div>
+            <div
+              class="my-2"
+              v-html="property.data.property.informations"
+            ></div>
           </div>
         </div>
       </div>

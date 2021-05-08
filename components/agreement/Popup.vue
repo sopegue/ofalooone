@@ -14,8 +14,12 @@
           <span class="font-semibold">Ofaloo</span>, vous acceptez l’utilisation
           de cookies qui permettront d'assurer et améliorer le bon
           fonctionnement du site.
-
           <a
+            href="/condition-utilisation#cookies"
+            class="color-008489 underline inline-block"
+            >Plus d'informations</a
+          >
+          <!-- <a
             href="/condition-utilisation"
             class="color-008489 underline inline-block"
             >Conditions d'utilisations</a
@@ -24,7 +28,7 @@
             href="/politique-confidentialite"
             class="color-008489 underline inline-block"
             >Politique de confidentialité</a
-          ></span
+          > --></span
         >
       </div>
     </div>

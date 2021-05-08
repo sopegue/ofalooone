@@ -868,7 +868,7 @@
                 >
                   Votre message a été envoyé avec succès √
                 </p>
-                <div class="w-full">
+                <div class="w-full pt-2">
                   <button
                     class="border-none w-full size-12 text-white px-5 pb-2 flex align-center space-x-2 rounded button btn-008489 both-centers"
                     :class="{ noclick: onsent }"

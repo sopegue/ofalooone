@@ -142,12 +142,7 @@
       </div>
       <div class="pb-10">
         <h4 class="color-008489 size-16 font-semibold mb-2">Nous Joindre</h4>
-        <div class="mb-2">
-          <span
-            >Contactez-nous en remplissant le formulaire de contact et
-            suivez-nous sur les réseaux sociaux.</span
-          >
-        </div>
+
         <div class="flex flex-col space-y-3">
           <span
             >Vous avez une question ou une suggestion ? Remplissez
@@ -155,9 +150,9 @@
               >ce formulaire</a
             >
             pour nous envoyer un message et nous vous répondrons dans les plus
-            brefs délais possibles</span
+            brefs délais possibles.</span
           >
-          <span>Rejoignez-nous sur les réseaux sociaux</span>
+          <span>Rejoignez-nous aussi sur les réseaux sociaux</span>
           <p class="flex align-center space-x-3">
             <a href="#" target="_blank"
               ><i class="fab fa-twitter size-20 clickable"></i
@@ -173,9 +168,6 @@
             ></a>
             <a href="#" target="_blank"
               ><i class="fab fa-youtube size-20 clickable"></i
-            ></a>
-            <a href="#" target="_blank"
-              ><i class="fab fa-snapchat-ghost size-20 clickable"></i
             ></a>
             <!-- <a href="#" target="_blank"
               ><i class="fab fa-linkedin-in size-20 clickable"></i

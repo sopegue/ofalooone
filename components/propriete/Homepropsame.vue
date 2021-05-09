@@ -438,6 +438,9 @@ export default {
           this.desaved().then((res) => {
             this.desavedd = true
             this.saved = false
+            if (this.curoute.includes('/favoris')) {
+              this.$store.commit('rel_fav', true)
+            }
           })
         }
         if (this.has_desaved) {

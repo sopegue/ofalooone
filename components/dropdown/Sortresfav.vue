@@ -41,7 +41,12 @@
           </div>
         </client-only>
       </div>
-      <div id="dropdown-menu" class="dropdown-menu z-15 walele" role="menu">
+      <div
+        id="dropdown-menu"
+        class="dropdown-menu z-15 walele"
+        role="menu"
+        :class="{ lefts: size <= 449 }"
+      >
         <div
           class="dropdown-content bg-white border h-40maxs overflow-y-auto aside"
         >
@@ -91,7 +96,11 @@ export default {
       ],
     }
   },
-  computed: {},
+  computed: {
+    size() {
+      return this.$store.state.size
+    },
+  },
   mounted() {
     this.currency = this.currencies[0]
   },
@@ -112,6 +121,7 @@ export default {
   animation: appear 0.2s;
   top: 1.5rem !important;
 }
+
 .dodo {
   right: 0.2rem !important;
 }

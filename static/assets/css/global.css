@@ -17,6 +17,9 @@ div {
   font-size: 14px;
   /* color: #2d3748; */
 }
+.lefts {
+  left: 0;
+}
 .parent_hover_under:hover span {
   text-decoration: underline;
 }

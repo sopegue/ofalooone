@@ -15,6 +15,7 @@ export const state = () => ({
   filter: null,
   reseting: false,
   from: '/',
+  ip: null,
 
   delmod: false,
   del: false,
@@ -51,6 +52,9 @@ export const mutations = {
   },
   set_Scroll(state, value) {
     state.scrollpos = value
+  },
+  set_ip(state, value) {
+    state.ip = value
   },
   rel_fav(state, value) {
     state.relfav = value

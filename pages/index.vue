@@ -125,6 +125,9 @@ export default {
     deleting() {
       return this.$store.state.accountdeleting === true
     },
+    ip() {
+      return this.$store.state.ip
+    },
     signing() {
       return this.$store.state.quicksign === true
     },
@@ -148,6 +151,7 @@ export default {
     if (!localStorage.cookies) localStorage.setItem('cookies', 'approving')
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('resize', this.large)
+    this.checkIP()
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.large)
@@ -191,6 +195,33 @@ export default {
     this.redir()
   },
   methods: {
+    checkIP() {
+      this.getIP().then(() => {
+        if (this.ip !== null) {
+          if (sessionStorage.ip) sessionStorage.removeItem('ip')
+          sessionStorage.setItem('ip', JSON.stringify(this.ip))
+        } else {
+          if (sessionStorage.ip) {
+            const ip = JSON.parse(sessionStorage.getItem('ip'))
+            this.$store.commit('set_ip', ip)
+          } else {
+            sessionStorage.setItem('ip', JSON.stringify({}))
+          }
+          console.log('perm denied for ip access')
+        }
+      })
+    },
+    async getIP() {
+      try {
+        const result = await fetch(
+          'https://ipinfo.io/?token=c2507a294b3386'
+        ).then((res) => res.json())
+        this.$store.commit('set_ip', result)
+      } catch (error) {
+        this.$store.commit('set_ip', null)
+        console.log("Can't read ipadresse")
+      }
+    },
     redir() {
       if (
         this.$route.query.q !== undefined &&

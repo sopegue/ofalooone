@@ -242,7 +242,7 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-col space-y-2">
+        <!-- <div class="flex flex-col space-y-2">
           <a
             href="#"
             class="button bg-white border rounded-md flex align-center space-x-2"
@@ -290,7 +290,7 @@
             ></client-only>
             <span class="size-14 text-white">S'inscrire avec Facebook</span></a
           >
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

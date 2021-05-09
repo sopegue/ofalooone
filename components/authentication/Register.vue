@@ -214,10 +214,15 @@
             }"
             @click="signup"
           >
-            <span class="size-12 text-white font-semibold"
-              >Créer mon compte
-            </span></a
-          >
+            <span
+              class="size-13 flex items-center space-x-2 text-white font-semibold"
+              ><span class="size-13 text-white font-semibold"
+                >Créer mon compte</span
+              >
+              <span v-show="creating" class="w-fit h-fit"
+                ><i class="animate-spin fas fa-circle-notch color-white"></i
+              ></span> </span
+          ></a>
           <div class="text-center">
             <div class="inline-block size-13 mt-2">
               <span>En vous inscrivant, vous acceptez les </span>

@@ -24,7 +24,6 @@
               class="border w-full py-1 h-7 size-14 rounded no-outlines px-2"
               :class="{
                 'border-red-700': mailerror,
-                'border-green-700': $linker.emailValidated(email),
               }"
             />
             <p
@@ -51,7 +50,6 @@
                 class="border pr-8 w-full py-1 h-7 size-14 rounded no-outlines outline-none px-2"
                 :class="{
                   'border-red-700': passerror,
-                  'border-green-700': $linker.pwdValidated(pwd),
                 }"
               />
               <button
@@ -104,9 +102,20 @@
               v-show="passerror"
               class="size-12 appearZ text-red-700 leading-4 pt-1"
             >
-              Le mot de passe doit contenir au moins 8 caractères avec lettres &
-              chiffres
+              Veuillez entrer un mot de passe
             </p>
+          </div>
+          <div v-if="inco" class="w-full top-0 appearZ pt-2">
+            <span
+              class="block rounded border border-red-600 text-red-600 text-c py-1 px-10 text-white font-semibold size-12"
+              >Email et/ou mot de passe incorrects</span
+            >
+          </div>
+          <div v-if="reqerr" class="w-full top-0 appearZ pt-2">
+            <span
+              class="block rounded border border-red-600 text-red-600 text-c py-1 px-10 text-white font-semibold size-12"
+              >Oops désolé, une erreur s'est produite</span
+            >
           </div>
           <a
             class="button block btn-008489 border rounded-md flex align-center space-x-2 relative top-05x bottom-0x"
@@ -197,6 +206,8 @@ export default {
       logging: false,
       pwdhid: true,
       rememberme: [],
+      nolog: false,
+      err: false,
     }
   },
   computed: {
@@ -218,6 +229,12 @@ export default {
     remember() {
       return this.rememberme === true
     },
+    inco() {
+      return this.nolog === true
+    },
+    reqerr() {
+      return this.err === true
+    },
   },
   watch: {
     email() {
@@ -237,7 +254,7 @@ export default {
         this.maierror = false
       } else this.maierror = true
 
-      if (this.$linker.pwdValidated(this.pwd)) {
+      if (this.pwd.length > 0) {
         this.pwderr = false
       } else this.pwderr = true
 
@@ -245,6 +262,8 @@ export default {
     },
     signin() {
       if (this.infosValidated()) {
+        this.nolog = false
+        this.err = false
         this.logging = true
         this.$auth
           .loginWith('local', {
@@ -256,6 +275,7 @@ export default {
           })
           .then((res) => {
             if (res.data.status === 200) {
+              this.logging = false
               const tokenId = res.data.token.substr(
                 0,
                 res.data.token.indexOf('|')
@@ -270,15 +290,18 @@ export default {
             }
             if (res.data.status === 404) {
               this.logging = false
+              this.nolog = true
               console.log('incorrects credentials')
             }
             if (res.data.status === 500) {
               this.logging = false
+              this.err = true
               console.log('Error on request')
             }
           })
           .catch(() => {
             this.logging = false
+            this.err = true
             console.log('error client side')
           })
       }

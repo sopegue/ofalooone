@@ -12,15 +12,15 @@
       </h4>
     </div>
     <div v-if="dataOk" class="pb-1.5">
-      <imges :data="properties.data"></imges>
+      <imgs :data="properties.data"></imgs>
     </div>
   </div>
 </template>
 
 <script>
-import Imges from './Imges.vue'
+import Imgs from './Imgs.vue'
 export default {
-  components: { Imges },
+  components: { Imgs },
   props: {
     title: {
       type: String,

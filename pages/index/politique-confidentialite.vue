@@ -2,7 +2,7 @@
   <div class="bg-white">
     <div class="lg:px-4 md:px-0 pt-5 pb-10">
       <h4 class="logo-color size-24 font-semibold mb-1">
-        Politique de confidentialité
+        Politique de confidentialité de ofaloo.com
       </h4>
       <div class="zoo">
         <p class="color-363636">Dernière modification: 09 Mai 2021</p>

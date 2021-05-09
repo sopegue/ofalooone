@@ -52,8 +52,8 @@
           class="py-2 block text-white text-center"
           >Description: {{ desc[index - 1] }}</span
         >
-        <div class="flex justify-center w-auto">
-          <div class="flex space-x-5 pt-3.5 px-1.5 overflow-x-auto">
+        <div class="flex justify-center w-auto pt-1">
+          <div class="flex space-x-5 pt-3.5 pb-2 px-1.5 overflow-x-auto">
             <a
               v-for="(i, j) in ads"
               :key="j"

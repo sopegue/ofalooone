@@ -2,8 +2,8 @@
   <div class="bg-white">
     <div class="lg:px-4 md:px-0 pt-5 pb-10">
       <h4 class="logo-color font-semibold mb-1">Conditions d'utilisations</h4>
-      <div>
-        <p class="color-363636">Dernière modification: 08 Mai 2021</p>
+      <div class="zoo">
+        <p class="color-363636">Dernière modification: 09 Mai 2021</p>
         <p class="font-semibold">
           Veuillez lire attentivement ces termes et conditions avant d'utiliser
           notre Service.
@@ -325,8 +325,13 @@ export default {}
 </script>
 
 <style scoped>
-div > * {
+.zoo > * {
   font-size: 16px !important;
+  padding: 0.5rem 0em;
+}
+li {
+  list-style-type: disc;
+  margin-left: 3rem;
 }
 P,
 h1,

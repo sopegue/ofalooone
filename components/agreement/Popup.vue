@@ -15,7 +15,7 @@
           de cookies qui permettront d'assurer et améliorer le bon
           fonctionnement du site.
           <a
-            href="/condition-utilisation#cookies"
+            href="/politique-confidentialite#cookies"
             class="color-008489 underline inline-block"
             >Plus d'informations</a
           >

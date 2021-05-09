@@ -135,6 +135,7 @@ export default {
       error: false,
       success: false,
       sending: false,
+      html: null,
     }
   },
   computed: {
@@ -207,6 +208,12 @@ export default {
       this.error = false
       if (this.validated()) {
         this.sending = true
+        this.html = this.$linker.admin({
+          name: this.name,
+          email: this.email,
+          tel: this.tel,
+          content: this.content,
+        })
         this.sendMess()
           .then((result) => {
             this.sending = false
@@ -238,6 +245,7 @@ export default {
             user: this.$auth.loggedIn ? this.$auth.user.id : null,
             tel: this.tel,
             name: this.name,
+            html: this.html,
           })
         )
       }).catch(() => {

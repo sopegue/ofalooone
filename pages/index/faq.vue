@@ -11,7 +11,7 @@
           Acheter et Louer
         </h4>
         <div class="mb-2">
-          <span
+          <span class="size-16"
             >Acheter et louer des propriétés, maisons, appartement, villa,
             haut-standings, bureaux, magasins, terrains partout en Côte d'Ivoire
             sur Ofaloo.</span
@@ -67,7 +67,7 @@
           Rejoindre Ofaloo
         </h4>
         <div class="mb-2">
-          <span
+          <span class="size-16"
             >Rejoindre Ofaloo est facile et gratuit, vous n'avez pas besoin de
             payer ou souscrire à un abonnement pour utiliser Ofaloo.</span
           >
@@ -108,7 +108,9 @@
       <div>
         <h4 class="color-008489 size-16 font-semibold mb-2">Votre compte</h4>
         <div class="mb-2">
-          <span>Se connecter et gérer son compte sur Ofaloo.</span>
+          <span class="size-16"
+            >Se connecter et gérer son compte sur Ofaloo.</span
+          >
         </div>
         <div class="flex flex-col space-y-3">
           <question
@@ -144,15 +146,19 @@
         <h4 class="color-008489 size-16 font-semibold mb-2">Nous Joindre</h4>
 
         <div class="flex flex-col space-y-3">
-          <span
+          <span class="size-16"
             >Vous avez une question ou une suggestion ? Remplissez
-            <a href="/contactez-nous" class="color-008489 underline-hover"
+            <a
+              href="/contactez-nous"
+              class="color-008489 size-16 underline-hover"
               >ce formulaire</a
             >
             pour nous envoyer un message et nous vous répondrons dans les plus
             brefs délais possibles.</span
           >
-          <span>Rejoignez-nous aussi sur les réseaux sociaux</span>
+          <span class="size-16"
+            >Rejoignez-nous aussi sur les réseaux sociaux</span
+          >
           <p class="flex align-center space-x-3">
             <a href="#" target="_blank"
               ><i class="fab fa-twitter size-20 clickable"></i

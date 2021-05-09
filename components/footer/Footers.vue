@@ -91,14 +91,14 @@
             :class="{ 'w-fit m-0-auto': size <= 767 }"
           ></home>
         </h4>
-        <div class="mt-2 flex flex-col space-y-1">
+        <div class="mt-2 flex flex-col justify-center space-y-1">
           <a
             class="w-fit text-white text-c block size-13"
             :class="{ 'w-autoxx': size <= 767 }"
             >Rejoignez-nous sur les réseaux</a
           >
           <p
-            class="flex align-center space-x-4 text-white pt-1"
+            class="flex align-center justify-center space-x-4 text-white pt-1"
             :class="{ 'w-autoxx': size <= 767 }"
           >
             <a href="#" target="_blank"

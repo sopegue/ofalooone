@@ -81,6 +81,294 @@ const linker = {
     value = value.toString()
     return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
   },
+  admin(message) {
+    return `<!DOCTYPE html>
+    <html>
+      <head>
+        <title>Nouveau message pour admin | Ofaloo</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Contenu du message pour admin" />
+        <style>
+          .color-008489 {
+            color: #004e66 !important;
+          }
+          .btn-008489s {
+            background-color: rgba(0, 78, 102, 0.089) !important;
+          }
+          .over {
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+          }
+          .font-semibold {
+            font-weight: 600;
+          }
+          .body {
+            background-color: #dedede;
+          }
+          .bb:hover {
+            background-color: #0a3d4d !important;
+          }
+          .size-11 {
+            font-size: 11px;
+          }
+          .size-12 {
+            font-size: 12px !important;
+          }
+          .size-13 {
+            font-size: 13px !important;
+          }
+          .size-14 {
+            font-size: 14px !important;
+          }
+          .size-145 {
+            font-size: 14.5px !important;
+          }
+          .size-15 {
+            font-size: 15px !important;
+          }
+          .size-16 {
+            font-size: 16px !important;
+          }
+          .img {
+            width: 48px !important;
+            height: 48px !important;
+          }
+          .block {
+            display: block !important;
+          }
+          .cursor-pointer {
+            cursor: pointer;
+          }
+          .border {
+            border: 1px solid #e2e8f0;
+          }
+          .border-b {
+            border-bottom: 1px solid #e2e8f0;
+          }
+          .border-t {
+            border-top: 1px solid #e2e8f0;
+          }
+          .rounded {
+            border-radius: 0.25rem;
+          }
+          .pos-right {
+            float: right;
+          }
+          .pos-left {
+            float: left;
+          }
+          .clbo {
+            clear: both;
+          }
+          .w-fit {
+            width: intrinsic !important; /* Safari/WebKit uses a non-standard name */
+            width: -moz-max-content !important; /* Firefox/Gecko */
+            width: -webkit-max-content !important;
+          }
+          .h-fit {
+            height: intrinsic !important; /* Safari/WebKit uses a non-standard name */
+            height: -moz-max-content !important; /* Firefox/Gecko */
+            height: -webkit-max-content !important;
+          }
+          .h-250 {
+            height: 250px !important;
+          }
+          .w-full {
+            width: 100% !important;
+          }
+          .h-full {
+            height: 100% !important;
+          }
+          .m-0-auto {
+            margin: 0 auto !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+          }
+          @media screen and (max-width: 99999px) {
+            .prop {
+              max-width: 50% !important;
+            }
+          }
+          @media screen and (max-width: 767px) {
+            .prop {
+              max-width: 70% !important;
+            }
+          }
+          @media screen and (max-width: 640px) {
+            .prop {
+              max-width: 80% !important;
+            }
+          }
+          @media screen and (max-width: 520px) {
+            .prop {
+              max-width: 100% !important;
+            }
+          }
+          @media screen and (max-width: 500px) {
+            .h-250 {
+              height: 200px !important;
+            }
+          }
+          @media screen and (max-width: 1024px) {
+            .home {
+              width: auto !important;
+            }
+          }
+          .bg-black {
+            background-color: rgba(0, 0, 0, 0.507) !important;
+          }
+          .header-home {
+            height: 80px;
+            width: 100%;
+            background-image: url("https://ofalooback.herokuapp.com/storage/svg/estate.jpg");
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            background-position: center;
+            background-size: cover;
+          }
+          @media screen and (max-width: 640px) {
+            .header-home {
+              height: 64px;
+            }
+            .zozo {
+              padding: 48px 10px !important;
+            }
+          }
+          @media screen and (max-width: 480px) {
+            .header-home {
+              height: 56px;
+            }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="zozo body" style="padding: 20px 48px">
+          <div
+            class="home rounded m-0-auto"
+            style="
+              font-family: system-ui;
+              padding: 20px;
+              color: #2d3748;
+              background-color: #fff;
+              width: 767px;
+            "
+          >
+            <div
+              style="
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center;
+                padding-bottom: 1rem;
+              "
+            >
+              <img
+                class="img"
+                src="https://ofalooback.herokuapp.com/storage/svg/logo.png"
+                alt="Ofaloo logo"
+              />
+              <span
+                class="block w-fit h-fit"
+                style="
+                  font-weight: 600 !important;
+                  font-size: 28px;
+                  color: #004e66;
+                  margin-left: 5px;
+                "
+                >Ofaloo</span
+              >
+            </div>
+            <div class="header-home">
+              <div class="w-full h-full bg-black"></div>
+            </div>
+            <div style="margin-top: 15px !important; font-size: 16px !important">
+              <div style="margin-top: 30px !important; font-weight: 600 !important">
+                <span>Bonjour Sopégué,</span>
+              </div>
+              <div style="margin-top: 10px !important">
+                <span
+                  >Un utilisateur vous a envoyé un message, essayez de lui répondre dans les plus brefs délais.</span
+                >
+              </div>
+              <div>
+                <span
+                  class="w-fit m-0-auto"
+                  style="
+                    font-weight: 600 !important;
+                    margin: 0 auto !important;
+                    padding-top: 1rem;
+                    padding-bottom: 1rem;
+                    width: fit-content !important;
+                    display: block;
+                    font-size: 14px !important;
+                  "
+                  >Détails du message</span
+                >
+              </div>
+              <div
+                class="border rounded"
+                style="padding: 10px; font-size: 14px !important"
+              >
+                <div>
+                  <span style="font-weight: 600 !important"
+                    >Informations sur l'expéditeur</span
+                  >
+                  <div style="padding-top: 0.25rem">
+                    <div>
+                      <span>Nom:</span>
+                      <span style="font-weight: 600 !important"
+                        >${
+                          message.name !== ''
+                            ? this.capitalizeEach(message.name)
+                            : 'Non fourni'
+                        }</span
+                      >
+                    </div>
+                    <div>
+                      <span>Email:</span>
+                      <span style="font-weight: 600 !important"
+                        >${message.email}</span
+                      >
+                    </div>
+                    <div>
+                      <span>Téléphone:</span>
+                      <span style="font-weight: 600 !important"
+                        >${
+                          message.tel !== '' ? message.tel : 'Non fourni'
+                        }</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="border-b border-t" style="margin-top: 1.5rem">
+                  <span
+                    class="w-fit m-0-auto"
+                    style="
+                      font-weight: 600 !important;
+                      margin: 0 auto !important;
+                      padding-top: 0.5rem;
+                      padding-bottom: 0.5rem;
+                      width: fit-content !important;
+                      display: block;
+                      font-size: 14px !important;
+                    "
+                    >Contenu du message</span
+                  >
+                </div>
+                <div style="padding: 20px 0px">
+                  <span style="font-size: 15px !important">${
+                    message.content
+                  }</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </body>
+    </html>
+    `
+  },
   message(property, message, condition = true) {
     return `<!DOCTYPE html>
     <html>

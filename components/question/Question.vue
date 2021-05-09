@@ -2,7 +2,7 @@
   <div class="border-b pb-2">
     <div class="flex align-center justify-between">
       <span
-        class="font-semibold block size-14 clickable"
+        class="font-semibold block size-16 clickable"
         :class="{
           'color-008489': expanded,
           'logo-color': !expanded,
@@ -55,12 +55,12 @@
       <div v-if="id === null"></div>
       <div v-else class="flex flex-col space-y-4 w-full mt-2">
         <div>
-          <span>{{ content }}</span>
+          <span class="size-16">{{ content }}</span>
         </div>
         <div v-if="link1">
           <a
             :href="link1.link"
-            class="button bg-transparent px-3 py-1 rounded border-008489ss size-12 color-008489"
+            class="button bg-transparent px-3 py-1 rounded border-008489ss size-14 color-008489"
             >{{ link1.text }}</a
           >
         </div>

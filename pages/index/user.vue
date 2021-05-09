@@ -31,7 +31,7 @@
             class="flex pb-8"
             :class="{
               'px-6 align-center space-x-5': size < 850 && size >= 467,
-              'flex-col space-y-2.5 justify-center border-b':
+              'flex-col space-y-2.5 justify-center border-b px-4':
                 size >= 850 || size < 467,
             }"
           >
@@ -50,7 +50,7 @@
                 >{{ $linker.capitalize($auth.user.surname) }}
                 {{ $linker.capitalize($auth.user.name) }}</span
               >
-              <span class="size-12 color-363636f">{{ $auth.user.email }}</span>
+              <span class="size-13 color-363636f">{{ $auth.user.email }}</span>
             </div>
           </div>
           <div

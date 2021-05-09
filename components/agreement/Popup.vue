@@ -9,14 +9,14 @@
   >
     <div class="flex flex-col space-y-1">
       <div class="inline-block">
-        <span class="inline-block"
+        <span class="inline-block size-16"
           >En poursuivant votre navigation sur
-          <span class="font-semibold">Ofaloo</span>, vous acceptez l’utilisation
-          de cookies qui permettront d'assurer et améliorer le bon
+          <span class="font-semibold size-16">ofaloo.com</span>, vous acceptez
+          l’utilisation de cookies qui permettront d'assurer et améliorer le bon
           fonctionnement du site.
           <a
             href="/politique-confidentialite#cookies"
-            class="color-008489 underline inline-block"
+            class="color-008489 underline inline-block size-16"
             >Plus d'informations</a
           >
           <!-- <a

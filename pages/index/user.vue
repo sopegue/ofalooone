@@ -17,7 +17,7 @@
         :class="{
           'flex-col rounded-tr rounded-tl': size < 850,
           'border rounded shadow-sm': size >= 850,
-          ' w380 sticky top-12xse': size >= 850,
+          ' w380 sticky top-18': size >= 850,
         }"
       >
         <div
@@ -41,7 +41,7 @@
                 'm-0-auto': size >= 850 || size < 467,
               }"
             >
-              <figure class="image relative rounded-full is-110x110 m-0-auto">
+              <figure class="image relative rounded-full is-96x96 m-0-auto">
                 <img class="rounded-full" src="/img/user.png" alt="Image" />
               </figure>
             </div>

@@ -28,7 +28,7 @@
           :src="'https://ofalooback.herokuapp.com/storage/' + property.user_pic"
           alt="Image"
         />
-        <span class="size-14 font-semibold">{{ property.agence.name }}</span></a
+        <span class="size-16 font-semibold">{{ property.agence.name }}</span></a
       >
       <a
         v-show="property.agence.super === 'yes'"
@@ -184,7 +184,7 @@
             "
             alt="Image"
           />
-          <span class="size-14 font-semibold">{{
+          <span class="size-16 font-semibold">{{
             property.agence.name
           }}</span></a
         >

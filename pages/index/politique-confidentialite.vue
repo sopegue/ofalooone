@@ -4,98 +4,112 @@
       <h4 class="logo-color size-24 font-semibold mb-1">
         Politique de confidentialité
       </h4>
-      <div>
-        <h1>Privacy Policy</h1>
-        <p>Last updated: May 08, 2021</p>
+      <div class="zoo">
+        <p class="color-363636">Dernière modification: 09 Mai 2021</p>
         <p>
-          This Privacy Policy describes Our policies and procedures on the
-          collection, use and disclosure of Your information when You use the
-          Service and tells You about Your privacy rights and how the law
-          protects You.
+          Cette politique de confidentialité décrit nos politiques et procédures
+          sur la collecte, l'utilisation et la divulgation de vos informations
+          lorsque Vous utilisez le Service et Vous informe de vos droits à la
+          confidentialité et de la manière dont la loi Vous protège.
         </p>
         <p>
-          We use Your Personal data to provide and improve the Service. By using
-          the Service, You agree to the collection and use of information in
-          accordance with this Privacy Policy. This Privacy Policy has been
-          created with the help of the
+          Nous utilisons vos données personnelles pour fournir et améliorer le
+          Service. En utilisant le Service, Vous acceptez la collecte et
+          l'utilisation d'informations conformément à la présente politique de
+          confidentialité. Cette politique de confidentialité a été créée avec
+          l'aide du
           <a
+            class="color-008489 underline-hover size-16"
             href="https://www.termsfeed.com/privacy-policy-generator/"
             target="_blank"
-            >Privacy Policy Generator</a
+            >Générateur de politique de confidentialité</a
           >.
         </p>
-        <h1>Interpretation and Definitions</h1>
-        <h2>Interpretation</h2>
+        <h1 class="font-semibold">Interprétation et définitions</h1>
+        <h2 class="font-semibold">Interprétation</h2>
         <p>
-          The words of which the initial letter is capitalized have meanings
-          defined under the following conditions. The following definitions
-          shall have the same meaning regardless of whether they appear in
-          singular or in plural.
+          Les mots dont la lettre initiale est en majuscule ont des
+          significations définies dans les conditions suivantes. Les définitions
+          suivantes ont la même signification, qu'elles apparaissent au
+          singulier ou au pluriel.
         </p>
-        <h2>Definitions</h2>
-        <p>For the purposes of this Privacy Policy:</p>
+        <h2 class="font-semibold">Définitions</h2>
+        <p>Aux fins de cette politique de confidentialité:</p>
         <ul>
           <li>
             <p>
-              <strong>Account</strong> means a unique account created for You to
-              access our Service or parts of our Service.
+              <span class="font-semibold size-16">Compte</span> signifie un
+              compte unique créé pour que Vous puissiez accéder à notre Service
+              ou à des parties de notre Service.
             </p>
           </li>
           <li>
             <p>
-              <strong>Company</strong> (referred to as either &quot;the
-              Company&quot;, &quot;We&quot;, &quot;Us&quot; or &quot;Our&quot;
-              in this Agreement) refers to Ofaloo.
+              <span class="font-semibold size-16">Compagnie</span> (dénommée «la
+              Compagnie», «Nous» ou «Notre» dans le présent Contrat) fait
+              référence à Ofaloo.
             </p>
           </li>
           <li>
             <p>
-              <strong>Cookies</strong> are small files that are placed on Your
-              computer, mobile device or any other device by a website,
-              containing the details of Your browsing history on that website
-              among its many uses.
-            </p>
-          </li>
-          <li>
-            <p><strong>Country</strong> refers to: Côte d’Ivoire</p>
-          </li>
-          <li>
-            <p>
-              <strong>Device</strong> means any device that can access the
-              Service such as a computer, a cellphone or a digital tablet.
+              <span class="font-semibold size-16">Cookies</span> sont de petits
+              fichiers qui sont placés sur votre ordinateur, appareil mobile ou
+              tout autre appareil par un site Web, contenant les détails de
+              votre navigation l'histoire sur ce site Web parmi ses nombreuses
+              utilisations.
             </p>
           </li>
           <li>
             <p>
-              <strong>Personal Data</strong> is any information that relates to
-              an identified or identifiable individual.
-            </p>
-          </li>
-          <li>
-            <p><strong>Service</strong> refers to the Website.</p>
-          </li>
-          <li>
-            <p>
-              <strong>Service Provider</strong> means any natural or legal
-              person who processes the data on behalf of the Company. It refers
-              to third-party companies or individuals employed by the Company to
-              facilitate the Service, to provide the Service on behalf of the
-              Company, to perform services related to the Service or to assist
-              the Company in analyzing how the Service is used.
+              <span class="font-semibold size-16">Pays</span> se réfère à: Côte
+              d’Ivoire
             </p>
           </li>
           <li>
             <p>
-              <strong>Usage Data</strong> refers to data collected
-              automatically, either generated by the use of the Service or from
-              the Service infrastructure itself (for example, the duration of a
-              page visit).
+              <span class="font-semibold size-16">Appareil</span> désigne tout
+              appareil pouvant accéder au Service tel qu'un ordinateur, un
+              téléphone portable ou une tablette numérique.
             </p>
           </li>
           <li>
             <p>
-              <strong>Website</strong> refers to Ofaloo, accessible from
+              <span class="font-semibold size-16">Données personnelles</span>
+              est toute information relative à une personne identifiée ou
+              identifiable individuel.
+            </p>
+          </li>
+          <li>
+            <p>
+              <span class="font-semibold size-16">Service(s)</span> fait
+              référence au site Web.
+            </p>
+          </li>
+          <li>
+            <p>
+              <span class="font-semibold size-16">Fournisseur de Services</span>
+              désigne toute personne physique ou morale qui traite les données
+              pour le compte de la Compagnie. Il fait référence à des compagnies
+              tierces ou à des particuliers employé par la Compagnie pour
+              faciliter le Service, pour fournir le Service au nom de la
+              Compagnie, pour effectuer des Services liés à le Service ou pour
+              aider la Compagnie à analyser comment le Service est utilisé.
+            </p>
+          </li>
+          <li>
+            <p>
+              <span class="font-semibold size-16">Données d'utilisation</span>
+              fait référence aux données collectées automatiquement, soit
+              générées par le l'utilisation du Service ou de l'infrastructure du
+              Service elle-même (pour exemple, la durée d'une visite de page).
+            </p>
+          </li>
+          <li>
+            <p>
+              <span class="font-semibold size-16">Le site Web </span> fait
+              référence à Ofaloo, accessible depuis
               <a
+                class="color-008489 underline-hover size-16"
                 href="https://www.ofaloo.com/"
                 rel="external nofollow noopener"
                 target="_blank"
@@ -105,393 +119,402 @@
           </li>
           <li>
             <p>
-              <strong>You</strong> means the individual accessing or using the
-              Service, or the company, or other legal entity on behalf of which
-              such individual is accessing or using the Service, as applicable.
+              <span class="font-semibold size-16">Vous</span> désigne la
+              personne accédant ou utilisant le Service, ou la Compagnie, ou
+              toute autre entité juridique au nom de laquelle cette personne
+              accède ou utilise le Service, selon le cas.
             </p>
           </li>
         </ul>
-        <h1>Collecting and Using Your Personal Data</h1>
-        <h2>Types of Data Collected</h2>
-        <h3>Personal Data</h3>
+        <h1 class="font-semibold">
+          Collecte et utilisation de vos données personnelles
+        </h1>
+        <h2 class="font-semibold">Types de données collectées</h2>
+        <h3 class="font-semibold">Données personnelles</h3>
         <p>
-          While using Our Service, We may ask You to provide Us with certain
-          personally identifiable information that can be used to contact or
-          identify You. Personally identifiable information may include, but is
-          not limited to:
+          Lors de l'utilisation de notre Service, nous pouvons Vous demander de
+          nous fournir certains informations personnellement identifiables qui
+          peuvent être utilisées pour contacter ou Vous identifier. Les
+          informations personnellement identifiables peuvent inclure, mais sont
+          pas limité à:
         </p>
         <ul>
           <li>
-            <p>Email address</p>
+            <p>Adresse email</p>
           </li>
           <li>
-            <p>First name and last name</p>
+            <p>Nom et prénom</p>
           </li>
           <li>
-            <p>Phone number</p>
+            <p>Numéro de téléphone</p>
           </li>
           <li>
-            <p>Address, State, Province, ZIP/Postal code, City</p>
-          </li>
-          <li>
-            <p>Usage Data</p>
+            <p>
+              Adresse de résidence, Pays de résidence, Ville de résidence, Code
+              postal
+            </p>
           </li>
         </ul>
-        <h3>Usage Data</h3>
-        <p>Usage Data is collected automatically when using the Service.</p>
+        <h3 class="font-semibold">Données d'utilisation</h3>
         <p>
-          Usage Data may include information such as Your Device's Internet
-          Protocol address (e.g. IP address), browser type, browser version, the
-          pages of our Service that You visit, the time and date of Your visit,
-          the time spent on those pages, unique device identifiers and other
-          diagnostic data.
+          Les données d'utilisation sont collectées automatiquement lors de
+          l'utilisation du Service.
         </p>
         <p>
-          When You access the Service by or through a mobile device, We may
-          collect certain information automatically, including, but not limited
-          to, the type of mobile device You use, Your mobile device unique ID,
-          the IP address of Your mobile device, Your mobile operating system,
-          the type of mobile Internet browser You use, unique device identifiers
-          and other diagnostic data.
+          Les données d'utilisation peuvent inclure des informations telles que
+          l'adresse IP de votre appareil, type de navigateur, version du
+          navigateur, les pages de notre Service que Vous visitez, l'heure et la
+          date de votre visite, le temps passé sur ces pages, les identifiants
+          uniques des appareils et autres données de diagnostic.
         </p>
         <p>
-          We may also collect information that Your browser sends whenever You
-          visit our Service or when You access the Service by or through a
-          mobile device.
+          Lorsque Vous accédez au Service par ou via un appareil mobile, nous
+          pouvons collecter automatiquement certaines informations, y compris,
+          mais sans s'y limiter à, le type d'appareil mobile que Vous utilisez,
+          l'identifiant unique de votre appareil mobile, l'adresse IP de votre
+          appareil mobile, votre système d'exploitation mobile, le type de
+          navigateur Internet mobile que Vous utilisez, les identifiants uniques
+          de l'appareil et autres données de diagnostic.
         </p>
-        <h3>Tracking Technologies and Cookies</h3>
         <p>
-          We use Cookies and similar tracking technologies to track the activity
-          on Our Service and store certain information. Tracking technologies
-          used are beacons, tags, and scripts to collect and track information
-          and to improve and analyze Our Service. The technologies We use may
-          include:
+          Nous pouvons également collecter des informations que votre navigateur
+          envoie chaque fois que Vous visitez notre Service ou lorsque Vous
+          accédez au Service par ou via un appareil mobile.
+        </p>
+        <p id="cookies"></p>
+        <h3 class="font-semibold">Technologies de suivi et cookies</h3>
+        <p>
+          Nous utilisons des cookies et des technologies de suivi similaires
+          pour suivre l'activité sur notre Service et stocker certaines
+          informations. Technologies de suivi utilisés sont des balises, des
+          balises et des scripts pour collecter et suivre des informations et
+          pour améliorer et analyser notre Service. Les technologies que nous
+          utilisons peuvent inclure:
         </p>
         <ul>
           <li>
-            <strong>Cookies or Browser Cookies.</strong> A cookie is a small
-            file placed on Your Device. You can instruct Your browser to refuse
-            all Cookies or to indicate when a Cookie is being sent. However, if
-            You do not accept Cookies, You may not be able to use some parts of
-            our Service. Unless you have adjusted Your browser setting so that
-            it will refuse Cookies, our Service may use Cookies.
-          </li>
-          <li>
-            <strong>Flash Cookies.</strong> Certain features of our Service may
-            use local stored objects (or Flash Cookies) to collect and store
-            information about Your preferences or Your activity on our Service.
-            Flash Cookies are not managed by the same browser settings as those
-            used for Browser Cookies. For more information on how You can delete
-            Flash Cookies, please read &quot;Where can I change the settings for
-            disabling, or deleting local shared objects?&quot; available at
-            <a
-              href="https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_"
-              rel="external nofollow noopener"
-              target="_blank"
-              >https://helpx.adobe.com/flash-player/kb/disable-local-shared-objects-flash.html#main_Where_can_I_change_the_settings_for_disabling__or_deleting_local_shared_objects_</a
+            <span class="font-semibold size-16"
+              >Cookies ou cookies de navigateur.</span
             >
-          </li>
-          <li>
-            <strong>Web Beacons.</strong> Certain sections of our Service and
-            our emails may contain small electronic files known as web beacons
-            (also referred to as clear gifs, pixel tags, and single-pixel gifs)
-            that permit the Company, for example, to count users who have
-            visited those pages or opened an email and for other related website
-            statistics (for example, recording the popularity of a certain
-            section and verifying system and server integrity).
+            Un cookie est un petit fichier placé sur votre appareil. Vous pouvez
+            instruire Votre navigateur pour refuser tous les cookies ou pour
+            indiquer quand un cookie est être envoyé. Cependant, si Vous
+            n'acceptez pas les cookies, il se peut que Vous ne soyez pas capable
+            d'utiliser certaines parties de notre Service. Sauf si Vous avez
+            ajusté votre réglage du navigateur afin qu'il refuse les cookies,
+            notre Service peut utiliser Biscuits.
           </li>
         </ul>
         <p>
-          Cookies can be &quot;Persistent&quot; or &quot;Session&quot; Cookies.
-          Persistent Cookies remain on Your personal computer or mobile device
-          when You go offline, while Session Cookies are deleted as soon as You
-          close Your web browser. You can learn more about cookies here:
-          <a href="https://www.termsfeed.com/blog/cookies/" target="_blank"
-            >All About Cookies by TermsFeed</a
+          Les cookies peuvent être "persistants" ou de "Session". Les cookies
+          persistants restent sur votre ordinateur personnel ou appareil mobile
+          lorsque Vous Vous déconnectez, tandis que les cookies de session sont
+          supprimés dès que Vous fermez votre navigateur Web. Vous pouvez en
+          savoir plus sur les cookies ici:
+          <a
+            class="color-008489 underline-hover size-16"
+            href="https://www.termsfeed.com/blog/cookies/"
+            target="_blank"
+            >Tout savoir sur les cookies par TermsFeed</a
           >.
         </p>
         <p>
-          We use both Session and Persistent Cookies for the purposes set out
-          below:
+          Nous utilisons à la fois des cookies de session et des cookies
+          persistants aux fins énoncées au dessous de:
         </p>
         <ul>
           <li>
-            <p><strong>Necessary / Essential Cookies</strong></p>
-            <p>Type: Session Cookies</p>
-            <p>Administered by: Us</p>
             <p>
-              Purpose: These Cookies are essential to provide You with services
-              available through the Website and to enable You to use some of its
-              features. They help to authenticate users and prevent fraudulent
-              use of user accounts. Without these Cookies, the services that You
-              have asked for cannot be provided, and We only use these Cookies
-              to provide You with those services.
+              <span class="font-semibold size-16"
+                >Cookies nécessaires / essentiels</span
+              >
+            </p>
+            <p>Type: Cookies de session</p>
+            <p>Administré par: Nous</p>
+            <p>
+              Objectif: ces cookies sont essentiels pour Vous fournir des
+              Services disponible sur le site Web et pour Vous permettre
+              d'utiliser certains de ses fonctionnalités. Ils aident à
+              authentifier les utilisateurs et à prévenir les fraudes
+              utilisation des comptes utilisateurs. Sans ces cookies, les
+              Services que Vous ont demandé ne peuvent pas être fournis, et nous
+              utilisons uniquement ces cookies pour Vous fournir ces Services.
             </p>
           </li>
           <li>
-            <p><strong>Cookies Policy / Notice Acceptance Cookies</strong></p>
-            <p>Type: Persistent Cookies</p>
-            <p>Administered by: Us</p>
             <p>
-              Purpose: These Cookies identify if users have accepted the use of
-              cookies on the Website.
+              <span class="font-semibold size-16"
+                >Politique de cookies / Avis d'acceptation des cookies</span
+              >
+            </p>
+            <p>Type: Cookies persistants</p>
+            <p>Administré par: Nous</p>
+            <p>
+              Objectif: ces cookies identifient si les utilisateurs ont accepté
+              l'utilisation de cookies sur le site Web.
             </p>
           </li>
           <li>
-            <p><strong>Functionality Cookies</strong></p>
-            <p>Type: Persistent Cookies</p>
-            <p>Administered by: Us</p>
             <p>
-              Purpose: These Cookies allow us to remember choices You make when
-              You use the Website, such as remembering your login details or
-              language preference. The purpose of these Cookies is to provide
-              You with a more personal experience and to avoid You having to
-              re-enter your preferences every time You use the Website.
+              <span class="font-semibold size-16"
+                >Cookies de fonctionnalité</span
+              >
+            </p>
+            <p>Type: Cookies persistants</p>
+            <p>Administré par: Nous</p>
+            <p>
+              Objectif: ces cookies nous permettent de nous souvenir des choix
+              que Vous faites lorsque Vous utilisez le site Web. Le but de ces
+              cookies est de Vous fournir une expérience plus personnelle chaque
+              fois que Vous utilisez le site Web.
             </p>
           </li>
         </ul>
         <p>
-          For more information about the cookies we use and your choices
-          regarding cookies, please visit our Cookies Policy or the Cookies
-          section of our Privacy Policy.
+          Pour plus d'informations sur les cookies que nous utilisons et vos
+          choix concernant les cookies, veuillez consulter les cookies section
+          de notre politique de confidentialité.
         </p>
-        <h2>Use of Your Personal Data</h2>
-        <p>The Company may use Personal Data for the following purposes:</p>
+        <h2 class="font-semibold">Utilisation de vos données personnelles</h2>
+        <p>
+          La Compagnie peut utiliser les données personnelles aux fins
+          suivantes:
+        </p>
         <ul>
           <li>
             <p>
-              <strong>To provide and maintain our Service</strong>, including to
-              monitor the usage of our Service.
+              <span class="font-semibold size-16"
+                >Pour fournir et maintenir notre service</span
+              >, y compris pour surveiller l'utilisation de notre service.
             </p>
           </li>
           <li>
             <p>
-              <strong>To manage Your Account:</strong> to manage Your
-              registration as a user of the Service. The Personal Data You
-              provide can give You access to different functionalities of the
-              Service that are available to You as a registered user.
+              <span class="font-semibold size-16"
+                >Pour gérer votre compte:</span
+              >
+              pour gérer votre inscription en tant qu'utilisateur du service.
+              Les données personnelles que Vous fournissez peuvent Vous donner
+              accès à différentes fonctionnalités du Service qui Vous sont
+              disponibles en tant qu'utilisateur inscrit.
             </p>
           </li>
           <li>
             <p>
-              <strong>For the performance of a contract:</strong> the
-              development, compliance and undertaking of the purchase contract
-              for the products, items or services You have purchased or of any
-              other contract with Us through the Service.
+              <span class="font-semibold size-16">Vous contacter:</span> Pour
+              Vous contacter par e-mail, appels téléphoniques, SMS ou autre
+              équivalent formes de communication électronique, comme une
+              application mobile notifications push concernant les mises à jour
+              ou les communications informatives liés aux fonctionnalités,
+              produits ou services sous-traités, y compris les mises à jour de
+              sécurité, si nécessaire ou raisonnable pour leur mise en œuvre.
             </p>
           </li>
           <li>
             <p>
-              <strong>To contact You:</strong> To contact You by email,
-              telephone calls, SMS, or other equivalent forms of electronic
-              communication, such as a mobile application's push notifications
-              regarding updates or informative communications related to the
-              functionalities, products or contracted services, including the
-              security updates, when necessary or reasonable for their
-              implementation.
+              <span class="font-semibold size-16">Pour Vous fournir</span> avec
+              actualités, offres spéciales et informations générales sur
+              d'autres produits, Services et événements que nous proposons
+              similaires à ceux qui Vous avez consulté(e) à moins que Vous
+              n'ayez choisi de ne pas recevoir de telles informations.
             </p>
           </li>
           <li>
             <p>
-              <strong>To provide You</strong> with news, special offers and
-              general information about other goods, services and events which
-              we offer that are similar to those that you have already purchased
-              or enquired about unless You have opted not to receive such
-              information.
+              <span class="font-semibold size-16"
+                >Pour gérer vos demandes:</span
+              >
+              Pour assister et gérer vos demandes à nous.
             </p>
           </li>
           <li>
             <p>
-              <strong>To manage Your requests:</strong> To attend and manage
-              Your requests to Us.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>For business transfers:</strong> We may use Your
-              information to evaluate or conduct a merger, divestiture,
-              restructuring, reorganization, dissolution, or other sale or
-              transfer of some or all of Our assets, whether as a going concern
-              or as part of bankruptcy, liquidation, or similar proceeding, in
-              which Personal Data held by Us about our Service users is among
-              the assets transferred.
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>For other purposes</strong>: We may use Your information
-              for other purposes, such as data analysis, identifying usage
-              trends, determining the effectiveness of our promotional campaigns
-              and to evaluate and improve our Service, products, services,
-              marketing and your experience.
+              <span class="font-semibold size-16">À d'autres fins</span>: Nous
+              pouvons utiliser vos informations à d'autres fins, telles que des
+              données analyse, identification des tendances d'utilisation,
+              détermination de l'efficacité de nos campagnes promotionnelles et
+              pour évaluer et améliorer nos Service, marketing et votre
+              expérience.
             </p>
           </li>
         </ul>
         <p>
-          We may share Your personal information in the following situations:
+          Nous pouvons partager vos informations personnelles dans les
+          situations suivantes:
         </p>
         <ul>
           <li>
-            <strong>With Service Providers:</strong> We may share Your personal
-            information with Service Providers to monitor and analyze the use of
-            our Service, to contact You.
+            <span class="font-semibold size-16"
+              >Avec les fournisseurs de services:</span
+            >
+            Nous pouvons partager vos informations personnelles avec des
+            fournisseurs de services pour surveiller et analyser l'utilisation
+            de notre service, pour Vous contacter.
           </li>
           <li>
-            <strong>For business transfers:</strong> We may share or transfer
-            Your personal information in connection with, or during negotiations
-            of, any merger, sale of Company assets, financing, or acquisition of
-            all or a portion of Our business to another company.
+            <span class="font-semibold size-16"
+              >Pour les transferts d'entreprise:</span
+            >
+            Nous pouvons partager ou transférer vos informations personnelles en
+            relation avec ou pendant les négociations de toute fusion, vente
+            d'actifs de la Compagnie, financement ou acquisition de tout ou
+            partie de nos activités pour une autre compagnie.
           </li>
           <li>
-            <strong>With Affiliates:</strong> We may share Your information with
-            Our affiliates, in which case we will require those affiliates to
-            honor this Privacy Policy. Affiliates include Our parent company and
-            any other subsidiaries, joint venture partners or other companies
-            that We control or that are under common control with Us.
+            <span class="font-semibold size-16">Avec les affiliés:</span> Nous
+            pouvons partager vos informations avec nos affiliés, auquel cas nous
+            exigeons de ces affiliés qu'ils respectent cette politique de
+            confidentialité.
           </li>
           <li>
-            <strong>With business partners:</strong> We may share Your
-            information with Our business partners to offer You certain
-            products, services or promotions.
+            <span class="font-semibold size-16"
+              >Avec des partenaires commerciaux:</span
+            >
+            Nous pouvons partager vos informations avec nos partenaires
+            commerciaux pour offrir Vous certains produits, services ou
+            promotions.
           </li>
           <li>
-            <strong>With other users:</strong> when You share personal
-            information or otherwise interact in the public areas with other
-            users, such information may be viewed by all users and may be
-            publicly distributed outside.
+            <span class="font-semibold size-16"
+              >Avec d'autres utilisateurs:</span
+            >
+            quand Vous partagez des informations personnelles à travers notre
+            Service pour contacter un utilisateur pour un Service.
           </li>
           <li>
-            <strong>With Your consent</strong>: We may disclose Your personal
-            information for any other purpose with Your consent.
+            <span class="font-semibold size-16">Avec votre accord</span>: Nous
+            pouvons divulguer vos informations personnelles à toute autre fin
+            avec votre consentement.
           </li>
         </ul>
-        <h2>Retention of Your Personal Data</h2>
+        <h2 class="font-semibold">Conservation de vos données personnelles</h2>
         <p>
-          The Company will retain Your Personal Data only for as long as is
-          necessary for the purposes set out in this Privacy Policy. We will
-          retain and use Your Personal Data to the extent necessary to comply
-          with our legal obligations (for example, if we are required to retain
-          your data to comply with applicable laws), resolve disputes, and
-          enforce our legal agreements and policies.
+          La Compagnie ne conservera vos données personnelles que pendant la
+          durée nécessaire aux fins énoncées dans la présente politique de
+          confidentialité. On le fera conserver et utiliser vos données
+          personnelles dans la mesure nécessaire pour se conformer avec nos
+          obligations légales (par exemple, si nous sommes tenus de vos données
+          pour se conformer aux lois applicables), résoudre les litiges, et
+          appliquer nos accords juridiques et nos politiques.
         </p>
         <p>
-          The Company will also retain Usage Data for internal analysis
-          purposes. Usage Data is generally retained for a shorter period of
-          time, except when this data is used to strengthen the security or to
-          improve the functionality of Our Service, or We are legally obligated
-          to retain this data for longer time periods.
+          La Compagnie conservera également les données d'utilisation à des fins
+          d'analyse interne fins. Les données d'utilisation sont généralement
+          conservées pendant une période plus courte heure, sauf lorsque ces
+          données sont utilisées pour renforcer la sécurité ou pour améliorer la
+          fonctionnalité de notre service, ou nous sommes légalement obligés
+          pour conserver ces données pendant des périodes plus longues.
         </p>
-        <h2>Transfer of Your Personal Data</h2>
+        <h2 class="font-semibold">Transfert de vos données personnelles</h2>
         <p>
-          Your information, including Personal Data, is processed at the
-          Company's operating offices and in any other places where the parties
-          involved in the processing are located. It means that this information
-          may be transferred to — and maintained on — computers located outside
-          of Your state, province, country or other governmental jurisdiction
-          where the data protection laws may differ than those from Your
-          jurisdiction.
-        </p>
-        <p>
-          Your consent to this Privacy Policy followed by Your submission of
-          such information represents Your agreement to that transfer.
+          Vos informations, y compris les données personnelles, sont traitées au
+          Bureaux d'exploitation de la Compagnie et dans tout autre endroit où
+          les parties impliqués dans le traitement sont localisés. Cela signifie
+          que ces informations peuvent être transférées et maintenus sur des
+          ordinateurs situés à l'extérieur de votre état, province, pays ou
+          autre juridiction gouvernementale où les lois sur la protection des
+          données peuvent différer de celles de votre juridiction.
         </p>
         <p>
-          The Company will take all steps reasonably necessary to ensure that
-          Your data is treated securely and in accordance with this Privacy
-          Policy and no transfer of Your Personal Data will take place to an
-          organization or a country unless there are adequate controls in place
-          including the security of Your data and other personal information.
+          Votre consentement à cette politique de confidentialité suivi de votre
+          soumission de ces informations représentent votre accord à ce
+          transfert.
         </p>
-        <h2>Disclosure of Your Personal Data</h2>
-        <h3>Business Transactions</h3>
         <p>
-          If the Company is involved in a merger, acquisition or asset sale,
-          Your Personal Data may be transferred. We will provide notice before
-          Your Personal Data is transferred and becomes subject to a different
-          Privacy Policy.
+          La Compagnie prendra toutes les mesures raisonnablement nécessaires
+          pour s'assurer que Vos données sont traitées en toute sécurité et
+          conformément à cette confidentialité Politique et aucun transfert de
+          vos données personnelles n'aura lieu à un une organisation ou un pays
+          à moins qu'il n'y ait des contrôles adéquats en place y compris la
+          sécurité de vos données et autres informations personnelles.
         </p>
-        <h3>Law enforcement</h3>
+        <h2 class="font-semibold">Divulgation de vos données personnelles</h2>
+        <h3 class="font-semibold">Transactions commerciales</h3>
         <p>
-          Under certain circumstances, the Company may be required to disclose
-          Your Personal Data if required to do so by law or in response to valid
-          requests by public authorities (e.g. a court or a government agency).
+          Si la Compagnie est impliquée dans une fusion, une acquisition ou une
+          vente d'actifs, Vos données personnelles peuvent être transférées.
+          Nous fournirons un avis avant Vos données personnelles sont
+          transférées et font l'objet d'un autre Politique de confidentialité.
         </p>
-        <h3>Other legal requirements</h3>
+        <h3 class="font-semibold">Application de la loi</h3>
         <p>
-          The Company may disclose Your Personal Data in the good faith belief
-          that such action is necessary to:
+          Dans certaines circonstances, la Compagnie peut être tenue de
+          divulguer Vos données personnelles si la loi l'exige ou en réponse à
+          des les demandes des autorités publiques (par exemple, un tribunal ou
+          une agence gouvernementale).
+        </p>
+        <h3 class="font-semibold">Autres exigences légales</h3>
+        <p>
+          La Compagnie peut divulguer vos données personnelles de bonne foi
+          qu'une telle action est nécessaire pour:
         </p>
         <ul>
-          <li>Comply with a legal obligation</li>
-          <li>Protect and defend the rights or property of the Company</li>
+          <li>Se conformer à une obligation légale</li>
           <li>
-            Prevent or investigate possible wrongdoing in connection with the
-            Service
+            Protéger et défendre les droits ou la propriété de la Compagnie
           </li>
           <li>
-            Protect the personal safety of Users of the Service or the public
+            Empêcher ou enquêter sur d'éventuels actes répréhensibles en un
+            service
           </li>
-          <li>Protect against legal liability</li>
+          <li>
+            Protéger la sécurité personnelle des Utilisateurs du Service ou du
+            public
+          </li>
+          <li>Protéger contre la responsabilité légale</li>
         </ul>
-        <h2>Security of Your Personal Data</h2>
+        <h2 class="font-semibold">Sécurité de vos données personnelles</h2>
         <p>
-          The security of Your Personal Data is important to Us, but remember
-          that no method of transmission over the Internet, or method of
-          electronic storage is 100% secure. While We strive to use commercially
-          acceptable means to protect Your Personal Data, We cannot guarantee
-          its absolute security.
+          La sécurité de vos données personnelles est importante pour nous, mais
+          rappelez-vous qu'aucune méthode de transmission sur Internet, ni
+          aucune méthode de stockage électronique est 100% sécurisé. Alors que
+          nous nous efforçons d'utiliser des moyens commercialement acceptables
+          pour protéger vos données personnelles, nous ne pouvons garantir sa
+          sécurité absolue.
         </p>
-        <h1>Children's Privacy</h1>
+        <h1 class="font-semibold">Liens vers d'autres sites Web</h1>
         <p>
-          Our Service does not address anyone under the age of 13. We do not
-          knowingly collect personally identifiable information from anyone
-          under the age of 13. If You are a parent or guardian and You are aware
-          that Your child has provided Us with Personal Data, please contact Us.
-          If We become aware that We have collected Personal Data from anyone
-          under the age of 13 without verification of parental consent, We take
-          steps to remove that information from Our servers.
-        </p>
-        <p>
-          If We need to rely on consent as a legal basis for processing Your
-          information and Your country requires consent from a parent, We may
-          require Your parent's consent before We collect and use that
-          information.
-        </p>
-        <h1>Links to Other Websites</h1>
-        <p>
-          Our Service may contain links to other websites that are not operated
-          by Us. If You click on a third party link, You will be directed to
-          that third party's site. We strongly advise You to review the Privacy
-          Policy of every site You visit.
+          Notre service peut contenir des liens vers d'autres sites Web qui ne
+          sont pas exploités par nous. Si Vous cliquez sur un lien tiers, Vous
+          serez dirigé vers le site de ce tiers. Nous Vous conseillons vivement
+          de consulter la confidentialité Politique de chaque site que Vous
+          visitez.
         </p>
         <p>
-          We have no control over and assume no responsibility for the content,
-          privacy policies or practices of any third party sites or services.
+          Nous n'avons aucun contrôle et n'assumons aucune responsabilité pour
+          le contenu, les politiques ou pratiques de confidentialité de tout
+          site ou service tiers.
         </p>
-        <h1>Changes to this Privacy Policy</h1>
+        <h1 class="font-semibold">
+          Modifications de cette politique de confidentialité
+        </h1>
         <p>
-          We may update Our Privacy Policy from time to time. We will notify You
-          of any changes by posting the new Privacy Policy on this page.
+          Nous pouvons mettre à jour notre politique de confidentialité de temps
+          à autre. Nous Vous informerons de tout changement en publiant la
+          nouvelle politique de confidentialité sur cette page.
         </p>
         <p>
-          We will let You know via email and/or a prominent notice on Our
-          Service, prior to the change becoming effective and update the
-          &quot;Last updated&quot; date at the top of this Privacy Policy.
+          Nous Vous informerons par e-mail et / ou par un avis bien visible sur
+          notre Service, avant que le changement ne devienne effectif et mettre
+          à jour la "Dernière date" de mise à jour en haut de cette politique de
+          confidentialité.
         </p>
         <p>
-          You are advised to review this Privacy Policy periodically for any
-          changes. Changes to this Privacy Policy are effective when they are
-          posted on this page.
+          Il Vous est conseillé de consulter périodiquement cette politique de
+          confidentialité pour changements. Les modifications apportées à cette
+          politique de confidentialité sont effectives lorsqu'elles sont publié
+          sur cette page.
         </p>
-        <h1>Contact Us</h1>
+        <h1 class="font-semibold">Nous contacter</h1>
         <p>
-          If you have any questions about this Privacy Policy, You can contact
-          us:
+          Si Vous avez des questions sur cette politique de confidentialité,
+          Vous pouvez contacter nous:
         </p>
         <ul>
           <li>
-            By visiting this page on our website:
+            En visitant cette page sur notre site Web:
             <a
+              class="color-008489 underline-hover size-16"
               href="https://www.ofaloo.com/politique-confidentialite"
               rel="external nofollow noopener"
               target="_blank"
@@ -508,4 +531,23 @@
 export default {}
 </script>
 
-<style scoped></style>
+<style scoped>
+.zoo > * {
+  font-size: 16px !important;
+  padding: 0.5rem 0em;
+}
+li {
+  list-style-type: disc;
+  margin-left: 3rem;
+  padding: 0.4rem 0em;
+}
+P,
+h1,
+h2,
+h3 {
+  font-size: 16px;
+}
+h4 {
+  font-size: 24px !important;
+}
+</style>

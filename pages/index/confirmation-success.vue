@@ -10,6 +10,11 @@
 import Confirmsuccess from '~/components/authentication/Confirmsuccess.vue'
 export default {
   components: { Confirmsuccess },
+  head() {
+    return {
+      title: 'Votre adresse email a été confirmée | Ofaloo',
+    }
+  },
   beforeMount() {
     if (!localStorage.success) {
       this.$router.replace('/')

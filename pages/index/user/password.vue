@@ -271,6 +271,11 @@ export default {
       wenwrong: false,
     }
   },
+  head() {
+    return {
+      title: 'Mot de passe du compte - ' + this.$auth.user.email + ' | Ofaloo',
+    }
+  },
   computed: {
     didpwdunmatch() {
       return this.notpwdok === true

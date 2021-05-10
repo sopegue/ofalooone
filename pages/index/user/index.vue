@@ -251,6 +251,11 @@ export default {
       checkletter: [],
     }
   },
+  head() {
+    return {
+      title: 'Mon compte - ' + this.$auth.user.email + ' | Ofaloo',
+    }
+  },
   computed: {
     curoute() {
       return this.$route.path

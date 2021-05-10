@@ -8,6 +8,11 @@
 import Apropos from '~/components/apropos/Apropos.vue'
 export default {
   components: { Apropos },
+  head() {
+    return {
+      title: 'A propos de nous | Ofaloo',
+    }
+  },
 }
 </script>
 

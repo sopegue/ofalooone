@@ -137,6 +137,7 @@ export default {
           })
         )
       }).catch(() => {
+        location.assign('/')
         console.error("Oops, can't resolve your promise sending mail")
       })
     },
@@ -148,6 +149,7 @@ export default {
           )
         )
       }).catch(() => {
+        location.assign('/')
         console.error("Oops, can't resolve your promise getting hash")
       })
     },
@@ -164,6 +166,8 @@ export default {
               }, 5000)
               this.cansend = false
             })
+          } else {
+            location.assign('/')
           }
         })
       }

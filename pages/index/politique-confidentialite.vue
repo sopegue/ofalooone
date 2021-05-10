@@ -515,10 +515,10 @@
             En visitant cette page sur notre site Web:
             <a
               class="color-008489 underline-hover size-16"
-              href="https://www.ofaloo.com/politique-confidentialite"
+              href="https://www.ofaloo.com/contactez-nous"
               rel="external nofollow noopener"
               target="_blank"
-              >https://www.ofaloo.com/politique-confidentialite</a
+              >https://www.ofaloo.com/contactez-nous/</a
             >
           </li>
         </ul>
@@ -528,7 +528,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  head() {
+    return {
+      title: 'Politique de confidentialité | Ofaloo',
+    }
+  },
+}
 </script>
 
 <style scoped>

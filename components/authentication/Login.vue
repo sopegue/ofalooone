@@ -17,21 +17,23 @@
           <div class="w-full">
             <label for="username" class="size-14">Email</label>
             <br />
-            <input
-              id="username"
-              v-model="email"
-              type="email"
-              class="border w-full py-1 h-7 size-14 rounded no-outlines px-2"
-              :class="{
-                'border-red-700': mailerror,
-              }"
-            />
-            <p
-              v-show="mailerror"
-              class="size-12 appearZ text-red-700 leading-4 pt-1"
-            >
-              Veuillez enter un email valide
-            </p>
+            <form @submit.prevent="signin">
+              <input
+                id="username"
+                v-model="email"
+                type="email"
+                class="border w-full py-1 h-7 size-14 rounded no-outlines px-2"
+                :class="{
+                  'border-red-700': mailerror,
+                }"
+              />
+              <p
+                v-show="mailerror"
+                class="size-12 appearZ text-red-700 leading-4 pt-1"
+              >
+                Veuillez enter un email valide
+              </p>
+            </form>
           </div>
           <div class="w-full">
             <div class="flex align-center justify-between">
@@ -42,7 +44,7 @@
                 >Mot de passe oublié ?</a
               >
             </div>
-            <div class="relative flex align-center">
+            <form class="relative flex align-center" @submit.prevent="signin">
               <input
                 id="pwd"
                 v-model="pwd"
@@ -53,8 +55,9 @@
                 }"
               />
               <button
+                type="button"
                 class="bg-transparent no-outlines absolute right-0 mr-2 logo-color"
-                @click="
+                @click.stop="
                   {
                     pwdhid = !pwdhid
                   }
@@ -97,7 +100,7 @@
                   ></path>
                 </svg>
               </button>
-            </div>
+            </form>
             <p
               v-show="passerror"
               class="size-12 appearZ text-red-700 leading-4 pt-1"

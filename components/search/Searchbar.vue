@@ -181,7 +181,7 @@
         :placeholder="
           currency === 'Agent'
             ? 'Rechercher une propriété par agent...'
-            : 'Rechercher une propriété par ville, quartier...'
+            : 'Rechercher une propriété par adresse, ville...'
         "
         @focus="
           {

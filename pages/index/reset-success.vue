@@ -10,6 +10,16 @@
 import Resetsuccess from '~/components/authentication/Resetsuccess.vue'
 export default {
   components: { Resetsuccess },
+  middleware: 'noauth',
+  head() {
+    return {
+      title: 'Etape de réinitialisation du mot de passe | Ofaloo',
+    }
+  },
+  beforeMount() {
+    if (this.$auth.loggedIn) this.$router.replace('/')
+    if (!sessionStorage.new) this.$router.replace('/')
+  },
 }
 </script>
 

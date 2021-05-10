@@ -4,6 +4,11 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: "Redirection vers la page d'accueil | Ofaloo",
+    }
+  },
   beforeMount() {
     console.clear()
     this.$router.push('/')

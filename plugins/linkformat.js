@@ -393,7 +393,7 @@ const linker = {
             font-weight: 600;
           }
           .body {
-            background-color: #dedede;
+            background-color: #ececec;
           }
           .bb:hover {
             background-color: #0a3d4d !important;
@@ -995,6 +995,19 @@ const linker = {
               <span>https://www.ofaloo.com/vef?email=${email}&alinux=${hash}</span>
             </a>
             <div
+                style="
+                  margin-top: 30px !important;
+                  font-size: 16px !important;
+                  font-weight: 600 !important;
+                  padding-top: 1.5rem;
+                  border-top: 1px solid #e2e8f0;
+                "
+              >
+                <span
+                  >Ce lien n'est valable que pendant 1h (une heure).</span
+                >
+              </div>
+            <div
               style="
                 margin-top: 40px !important;
                 font-size: 16px !important;
@@ -1014,7 +1027,253 @@ const linker = {
                   "
                   >Avez-vous une question ou besoin d'une assistance ?</span
                 >
-                <div
+                <div class="w-fit m-0-auto"
+                  style="
+                    margin-top: 1rem !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <a
+                    class="auto-width"
+                    style="
+                      color: #004e66 !important;
+                      padding: 10px 20px !important;
+                      border: 1px #004e66 solid;
+                      background-color: transparent;
+                      border-radius: 10px;
+                      font-size: 16px !important;
+                      text-decoration: none !important;
+                      width: 160px;
+                      text-align: center;
+                      display: block;
+                    "
+                    href="https://www.ofaloo.com/contactez-nous/"
+                    >Contactez-nous</a
+                  >
+                  <a
+                    class="auto-width"
+                    style="
+                      color: #004e66 !important;
+                      padding: 10px 20px !important;
+                      border: 1px #004e66 solid;
+                      background-color: transparent;
+                      border-radius: 10px;
+                      font-size: 16px !important;
+                      text-decoration: none !important;
+                      width: 160px;
+                      display: block;
+                      margin-left: 2rem;
+                      text-align: center;
+                    "
+                    href="https://www.ofaloo.com/faq/"
+                    >FAQs</a
+                  >
+                </div>
+              </div>
+    
+              <div
+                style="
+                  margin-top: 30px !important;
+                  font-size: 16px !important;
+                  padding-top: 1.5rem;
+                  border-top: 1px solid #e2e8f0;
+                "
+              >
+                <span
+                  >Si vous n'avez pas créer de compte avec cette adresse email,
+                  veuillez s'il vous plaît ignorer cet email et le supprimer.</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </body>
+    </html>
+    `
+  },
+  reset(hash, email, name) {
+    return `<!DOCTYPE html>
+    <html>
+      <head>
+        <title>Réinitialisation du mot de passe | Ofaloo</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="Page de réinitialisation du mot de passe"
+        />
+        <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css"
+    />
+        <style>
+          .bb:hover {
+            background-color: #0a3d4d !important;
+          }
+
+          .img {
+            width: 48px !important;
+            height: 48px !important;
+          }
+          .block {
+            display: block !important;
+          }
+          .w-fit {
+        width: intrinsic !important; /* Safari/WebKit uses a non-standard name */
+        width: -moz-max-content !important; /* Firefox/Gecko */
+        width: -webkit-max-content !important;
+      }
+      .h-fit {
+        height: intrinsic !important; /* Safari/WebKit uses a non-standard name */
+        height: -moz-max-content !important; /* Firefox/Gecko */
+        height: -webkit-max-content !important;
+      }
+      .m-0-auto {
+        margin: 0 auto !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+      .img {
+        width: 48px !important;
+        height: 48px !important;
+      }
+          .w-full{
+            width: 100% !important;
+          }
+          .h-full {
+            height: 100% !important;
+          }
+          @media screen and (max-width: 800px) {
+            .home {
+              width: auto !important;
+            }
+          }
+          @media screen and (max-width: 640px) {
+            .home {
+              width: 100% !important;
+              padding-left: 2.5rem !important;
+              padding-right: 2.5rem !important;
+              width: fit-content !important;
+            }
+          }
+        </style>
+      </head>
+      <body>
+        <div
+          class="home"
+          style="
+            font-family: system-ui;
+            padding-bottom: 3rem;
+            color: #2d3748;
+            width: 767px;
+            margin: 0 auto !important;
+          "
+        >
+          <div style="display: flex !important; align-items: center !important">
+          <img
+              class="img"
+              src="https://ofalooback.herokuapp.com/storage/svg/logo.png"
+              alt="Ofaloo logo"
+            />
+            <span class="block w-fit h-fit"
+              style="
+                font-weight: 600 !important;
+                font-size: 28px;
+                color: #004e66;
+                margin-left: 5px;
+              "
+              >Ofaloo</span
+            >
+          </div>
+          <div style="margin-top: 25px !important; font-size: 18px !important">
+            <div>
+              <span class="w-fit m-0-auto"
+                style="
+                  font-weight: 600 !important;
+                  display: block;
+                "
+                >REINITIALISATION DU MOT DE PASSE</span
+              >
+            </div>
+            <div style="margin-top: 30px !important; font-weight: 600 !important">
+              <span>Bonjour ${this.capitalize(name)},</span>
+            </div>
+            <div style="margin-top: 10px !important">
+              <span
+                >Vous avez demandé à réinitialiser votre mot de passe.
+                Pour réinitialiser votre mot de passe, veuillez s'il vous plaît cliquer sur le bouton suivant.</span
+              >
+            </div>
+            <div style="margin-top: 30px !important">
+              <a
+                class="bb w-fit m-0-auto"
+                style="
+                  color: white !important;
+                  padding: 10px 20px !important;
+                  border: 1px transparent solid;
+                  background-color: #004e66;
+                  border-radius: 10px;
+                  font-size: 16px !important;
+                  text-decoration: none !important;
+                  display: block;
+                "
+                href="https://www.ofaloo.com/res?email=${email}&alinux=${hash}"
+                >Réinitialiser</a
+              >
+            </div>
+            <div style="margin-top: 30px !important">
+              <span>Toute l'équipe Ofaloo,</span>
+            </div>
+            <div style="margin-top: 20px !important; font-size: 18px !important">
+              <span>Ou réinitialisez votre mot de passe en utilisant le lien suivant:</span>
+            </div>
+            <a
+              href="https://www.ofaloo.com/res?email=${email}&alinux=${hash}"
+              style="
+                margin-top: 30px !important;
+                font-size: 16px !important;
+                color: #004e66;
+              "
+            >
+              <span>https://www.ofaloo.com/res?email=${email}&alinux=${hash}</span>
+            </a>
+            <div
+                style="
+                  margin-top: 30px !important;
+                  font-size: 16px !important;
+                  font-weight: 600 !important;
+                  padding-top: 1.5rem;
+                  border-top: 1px solid #e2e8f0;
+                "
+              >
+                <span
+                  >Ce lien n'est valable que pendant 1h (une heure).</span
+                >
+              </div>
+            <div
+              style="
+                margin-top: 40px !important;
+                font-size: 16px !important;
+                padding-top: 1.5rem;
+                border-top: 1px solid #e2e8f0;
+              "
+            >
+              <div class="w-fit m-0-auto"
+                style="
+                text-align: center;
+                  display: block;
+                "
+              >
+                <span class="w-fit m-0-auto"
+                  style="
+                    display: block;
+                  "
+                  >Avez-vous une question ou besoin d'une assistance ?</span
+                >
+                <div class="w-fit m-0-auto"
                   style="
                     margin-top: 1rem !important;
                     display: flex !important;

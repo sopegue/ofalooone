@@ -29,6 +29,11 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: 'Rejoignez-nous et vendez vos propriétés | Ofaloo',
+    }
+  },
   computed: {
     size() {
       return this.$store.state.size

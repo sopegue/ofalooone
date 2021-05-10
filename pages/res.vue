@@ -13,17 +13,19 @@ export default {
       this.verification()
         .then((result) => {
           if (result.status === '200') {
-            if (localStorage.success) localStorage.removeItem('success')
-            localStorage.setItem('success', true)
-            location.assign('/confirmation-success')
+            if (sessionStorage.new) sessionStorage.removeItem('new')
+            sessionStorage.setItem('new', this.$route.query.email)
+            if (sessionStorage.ofaloo_h) sessionStorage.removeItem('ofaloo_h')
+            sessionStorage.setItem('ofaloo_h', this.$route.query.alinux)
+            location.assign('/reset-success')
           }
-          if (result.status === '404' || result.status === '500') {
+          if (result.status === '500') {
             location.assign('/')
           }
-          if (result.status === '1997') {
+          if (result.status === '1997' || result.status === '404') {
             if (localStorage.invalid) localStorage.removeItem('invalid')
             localStorage.setItem('invalid', true)
-            location.assign('/expirated-link')
+            location.assign('/expirated-reset')
           }
           if (result.status === '401') {
             if (this.$auth.loggedIn) {
@@ -42,10 +44,7 @@ export default {
       return await new Promise((resolve, reject) => {
         resolve(
           this.$axios.$get(
-            'verification/' +
-              this.$route.query.email +
-              '/' +
-              this.$route.query.alinux
+            'reset/' + this.$route.query.email + '/' + this.$route.query.alinux
           )
         )
       }).catch(() => {

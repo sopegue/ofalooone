@@ -777,8 +777,9 @@
               'space-x-5 justify-between': size >= 640,
             }"
           >
-            <div
+            <form
               class="w-full lg:w-2/5 md:w-3/5 sm:w-3/4 border rounded px-6 pt-4 pb-10 flex flex-col space-y-2"
+              @submit.prevent="send"
             >
               <div class="w-full" :class="{ noclick: authmail.length > 0 }">
                 <label for="email" class="size-13">Email</label>
@@ -905,11 +906,13 @@
               >
                 Votre message a été envoyé avec succès √
               </p>
+              <button></button>
               <div class="w-full">
                 <button
+                  type="button"
                   class="border-none w-full size-12 text-white px-5 pb-2 flex align-center space-x-2 rounded button btn-008489 both-centers"
                   :class="{ noclick: onsent }"
-                  @click="send"
+                  @click.stop="send"
                 >
                   <span class="size-12 text-white">Envoyer</span>
                   <span v-show="onsent" class="w-fit h-fit"
@@ -917,7 +920,7 @@
                   ></span>
                 </button>
               </div>
-            </div>
+            </form>
             <div
               class="flex align-center border justify-between h-16 rounded bg-white"
               :class="{

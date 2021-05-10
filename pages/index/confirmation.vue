@@ -10,7 +10,13 @@
 import Confirm from '~/components/authentication/Confirm.vue'
 export default {
   components: { Confirm },
+
   middleware: 'auth',
+  head() {
+    return {
+      title: "Confirmation de l'adresse email | Ofaloo",
+    }
+  },
   beforeMount() {
     if (!localStorage.conf) {
       this.$router.replace('/')

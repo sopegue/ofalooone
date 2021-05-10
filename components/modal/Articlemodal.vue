@@ -742,7 +742,10 @@
               <h4 class="logo-color border-b text-c size-13 pb-2 font-semibold">
                 Contacter l'agent
               </h4>
-              <div class="w-full py-3 flex flex-col space-y-2">
+              <form
+                class="w-full py-3 flex flex-col space-y-2"
+                @submit.prevent="send"
+              >
                 <div class="w-full" :class="{ noclick: authmail.length > 0 }">
                   <label for="email" class="size-13">Email</label>
                   <br />
@@ -868,11 +871,13 @@
                 >
                   Votre message a été envoyé avec succès √
                 </p>
+                <button></button>
                 <div class="w-full pt-2">
                   <button
+                    type="button"
                     class="border-none w-full size-12 text-white px-5 pb-2 flex align-center space-x-2 rounded button btn-008489 both-centers"
                     :class="{ noclick: onsent }"
-                    @click="send"
+                    @click.stop="send"
                   >
                     <span class="size-12 text-white">Envoyer</span>
                     <span v-show="onsent" class="w-fit h-fit"
@@ -882,7 +887,7 @@
                     ></span>
                   </button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>

@@ -13,6 +13,11 @@ import Login from '~/components/authentication/Login.vue'
 export default {
   components: { Login },
   middleware: 'noauth',
+  head() {
+    return {
+      title: 'Se connecter | Ofaloo',
+    }
+  },
   computed: {
     logged() {
       return this.$auth.loggedIn === true

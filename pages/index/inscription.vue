@@ -11,6 +11,11 @@ import Register from '~/components/authentication/Register.vue'
 export default {
   components: { Register },
   middleware: 'noauth',
+  head() {
+    return {
+      title: 'Créer un compte | Ofaloo',
+    }
+  },
   beforeMount() {
     if (this.$auth.loggedIn) {
       this.$router.replace('/redirecting-home')

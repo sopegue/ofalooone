@@ -179,11 +179,18 @@ export default {
     if (!this.curoute.includes('/confirmation-success')) {
       localStorage.removeItem('success')
     }
-    if (!this.curoute.includes('/expirated-link')) {
+    if (!this.curoute.includes('/expirated')) {
       localStorage.removeItem('invalid')
     }
     if (!this.curoute.includes('/confirmation')) {
       localStorage.removeItem('conf')
+    }
+    if (!this.curoute.includes('/pwd-reset-sent')) {
+      sessionStorage.removeItem('reset')
+    }
+    if (!this.curoute.includes('/reset-success')) {
+      sessionStorage.removeItem('new')
+      sessionStorage.removeItem('ofaloo_h')
     }
     if (!this.$auth.loggedIn) {
       if (localStorage.hdzd) {

@@ -81,6 +81,12 @@ export default {
       notif: false,
     }
   },
+  head() {
+    return {
+      title:
+        'Paramètres de mon compte - ' + this.$auth.user.email + ' | Ofaloo',
+    }
+  },
   computed: {
     del() {
       return this.wannadelete === true

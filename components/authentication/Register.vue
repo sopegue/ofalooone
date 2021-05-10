@@ -8,211 +8,217 @@
           <h4 class="text-center size-16 logo-color font-semibold mb-1">
             Inscription à Ofaloo
           </h4>
-          <div class="w-full">
-            <label for="email" class="size-14">Email</label>
-            <br />
-            <input
-              id="email"
-              v-model="email"
-              type="email"
-              class="border w-full py-1 h-7 size-14 rounded no-outlines outline-none px-2"
-              :class="{
-                'border-red-700': mailerror,
-                'border-green-700': $linker.emailValidated(email),
-              }"
-            />
-            <p
-              v-show="mailerror"
-              class="size-12 appearZ text-red-700 leading-4 pt-1"
-            >
-              Veuillez enter un email valide !
-            </p>
-            <p
-              v-show="liverror || noliverror"
-              class="size-12 appearZ text-red-700 leading-4 pt-1"
-            >
-              Désolé, cette adresse email est déjà utilisée !
-            </p>
-          </div>
-          <div class="w-full">
-            <label for="username" class="size-14">Nom</label>
-            <br />
-            <input
-              id="username"
-              v-model="name"
-              autocomplete="none"
-              type="text"
-              class="border w-full py-1 h-7 size-14 rounded no-outlines outline-none px-2"
-              :class="{
-                'border-red-700': noname,
-                'border-green-700':
-                  name.length >= 2 && $linker.onlyLetters(name),
-              }"
-            />
-            <p
-              v-show="noname"
-              class="size-12 appearZ text-red-700 leading-4 pt-1"
-            >
-              Veuillez enter votre nom s'il vous plaît (lettres de l'alphabet)
-            </p>
-          </div>
-          <div class="w-full">
-            <label for="userdname" class="size-14">Prénom (Optionnel)</label>
-            <br />
-            <input
-              id="userdname"
-              v-model="surname"
-              autocomplete="none"
-              type="text"
-              class="border w-full py-1 h-7 size-14 rounded no-outlines outline-none px-2"
-            />
-            <p
-              v-show="invalidsurname"
-              class="size-12 appearZ text-red-700 leading-4 pt-1"
-            >
-              Veuillez enter un prénom valide (lettres de l'alphabet) !
-            </p>
-          </div>
-          <div class="w-full">
-            <div class="flex align-center justify-between">
-              <label for="pwd" class="size-14">Mot de passe</label>
-            </div>
-
-            <div class="relative flex align-center">
+          <form class="flex flex-col space-y-2" @submit.prevent="signup">
+            <div class="w-full">
+              <label for="email" class="size-14">Email</label>
+              <br />
               <input
-                id="pwd"
-                v-model="pwd"
+                id="email"
+                v-model="email"
+                type="email"
+                class="border w-full py-1 h-7 size-14 rounded no-outlines outline-none px-2"
+                :class="{
+                  'border-red-700': mailerror,
+                  'border-green-700': $linker.emailValidated(email),
+                }"
+              />
+              <p
+                v-show="mailerror"
+                class="size-12 appearZ text-red-700 leading-4 pt-1"
+              >
+                Veuillez enter un email valide !
+              </p>
+              <p
+                v-show="liverror || noliverror"
+                class="size-12 appearZ text-red-700 leading-4 pt-1"
+              >
+                Désolé, cette adresse email est déjà utilisée !
+              </p>
+            </div>
+            <div class="w-full">
+              <label for="username" class="size-14">Nom</label>
+              <br />
+              <input
+                id="username"
+                v-model="name"
+                autocomplete="none"
+                type="text"
+                class="border w-full py-1 h-7 size-14 rounded no-outlines outline-none px-2"
+                :class="{
+                  'border-red-700': noname,
+                  'border-green-700':
+                    name.length >= 2 && $linker.onlyLetters(name),
+                }"
+              />
+              <p
+                v-show="noname"
+                class="size-12 appearZ text-red-700 leading-4 pt-1"
+              >
+                Veuillez enter votre nom s'il vous plaît (lettres de l'alphabet)
+              </p>
+            </div>
+            <div class="w-full">
+              <label for="userdname" class="size-14">Prénom (Optionnel)</label>
+              <br />
+              <input
+                id="userdname"
+                v-model="surname"
+                autocomplete="none"
+                type="text"
+                class="border w-full py-1 h-7 size-14 rounded no-outlines outline-none px-2"
+              />
+              <p
+                v-show="invalidsurname"
+                class="size-12 appearZ text-red-700 leading-4 pt-1"
+              >
+                Veuillez enter un prénom valide (lettres de l'alphabet) !
+              </p>
+            </div>
+            <div class="w-full">
+              <div class="flex align-center justify-between">
+                <label for="pwd" class="size-14">Mot de passe</label>
+              </div>
+
+              <div class="relative flex align-center">
+                <input
+                  id="pwd"
+                  v-model="pwd"
+                  :type="pwdhidden ? 'password' : 'text'"
+                  class="border pr-8 w-full py-1 h-7 size-14 rounded no-outlines outline-none px-2"
+                  :class="{
+                    'border-red-700': passerror,
+                    'border-green-700': $linker.pwdValidated(pwd),
+                  }"
+                />
+                <button></button>
+                <button
+                  type="button"
+                  class="bg-transparent no-outlines absolute right-0 mr-2 logo-color"
+                  @click.stop="
+                    {
+                      pwdhid = !pwdhid
+                    }
+                  "
+                >
+                  <svg
+                    v-show="pwdhidden"
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    ></path>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1"
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                    ></path>
+                  </svg>
+                  <svg
+                    v-show="!pwdhidden"
+                    class="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1"
+                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+              <p
+                v-show="passerror"
+                class="size-12 appearZ text-red-700 leading-4 pt-1"
+              >
+                Le mot de passe doit contenir au moins 8 caractères avec lettres
+                & chiffres.
+              </p>
+            </div>
+            <div class="w-full">
+              <div class="flex align-center justify-between">
+                <label for="pwdx" class="size-14"
+                  >Mot de passe confirmation</label
+                >
+              </div>
+              <input
+                id="pwdx"
+                v-model="pwdcf"
                 :type="pwdhidden ? 'password' : 'text'"
                 class="border pr-8 w-full py-1 h-7 size-14 rounded no-outlines outline-none px-2"
                 :class="{
-                  'border-red-700': passerror,
-                  'border-green-700': $linker.pwdValidated(pwd),
+                  'border-red-700s':
+                    didpwdunmatch ||
+                    ($linker.pwdValidated(pwd) &&
+                      pwdcf.length >= pwd.length &&
+                      !samepwd) ||
+                    ($linker.pwdValidated(pwd) &&
+                      pwdcf.length > 0 &&
+                      pwdcf.length < pwd.length &&
+                      !pwd.startsWith(pwdcf)),
+                  'border-green-700': samepwd,
                 }"
               />
-              <button
-                class="bg-transparent no-outlines absolute right-0 mr-2 logo-color"
-                @click="
-                  {
-                    pwdhid = !pwdhid
-                  }
-                "
-              >
-                <svg
-                  v-show="pwdhidden"
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1"
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  ></path>
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1"
-                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                  ></path>
-                </svg>
-                <svg
-                  v-show="!pwdhidden"
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1"
-                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
-                  ></path>
-                </svg>
-              </button>
-            </div>
-            <p
-              v-show="passerror"
-              class="size-12 appearZ text-red-700 leading-4 pt-1"
-            >
-              Le mot de passe doit contenir au moins 8 caractères avec lettres &
-              chiffres.
-            </p>
-          </div>
-          <div class="w-full">
-            <div class="flex align-center justify-between">
-              <label for="pwdx" class="size-14"
-                >Mot de passe confirmation</label
-              >
-            </div>
-            <input
-              id="pwdx"
-              v-model="pwdcf"
-              :type="pwdhidden ? 'password' : 'text'"
-              class="border pr-8 w-full py-1 h-7 size-14 rounded no-outlines outline-none px-2"
-              :class="{
-                'border-red-700s':
-                  didpwdunmatch ||
+              <p
+                v-show="
                   ($linker.pwdValidated(pwd) &&
                     pwdcf.length >= pwd.length &&
                     !samepwd) ||
+                  didpwdunmatch ||
                   ($linker.pwdValidated(pwd) &&
                     pwdcf.length > 0 &&
                     pwdcf.length < pwd.length &&
-                    !pwd.startsWith(pwdcf)),
-                'border-green-700': samepwd,
-              }"
-            />
-            <p
-              v-show="
-                ($linker.pwdValidated(pwd) &&
-                  pwdcf.length >= pwd.length &&
-                  !samepwd) ||
-                didpwdunmatch ||
-                ($linker.pwdValidated(pwd) &&
-                  pwdcf.length > 0 &&
-                  pwdcf.length < pwd.length &&
-                  !pwd.startsWith(pwdcf))
-              "
-              class="size-12 appearZ text-red-700 leading-4 pt-1"
-            >
-              Le mot de passe et la confirmation ne correspondent pas.
-            </p>
-          </div>
-          <div class="w-full">
-            <div class="flex align-center justify-between">
-              <label for="tellnum" class="size-14">Téléphone (Optionnel)</label>
+                    !pwd.startsWith(pwdcf))
+                "
+                class="size-12 appearZ text-red-700 leading-4 pt-1"
+              >
+                Le mot de passe et la confirmation ne correspondent pas.
+              </p>
             </div>
-            <input
-              id="tellnum"
-              v-model="phone"
-              type="tel"
-              class="border w-full py-1 h-7 size-14 rounded no-outlines outline-none px-2"
-            />
-          </div>
-          <div class="w-full flex align-center space-x-2 pt-1">
-            <input
-              id="senupd"
-              v-model="checkletter"
-              type="checkbox"
-              value="yes"
-              class="border rounded no-outlines outline-none"
-            />
-            <label for="senupd" class="size-12"
-              >M'abonner pour recevoir les meilleurs offres sur Ofaloo.</label
-            >
-          </div>
+            <div class="w-full">
+              <div class="flex align-center justify-between">
+                <label for="tellnum" class="size-14"
+                  >Téléphone (Optionnel)</label
+                >
+              </div>
+              <input
+                id="tellnum"
+                v-model="phone"
+                type="tel"
+                class="border w-full py-1 h-7 size-14 rounded no-outlines outline-none px-2"
+              />
+            </div>
+            <div class="w-full flex align-center space-x-2 pt-1">
+              <input
+                id="senupd"
+                v-model="checkletter"
+                type="checkbox"
+                value="yes"
+                class="border rounded no-outlines outline-none"
+              />
+              <label for="senupd" class="size-12"
+                >M'abonner pour recevoir les meilleurs offres sur Ofaloo.</label
+              >
+            </div>
+          </form>
           <a
             class="button relative top-05x border rounded-md flex align-center space-x-2"
             :class="{
               'noclick bg-gray-800': creating,
               'btn-008489': !creating,
             }"
-            @click="signup"
+            @click.stop="signup"
           >
             <span
               class="size-13 flex items-center space-x-2 text-white font-semibold"

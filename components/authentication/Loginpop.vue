@@ -8,7 +8,10 @@
             >Mot passe réinitialisé avec success √</span
           >
         </div> -->
-        <div class="border bg-white px-5 sm:px-8 py-5 flex flex-col space-y-2">
+        <form
+          class="border bg-white px-5 sm:px-8 py-5 flex flex-col space-y-2"
+          @submit.prevent="signin"
+        >
           <h4 class="text-center size-16 logo-color font-semibold mb-1">
             Connexion à Ofaloo
           </h4>
@@ -50,9 +53,11 @@
                   'border-red-700': passerror,
                 }"
               />
+              <button></button>
               <button
+                type="button"
                 class="bg-transparent no-outlines absolute right-0 mr-2 logo-color"
-                @click="
+                @click.stop="
                   {
                     pwdhid = !pwdhid
                   }
@@ -115,10 +120,11 @@
               >Oops désolé, une erreur s'est produite</span
             >
           </div>
+          <button></button>
           <a
             class="button block btn-008489 border rounded-md flex align-center space-x-2 relative top-05x bottom-0x"
             :class="{ noclick: isloging }"
-            @click="signin"
+            @click.stop="signin"
           >
             <span
               class="size-13 flex items-center space-x-2 text-white font-semibold"
@@ -137,7 +143,7 @@
               >
             </div>
           </div>
-        </div>
+        </form>
         <!-- <div class="flex flex-col space-y-2">
           <a
             href="#"

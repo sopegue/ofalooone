@@ -10,6 +10,15 @@
 import Forgotten from '~/components/authentication/Forgotten.vue'
 export default {
   components: { Forgotten },
+  middleware: 'noauth',
+  head() {
+    return {
+      title: 'Mot de passe oublié | Ofaloo',
+    }
+  },
+  beforeMount() {
+    if (this.$auth.loggedIn) this.$router.replace('/')
+  },
 }
 </script>
 

@@ -189,6 +189,11 @@
 import Question from '~/components/question/Question.vue'
 export default {
   components: { Question },
+  head() {
+    return {
+      title: 'Questions Fréquemments posées (FAQ) | Ofaloo',
+    }
+  },
 }
 </script>
 

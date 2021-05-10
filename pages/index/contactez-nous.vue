@@ -14,94 +14,100 @@
         >
       </div>
       <div class="px-6 sm:px-10 pt-4 pb-5 flex flex-col space-y-3">
-        <div class="w-full">
-          <label for="username" class="size-13">Nom</label>
-          <br />
-          <input
-            id="username"
-            v-model="name"
-            autocomplete="none"
-            type="text"
-            class="border w-full py-1 h-7 size-14 rounded no-outlines px-2"
-          />
-        </div>
-        <div class="w-full" :class="{ noclick: authmail.length > 0 }">
-          <label for="email" class="size-13">Email</label>
-          <br />
-          <input
-            id="email"
-            v-model="email"
-            type="text"
-            class="border w-full py-1 h-7 size-14 rounded no-outlines px-2"
-            :class="{
-              'border-red-700': mailerror,
-              'border-green-700': $linker.emailValidated(email),
-            }"
-          />
-          <p
-            v-show="mailerror"
-            class="size-12 appearZ text-red-700 leading-4 pt-1"
-          >
-            Veuillez enter un email valide !
-          </p>
-        </div>
-        <div
-          v-show="$auth.loggedIn"
-          class="w-full flex align-center space-x-2 pt-1"
-        >
-          <input
-            id="senupd"
-            v-model="authmail"
-            type="checkbox"
-            value="yes"
-            class="border rounded no-outlines outline-none"
-          />
-          <label for="senupd" class="size-12"
-            >Utiliser l'adresse email de mon compte</label
-          >
-        </div>
-        <div class="w-full">
-          <label for="phone" class="size-13">Téléphone</label>
-          <br />
-          <input
-            id="phone"
-            v-model="tel"
-            autocomplete="none"
-            type="tel"
-            class="border w-full py-1 h-7 size-14 rounded no-outlines px-2"
-          />
-        </div>
-        <div class="w-full">
-          <label for="coment2x" class="size-14">Message</label>
-          <div
-            class="border rounded w-full"
-            :class="{
-              'border-red-700': contenterror,
-              'border-green-700': content.length >= 2,
-            }"
-          >
-            <textarea
-              id="coment2x"
-              v-model="content"
-              wrap="hard"
-              class="w-full aside noscroll toyo size-14 px-2 py-01 text-gray-700 focus:outline-none mt-1"
-              placeholder="Ecrire un message"
-              rows="5"
-            ></textarea>
+        <form class="flex flex-col space-y-3" @submit.prevent="send">
+          <div class="w-full">
+            <label for="username" class="size-13">Nom</label>
+            <br />
+            <input
+              id="username"
+              v-model="name"
+              autocomplete="none"
+              type="text"
+              class="border w-full py-1 h-7 size-14 rounded no-outlines px-2"
+            />
           </div>
-          <p
-            v-show="contenterror"
-            class="size-12 appearZ text-red-700 leading-4 pt-1"
+          <div class="w-full" :class="{ noclick: authmail.length > 0 }">
+            <label for="email" class="size-13">Email</label>
+            <br />
+            <input
+              id="email"
+              v-model="email"
+              type="text"
+              class="border w-full py-1 h-7 size-14 rounded no-outlines px-2"
+              :class="{
+                'border-red-700': mailerror,
+                'border-green-700': $linker.emailValidated(email),
+              }"
+            />
+            <p
+              v-show="mailerror"
+              class="size-12 appearZ text-red-700 leading-4 pt-1"
+            >
+              Veuillez enter un email valide !
+            </p>
+          </div>
+          <div
+            v-show="$auth.loggedIn"
+            class="w-full flex align-center space-x-2 pt-1"
           >
-            Veuillez écrire un message !
+            <input
+              id="senupd"
+              v-model="authmail"
+              type="checkbox"
+              value="yes"
+              class="border rounded no-outlines outline-none"
+            />
+            <label for="senupd" class="size-12"
+              >Utiliser l'adresse email de mon compte</label
+            >
+          </div>
+          <div class="w-full">
+            <label for="phone" class="size-13">Téléphone</label>
+            <br />
+            <input
+              id="phone"
+              v-model="tel"
+              autocomplete="none"
+              type="tel"
+              class="border w-full py-1 h-7 size-14 rounded no-outlines px-2"
+            />
+          </div>
+          <div class="w-full">
+            <label for="coment2x" class="size-14">Message</label>
+            <div
+              class="border rounded w-full"
+              :class="{
+                'border-red-700': contenterror,
+                'border-green-700': content.length >= 2,
+              }"
+            >
+              <textarea
+                id="coment2x"
+                v-model="content"
+                wrap="hard"
+                class="w-full aside noscroll toyo size-14 px-2 py-01 text-gray-700 focus:outline-none mt-1"
+                placeholder="Ecrire un message"
+                rows="5"
+              ></textarea>
+            </div>
+            <p
+              v-show="contenterror"
+              class="size-12 appearZ text-red-700 leading-4 pt-1"
+            >
+              Veuillez écrire un message !
+            </p>
+          </div>
+          <p v-show="err" class="size-12 appearZ text-red-700 leading-4 pt-1">
+            Oops, une erreur s'est produite pendant l'envoi du message
           </p>
-        </div>
-        <p v-show="err" class="size-12 appearZ text-red-700 leading-4 pt-1">
-          Oops, une erreur s'est produite pendant l'envoi du message
-        </p>
-        <p v-show="sent" class="size-13 appearZ text-green-700 leading-4 pt-1">
-          Votre message a été envoyé avec succès √
-        </p>
+          <p
+            v-show="sent"
+            class="size-13 appearZ text-green-700 leading-4 pt-1"
+          >
+            Votre message a été envoyé avec succès √
+          </p>
+          <button></button>
+        </form>
         <div class="w-full">
           <button
             class="border-none w-full size-12 text-white px-5 pb-2 flex align-center space-x-2 rounded button btn-008489 both-centers"
@@ -136,6 +142,11 @@ export default {
       success: false,
       sending: false,
       html: null,
+    }
+  },
+  head() {
+    return {
+      title: 'Contactez-nous | Ofaloo',
     }
   },
   computed: {

@@ -323,7 +323,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  head() {
+    return {
+      title: "Conditions d'utilisations | Ofaloo",
+    }
+  },
+}
 </script>
 
 <style scoped>

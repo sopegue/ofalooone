@@ -186,7 +186,7 @@
               :placeholder="
                 activesearch === 'Agent'
                   ? 'Rechercher une propriété par agent...'
-                  : 'Rechercher par ville, quartier...'
+                  : 'Rechercher par adresse, ville...'
               "
               @focus="
                 {

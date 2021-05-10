@@ -136,7 +136,8 @@ export default {
   },
   head() {
     return {
-      title: "Ma liste d'enregistrements (favoris) | Ofaloo",
+      title:
+        "Ma liste d'enregistrements (favoris - " + this.toting + ') | Ofaloo',
     }
   },
   computed: {

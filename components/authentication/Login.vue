@@ -294,7 +294,7 @@ export default {
             if (res.data.status === 404) {
               this.logging = false
               this.nolog = true
-              console.log('incorrects credentials')
+              console.log('incorrects credentials') 
             }
             if (res.data.status === 500) {
               this.logging = false

@@ -206,8 +206,8 @@ export default {
       email: '',
       pwderr: false,
       maierror: false,
-      logging: false,
       pwdhid: true,
+      logging: false,
       rememberme: [],
       nolog: false,
       err: false,
@@ -294,7 +294,7 @@ export default {
             if (res.data.status === 404) {
               this.logging = false
               this.nolog = true
-              console.log('incorrects credentials') 
+              console.log('incorrects credentials')
             }
             if (res.data.status === 500) {
               this.logging = false

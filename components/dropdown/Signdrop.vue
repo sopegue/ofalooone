@@ -48,7 +48,7 @@
             <h4 class="font-semibold cursor-default size-14 logo-color px-4">
               Bienvenue,
               <span class="font-semibold size-14 logo-color">
-                {{ user.name | capitalize }} !
+                {{ $linker.capitalizeEach(user.name) }} !
               </span>
             </h4>
           </div>

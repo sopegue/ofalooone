@@ -183,21 +183,53 @@
       ></brand>
       <brand
         number="1"
-        :content="['Tous types', 'Jacuzzi']"
+        :content="[
+          'Tous types',
+          'Bureau',
+          'Jacuzzi intérieur',
+          'Salle de bain par chambre',
+          'Haut-débit internet',
+          'Système alarme',
+          'Salle de Gym',
+          'Salle de jeux',
+          'Salle d\'atelier',
+          'Lave-vaisselle',
+          'Plancher',
+          'Penderie',
+        ]"
         :title="'Intérieur'"
         @there="there"
         @done="done"
       ></brand>
       <brand
         number="1"
-        :content="['Tous types', 'Balcon']"
+        :content="[
+          'Tous types',
+          'Balcon',
+          'Piscine',
+          'Spa extérieur',
+          'Cuisine extérieure',
+          'Court de sport',
+          'Espace extérieur',
+          'Hangar',
+          'Entièrement clôturé',
+          'Parking',
+        ]"
         :title="'Extérieur'"
         @there="there"
         @done="done"
       ></brand>
       <brand
         number="1"
-        :content="['Tous types', 'Climatiseur']"
+        :content="[
+          'Tous types',
+          'Climatisation',
+          'Chauffage',
+          'Haute efficacité énergétique',
+          'Réservoir d\'eau',
+          'Panneaux solaires',
+          'Eau chaude solaire',
+        ]"
         :title="'Contrôle de l\'énergie'"
         @there="there"
         @done="done"

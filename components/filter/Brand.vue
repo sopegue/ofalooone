@@ -253,7 +253,7 @@ export default {
       hasfil: false,
       indexsub: 0,
       hiddensub: false,
-      expand: true,
+      expand: false,
       id: null,
       checkedCateg: [],
       search: '',

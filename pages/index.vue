@@ -54,7 +54,7 @@
       <div class="clear-both"></div>
       <footers></footers>
     </div>
-    <popup></popup>
+    <popup v-show="poping"></popup>
   </div>
 </template>
 
@@ -85,11 +85,15 @@ export default {
       stillscrolling: false,
       previous: '/',
       has_previous: false,
+      popup: false,
     }
   },
   computed: {
     url() {
       return this.$store.state.url
+    },
+    poping() {
+      return this.popup === true
     },
     title() {
       return this.$store.state.title
@@ -259,6 +263,9 @@ export default {
       }
     },
     checkSearch() {
+      setTimeout(() => {
+        this.popup = true
+      }, 3000)
       if (!localStorage.history) {
         localStorage.setItem(
           'history',

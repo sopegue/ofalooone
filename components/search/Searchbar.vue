@@ -384,9 +384,6 @@ export default {
 
     if (this.curoute !== '/' && !this.curoute.includes('/recherche')) {
       sessionStorage.removeItem('search')
-      sessionStorage.removeItem('txt')
-      sessionStorage.removeItem('sort')
-      this.currency = 'Acheter'
       this.search = ''
     }
     this.checkSearch()

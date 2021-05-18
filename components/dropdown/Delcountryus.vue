@@ -88,34 +88,24 @@
   </div>
 </template>
 <script>
+import { pays } from '@/pays/pays'
+Object.filter = (obj, predicate) =>
+  Object.keys(obj)
+    .filter((key) => predicate(obj[key]))
+    // eslint-disable-next-line no-sequences
+    .reduce((res, key) => ((res[key] = obj[key]), res), {})
 export default {
   data() {
     return {
       focused: false,
       searching: '',
+      pays,
       ctry: '--Choisir un pays--',
-      lan: [
-        '--Choisir un pays--',
-        'Nigeria',
-        'Tunisie',
-        'Cameroon',
-        'Kenya',
-        'Ouganda',
-        'Afrique du Sud',
-        'Ghana',
-        'Maroc',
-        'Algérie',
-        'Liban',
-        'France',
-        'Angleterre',
-        'Canada',
-        'Etats-Unis',
-      ],
     }
   },
   computed: {
     language() {
-      return this.lan.filter((x) =>
+      return Object.filter(pays, (x) =>
         x.toLowerCase().includes(this.searching.toLowerCase())
       )
     },

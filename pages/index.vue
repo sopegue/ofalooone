@@ -173,8 +173,6 @@ export default {
     this.scrolltop()
     if (!this.curoute.includes('/recherche')) {
       sessionStorage.removeItem('search')
-      sessionStorage.removeItem('txt')
-      sessionStorage.removeItem('sort')
     }
     if (this.curoute !== '/') {
       sessionStorage.removeItem('filter_home')

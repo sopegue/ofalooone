@@ -35,7 +35,7 @@
           >
         </h4>
         <h4 class="logo-color size-13 pb-1">
-          Adresse actuelle:
+          Adresse email actuelle:
           <span class="size-13 logo-color font-semibold">{{
             $auth.user.email
           }}</span>

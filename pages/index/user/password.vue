@@ -223,7 +223,7 @@
         class="pt-5 lg:pb-5 pb-0 w-fit flex lg:flex-row flex-col lg:space-y-0 space-y-3 lg:items-center lg:space-x-4"
       >
         <button
-          class="border-none size-12 w-fit text-white sm:px-24 px-15 pb-1.5 rounded button btn-008489"
+          class="border-none size-12 w-fit text-white px-8 pb-1.5 rounded button btn-008489"
           :class="{
             noclick:
               (curpwd.length === 0 && pwd.length === 0 && pwdcf.length === 0) ||
@@ -423,8 +423,6 @@ export default {
             this.accounting = false
           } else if (taken.status === '404') {
             this.curpwdinco = true
-            this.pwd = ''
-            this.pwdcf = ''
             this.accounting = false
           } else {
             this.curpwd = ''

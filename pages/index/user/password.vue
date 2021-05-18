@@ -384,6 +384,7 @@ export default {
     },
     async signup() {
       if (this.infosValidated()) {
+        let time
         if (this.curpwd === this.pwd) this.nothingchanged = true
         else {
           this.accounting = true
@@ -395,7 +396,7 @@ export default {
           // console.log(taken)
           this.nothingchanged = false
           if (taken.status === '200') {
-            await this.$axios.$post('client/pwd/update', {
+            const data = await this.$axios.$post('client/pwd/update', {
               email: this.$auth.user.email,
               id: this.$auth.user.id,
               password: this.pwd,
@@ -404,13 +405,21 @@ export default {
             // YOU GOT TO FIND A BETTER SOLUTION
             // TRY TO USE PROMISE TO DISPLAY MESSAGE OF
             // SUCCESS OR FAILURE
-            this.pwdsuccess = true
-            setTimeout(() => {
+            if (data.status === '201') {
               this.pwdsuccess = false
-            }, 3000)
-            this.curpwd = ''
-            this.pwd = ''
-            this.pwdcf = ''
+              clearTimeout(time)
+              this.pwdsuccess = true
+              time = setTimeout(() => {
+                this.pwdsuccess = false
+              }, 3000)
+              this.curpwd = ''
+              this.pwd = ''
+              this.pwdcf = ''
+            } else {
+              this.curpwdinco = true
+              this.pwd = ''
+              this.pwdcf = ''
+            }
             this.accounting = false
           } else if (taken.status === '404') {
             this.curpwdinco = true

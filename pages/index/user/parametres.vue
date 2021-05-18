@@ -192,6 +192,7 @@ export default {
     },
     async pendingmail(prop, what, id, email) {
       // console.log(prop, what, id, email)
+      let time
       const data = await this.$axios.$post('saved', {
         prop,
         what,
@@ -200,8 +201,10 @@ export default {
       })
       this.stat = data
       if (data.status === '200') {
+        this.notif = false
+        clearTimeout(time)
         this.notif = true
-        setTimeout(() => {
+        time = setTimeout(() => {
           this.notif = false
         }, 3000)
       }

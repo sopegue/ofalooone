@@ -455,6 +455,7 @@ export default {
       )
     },
     async signup() {
+      let time
       const form = new FormData()
       if (this.infosValidated()) {
         this.accounting = true
@@ -477,8 +478,10 @@ export default {
         form.append('cp', this.cp)
 
         const data = await this.$axios.$post('client/infos/update', form)
-        console.log(data)
+        // console.log(data)
         if (data.status === '201') {
+          this.success = false
+          clearTimeout(time)
           // commit account created
           // this.resetInfos()
           this.mailtaken = false
@@ -486,7 +489,7 @@ export default {
           this.success = true
           this.accounting = false
           await this.$auth.fetchUser()
-          setTimeout(() => {
+          time = setTimeout(() => {
             this.success = false
           }, 3000)
         }

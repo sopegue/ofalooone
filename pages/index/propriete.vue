@@ -548,13 +548,13 @@
               ><img
                 class="rounded-full is-40x40"
                 :src="
-                  'https://ofalooback.herokuapp.com/storage/' +
+                  'https://ofaloo.blob.core.windows.net/ofaloo/' +
                   property.data.user_pic
                 "
                 alt="Image"
               />
-              <span class="size-14 font-semibold">{{
-                property.data.agence.name
+              <span class="size-16 font-semibold">{{
+                $linker.capitalizeEach(property.data.agence.name)
               }}</span></a
             >
             <a
@@ -657,51 +657,45 @@
             </h4>
             <div class="my-2 flex flex-col space-y-5">
               <div v-show="has_in">
-                <h4 class="logo-color size-13 pb-2 font-semibold">Intérieur</h4>
+                <h4 class="logo-color size-14 pb-2 font-semibold">Intérieur</h4>
                 <div class="flex flex-wrap">
                   <div
                     v-for="op in options.indoor"
                     :key="op"
-                    class="flex items-center space-x-1.5 column is-one-fifth"
+                    class="flex space-x-1.5 column is-one-fifth"
                     :class="{ 'mx-5': size < 600 }"
                   >
-                    <span
-                      ><i class="far fa-check-square color-363636"></i
-                    ></span>
+                    <span><i class="fas fa-circle size-8 logo-color"></i></span>
                     <span class="logo-color">{{ op }}</span>
                   </div>
                 </div>
               </div>
               <div v-show="has_out">
-                <h4 class="logo-color size-13 pb-2 font-semibold">Extérieur</h4>
+                <h4 class="logo-color size-14 pb-2 font-semibold">Extérieur</h4>
                 <div class="flex flex-wrap">
                   <div
                     v-for="op in options.outdoor"
                     :key="op"
-                    class="flex items-center space-x-1.5 column is-one-fifth"
+                    class="flex space-x-1.5 column is-one-fifth"
                     :class="{ 'mx-5': size < 600 }"
                   >
-                    <span
-                      ><i class="far fa-check-square color-363636"></i
-                    ></span>
+                    <span><i class="fas fa-circle size-8 logo-color"></i></span>
                     <span class="logo-color">{{ op }}</span>
                   </div>
                 </div>
               </div>
               <div v-show="has_en">
-                <h4 class="logo-color size-13 pb-2 font-semibold">
+                <h4 class="logo-color size-14 pb-2 font-semibold">
                   Contrôle de l'énergie
                 </h4>
                 <div class="flex flex-wrap">
                   <div
                     v-for="op in options.energy"
                     :key="op"
-                    class="flex items-center space-x-1.5 column is-one-fifth"
+                    class="flex space-x-1.5 column is-one-fifth"
                     :class="{ 'mx-5': size < 600 }"
                   >
-                    <span
-                      ><i class="far fa-check-square color-363636"></i
-                    ></span>
+                    <span><i class="fas fa-circle size-8 logo-color"></i></span>
                     <span class="logo-color">{{ op }}</span>
                   </div>
                 </div>
@@ -1185,10 +1179,10 @@ export default {
       for (let index = 0; index < this.property.data.images.length; index++) {
         const element = this.property.data.images[index]
         if (element.principal === 'yes')
-          return 'https://ofalooback.herokuapp.com/storage/' + element.url
+          return 'https://ofaloo.blob.core.windows.net/ofaloo/' + element.url
       }
       return (
-        'https://ofalooback.herokuapp.com/storage/' +
+        'https://ofaloo.blob.core.windows.net/ofaloo/' +
         this.property.images[0].url
       )
     },
@@ -1456,7 +1450,7 @@ export default {
           const element = this.property.data.images[index]
           if (element.principal === 'yes') {
             this.images.push(
-              'https://ofalooback.herokuapp.com/storage/' + element.url
+              'https://ofaloo.blob.core.windows.net/ofaloo/' + element.url
             )
             break
           }
@@ -1466,7 +1460,7 @@ export default {
           this.desc.push(element.desc)
           if (element.principal === 'no')
             this.images.push(
-              'https://ofalooback.herokuapp.com/storage/' + element.url
+              'https://ofaloo.blob.core.windows.net/ofaloo/' + element.url
             )
         }
         this.ades = this.images

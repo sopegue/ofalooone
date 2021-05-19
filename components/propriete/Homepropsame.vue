@@ -352,15 +352,21 @@ export default {
       return this.$store.state.component
     },
     getImgPrin() {
-      for (let index = 0; index < this.property.images.length; index++) {
-        const element = this.property.images[index]
-        if (element.principal === 'yes')
-          return 'https://ofalooback.herokuapp.com/storage/' + element.url
+      if (
+        this.property !== undefined &&
+        this.property.images[0] !== undefined
+      ) {
+        for (let index = 0; index < this.property.images.length; index++) {
+          const element = this.property.images[index]
+          if (element.principal === 'yes')
+            return 'https://ofaloo.blob.core.windows.net/ofaloo/' + element.url
+        }
+        return (
+          'https://ofaloo.blob.core.windows.net/ofaloo/' +
+          this.property.images[0].url
+        )
       }
-      return (
-        'https://ofalooback.herokuapp.com/storage/' +
-        this.property.images[0].url
-      )
+      return 'https://www.ofaloo.com/bg/2.jpg'
     },
     size() {
       return this.$store.state.size
@@ -389,7 +395,7 @@ export default {
         const element = this.property.images[index]
         if (element.principal === 'yes') {
           this.images.push(
-            'https://ofalooback.herokuapp.com/storage/' + element.url
+            'https://ofaloo.blob.core.windows.net/ofaloo/' + element.url
           )
           break
         }
@@ -398,7 +404,7 @@ export default {
         const element = this.property.images[index]
         if (element.principal === 'no')
           this.images.push(
-            'https://ofalooback.herokuapp.com/storage/' + element.url
+            'https://ofaloo.blob.core.windows.net/ofaloo/' + element.url
           )
       }
     },

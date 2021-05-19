@@ -48,7 +48,10 @@
           </slider>
         </div>
         <span
-          v-show="desc[index - 1] !== null"
+          :class="{
+            visibles: desc[index - 1] !== null,
+            invisibles: desc[index - 1] === null,
+          }"
           class="py-2 block text-white text-center"
           >Description: {{ desc[index - 1] }}</span
         >

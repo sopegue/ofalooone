@@ -578,13 +578,13 @@
                     ><img
                       class="rounded-full is-40x40"
                       :src="
-                        'https://ofalooback.herokuapp.com/storage/' +
+                        'https://ofaloo.blob.core.windows.net/ofaloo/' +
                         property.user_pic
                       "
                       alt="Image"
                     />
-                    <span class="size-14 font-semibold">{{
-                      property.agence.name
+                    <span class="size-16 font-semibold">{{
+                      $linker.capitalizeEach(property.agence.name)
                     }}</span></a
                   >
                   <a
@@ -640,64 +640,16 @@
                   </button>
                 </div>
               </div>
-              <div v-if="has_options" class="border-b pb-5">
-                <h4 class="logo-color size-16 font-semibold mb-5">
-                  Appartement Caractéristiques
-                </h4>
-                <div class="my-2 flex flex-col space-y-5">
-                  <div v-show="has_in">
-                    <h4 class="logo-color size-13 pb-2 font-semibold">
-                      Intérieur
+              <div class="w-full border-b pb-5">
+                <div class="w-full">
+                  <div>
+                    <h4 class="logo-color size-16 font-semibold mb-5">
+                      Informations Appartement
                     </h4>
-                    <div class="flex flex-wrap">
-                      <div
-                        v-for="op in options.indoor"
-                        :key="op"
-                        class="flex items-center space-x-1.5 column is-one-fifth"
-                        :class="{ 'mx-5': size < 600 }"
-                      >
-                        <span
-                          ><i class="far fa-check-square color-363636"></i
-                        ></span>
-                        <span class="logo-color">{{ op }}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div v-show="has_out">
-                    <h4 class="logo-color size-13 pb-2 font-semibold">
-                      Extérieure
-                    </h4>
-                    <div class="flex flex-wrap">
-                      <div
-                        v-for="op in options.outdoor"
-                        :key="op"
-                        class="flex items-center space-x-1.5 column is-one-fifth"
-                        :class="{ 'mx-5': size < 600 }"
-                      >
-                        <span
-                          ><i class="far fa-check-square color-363636"></i
-                        ></span>
-                        <span class="logo-color">{{ op }}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div v-show="has_en">
-                    <h4 class="logo-color size-13 pb-2 font-semibold">
-                      Contrôle de l'énergie
-                    </h4>
-                    <div class="flex flex-wrap">
-                      <div
-                        v-for="op in options.energy"
-                        :key="op"
-                        class="flex items-center space-x-1.5 column is-one-fifth"
-                        :class="{ 'mx-5': size < 600 }"
-                      >
-                        <span
-                          ><i class="far fa-check-square color-363636"></i
-                        ></span>
-                        <span class="logo-color">{{ op }}</span>
-                      </div>
-                    </div>
+                    <div
+                      class="my-2"
+                      v-html="property.property.informations"
+                    ></div>
                   </div>
                 </div>
               </div>

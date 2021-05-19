@@ -20,6 +20,12 @@ div {
 .lefts {
   left: 0;
 }
+.invisibles {
+  visibility: hidden !important;
+}
+.visibles {
+  visibility: visible !important;
+}
 .parent_hover_under:hover span {
   text-decoration: underline;
 }

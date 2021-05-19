@@ -122,7 +122,7 @@
             <a class="flex w-fits align-center space-x-2"
               ><img
                 class="rounded-full is-40x40 self-startes"
-                :src="'https://ofalooback.herokuapp.com/storage/' + user_pic"
+                :src="'https://ofaloo.blob.core.windows.net/ofaloo/' + user_pic"
                 alt="Image"
               />
               <span class="size-14 block font-semibold text-white w-fits">{{

@@ -222,7 +222,7 @@ const linker = {
           .header-home {
             height: 80px;
             width: 100%;
-            background-image: url("https://ofalooback.herokuapp.com/storage/svg/estate.jpg");
+            background-image: url("https://ofaloo.blob.core.windows.net/ofaloo/svg/estate.jpg");
             background-repeat: no-repeat;
             background-attachment: scroll;
             background-position: center;
@@ -265,7 +265,7 @@ const linker = {
             >
               <img
                 class="img"
-                src="https://ofalooback.herokuapp.com/storage/svg/logo.png"
+                src="https://ofaloo.blob.core.windows.net/ofaloo/svg/logo.png"
                 alt="Ofaloo logo"
               />
               <span
@@ -510,7 +510,7 @@ const linker = {
           .header-home {
             height: 80px;
             width: 100%;
-            background-image: url("https://ofalooback.herokuapp.com/storage/svg/estate.jpg");
+            background-image: url("https://ofaloo.blob.core.windows.net/ofaloo/svg/estate.jpg");
             background-repeat: no-repeat;
             background-attachment: scroll;
             background-position: center;
@@ -553,7 +553,7 @@ const linker = {
             >
               <img
                 class="img"
-                src="https://ofalooback.herokuapp.com/storage/svg/logo.png"
+                src="https://ofaloo.blob.core.windows.net/ofaloo/svg/logo.png"
                 alt="Ofaloo logo"
               />
               <span
@@ -703,7 +703,7 @@ const linker = {
                     <div style="padding: 5px 0px">
                       <img
                         class="pos-left"
-                        src="https://ofalooback.herokuapp.com/storage/svg/place.png"
+                        src="https://ofaloo.blob.core.windows.net/ofaloo/svg/place.png"
                         alt="Location icône"
                       />
                       <span
@@ -720,7 +720,7 @@ const linker = {
                         <div class="flex items-center pos-left">
                           <img
                             class="block pos-left"
-                            src="https://ofalooback.herokuapp.com/storage/svg/1.png"
+                            src="https://ofaloo.blob.core.windows.net/ofaloo/svg/1.png"
                             alt="Lit icône"
                           />
                           <span
@@ -735,7 +735,7 @@ const linker = {
                         >
                           <img
                             class="block pos-left"
-                            src="https://ofalooback.herokuapp.com/storage/svg/2.png"
+                            src="https://ofaloo.blob.core.windows.net/ofaloo/svg/2.png"
                             alt="Salle de bain icône"
                           />
                           <span
@@ -750,7 +750,7 @@ const linker = {
                         >
                           <img
                             class="block pos-left"
-                            src="https://ofalooback.herokuapp.com/storage/svg/3.png"
+                            src="https://ofaloo.blob.core.windows.net/ofaloo/svg/3.png"
                             alt="Garage icône"
                           />
                           <span
@@ -765,7 +765,7 @@ const linker = {
                         >
                           <img
                             class="block pos-left"
-                            src="https://ofalooback.herokuapp.com/storage/svg/4.png"
+                            src="https://ofaloo.blob.core.windows.net/ofaloo/svg/4.png"
                             alt="Traceuse icône"
                           />
                           <span
@@ -927,7 +927,7 @@ const linker = {
           <div style="display: flex !important; align-items: center !important">
           <img
               class="img"
-              src="https://ofalooback.herokuapp.com/storage/svg/logo.png"
+              src="https://ofaloo.blob.core.windows.net/ofaloo/svg/logo.png"
               alt="Ofaloo logo"
             />
             <span class="block w-fit h-fit"
@@ -1175,7 +1175,7 @@ const linker = {
           <div style="display: flex !important; align-items: center !important">
           <img
               class="img"
-              src="https://ofalooback.herokuapp.com/storage/svg/logo.png"
+              src="https://ofaloo.blob.core.windows.net/ofaloo/svg/logo.png"
               alt="Ofaloo logo"
             />
             <span class="block w-fit h-fit"

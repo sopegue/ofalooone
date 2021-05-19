@@ -492,7 +492,7 @@
                     ><img
                       class="rounded-full is-40x40"
                       :src="
-                        'https://ofalooback.herokuapp.com/storage/' +
+                        'https://ofaloo.blob.core.windows.net/ofaloo/' +
                         property.user_pic
                       "
                       alt="Image"

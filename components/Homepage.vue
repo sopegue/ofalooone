@@ -4,14 +4,14 @@
       class="bg-white py-10 flex flex-col space-y-6"
       :class="{ 'px-0': size <= 450 }"
     >
-      <listhome class="border-b pb-6"></listhome>
-      <listhome :titler="'Studio'" class="border-b pb-6"></listhome>
-      <listhome :titler="'Maison'" class="border-b pb-6"></listhome>
-      <listhome :titler="'Haut-Standing'" class="border-b pb-6"></listhome>
-      <listhome :titler="'Villa'" class="border-b pb-6"></listhome>
-      <listhome :titler="'Bureau'" class="border-b pb-6"></listhome>
-      <listhome :titler="'Magasin'" class="border-b pb-6"></listhome>
-      <listhome :titler="'Terrain'" class="border-b pb-6"></listhome>
+      <listhome></listhome>
+      <listhome :titler="'Studio'"></listhome>
+      <listhome :titler="'Maison'"></listhome>
+      <listhome :titler="'Haut-Standing'"></listhome>
+      <listhome :titler="'Villa'"></listhome>
+      <listhome :titler="'Bureau'"></listhome>
+      <listhome :titler="'Magasin'"></listhome>
+      <listhome :titler="'Terrain'"></listhome>
       <!-- <listhome :titler="'Villa'"></listhome> -->
       <!-- <listhome :property="'Villa'" class="border-b pb-8"></listhome> -->
       <div v-show="recently && okay" class="sm:px-8 px-4">

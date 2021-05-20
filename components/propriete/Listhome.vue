@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-if="
+      v-show="
         properties !== undefined &&
         properties.data !== null &&
         properties.data !== undefined &&

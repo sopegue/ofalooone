@@ -124,8 +124,7 @@ export default {
       return (
         this.properties !== undefined &&
         this.properties.data !== null &&
-        this.properties.data !== undefined &&
-        this.none === false
+        this.properties.data !== undefined
       )
     },
     // fetcherror() {
@@ -139,14 +138,6 @@ export default {
   // },
   mounted() {
     this.title = this.titler
-    if (
-      this.properties !== undefined &&
-      this.properties.data !== null &&
-      this.properties.data !== undefined &&
-      this.properties.data.length === 0
-    ) {
-      this.none = true
-    }
     // this.fetchTitle()
   },
   methods: {

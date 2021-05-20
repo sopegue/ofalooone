@@ -15,23 +15,39 @@ const utility = {
           if (this.inDays(date, new Date()) > 7) {
             if (this.inWeeks(date, new Date()) > 4) {
               if (this.inMonths(date, new Date()) > 12) {
-                return 'Il y a ' + this.inYears(date, new Date()) + ' an(s)'
+                return (
+                  'Il y a ' +
+                  Math.trunc(this.inYears(date, new Date())) +
+                  ' an(s)'
+                )
               }
-              return 'Il y a ' + this.inMonths(date, new Date()) + ' mois(s)'
+              return (
+                'Il y a ' +
+                Math.trunc(this.inMonths(date, new Date())) +
+                ' mois(s)'
+              )
             }
-            return 'Il y a ' + this.inWeeks(date, new Date()) + ' semaine(s)'
+            return (
+              'Il y a ' +
+              Math.trunc(this.inWeeks(date, new Date())) +
+              ' semaine(s)'
+            )
           }
-          return 'Il y a ' + this.inDays(date, new Date()) + ' jour(s)'
+          return (
+            'Il y a ' + Math.trunc(this.inDays(date, new Date())) + ' jour(s)'
+          )
         }
-        return 'Il y a ' + this.inHours(date, new Date()) + ' heure(s)'
+        return (
+          'Il y a ' + Math.trunc(this.inHours(date, new Date())) + ' heure(s)'
+        )
       }
-      return 'Il y a ' + this.inMinutes(date, new Date()) + ' an(s)'
+      return 'Il y a ' + Math.trunc(this.inMinutes(date, new Date())) + ' an(s)'
     }
     return 'Il y a 1 minute'
   },
   inSeconds(date1, date2) {
     const diffInMs = Math.abs(date2 - date1)
-    return diffInMs / (1000 * 60 * 60)
+    return diffInMs / 1000
   },
   inMinutes(date1, date2) {
     const diffInMs = Math.abs(date2 - date1)
@@ -39,7 +55,7 @@ const utility = {
   },
   inHours(date1, date2) {
     const diffInMs = Math.abs(date2 - date1)
-    return diffInMs / 1000
+    return diffInMs / (1000 * 60 * 60)
   },
   inDays(d1, d2) {
     const t2 = d2.getTime()
@@ -47,7 +63,6 @@ const utility = {
 
     return parseInt((t2 - t1) / (24 * 3600 * 1000))
   },
-
   inWeeks(d1, d2) {
     const t2 = d2.getTime()
     const t1 = d1.getTime()

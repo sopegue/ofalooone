@@ -155,7 +155,7 @@ export default {
 </script>
 <style scoped>
 .header-home {
-  background-image: url('https://ofalooback.herokuapp.com/images/4.jpg');
+  background-image: url('https://ofaloo.blob.core.windows.net/ofaloo/4.jpg');
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center;

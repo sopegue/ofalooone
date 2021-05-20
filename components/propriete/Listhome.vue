@@ -70,6 +70,7 @@ export default {
       error: false,
       end: false,
       next: false,
+      none: false,
       charging: false,
     }
   },
@@ -123,7 +124,8 @@ export default {
       return (
         this.properties !== undefined &&
         this.properties.data !== null &&
-        this.properties.data !== undefined
+        this.properties.data !== undefined &&
+        this.none === false
       )
     },
     // fetcherror() {
@@ -137,6 +139,14 @@ export default {
   // },
   mounted() {
     this.title = this.titler
+    if (
+      this.properties !== undefined &&
+      this.properties.data !== null &&
+      this.properties.data !== undefined &&
+      this.properties.data.length === 0
+    ) {
+      this.none = true
+    }
     // this.fetchTitle()
   },
   methods: {

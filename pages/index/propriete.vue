@@ -640,7 +640,7 @@
         <div class="w-full">
           <div>
             <h4 class="logo-color size-16 font-semibold mb-5">
-              Informations Appartement
+              Informations {{ property.data.property.type }}
             </h4>
             <div
               class="my-2"
@@ -653,7 +653,7 @@
         <div class="w-full">
           <div>
             <h4 class="logo-color size-16 font-semibold mb-5">
-              Caractéristiques Appartement
+              Caractéristiques {{ property.data.property.type }}
             </h4>
             <div class="my-2 flex flex-col space-y-5">
               <div v-show="has_in">
@@ -904,7 +904,7 @@
               <div class="w-full">
                 <button
                   type="button"
-                  class="border-none w-full size-12 text-white px-5 pb-2 flex align-center space-x-2 rounded button btn-008489 both-centers"
+                  class="border-none w-full size-12 text-white px-5 pb-1.5 flex align-center space-x-2 rounded button btn-008489 both-centers"
                   :class="{ noclick: onsent }"
                   @click.stop="send"
                 >
@@ -1250,7 +1250,8 @@ export default {
       this.getOtherProp()
       this.checkOptions()
     }
-    if (this.property.data.saved) this.saved = true
+    if (this.property !== undefined && this.property.data.saved)
+      this.saved = true
     else this.desavedd = true
   },
   mounted() {
@@ -1449,6 +1450,7 @@ export default {
         for (let index = 0; index < this.property.data.images.length; index++) {
           const element = this.property.data.images[index]
           if (element.principal === 'yes') {
+            this.desc.push(element.desc)
             this.images.push(
               'https://ofaloo.blob.core.windows.net/ofaloo/' + element.url
             )
@@ -1457,11 +1459,13 @@ export default {
         }
         for (let index = 0; index < this.property.data.images.length; index++) {
           const element = this.property.data.images[index]
-          this.desc.push(element.desc)
-          if (element.principal === 'no')
+
+          if (element.principal === 'no') {
+            this.desc.push(element.desc)
             this.images.push(
               'https://ofaloo.blob.core.windows.net/ofaloo/' + element.url
             )
+          }
         }
         this.ades = this.images
       }

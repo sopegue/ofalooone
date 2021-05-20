@@ -481,6 +481,9 @@ export default {
     this.id = this._uid
     if (this.property.saved) this.saved = true
     else this.desavedd = true
+    console.log(
+      new Date(this.$moment(this.property.property.created_at).format())
+    )
   },
   methods: {
     fillImages() {

@@ -443,13 +443,11 @@
                   <div>
                     <a
                       v-if="property.property.proposition === 'Vente totale'"
-                      href="/"
                       title="Le prix indiqué représente le montant à payer pour toute la propriété"
                       class="px-3 py-1 z-20 block w-fit rounded btn-008489s color-008489 font-semibold size-11 my-1"
                       >Achat total</a
                     ><a
                       v-if="property.property.proposition === 'Vente partielle'"
-                      href="/"
                       :title="
                         'Le prix indiqué représente ' +
                         property.property.percentage_part.toString() +
@@ -463,7 +461,6 @@
                     >
                     <a
                       v-if="property.property.proposition === 'Location totale'"
-                      href="/"
                       title="Le prix indiqué représente le montant à payer pour toute la propriété"
                       class="px-3 py-1 z-20 block w-fit rounded btn-008489s color-008489 font-semibold size-11 my-1"
                       >Location totale</a
@@ -472,7 +469,6 @@
                       v-if="
                         property.property.proposition === 'Location partielle'
                       "
-                      href="/"
                       :title="
                         'Le prix indiqué représente ' +
                         property.property.percentage_part.toString() +
@@ -644,7 +640,7 @@
                 <div class="w-full">
                   <div>
                     <h4 class="logo-color size-16 font-semibold mb-5">
-                      Informations Appartement
+                      Informations {{ property.property.type }}
                     </h4>
                     <div
                       class="my-2"
@@ -827,7 +823,7 @@
                 <div class="w-full pt-2">
                   <button
                     type="button"
-                    class="border-none w-full size-12 text-white px-5 pb-2 flex align-center space-x-2 rounded button btn-008489 both-centers"
+                    class="border-none w-full size-12 text-white px-5 pb-1.5 flex align-center space-x-2 rounded button btn-008489 both-centers"
                     :class="{ noclick: onsent }"
                     @click.stop="send"
                   >

@@ -437,15 +437,11 @@ export default {
       return this.notif === true
     },
     getImgPrin() {
-      if (
-        this.property !== undefined &&
-        this.property.images[0] !== undefined
-      ) {
-        for (let index = 0; index < this.property.images.length; index++) {
-          const element = this.property.images[index]
+      if (this.property !== undefined && this.property.images.length > 0) {
+        this.property.images.forEach((element) => {
           if (element.principal === 'yes')
             return 'https://ofaloo.blob.core.windows.net/ofaloo/' + element.url
-        }
+        })
         return (
           'https://ofaloo.blob.core.windows.net/ofaloo/' +
           this.property.images[0].url
@@ -481,9 +477,7 @@ export default {
     this.id = this._uid
     if (this.property.saved) this.saved = true
     else this.desavedd = true
-    console.log(
-      new Date(this.$moment(this.property.property.created_at).format())
-    )
+    console.log(this.property.images)
   },
   methods: {
     fillImages() {

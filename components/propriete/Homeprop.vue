@@ -413,6 +413,7 @@ export default {
       images: [],
       saved: false,
       desavedd: false,
+      getImgPrin: '',
     }
   },
   computed: {
@@ -436,19 +437,19 @@ export default {
     notification() {
       return this.notif === true
     },
-    getImgPrin() {
-      if (this.property !== undefined && this.property.images.length > 0) {
-        this.property.images.forEach((element) => {
-          if (element.principal === 'yes')
-            return 'https://ofaloo.blob.core.windows.net/ofaloo/' + element.url
-        })
-        return (
-          'https://ofaloo.blob.core.windows.net/ofaloo/' +
-          this.property.images[0].url
-        )
-      }
-      return 'https://www.ofaloo.com/bg/2.jpg'
-    },
+    // getImgPrin() {
+    //   if (this.property !== undefined && this.property.images.length > 0) {
+    //     this.property.images.forEach((element) => {
+    //       if (element.principal === 'yes')
+    //         return 'https://ofaloo.blob.core.windows.net/ofaloo/' + element.url
+    //     })
+    //     return (
+    //       'https://ofaloo.blob.core.windows.net/ofaloo/' +
+    //       this.property.images[0].url
+    //     )
+    //   }
+    //   return 'https://www.ofaloo.com/bg/2.jpg'
+    // },
     size() {
       return this.$store.state.size
     },
@@ -477,7 +478,15 @@ export default {
     this.id = this._uid
     if (this.property.saved) this.saved = true
     else this.desavedd = true
-    console.log(this.property.images)
+    this.property.images.forEach((element) => {
+      if (element.principal === 'yes')
+        this.getImgPrin =
+          'https://ofaloo.blob.core.windows.net/ofaloo/' + element.url
+    })
+    if (this.getImgPrin === '')
+      this.getImgPrin =
+        'https://ofaloo.blob.core.windows.net/ofaloo/' +
+        this.property.images[0].url
   },
   methods: {
     fillImages() {

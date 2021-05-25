@@ -1948,6 +1948,14 @@ fieldset[disabled] .button {
   min-width: 12px;
   width: 12px;
 }
+.is-large.modal-close {
+  height: 24px !important;
+  max-height: 24px !important;
+  max-width: 24px !important;
+  min-height: 24px !important;
+  min-width: 24px !important;
+  width: 24px !important;
+}
 .is-smallest.delete,
 .is-smallest.modal-close {
   height: 16px;
@@ -2042,7 +2050,16 @@ fieldset[disabled] .button {
   background-color: rgba(255, 255, 255, 0.575) !important;
 }
 .delete::after,
-.delete::before,
+.delete::before {
+  background-color: rgb(48, 48, 48);
+  content: '';
+  display: block;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  transform-origin: center center;
+}
 .modal-close::after,
 .modal-close::before {
   background-color: rgb(48, 48, 48);
@@ -2053,6 +2070,12 @@ fieldset[disabled] .button {
   top: 50%;
   transform: translateX(-50%) translateY(-50%) rotate(45deg);
   transform-origin: center center;
+}
+@media screen and (max-width: 600px) {
+  .modal-close::after,
+  .modal-close::before {
+    background-color: rgb(48, 48, 48) !important;
+  }
 }
 .modal,
 .modal-background {

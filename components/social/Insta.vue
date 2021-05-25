@@ -44,7 +44,7 @@ export default {
       this.embed = await fetch(
         'https://graph.facebook.com/v10.0/instagram_oembed?url=' +
           this.link +
-          '&access_token=488958562538081|8eb8ed1113a761c63d3d62a894ac34ff'
+          '&access_token=1584357918425951|492c5db3d2edb3d0e8f1ca085e1824fd'
       )
         .then((res) => res.json())
         .catch(() => console.log("can't get embed link yt"))

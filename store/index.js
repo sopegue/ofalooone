@@ -16,6 +16,8 @@ export const state = () => ({
   reseting: false,
   from: '/',
   ip: null,
+  report: false,
+  prop: -1,
 
   delmod: false,
   del: false,
@@ -49,6 +51,12 @@ export const mutations = {
   },
   set_HasScrolled(state, value) {
     state.hasscrolled = value
+  },
+  set_id(state, value) {
+    state.prop = value
+  },
+  set_report(state, value) {
+    state.report = value
   },
   set_Scroll(state, value) {
     state.scrollpos = value

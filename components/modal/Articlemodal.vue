@@ -15,10 +15,13 @@
           v-if="dataOk"
           class="flex flex-col bg-white w-full h-full relative py-3 sm:px-8 px-0.5 mt-4 overflow-y-auto aside"
         >
-          <div class="mb-1">
+          <div class="mb-1 flex justify-between">
             <h4 class="logo-color size-18 font-semibold">
               {{ property.property.type }}
             </h4>
+            <a class="color-008489 underline-hover clickable" @click="report"
+              >Signaler</a
+            >
           </div>
           <div
             class="flex mb-5"
@@ -97,10 +100,12 @@
                     </svg>
                     <span
                       v-if="adesaved"
-                      class="logo-color size-14 makeme-008489"
+                      class="logo-color underline-hover size-14 makeme-008489"
                       >Enregistrer</span
                     >
-                    <span v-if="asaved" class="logo-color size-14 makeme-008489"
+                    <span
+                      v-if="asaved"
+                      class="logo-color underline-hover size-14 makeme-008489"
                       >Enregistrée</span
                     >
                   </button>
@@ -179,7 +184,9 @@
                       </svg>
                     </a>
                   </div>
-                  <span class="logo-color size-14 makeme-008489">Partager</span>
+                  <span class="logo-color size-14 makeme-008489 underline-hover"
+                    >Partager</span
+                  >
                 </button>
               </div>
             </div>
@@ -1080,6 +1087,12 @@ export default {
     this.increment()
   },
   methods: {
+    report() {
+      this.$store.commit('set_id', this.property.property.id)
+      this.$store.commit('set_report', true)
+      document.body.style.overflow = 'hidden'
+      this.close()
+    },
     prepare() {
       this.prop.id = this.property.property.id
       this.prop.agence = this.property.agence.name

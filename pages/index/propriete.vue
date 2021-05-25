@@ -8,10 +8,13 @@
         'px-20': size >= 1200,
       }"
     >
-      <div class="mb-1">
+      <div class="mb-1 flex justify-between">
         <h4 class="logo-color size-18 font-semibold">
           {{ property.data.property.type }}
         </h4>
+        <a class="color-008489 underline-hover clickable" @click="report"
+          >Signaler</a
+        >
       </div>
       <div
         class="flex mb-5"
@@ -90,10 +93,12 @@
                 </svg>
                 <span
                   v-if="has_desaved"
-                  class="logo-color size-14 makeme-008489"
+                  class="logo-color underline-hover size-14 makeme-008489"
                   >Enregistrer</span
                 >
-                <span v-if="has_saved" class="logo-color size-14 makeme-008489"
+                <span
+                  v-if="has_saved"
+                  class="logo-color underline-hover size-14 makeme-008489"
                   >Enregistrée</span
                 >
               </button>
@@ -169,7 +174,9 @@
                   </svg>
                 </a>
               </div>
-              <span class="logo-color size-14 makeme-008489">Partager</span>
+              <span class="logo-color size-14 makeme-008489 underline-hover"
+                >Partager</span
+              >
             </button>
           </div>
         </div>
@@ -1396,6 +1403,11 @@ export default {
     },
     datating() {
       this.ok = true
+    },
+    report() {
+      this.$store.commit('set_id', this.property.data.property.id)
+      this.$store.commit('set_report', true)
+      document.body.style.overflow = 'hidden'
     },
     sort(val, first) {
       const newarray = [first]

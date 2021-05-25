@@ -6,7 +6,7 @@
     >
       <div class="modal-background bg-transparent" @mousedown="close"></div>
       <div
-        class="bg-white relative wmin-900 wmin-900s h-full overflow-y-auto sm:px-6 asides py-2"
+        class="bg-white rounded relative wmin-900 wmin-900s h-full overflow-y-auto sm:px-6 asides py-2"
       >
         <div class="vertical-center">
           <button

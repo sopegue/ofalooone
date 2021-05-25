@@ -1,10 +1,13 @@
 <template>
   <div class="relative">
-    <div v-if="signing" class="z-50">
+    <div v-if="signing" class="z-50 rounded">
       <loginmodal></loginmodal>
     </div>
     <div v-if="delmod" class="z-50">
       <delmodal></delmodal>
+    </div>
+    <div v-if="report" class="z-50">
+      <report></report>
     </div>
     <div
       v-if="deleting"
@@ -66,6 +69,7 @@ import Headerhome from '~/components/header/Headerhome.vue'
 import Headers from '~/components/header/Headers.vue'
 import Home from '~/components/Homepage.vue'
 import Delmodal from '~/components/modal/Delmodal.vue'
+import Report from '~/components/report/Report.vue'
 export default {
   components: {
     Footers,
@@ -75,6 +79,7 @@ export default {
     Loginmodal,
     Popup,
     Delmodal,
+    Report,
   },
   data() {
     return {
@@ -125,6 +130,9 @@ export default {
     },
     size() {
       return this.$store.state.size
+    },
+    report() {
+      return this.$store.state.report
     },
     deleting() {
       return this.$store.state.accountdeleting === true

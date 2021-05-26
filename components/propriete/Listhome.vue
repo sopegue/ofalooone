@@ -1,14 +1,6 @@
 <template>
   <div>
-    <div
-      v-show="
-        properties !== undefined &&
-        properties.data !== null &&
-        properties.data !== undefined &&
-        properties.data.length > 0
-      "
-      class="border-b pb-6"
-    >
+    <div class="border-b pb-6">
       <div v-if="erroring" class="py-4 text-c">
         Oops, erreur pendant chargement des propriétés.
       </div>

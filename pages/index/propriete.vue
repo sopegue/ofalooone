@@ -540,7 +540,7 @@
           <div v-if="size >= 770" class="py-3">
             <a
               href="#contact-agent"
-              class="button border-none size-12 text-white px-5 pb-2 rounded button btn-008489"
+              class="button border-none size-12 text-white px-5 pb-1.5 rounded button btn-008489"
             >
               Contacter l'agent
             </a>

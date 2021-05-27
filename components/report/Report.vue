@@ -147,12 +147,12 @@
             :class="{ noclick: signal === '' || onsent }"
             @click="send"
           >
-            <span class="text-white size-13">Signaler la propriété</span>
             <span v-if="onsent" class="w-fit h-fit pl-1"
               ><i
                 class="animate-spin fas fa-circle-notch color-white mt-0.5"
               ></i
             ></span>
+            <span class="text-white size-13">Signaler la propriété</span>
           </button>
           <button
             v-if="success"

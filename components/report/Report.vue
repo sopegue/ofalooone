@@ -10,7 +10,7 @@
             class="font-semibold flex items-center justify-center space-x-2 size-18 logo-color text-center"
           >
             <svg
-              class="w-5 h-5 mt-0.5"
+              class="w-5 h-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -30,7 +30,7 @@
             class="font-semibold flex items-center justify-center space-x-2 size-18 logo-color text-center"
           >
             <svg
-              class="w-5 h-5 mt-0.5"
+              class="w-5 h-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -143,19 +143,19 @@
         <div class="signaler py-3 px-4 flex justify-end">
           <button
             v-if="!success"
-            class="button border-0 rounded btn-008489 text-white size-13 py-1 px-4"
+            key="dfsq"
+            class="button flex border-0 rounded btn-008489 text-white size-13 py-1 px-4"
             :class="{ noclick: signal === '' || onsent }"
             @click="send"
           >
-            <span v-if="onsent" class="w-fit h-fit pl-1"
-              ><i
-                class="animate-spin fas fa-circle-notch color-white mt-0.5"
-              ></i
+            <span v-if="!success && onsent" class="w-fit block h-fit mr-1.5"
+              ><i class="animate-spin fas fa-circle-notch color-white"></i
             ></span>
-            <span class="text-white size-13">Signaler la propriété</span>
+            <span class="text-white block size-13">Signaler la propriété</span>
           </button>
           <button
             v-if="success"
+            key="dsds"
             class="button border-0 rounded btn-008489 text-white size-13 py-1 px-4"
             @click="close"
           >

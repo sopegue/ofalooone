@@ -146,7 +146,7 @@
         href="https://www.linkedin.com/in/sopoude/"
         target="_blank"
         class="underline-hover w-fit text-white block size-13"
-        >By Yaya Sopegue SORO</a
+        >By Sopoude</a
       >
     </div>
   </div>

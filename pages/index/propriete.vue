@@ -540,7 +540,7 @@
           <div v-if="size >= 770" class="py-3">
             <a
               href="#contact-agent"
-              class="button border-none size-12 text-white px-5 pb-1.5 rounded button btn-008489"
+              class="button border-none size-12 text-white px-5 pb-2.5 pt-2 rounded button btn-008489"
             >
               Contacter l'agent
             </a>
@@ -574,9 +574,10 @@
           <div>
             <span
               v-if="showtel"
-              class="size-14 appearZ font-semibold block flex align-center mt-1 mb-3"
+              class="size-14 appearZ block flex align-center mt-1 mb-3"
             >
               <svg
+                class="mr-0.5"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -590,7 +591,12 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 /></svg
-              >Tel: {{ property.data.agence.tel }}</span
+              >Tel:
+              {{
+                property.data.property.phone !== null
+                  ? property.data.property.phone
+                  : property.data.agence.tel
+              }}</span
             >
             <button
               class="border-none mt-1.5 flex align-center w-full size-12 text-white px-5 pb-1.5 rounded button btn-008489"
@@ -602,8 +608,8 @@
             >
               <svg
                 class="mr-1.5"
-                width="16"
-                height="16"
+                width="20"
+                height="20"
                 viewBox="0 0 20 20"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -623,8 +629,8 @@
             >
               <svg
                 class="mr-1.5"
-                width="16"
-                height="16"
+                width="20"
+                height="20"
                 viewBox="0 0 20 20"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -911,7 +917,7 @@
               <div class="w-full">
                 <button
                   type="button"
-                  class="border-none w-full size-12 text-white px-5 pb-1.5 flex align-center space-x-2 rounded button btn-008489 both-centers"
+                  class="border-none w-full size-12 text-white px-5 pb-2 pt-1.5 flex align-center space-x-2 rounded button btn-008489 both-centers"
                   :class="{ noclick: onsent }"
                   @click.stop="send"
                 >

@@ -142,10 +142,7 @@
         class="underline-hover w-fit text-white block size-13"
         >Politique de confidentialité</a
       >
-      <a
-        href="https://www.linkedin.com/in/sopoude/"
-        target="_blank"
-        class="underline-hover w-fit text-white block size-13"
+      <a target="_blank" class="underline-hover w-fit text-white block size-13"
         >By Sopoude</a
       >
     </div>

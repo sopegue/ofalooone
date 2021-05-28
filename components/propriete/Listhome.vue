@@ -149,7 +149,6 @@ export default {
   // },
   mounted() {
     this.title = this.titler
-    console.log(this.properties)
     // this.fetchTitle()
   },
   methods: {

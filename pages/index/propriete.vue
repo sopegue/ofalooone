@@ -191,7 +191,7 @@
         <div class="h-full relative w-full">
           <div
             v-if="property.data.property.sold === 'yes'"
-            class="absolute z-10 bottom-0 left-0"
+            class="absolute z-12 bottom-0 left-0"
           >
             <button
               class="border-none size-12 text-white rounded ml-2 mb-2 button bg-black-tre both-centers"
@@ -201,7 +201,7 @@
           </div>
           <div
             v-if="property.data.property.rent === 'yes'"
-            class="absolute z-10 bottom-0 left-0"
+            class="absolute z-12 bottom-0 left-0"
           >
             <button
               class="border-none size-12 text-white rounded ml-2 mb-2 button bg-black-tre both-centers"

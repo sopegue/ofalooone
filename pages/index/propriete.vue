@@ -553,7 +553,7 @@
               :href="'/recherche?ofloowa=' + property.data.property.user_id"
               class="flex align-center space-x-2"
               ><img
-                class="rounded-full is-40x40"
+                class="rounded-full is-40x40 border"
                 :src="
                   'https://ofaloo.blob.core.windows.net/ofaloo/' +
                   property.data.user_pic

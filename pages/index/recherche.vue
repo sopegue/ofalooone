@@ -121,7 +121,7 @@
           <div class="flex align-center space-x-5 w-fits">
             <a class="flex w-fits align-center space-x-2"
               ><img
-                class="rounded-full is-40x40 self-startes"
+                class="rounded-full is-40x40 border self-startes"
                 :src="'https://ofaloo.blob.core.windows.net/ofaloo/' + user_pic"
                 alt="Image"
               />

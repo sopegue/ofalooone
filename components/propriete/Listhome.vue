@@ -93,8 +93,15 @@ export default {
       ) {
         if (this.property.data.length > 6) {
           this.next = true
+          this.properties.data = this.property.data.slice(0, 6)
+        } else {
+          if (this.property.data.length > 0) {
+            this.properties.data = this.property.data
+          }
+          if (this.property.data.length === 0) {
+            this.properties.data = []
+          }
         }
-        this.properties.data = this.property.data.slice(0, 6)
       }
       this.error = false
     } catch (th) {
@@ -105,13 +112,6 @@ export default {
     size() {
       return this.$store.state.size
     },
-    can() {
-      return (
-        this.properties !== undefined &&
-        this.properties.data !== null &&
-        this.properties.data !== undefined
-      )
-    },
     loading() {
       return this.charging === true
     },
@@ -119,11 +119,7 @@ export default {
       return this.next === true
     },
     common() {
-      return this.properties !== undefined &&
-        this.properties.data !== null &&
-        this.properties.data !== undefined
-        ? this.properties.data
-        : []
+      return this.properties.data.length > 0 ? this.properties.data : []
     },
     ending() {
       return this.end === true
@@ -149,6 +145,7 @@ export default {
   // },
   mounted() {
     this.title = this.titler
+    console.log(this.common)
     // this.fetchTitle()
   },
   methods: {

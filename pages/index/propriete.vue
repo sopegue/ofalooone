@@ -532,9 +532,7 @@
             }"
           >
             <span class="color-363636 size-11">{{
-              $utility.dating(
-                new Date($moment(property.data.property.created_at).format())
-              )
+              $moment(property.data.property.updated_at).format('LL')
             }}</span>
           </div>
           <div v-if="size >= 770" class="py-3">

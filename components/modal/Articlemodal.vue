@@ -569,9 +569,7 @@
                   }"
                 >
                   <span class="color-363636 size-11">{{
-                    $utility.dating(
-                      new Date($moment(property.property.created_at).format())
-                    )
+                    $moment(property.property.updated_at).format('LL')
                   }}</span>
                 </div>
                 <div class="flex align-center space-x-4 justify-between py-2">

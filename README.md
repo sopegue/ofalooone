@@ -2,6 +2,10 @@
 
 Ofaloo is an idea of real estate website where real estate agent or people can host estate for sales or rent.
 
+# demo site
+
+[Demo here](https://ofaloo.netlify.app/).
+
 ## Build Setup
 
 ```bash

@@ -143,7 +143,7 @@
         >Politique de confidentialité</a
       >
       <a target="_blank" class="underline-hover w-fit text-white block size-13"
-        >By Sopoude</a
+        >By Xunita</a
       >
     </div>
   </div>
